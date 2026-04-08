@@ -1,5 +1,8 @@
 RigCheck is the second ShackDesk suite application.
 
+"Know your rig is ready."<br>
+Serial CAT communication diagnostics using Hamlib. Verify your radio connection before it matters.
+
 ## Suite Context
 
 Brand: ShackDesk
