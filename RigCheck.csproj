@@ -1,0 +1,96 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    CODE SIGNING — required before public release
+    ═══════════════════════════════════════════════════════════════
+    Without a trusted code signing certificate:
+      • Windows SmartScreen will block first-run with "Unknown publisher"
+      • Antivirus heuristics will flag the self-contained .exe as suspicious
+      • Users will need to click through security warnings
+
+    To sign on release:
+      1. Obtain an EV or OV code signing certificate (Sectigo, DigiCert, etc.)
+      2. Add to GitHub Actions as a secret (SIGNING_CERT_BASE64 + SIGNING_CERT_PASSWORD)
+      3. Uncomment the signtool step in .github/workflows/build.yml
+      4. Submit each release to https://www.virustotal.com after signing
+
+    See docs/CODE-SIGNING.md for the full process.
+
+    ANTIVIRUS FALSE POSITIVES
+    ═══════════════════════════════════════════════════════════════
+    Self-contained .NET 8 single-file executables are frequently flagged
+    by heuristic scanners. This is a known issue affecting WSJT-X, Fldigi,
+    and other ham radio software. Code signing is the primary mitigation.
+    After each release, submit to VirusTotal and file false-positive reports
+    with any vendors that flag the signed binary.
+  -->
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>RigCheck</AssemblyName>
+    <RootNamespace>RigCheck</RootNamespace>
+    <ApplicationIcon>Assets\rigcheck.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Version>0.5.0</Version>
+    <AssemblyVersion>0.5.0.0</AssemblyVersion>
+    <FileVersion>0.5.0.0</FileVersion>
+    <Company>My Computer Guru LLC</Company>
+    <Copyright>Copyright © 2025 My Computer Guru LLC</Copyright>
+    <Product>RigCheck by ShackDesk</Product>
+    <Description>Ham radio rig control diagnostics — Know your rig is ready</Description>
+    <Authors>Mark McDow N4TEK</Authors>
+
+    <!-- Self-contained single .exe — no runtime install required -->
+    <SelfContained>true</SelfContained>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+
+    <!-- Trim unused code to reduce exe size -->
+    <PublishTrimmed>false</PublishTrimmed>
+
+    <!-- Startup object -->
+    <StartupObject>RigCheck.App</StartupObject>
+
+    <Nullable>enable</Nullable>
+    <WarningsAsErrors>CS8600;CS8601;CS8602;CS8603;CS8604</WarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Serilog structured logging — mirrors PortPane -->
+    <PackageReference Include="Serilog" Version="4.*" />
+    <PackageReference Include="Serilog.Sinks.File" Version="6.*" />
+    <PackageReference Include="Serilog.Sinks.Debug" Version="3.*" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="8.*" />
+
+    <!-- Microsoft DI container — mirrors PortPane -->
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.*" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.*" />
+
+    <!-- CommunityToolkit.Mvvm for RelayCommand, ObservableObject, etc. -->
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.*" />
+
+    <!-- Newtonsoft.Json for settings persistence -->
+    <PackageReference Include="Newtonsoft.Json" Version="13.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Embedded assets -->
+    <Resource Include="Assets\**" />
+    <EmbeddedResource Include="Resources\**" />
+
+    <!-- Data files copied to output -->
+    <None Update="Assets\usb_devices.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\radio_presets.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

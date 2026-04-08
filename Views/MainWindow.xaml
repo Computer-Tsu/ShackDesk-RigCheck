@@ -1,0 +1,343 @@
+<Window x:Class="RigCheck.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:RigCheck.ViewModels"
+        xmlns:models="clr-namespace:RigCheck.Models"
+        Title="{Binding WindowTitle}"
+        MinWidth="560" MinHeight="480"
+        Width="{Binding Source={StaticResource Settings}, Path=Current.WindowWidth, Mode=TwoWay}"
+        Height="{Binding Source={StaticResource Settings}, Path=Current.WindowHeight, Mode=TwoWay}"
+        Background="{StaticResource BrushBackground}"
+        Foreground="{StaticResource BrushForeground}"
+        Topmost="{Binding AlwaysOnTop}"
+        Closing="Window_Closing"
+        Loaded="Window_Loaded">
+
+    <Window.RenderTransform>
+        <ScaleTransform ScaleX="{Binding ScaleFactor}" ScaleY="{Binding ScaleFactor}" />
+    </Window.RenderTransform>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />   <!-- chrome bar (hidden by default) -->
+            <RowDefinition Height="Auto" />   <!-- Hamlib status bar -->
+            <RowDefinition Height="Auto" />   <!-- connection configuration -->
+            <RowDefinition Height="*"    />   <!-- test results -->
+            <RowDefinition Height="Auto" />   <!-- raw console (collapsible) -->
+            <RowDefinition Height="Auto" />   <!-- action bar -->
+            <RowDefinition Height="Auto" />   <!-- status strip -->
+        </Grid.RowDefinitions>
+
+        <!-- ── Chrome bar (hidden, revealed on click) ── -->
+        <Border Grid.Row="0"
+                Style="{StaticResource ChromeBarStyle}"
+                Visibility="{Binding ChromeVisible, Converter={StaticResource BoolToVisibility}}">
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Left"
+                           Text="{Binding WindowTitle}"
+                           Style="{StaticResource ChromeTitleStyle}" />
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                    <Button Content="–" Style="{StaticResource ChromeButtonStyle}"
+                            Click="ScaleDown_Click" ToolTip="Scale down" />
+                    <Button Content="+" Style="{StaticResource ChromeButtonStyle}"
+                            Click="ScaleUp_Click"   ToolTip="Scale up" />
+                    <Button Content="⊡" Style="{StaticResource ChromeButtonStyle}"
+                            Click="ScaleReset_Click" ToolTip="Reset scale" />
+                    <CheckBox Content="On top" IsChecked="{Binding AlwaysOnTop}"
+                              Style="{StaticResource ChromeCheckStyle}" />
+                </StackPanel>
+            </DockPanel>
+        </Border>
+
+        <!-- ── Hamlib status ── -->
+        <Border Grid.Row="1" Style="{StaticResource HamlibStatusBarStyle}">
+            <DockPanel>
+                <Ellipse Width="8" Height="8" Margin="8,0,6,0"
+                         Fill="{Binding IsHamlibAvailable, Converter={StaticResource BoolToStatusColor}}" />
+                <TextBlock Text="{Binding HamlibStatus}"
+                           Style="{StaticResource StatusTextStyle}" />
+                <Button DockPanel.Dock="Right" Content="How to install"
+                        Style="{StaticResource LinkButtonStyle}"
+                        Visibility="{Binding IsHamlibMissing, Converter={StaticResource BoolToVisibility}}"
+                        Command="{Binding OpenHamlibDownloadCommand}" />
+            </DockPanel>
+        </Border>
+
+        <!-- ── Connection configuration ── -->
+        <GroupBox Grid.Row="2" Header="Connection" Style="{StaticResource GroupBoxStyle}">
+            <Grid Margin="8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />   <!-- preset selector -->
+                    <RowDefinition Height="Auto" />   <!-- mode toggle -->
+                    <RowDefinition Height="Auto" />   <!-- serial settings -->
+                    <RowDefinition Height="Auto" />   <!-- advanced serial -->
+                </Grid.RowDefinitions>
+
+                <!-- Preset selector -->
+                <DockPanel Grid.Row="0" Margin="0,0,0,6">
+                    <Label Content="Quick preset:" Style="{StaticResource FieldLabelStyle}" />
+                    <ComboBox ItemsSource="{Binding Connection.AvailablePresets}"
+                              SelectedItem="{Binding Connection.SelectedPreset}"
+                              DisplayMemberPath="Name"
+                              Style="{StaticResource ComboBoxStyle}"
+                              Width="240" />
+                </DockPanel>
+
+                <!-- Serial / rigctld toggle -->
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,6">
+                    <RadioButton Content="Direct serial (COM port)"
+                                 IsChecked="{Binding Connection.UseRigctld, Converter={StaticResource InverseBool}}"
+                                 Style="{StaticResource RadioStyle}" Margin="0,0,16,0" />
+                    <RadioButton Content="rigctld (network)"
+                                 IsChecked="{Binding Connection.UseRigctld}"
+                                 Style="{StaticResource RadioStyle}" />
+                </StackPanel>
+
+                <!-- Serial settings panel -->
+                <Grid Grid.Row="2"
+                      Visibility="{Binding Connection.UseRigctld, Converter={StaticResource InverseBoolToVisibility}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- COM port -->
+                    <Label Grid.Column="0" Content="Port:" Style="{StaticResource FieldLabelStyle}" />
+                    <ComboBox Grid.Column="1"
+                              ItemsSource="{Binding Connection.AvailablePorts}"
+                              SelectedItem="{Binding Connection.SelectedPort}"
+                              DisplayMemberPath="DisplayName"
+                              Style="{StaticResource ComboBoxStyle}" MinWidth="160" />
+                    <Button Grid.Column="2" Content="↻" ToolTip="Refresh ports"
+                            Command="{Binding Connection.RefreshPortsCommand}"
+                            Style="{StaticResource IconButtonStyle}" Margin="4,0,16,0" />
+
+                    <!-- Baud rate -->
+                    <Label Grid.Column="3" Content="Baud:" Style="{StaticResource FieldLabelStyle}" />
+                    <ComboBox Grid.Column="4"
+                              ItemsSource="{Binding Connection.BaudRates}"
+                              SelectedItem="{Binding Connection.BaudRate}"
+                              Style="{StaticResource ComboBoxStyle}" Width="90" />
+                </Grid>
+
+                <!-- rigctld panel -->
+                <Grid Grid.Row="2"
+                      Visibility="{Binding Connection.UseRigctld, Converter={StaticResource BoolToVisibility}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="80" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Host:" Style="{StaticResource FieldLabelStyle}" />
+                    <TextBox Grid.Column="1" Text="{Binding Connection.RigctldHost}"
+                             Style="{StaticResource TextBoxStyle}" />
+                    <Label Grid.Column="2" Content="Port:" Style="{StaticResource FieldLabelStyle}" Margin="8,0,0,0" />
+                    <TextBox Grid.Column="3" Text="{Binding Connection.RigctldPort}"
+                             Style="{StaticResource TextBoxStyle}" />
+                </Grid>
+
+                <!-- Advanced serial row (PTT, data bits, etc.) — collapsed by default -->
+                <Expander Grid.Row="3" Header="Advanced serial settings"
+                          Foreground="{StaticResource BrushMuted}" FontSize="11"
+                          Visibility="{Binding Connection.UseRigctld, Converter={StaticResource InverseBoolToVisibility}}"
+                          Margin="0,4,0,0">
+                    <WrapPanel Margin="4,4,0,0">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,16,0">
+                            <Label Content="PTT:" Style="{StaticResource FieldLabelStyle}" />
+                            <ComboBox ItemsSource="{Binding Connection.PttMethods}"
+                                      SelectedItem="{Binding Connection.PttMethod}"
+                                      Style="{StaticResource ComboBoxStyle}" Width="80" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,16,0">
+                            <Label Content="Data:" Style="{StaticResource FieldLabelStyle}" />
+                            <ComboBox ItemsSource="{Binding Connection.DataBitsOptions}"
+                                      SelectedItem="{Binding Connection.DataBits}"
+                                      Style="{StaticResource ComboBoxStyle}" Width="40" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,16,0">
+                            <Label Content="Parity:" Style="{StaticResource FieldLabelStyle}" />
+                            <ComboBox ItemsSource="{Binding Connection.ParityOptions}"
+                                      SelectedItem="{Binding Connection.Parity}"
+                                      Style="{StaticResource ComboBoxStyle}" Width="70" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,16,0">
+                            <Label Content="Stop:" Style="{StaticResource FieldLabelStyle}" />
+                            <ComboBox ItemsSource="{Binding Connection.StopBitsOptions}"
+                                      SelectedItem="{Binding Connection.StopBits}"
+                                      Style="{StaticResource ComboBoxStyle}" Width="50" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Flow:" Style="{StaticResource FieldLabelStyle}" />
+                            <ComboBox ItemsSource="{Binding Connection.FlowCtrlOptions}"
+                                      SelectedItem="{Binding Connection.FlowControl}"
+                                      Style="{StaticResource ComboBoxStyle}" Width="90" />
+                        </StackPanel>
+                    </WrapPanel>
+                </Expander>
+            </Grid>
+        </GroupBox>
+
+        <!-- ── Test results ── -->
+        <GroupBox Grid.Row="3" Header="Diagnostic results" Style="{StaticResource GroupBoxStyle}">
+            <DockPanel>
+                <!-- Summary bar -->
+                <Border DockPanel.Dock="Bottom" Style="{StaticResource SummaryBarStyle}"
+                        Visibility="{Binding Results.HasResults, Converter={StaticResource BoolToVisibility}}">
+                    <TextBlock Text="{Binding Results.SummaryText}"
+                               Style="{StaticResource SummaryTextStyle}" />
+                </Border>
+
+                <!-- Results list -->
+                <ListBox ItemsSource="{Binding Results.Items}"
+                         Style="{StaticResource ResultsListStyle}"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type vm:TestResultItemViewModel}">
+                            <Border Style="{StaticResource ResultItemBorderStyle}">
+                                <StackPanel>
+                                    <!-- Main result row -->
+                                    <DockPanel>
+                                        <!-- Status icon -->
+                                        <TextBlock Text="{Binding StatusIcon}"
+                                                   Style="{StaticResource StatusIconStyle}"
+                                                   Foreground="{Binding Status, Converter={StaticResource StatusToColor}}" />
+
+                                        <!-- Test name -->
+                                        <TextBlock Text="{Binding Name}"
+                                                   Style="{StaticResource TestNameStyle}" />
+
+                                        <!-- Message -->
+                                        <TextBlock Text="{Binding Message}"
+                                                   Style="{StaticResource TestMessageStyle}" />
+
+                                        <!-- Expand button (if has diagnosis) -->
+                                        <Button DockPanel.Dock="Right"
+                                                Content="{Binding IsExpanded, Converter={StaticResource ExpandIcon}}"
+                                                Command="{Binding ToggleExpandedCommand}"
+                                                Style="{StaticResource ExpandButtonStyle}"
+                                                Visibility="{Binding HasDiagnosis, Converter={StaticResource BoolToVisibility}}" />
+                                    </DockPanel>
+
+                                    <!-- Command row — always visible when command available -->
+                                    <DockPanel Margin="24,2,0,0"
+                                               Visibility="{Binding DisplayCommand, Converter={StaticResource NullOrEmptyToCollapsed}}">
+                                        <Button DockPanel.Dock="Right"
+                                                Content="Copy"
+                                                Command="{Binding CopyCommandCommand}"
+                                                Style="{StaticResource CopyButtonStyle}"
+                                                ToolTip="Copy command to clipboard — paste into CMD to run yourself" />
+                                        <TextBlock Text="{Binding DisplayCommand}"
+                                                   Style="{StaticResource CommandTextStyle}"
+                                                   ToolTip="The rigctl command used for this test" />
+                                    </DockPanel>
+
+                                    <!-- Expanded diagnosis panel -->
+                                    <Border Margin="24,4,0,4"
+                                            Style="{StaticResource DiagnosisPanelStyle}"
+                                            Visibility="{Binding IsExpanded, Converter={StaticResource BoolToVisibility}}">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Diagnosis.Summary}"
+                                                       Style="{StaticResource DiagnosisSummaryStyle}" />
+                                            <ItemsControl ItemsSource="{Binding Diagnosis.Checks}"
+                                                          Margin="0,4,0,0">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <DockPanel>
+                                                            <TextBlock Text="•" Margin="0,0,6,0"
+                                                                       Foreground="{StaticResource BrushAccent}" />
+                                                            <TextBlock Text="{Binding}"
+                                                                       Style="{StaticResource DiagnosisCheckStyle}"
+                                                                       TextWrapping="Wrap" />
+                                                        </DockPanel>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+        </GroupBox>
+
+        <!-- ── Raw console (collapsible advanced panel) ── -->
+        <Expander Grid.Row="4"
+                  Header="Advanced — raw Hamlib commands"
+                  IsExpanded="{Binding RawConsoleVisible}"
+                  Style="{StaticResource RawConsoleExpanderStyle}">
+            <Grid Height="160">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- Output area -->
+                <ListBox Grid.Row="0"
+                         ItemsSource="{Binding RawConsole.Entries}"
+                         Style="{StaticResource ConsoleListStyle}"
+                         ScrollViewer.CanContentScroll="True">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type vm:ConsoleEntry}">
+                            <TextBlock Text="{Binding Text}"
+                                       Foreground="{Binding Kind, Converter={StaticResource ConsoleKindToColor}}"
+                                       FontFamily="Consolas" FontSize="12" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <!-- Input row -->
+                <DockPanel Grid.Row="1" Margin="4,4,4,4">
+                    <Button DockPanel.Dock="Right" Content="Clear"
+                            Command="{Binding RawConsole.ClearConsoleCommand}"
+                            Style="{StaticResource SecondaryButtonStyle}" />
+                    <Button DockPanel.Dock="Right" Content="Send"
+                            Command="{Binding RawConsole.SendCommandCommand}"
+                            Style="{StaticResource PrimaryButtonStyle}" Margin="0,0,4,0" />
+                    <TextBox x:Name="ConsoleInput"
+                             Text="{Binding RawConsole.InputText, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource ConsoleInputStyle}"
+                             FontFamily="Consolas"
+                             KeyDown="ConsoleInput_KeyDown"
+                             ToolTip="Enter a rigctl subcommand (e.g. f, m, t, v, l STRENGTH)" />
+                </DockPanel>
+            </Grid>
+        </Expander>
+
+        <!-- ── Action bar ── -->
+        <Border Grid.Row="5" Style="{StaticResource ActionBarStyle}">
+            <DockPanel Margin="8,6,8,6">
+                <Button DockPanel.Dock="Right"
+                        Content="Export Log"
+                        Command="{Binding ExportLogCommand}"
+                        Style="{StaticResource SecondaryButtonStyle}"
+                        Margin="8,0,0,0"
+                        ToolTip="Save results to a text file to email or post for help" />
+
+                <Button DockPanel.Dock="Right"
+                        Content="Advanced ▾"
+                        Command="{Binding ToggleRawConsoleCommand}"
+                        Style="{StaticResource SecondaryButtonStyle}"
+                        Margin="8,0,0,0" />
+
+                <!-- Run Tests — large, prominent -->
+                <Button Content="▶  Run Tests"
+                        Command="{Binding RunTestsCommand}"
+                        Style="{StaticResource RunButtonStyle}"
+                        IsEnabled="{Binding IsRunning, Converter={StaticResource InverseBool}}" />
+            </DockPanel>
+        </Border>
+
+        <!-- ── Status strip ── -->
+        <Border Grid.Row="6" Style="{StaticResource StatusStripStyle}">
+            <TextBlock Text="{Binding StatusMessage}"
+                       Style="{StaticResource StatusStripTextStyle}" />
+        </Border>
+
+    </Grid>
+</Window>
