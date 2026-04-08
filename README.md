@@ -1,4 +1,18 @@
+RigCheck is the second ShackDesk suite application.
 
+## Suite Context
+
+Brand: ShackDesk
+Developer: Mark McDow N4TEK / My Computer Guru LLC
+GitHub: github.com/Computer-Tsu
+Suite site: shackdesk.com
+Technology: C# WPF .NET 8, MVVM architecture,
+            dependency injection, Serilog logging,
+            GitHub Actions CI/CD, no local compiler
+
+## RigCheck Purpose
+
+Hamlib is the open source radio control library used
 by virtually every digital mode program — WSJT-X, 
 Fldigi, JS8Call, Winlink, and dozens more. When rig 
 control does not work, diagnosing why is genuinely 
