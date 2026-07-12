@@ -5,10 +5,10 @@ Serial CAT communication diagnostics using Hamlib. Verify your radio connection 
 
 ## Suite Context
 
-Brand: ShackDesk
-Developer: Mark McDow N4TEK / My Computer Guru LLC
-GitHub: github.com/Computer-Tsu
-Suite site: shackdesk.com
+Brand: ShackDesk<br>
+Developer: Mark McDow N4TEK / My Computer Guru LLC<br>
+GitHub: github.com/Computer-Tsu<br>
+Suite site: shackdesk.com<br>
 Technology: C# WPF .NET 8, MVVM architecture,
             dependency injection, Serilog logging,
             GitHub Actions CI/CD, no local compiler
@@ -49,6 +49,7 @@ Target users:
   localhost:4532)
 - Connection type toggle: Direct serial vs 
   rigctld network
+- Detect and test GPS (USB serial receivers, puck)
 
 ### Diagnostic Test Suite
 Run a sequence of standard Hamlib queries and 
