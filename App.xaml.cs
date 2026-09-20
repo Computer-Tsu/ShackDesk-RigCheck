@@ -54,7 +54,6 @@ public partial class App : Application
         // Infrastructure
         services.AddSingleton<AppLogger>();
         services.AddSingleton<SettingsService>();
-        services.AddSingleton<LicenseService>();
 
         // Hamlib / rig control
         services.AddSingleton<HamlibLocatorService>();

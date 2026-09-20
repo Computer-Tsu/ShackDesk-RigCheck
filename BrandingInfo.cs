@@ -12,7 +12,7 @@ public static class BrandingInfo
     public const string AppName    = "RigCheck";
     public const string SuiteName  = "ShackDesk";
     public const string FullName   = "RigCheck by ShackDesk";
-    public const string Version    = "0.5.0-beta";
+    public const string Version    = "0.6.0";
     public const string Tagline    = "Know your rig is ready";
 
     // ── Developer / publisher ────────────────────────────────────
@@ -21,11 +21,11 @@ public static class BrandingInfo
     public const string Callsign   = "N4TEK";
 
     // ── URLs ─────────────────────────────────────────────────────
-    public const string SuiteUrl   = "https://shackdesk.app";
-    public const string AppUrl     = "https://shackdesk.app/rigcheck";
+    public const string SuiteUrl   = "https://shackdesk.com";
+    public const string AppUrl     = "https://shackdesk.com/rigcheck";
     public const string GitHubOrg  = "https://github.com/Computer-Tsu";
-    public const string GitHubRepo = "https://github.com/Computer-Tsu/shackdesk-rigcheck";
-    public const string IssueUrl   = "https://github.com/Computer-Tsu/shackdesk-rigcheck/issues";
+    public const string GitHubRepo = "https://github.com/Computer-Tsu/ShackDesk-RigCheck";
+    public const string IssueUrl   = "https://github.com/Computer-Tsu/ShackDesk-RigCheck/issues";
 
     // ── Hamlib / rigctl resources ─────────────────────────────────
     public const string HamlibDownloadUrl  = "https://github.com/Hamlib/Hamlib/releases";
@@ -56,7 +56,6 @@ public static class BrandingInfo
     public const string SettingsFileName = "rigcheck-settings.json";
 
     // ── License ───────────────────────────────────────────────────
-    public const string License        = "GPL v3";
-    public const string LicenseUrl     = "https://www.gnu.org/licenses/gpl-3.0.html";
-    public const string CommercialTier = "Commercial license available — contact shackdesk.app";
+    public const string License    = "GPL v3";
+    public const string LicenseUrl = "https://www.gnu.org/licenses/gpl-3.0.html";
 }
