@@ -17,6 +17,10 @@ starting from nothing, and it is the most useful thing you can do.
 | Language | File | Coverage | Status |
 | --- | --- | --- | --- |
 | English (source) | `Strings.resx` | 100% (233 of 233) | Source |
+| German (`de`) | `Strings.de.resx` | 100% (233 of 233) | Machine translated — review wanted |
+| Spanish (`es`) | `Strings.es.resx` | 100% (233 of 233) | Machine translated — review wanted |
+| French (`fr`) | `Strings.fr.resx` | 100% (233 of 233) | Machine translated — review wanted |
+| Japanese (`ja`) | `Strings.ja.resx` | 100% (233 of 233) | Machine translated — review wanted |
 <!-- coverage:end -->
 
 ---
