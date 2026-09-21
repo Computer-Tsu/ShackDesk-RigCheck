@@ -131,8 +131,48 @@ public class ConfigClueService
 
             var eq = line.IndexOf('=');
             if (eq <= 0) continue;
-            result[line[..eq].Trim()] = line[(eq + 1)..].Trim();
+            result[line[..eq].Trim()] = DecodeQtValue(line[(eq + 1)..].Trim());
         }
         return result;
+    }
+
+    // WSJT-X writes enum settings as Qt variants, e.g.
+    //   @Variant(\0\0\0\x7f\0\0\0\x1eTransceiverFactory::PTTMethod\0\0\0\0\xfPTT_method_VOX\0)
+    //   @Variant(...TransceiverFactory::StopBits\0\0\0\0\x12\x64\x65\x66\x61ult_stop_bits\0)
+    // Unescape \0 and \xHH (Qt escapes any hex-looking character that
+    // follows an escape, so a greedy hex read is safe), split on NUL, and
+    // take the last segment minus its length-prefix byte. Then strip the
+    // type prefixes/suffixes so callers see "VOX", "two", "none", "default".
+    private static string DecodeQtValue(string raw)
+    {
+        if (!raw.StartsWith("@Variant(", StringComparison.Ordinal)) return raw;
+
+        var inner = raw[9..].TrimEnd(')');
+        var sb = new System.Text.StringBuilder();
+        for (int i = 0; i < inner.Length; i++)
+        {
+            if (inner[i] == '\\' && i + 1 < inner.Length)
+            {
+                if (inner[i + 1] == '0') { sb.Append('\0'); i++; continue; }
+                if (inner[i + 1] == 'x')
+                {
+                    int j = i + 2; var hex = string.Empty;
+                    while (j < inner.Length && hex.Length < 4 && Uri.IsHexDigit(inner[j])) hex += inner[j++];
+                    if (hex.Length > 0) { sb.Append((char)Convert.ToInt32(hex, 16)); i = j - 1; continue; }
+                }
+            }
+            sb.Append(inner[i]);
+        }
+
+        var segments = sb.ToString().Split('\0', StringSplitOptions.RemoveEmptyEntries);
+        var last = segments.Length > 0 ? segments[^1] : string.Empty;
+        last = new string(last.SkipWhile(c => !char.IsLetter(c) && c != '_').ToArray());
+
+        return last
+            .Replace("PTT_method_", string.Empty)
+            .Replace("handshake_",  string.Empty)
+            .Replace("_stop_bits",  string.Empty)
+            .Replace("_stop_bit",   string.Empty)
+            .Replace("_data_bits",  string.Empty);
     }
 }

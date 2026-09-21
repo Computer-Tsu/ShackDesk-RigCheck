@@ -5,6 +5,19 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
+## [0.6.14] - 2026-09-21
+
+Run Tests works against a real radio.
+
+### Fixed
+- The "Open connection" test ran rigctl with no command, which does not connect-and-exit — it
+  enters rigctl's interactive mode and waits for keyboard input until RigCheck's timeout, so
+  every run reported "the radio did not respond" and skipped the other six tests, even though
+  Hamlib could talk to the radio in 7 ms. The test now reads the frequency, which proves the
+  round trip; rigctl's input is also closed at launch so it can never wait on a keyboard again
+- WSJT-X stores several settings as Qt variant blobs (`(...PTT_method_VOX...)`); the
+  configuration reader now decodes them instead of passing the blob through to the handoff
+
 ## [0.6.13] - 2026-09-21
 
 WSJT-X's Hamlib is found.

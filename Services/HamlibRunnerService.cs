@@ -52,6 +52,7 @@ public class HamlibRunnerService
             UseShellExecute        = false,
             RedirectStandardOutput = true,
             RedirectStandardError  = true,
+            RedirectStandardInput  = true,   // closed right after start: rigctl must never wait for a keyboard
             CreateNoWindow         = true,
             StandardOutputEncoding = Encoding.UTF8,
             StandardErrorEncoding  = Encoding.UTF8,
@@ -75,6 +76,7 @@ public class HamlibRunnerService
             };
 
             process.Start();
+            process.StandardInput.Close();
             process.BeginOutputReadLine();
             process.BeginErrorReadLine();
 

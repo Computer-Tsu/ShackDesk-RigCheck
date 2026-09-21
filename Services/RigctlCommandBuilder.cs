@@ -57,11 +57,21 @@ public class RigctlCommandBuilder
 
     // ── Test commands ────────────────────────────────────────────────────
 
-    /// <summary>Test 1: Open connection — just connect and disconnect (no subcommand).</summary>
+    /// <summary>
+    /// Test 1: Open connection. Asks for the frequency: rigctl with no
+    /// subcommand does not "just connect", it enters interactive mode and
+    /// waits on stdin forever — which read as a radio timeout on a working
+    /// IC-7300. Hamlib's open already exchanges with the rig; the reply to
+    /// "f" proves the round trip.
+    /// </summary>
     public static RigctlCommand TestConnection(ConnectionConfig cfg)
     {
         var conn = ConnArgs(cfg);
-        return conn with { DisplayCommand = $"{ExeName} {conn.ConnectionLabel}" };
+        return conn with
+        {
+            Args           = [..conn.Args, "f"],
+            DisplayCommand = $"{ExeName} {conn.ConnectionLabel} f",
+        };
     }
 
     /// <summary>Test 2: Get frequency — 'f' subcommand.</summary>
