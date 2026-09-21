@@ -267,7 +267,7 @@ public record DiscoveredRig(
     int     HandoffStopBits,
     bool    UseRigctld = false);
 
-public enum ProbeEventKind { Trying, Sent, Received, Skipped, InUse, Found, PortDone, Note }
+public enum ProbeEventKind { Trying, Sent, Received, Response, Skipped, InUse, Found, PortDone, Note }
 
 /// <summary>One step of a discovery run, emitted as it happens.</summary>
 public record ProbeEvent(
