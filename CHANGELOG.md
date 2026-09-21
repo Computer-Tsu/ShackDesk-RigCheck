@@ -5,13 +5,22 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
+## [0.7.2] - 2026-09-21
+
+### Changed
+- Beta and stable numbering switched to the promotion model before any beta was cut: a beta
+  keeps its alpha's number (`0.7.4-beta`), a fix during the beta is the next patch
+  (`0.7.5-beta`), and the stable is the last beta without the suffix (`0.7.5`). The `beta.N`
+  counter from 0.7.1 is gone; the title bar shows version and channel only
+
 ## [0.7.1] - 2026-09-21
 
 ### Added
-- Beta and stable releases are built from version tags: `v0.7.0-beta.1` publishes
-  `RigCheck-0.7.0-beta.1.exe` as a pre-release on the beta channel (90-day reminder), `v0.7.0`
-  publishes `RigCheck-0.7.0.exe` as a stable release. The tag must match the project version.
-  The version in the title bar shows the tag suffix (`0.7.0-beta.1`)
+- Beta and stable releases are built from version tags by promotion: an alpha that is working
+  and feature-complete is tagged `v0.7.4-beta` and published as `RigCheck-0.7.4-beta.exe`
+  (pre-release, 90-day reminder); the last beta is tagged `v0.7.5` and published as
+  `RigCheck-0.7.5.exe` (stable). Same number, different channel. The tag must match the project
+  version
 
 ### Changed
 - RigCheck runs as a single instance: starting it again brings the open window to the front.

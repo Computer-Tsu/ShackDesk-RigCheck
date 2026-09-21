@@ -10,16 +10,24 @@
 #            never runs for them.
 #
 # Trigger  : push of a tag matching v*
-#              v0.7.0-beta.1   → channel beta,   pre-release, RigCheck-0.7.0-beta.1.exe
-#              v0.7.0          → channel stable, release,     RigCheck-0.7.0.exe
-#            Tag main after the develop→main merge for that version.
+#              v0.7.4-beta   → channel beta,   pre-release, RigCheck-0.7.4-beta.exe
+#              v0.7.5        → channel stable, release,     RigCheck-0.7.5.exe
+#
+# Model    : promotion. The version names the CODE; the channel names how far
+#            it has been trusted. An alpha that is working and feature-complete
+#            is tagged as a beta with the SAME number; develop moves on to the
+#            next minor. A fix on the beta line is a patch bump (0.7.5-beta),
+#            and the stable is simply the last beta re-tagged without -beta.
+#            Every build in every channel is a new patch number — one rule.
+#            The beta line lives on main: promote by tagging main, fix a beta
+#            by committing to main (patch bump, cherry-pick to develop), and
+#            tag again. develop is always the next minor's alpha.
 #
 # Checks   : the tag's version must equal <Version> in RigCheck.csproj, or
 #            the build fails before anything is published.
 #
-# Channel  : passed to MSBuild with the UTC build date and, for a beta, the
-#            tag suffix (beta.1) as PreRelease — BuildInfo.cs shows it in the
-#            title bar. Beta builds warn 90 days after the build date but keep
+# Channel  : passed to MSBuild with the UTC build date; BuildInfo.cs shows it
+#            in the title bar (0.7.4-beta). Beta builds warn 90 days after the build date but keep
 #            running; stable builds never expire. No hash in the filename or
 #            the tag: these are the builds people keep.
 #
@@ -47,7 +55,6 @@ jobs:
     outputs:
       channel:    ${{ steps.meta.outputs.channel }}
       version:    ${{ steps.meta.outputs.version }}
-      prerelease: ${{ steps.meta.outputs.prerelease }}
       label:      ${{ steps.meta.outputs.label }}
       name:       ${{ steps.meta.outputs.name }}
       date:       ${{ steps.meta.outputs.date }}
@@ -65,14 +72,13 @@ jobs:
         id: meta
         shell: pwsh
         run: |
-          $tag = '${{ github.ref_name }}'                       # v0.7.0-beta.1 or v0.7.0
-          if ($tag -notmatch '^v(\d+\.\d+\.\d+)(?:-(beta\.\d+))?$') {
-            Write-Error "Tag '$tag' must look like v1.2.3 (stable) or v1.2.3-beta.N (beta)"
+          $tag = '${{ github.ref_name }}'                       # v0.7.4-beta or v0.7.5
+          if ($tag -notmatch '^v(\d+\.\d+\.\d+)(-beta)?$') {
+            Write-Error "Tag '$tag' must look like v1.2.3 (stable) or v1.2.3-beta (beta)"
           }
           $version    = $Matches[1]
-          $prerelease = if ($Matches[2]) { $Matches[2] } else { '' }
-          $channel    = if ($prerelease) { 'beta' } else { 'stable' }
-          $label      = if ($prerelease) { "$version-$prerelease" } else { $version }
+          $channel    = if ($Matches[2]) { 'beta' } else { 'stable' }
+          $label      = if ($channel -eq 'beta') { "$version-beta" } else { $version }
           $name       = "RigCheck-$label"
           $date       = [DateTime]::UtcNow.ToString('yyyy-MM-dd')
 
@@ -83,7 +89,6 @@ jobs:
 
           "channel=$channel"       >> $env:GITHUB_OUTPUT
           "version=$version"       >> $env:GITHUB_OUTPUT
-          "prerelease=$prerelease" >> $env:GITHUB_OUTPUT
           "label=$label"           >> $env:GITHUB_OUTPUT
           "name=$name"             >> $env:GITHUB_OUTPUT
           "date=$date"             >> $env:GITHUB_OUTPUT
@@ -103,7 +108,6 @@ jobs:
           -p:IncludeNativeLibrariesForSelfExtract=true
           -p:Channel=${{ steps.meta.outputs.channel }}
           -p:BuildDateUtc=${{ steps.meta.outputs.date }}
-          -p:PreRelease=${{ steps.meta.outputs.prerelease }}
           --output ./publish
 
       - name: Verify single-file output

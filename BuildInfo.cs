@@ -15,8 +15,6 @@ public static class BuildInfo
 {
     public static string    Channel    { get; }
     public static DateOnly? BuildDate  { get; }
-    /// <summary>Tag suffix of a tagged pre-release, e.g. "beta.1"; empty for alpha, stable, and local builds.</summary>
-    public static string    PreRelease { get; }
 
     static BuildInfo()
     {
@@ -25,7 +23,6 @@ public static class BuildInfo
             .ToDictionary(a => a.Key, a => a.Value ?? string.Empty);
 
         Channel = meta.GetValueOrDefault("Channel", "dev").ToLowerInvariant();
-        PreRelease = meta.GetValueOrDefault("PreRelease", string.Empty).Trim();
 
         BuildDate = DateOnly.TryParseExact(
             meta.GetValueOrDefault("BuildDateUtc", string.Empty),
@@ -37,14 +34,12 @@ public static class BuildInfo
     public static bool IsStable => Channel == BrandingInfo.ChannelStable;
 
     /// <summary>
-    /// Version for display: "0.7.0" on stable, "0.7.0-beta.1" on a tagged
-    /// beta, "0.7.0-alpha" on a develop build (the date and hash are in
-    /// the filename and About, not here).
+    /// Version for display: "0.7.5" on stable, "0.7.4-beta" on a beta,
+    /// "0.7.3-alpha" on a develop build. Promotion model: the same number
+    /// moves alpha → beta → stable; only the channel suffix changes.
     /// </summary>
     public static string VersionLabel =>
-        IsStable                              ? BrandingInfo.Version
-        : PreRelease.Length > 0               ? $"{BrandingInfo.Version}-{PreRelease}"
-        :                                       $"{BrandingInfo.Version}-{Channel}";
+        IsStable ? BrandingInfo.Version : $"{BrandingInfo.Version}-{Channel}";
 
     /// <summary>Last day this build runs, or null for channels that never expire.</summary>
     public static DateOnly? ExpiryDate => BuildDate is not { } built ? null : Channel switch

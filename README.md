@@ -55,13 +55,23 @@ RigCheck is published in three channels:
   is shown in the window title and in Help >
   About. When an alpha expires, starting it shows
   a notice with a link to the latest build.
-- **Beta** — built from a `v0.7.0-beta.1` tag on
-  `main`, named `RigCheck-0.7.0-beta.1.exe` (no
-  date or hash). Beta builds warn in the status
-  bar 90 days after they were built but keep
-  running.
-- **Stable** — built from a `v0.7.0` tag on `main`,
-  named `RigCheck-0.7.0.exe`. Never expires.
+- **Beta** — an alpha that is working and
+  feature-complete, promoted with the same
+  number: tag `v0.7.4-beta`, file
+  `RigCheck-0.7.4-beta.exe` (no date or hash).
+  Beta builds warn in the status bar 90 days
+  after they were built but keep running. A fix
+  during the beta is the next patch number
+  (`0.7.5-beta`).
+- **Stable** — the last beta promoted again: tag
+  `v0.7.5`, file `RigCheck-0.7.5.exe`. Never
+  expires.
+
+The version names the code; the channel names
+how far it has been trusted. Every build in every
+channel is a new patch number, and the next alpha
+after a promotion starts the next minor
+(`0.8.0-alpha`).
 
 The window title shows the version, channel, and
 expiry date, for example
