@@ -2,6 +2,17 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:views="clr-namespace:RigCheck.Views">
 
+    <!--
+        Control styles for the main window, keyed by role rather than by
+        control type so the XAML reads as intent ("RunButtonStyle") rather
+        than appearance. All colors come from DarkTheme.xaml.
+
+        Buttons share FlatButtonTemplate. ComboBox, CheckBox, RadioButton and
+        Expander use property-level theming on the default templates for now;
+        they will need full templates for a consistent dark look in dropdown
+        and hover states.
+    -->
+
     <!-- ── Converters ─────────────────────────────────────────────────── -->
 
     <BooleanToVisibilityConverter              x:Key="BoolToVisibility" />

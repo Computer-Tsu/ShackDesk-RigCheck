@@ -5,6 +5,11 @@ using System.Windows.Input;
 
 namespace RigCheck.Views;
 
+/// <summary>
+/// Code-behind for the main window. Kept to view-only concerns:
+/// window placement persistence and keyboard routing for the raw console.
+/// All application logic lives in MainViewModel.
+/// </summary>
 public partial class MainWindow : Window
 {
     private readonly MainViewModel _vm;
@@ -12,9 +17,14 @@ public partial class MainWindow : Window
     public MainWindow(MainViewModel vm)
     {
         _vm = vm;
+        // Set DataContext before InitializeComponent so bindings resolve on first layout
         DataContext = vm;
         InitializeComponent();
     }
+
+    // ── Window placement ──────────────────────────────────────────────────
+    // Width and height are bound directly to settings in XAML. Left/Top are
+    // restored here because a window position is view state, not ViewModel state.
 
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
@@ -28,6 +38,9 @@ public partial class MainWindow : Window
 
     private void Window_Closing(object sender, CancelEventArgs e) =>
         _vm.OnWindowClosing(Left, Top);
+
+    // ── Raw console keyboard handling ─────────────────────────────────────
+    // Enter sends the command; Up/Down walk the history like a shell prompt.
 
     private void ConsoleInput_KeyDown(object sender, KeyEventArgs e)
     {

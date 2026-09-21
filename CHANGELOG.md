@@ -5,7 +5,10 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
-## [Unreleased]
+## [0.6.1] - 2026-09-21
+
+First successful build. The application compiles in CI and produces a
+self-contained executable.
 
 ### Added
 - CI build workflow producing the self-contained exe and its SHA-256 as an artifact
