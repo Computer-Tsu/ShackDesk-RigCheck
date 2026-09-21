@@ -17,6 +17,14 @@ namespace RigCheck.Services;
 /// </summary>
 public class RigctlCommandBuilder
 {
+    /// <summary>
+    /// The name the copyable commands start with. "rigctl" for standalone
+    /// Hamlib; WSJT-X ships its copy as "rigctl-wsjtx", and a command the
+    /// operator pastes must use the name that actually exists on their PC.
+    /// Set by HamlibLocatorService when it finds the exe.
+    /// </summary>
+    public static string ExeName { get; set; } = "rigctl";
+
     // ── Connection argument builders ─────────────────────────────────────
 
     /// <summary>
@@ -53,7 +61,7 @@ public class RigctlCommandBuilder
     public static RigctlCommand TestConnection(ConnectionConfig cfg)
     {
         var conn = ConnArgs(cfg);
-        return conn with { DisplayCommand = $"rigctl {conn.ConnectionLabel}" };
+        return conn with { DisplayCommand = $"{ExeName} {conn.ConnectionLabel}" };
     }
 
     /// <summary>Test 2: Get frequency — 'f' subcommand.</summary>
@@ -63,7 +71,7 @@ public class RigctlCommandBuilder
         return conn with
         {
             Args        = [..conn.Args, "f"],
-            DisplayCommand = $"rigctl {conn.ConnectionLabel} f"
+            DisplayCommand = $"{ExeName} {conn.ConnectionLabel} f"
         };
     }
 
@@ -74,7 +82,7 @@ public class RigctlCommandBuilder
         return conn with
         {
             Args        = [..conn.Args, "m"],
-            DisplayCommand = $"rigctl {conn.ConnectionLabel} m"
+            DisplayCommand = $"{ExeName} {conn.ConnectionLabel} m"
         };
     }
 
@@ -85,7 +93,7 @@ public class RigctlCommandBuilder
         return conn with
         {
             Args        = [..conn.Args, "t"],
-            DisplayCommand = $"rigctl {conn.ConnectionLabel} t"
+            DisplayCommand = $"{ExeName} {conn.ConnectionLabel} t"
         };
     }
 
@@ -96,7 +104,7 @@ public class RigctlCommandBuilder
         return conn with
         {
             Args        = [..conn.Args, "l", "STRENGTH"],
-            DisplayCommand = $"rigctl {conn.ConnectionLabel} l STRENGTH"
+            DisplayCommand = $"{ExeName} {conn.ConnectionLabel} l STRENGTH"
         };
     }
 
@@ -107,7 +115,7 @@ public class RigctlCommandBuilder
         return conn with
         {
             Args        = [..conn.Args, "v"],
-            DisplayCommand = $"rigctl {conn.ConnectionLabel} v"
+            DisplayCommand = $"{ExeName} {conn.ConnectionLabel} v"
         };
     }
 
@@ -118,7 +126,7 @@ public class RigctlCommandBuilder
         return conn with
         {
             Args        = [..conn.Args, "F", frequencyHz.ToString()],
-            DisplayCommand = $"rigctl {conn.ConnectionLabel} F {frequencyHz}"
+            DisplayCommand = $"{ExeName} {conn.ConnectionLabel} F {frequencyHz}"
         };
     }
 
@@ -136,7 +144,7 @@ public class RigctlCommandBuilder
         return conn with
         {
             Args        = [..conn.Args, ..tokens],
-            DisplayCommand = $"rigctl {conn.ConnectionLabel} {rawInput.Trim()}"
+            DisplayCommand = $"{ExeName} {conn.ConnectionLabel} {rawInput.Trim()}"
         };
     }
 

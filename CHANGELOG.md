@@ -5,6 +5,18 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
+## [0.6.13] - 2026-09-21
+
+WSJT-X's Hamlib is found.
+
+### Fixed
+- Hamlib was reported missing on a PC with WSJT-X installed: WSJT-X ships its copy as
+  `rigctl-wsjtx.exe` (and `rigctld-wsjtx.exe`), not `rigctl.exe`. Both names are now tried, the
+  install folder is also read from the Uninstall registry key, and either name is accepted on PATH
+- Copyable commands start with the name that exists on the PC (`rigctl-wsjtx …` for WSJT-X users)
+- Scan PC re-searches for Hamlib, so installing WSJT-X while RigCheck is open updates the banner
+  and enables Run Tests without a restart
+
 ## [0.6.12] - 2026-09-21
 
 ### Added

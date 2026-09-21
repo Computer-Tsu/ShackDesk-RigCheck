@@ -12,7 +12,7 @@ public static class BrandingInfo
     public const string AppName    = "RigCheck";
     public const string SuiteName  = "ShackDesk";
     public const string FullName   = "RigCheck by ShackDesk";
-    public const string Version    = "0.6.12";
+    public const string Version    = "0.6.13";
     public const string Tagline    = "Know your rig is ready";
 
     // ── Developer / publisher ────────────────────────────────────

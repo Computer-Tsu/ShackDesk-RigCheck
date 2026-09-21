@@ -181,6 +181,13 @@ public partial class MainViewModel : ObservableObject
             using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
             var suite = await _envCheck.RunAllAsync(Connection.BuildConfig(), progress, cts.Token);
 
+            // The scan re-searched for Hamlib; reflect the answer in the
+            // banner and the Run Tests gate without a restart.
+            CheckHamlib();
+            OnPropertyChanged(nameof(IsHamlibAvailable));
+            OnPropertyChanged(nameof(IsHamlibMissing));
+            RunTestsCommand.NotifyCanExecuteChanged();
+
             Results.SetSuiteResult(suite);
             TaskCompleted?.Invoke(suite.AllPassed);
             StatusMessage = Strings.Format("Status_ScanDone", suite.WarningCount + suite.FailCount);

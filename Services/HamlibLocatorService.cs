@@ -49,7 +49,8 @@ public class HamlibLocatorService
             {
                 _cachedPath = path;
                 FoundVia = via;
-                Log.Information("rigctl.exe found via {Via}: {Path}", via, path);
+                RigctlCommandBuilder.ExeName = Path.GetFileNameWithoutExtension(path);
+                Log.Information("rigctl found via {Via}: {Path}", via, path);
                 return;
             }
         }
@@ -74,20 +75,28 @@ public class HamlibLocatorService
     public IEnumerable<(string Path, string Via)> CandidatePaths()
     {
         // ── 1. WSJT-X bundled Hamlib ─────────────────────────────────────
-        // WSJT-X ships rigctl.exe in its own bin directory.
-        var wsjtxDirs = new[]
+        // WSJT-X ships Hamlib in its bin folder under its OWN names:
+        // rigctl-wsjtx.exe and rigctld-wsjtx.exe (confirmed on 3.0.2,
+        // installed by winget to C:\WSJT\wsjtx). Older builds used plain
+        // rigctl.exe, so both are tried. The install folder also comes from
+        // the Uninstall key, which covers a non-default install path.
+        var wsjtxDirs = new List<string>
         {
             @"C:\WSJT\wsjtx\bin",
             @"C:\Program Files\WSJT-X\bin",
             @"C:\Program Files (x86)\WSJT-X\bin",
         };
-        // Also check registry for WSJT-X install location
         var wsjtxReg = RegistryInstallPath(@"SOFTWARE\WSJT-X", "InstallDir");
         if (wsjtxReg is not null)
-            wsjtxDirs = [..wsjtxDirs, Path.Combine(wsjtxReg, "bin")];
+            wsjtxDirs.Add(Path.Combine(wsjtxReg, "bin"));
+        foreach (var dir in UninstallKeyInstallDirs("wsjtx", "WSJT-X"))
+            wsjtxDirs.Add(Path.Combine(dir, "bin"));
 
-        foreach (var d in wsjtxDirs)
-            yield return (Path.Combine(d, "rigctl.exe"), "WSJT-X");
+        foreach (var d in wsjtxDirs.Distinct(StringComparer.OrdinalIgnoreCase))
+        {
+            yield return (Path.Combine(d, "rigctl-wsjtx.exe"), "WSJT-X");
+            yield return (Path.Combine(d, "rigctl.exe"),       "WSJT-X");
+        }
 
         // ── 2. Fldigi bundled Hamlib ──────────────────────────────────────
         var fldigiDirs = new[]
@@ -115,9 +124,14 @@ public class HamlibLocatorService
             yield return (Path.Combine(d, "rigctl.exe"), "Hamlib standalone");
 
         // ── 4. PATH ───────────────────────────────────────────────────────
-        var fromPath = FindInPath("rigctl.exe");
-        if (fromPath is not null)
-            yield return (fromPath, "PATH");
+        // Either name: a WSJT-X user who added its bin folder to PATH has
+        // rigctl-wsjtx, not rigctl.
+        foreach (var exe in new[] { "rigctl.exe", "rigctl-wsjtx.exe" })
+        {
+            var fromPath = FindInPath(exe);
+            if (fromPath is not null)
+                yield return (fromPath, "PATH");
+        }
     }
 
     // ── Helpers ──────────────────────────────────────────────────────────
@@ -132,6 +146,53 @@ public class HamlibLocatorService
             if (File.Exists(full)) return full;
         }
         return null;
+    }
+
+    /// <summary>
+    /// Install folders of programs whose Uninstall entry matches any of the
+    /// given name fragments: InstallLocation when set, else the folder of
+    /// the uninstaller (NSIS installers such as WSJT-X's set only that).
+    /// </summary>
+    private static IEnumerable<string> UninstallKeyInstallDirs(params string[] nameFragments)
+    {
+        var found = new List<string>();
+        var roots = new (RegistryKey Root, string Sub)[]
+        {
+            (Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall"),
+            (Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall"),
+            (Registry.CurrentUser,  @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall"),
+        };
+
+        foreach (var (root, sub) in roots)
+        {
+            try
+            {
+                using var key = root.OpenSubKey(sub);
+                if (key is null) continue;
+                foreach (var name in key.GetSubKeyNames())
+                {
+                    using var app = key.OpenSubKey(name);
+                    var display = app?.GetValue("DisplayName") as string ?? string.Empty;
+                    if (!nameFragments.Any(f => name.Contains(f, StringComparison.OrdinalIgnoreCase)
+                                             || display.Contains(f, StringComparison.OrdinalIgnoreCase)))
+                        continue;
+
+                    var location = app?.GetValue("InstallLocation") as string;
+                    if (string.IsNullOrWhiteSpace(location))
+                    {
+                        var uninstaller = (app?.GetValue("UninstallString") as string ?? string.Empty).Trim('"');
+                        location = Path.GetDirectoryName(uninstaller.Split(".exe", StringSplitOptions.None)[0] + ".exe");
+                    }
+                    if (!string.IsNullOrWhiteSpace(location))
+                        found.Add(location.TrimEnd('\\'));
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Debug(ex, "Uninstall key scan failed under {Root}\\{Sub}", root.Name, sub);
+            }
+        }
+        return found;
     }
 
     private static string? RegistryInstallPath(string subKey, string valueName)

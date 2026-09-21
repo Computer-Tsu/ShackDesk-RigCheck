@@ -107,6 +107,9 @@ public class EnvironmentCheckService
 
     private TestResult CheckHamlib()
     {
+        // Re-run the search: the operator may have installed WSJT-X since
+        // RigCheck started, and the cached answer must not stay stale.
+        _locator.Find();
         var copies = _locator.FindAll();
         if (copies.Count == 0)
         {
