@@ -19,7 +19,9 @@ Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for 
   telemetry endpoint: a startup report and a per-test-run report with radio model, serial settings,
   USB cable identifiers, and test outcomes. Every report is stored locally and viewable under
   Help > View collected data. Support ID shown in Help > About.
-- Settings window now has content: the diagnostics toggle, data viewer, and privacy link
+- Settings window: diagnostics toggle, log level (Off / Errors only / Normal / Detailed —
+  Detailed by default on test builds), log folder path with Open and Delete buttons, Support ID
+  with Copy and Reset. Changes apply on OK; Cancel discards them.
 - Unhandled exceptions are logged, reported if diagnostics are on, and shown to the operator
   before the app closes
 

@@ -3,12 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:loc="clr-namespace:RigCheck.Localization"
         Title="{loc:Str Settings_Title}"
-        Width="480" SizeToContent="Height"
+        Width="520" SizeToContent="Height"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False"
         Background="{StaticResource BrushBackground}"
         Foreground="{StaticResource BrushForeground}">
+
+    <!--
+        Settings are held as pending values and written only on OK.
+        Buttons that act on files (open folder, delete logs, reset ID) act
+        immediately and confirm first where destructive.
+    -->
 
     <StackPanel Margin="24,20,24,16">
 
@@ -19,13 +25,12 @@
         <CheckBox x:Name="TelemetryCheckBox"
                   Content="{loc:Str Telemetry_Checkbox}"
                   Foreground="{StaticResource BrushForeground}" FontSize="13"
-                  Margin="0,0,0,8"
-                  Checked="Telemetry_Changed" Unchecked="Telemetry_Changed" />
+                  Margin="0,0,0,8" />
 
         <TextBlock x:Name="WhatIsSentText" TextWrapping="Wrap"
                    Foreground="{StaticResource BrushMuted}" FontSize="12" Margin="0,0,0,6" />
         <TextBlock Text="{loc:Str Telemetry_WhatIsNotSent}" TextWrapping="Wrap"
-                   Foreground="{StaticResource BrushMuted}" FontSize="12" Margin="0,0,0,12" />
+                   Foreground="{StaticResource BrushMuted}" FontSize="12" Margin="0,0,0,10" />
 
         <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
             <Button Content="{loc:Str Settings_ViewData}"
@@ -38,9 +43,58 @@
             </Button>
         </StackPanel>
 
-        <Button Content="{loc:Str Common_Close}"
-                Style="{StaticResource PrimaryButtonStyle}"
-                HorizontalAlignment="Right" MinWidth="90"
-                IsDefault="True" IsCancel="True" />
+        <!-- ── Logging ── -->
+        <TextBlock Text="{loc:Str Settings_LoggingHeading}"
+                   FontWeight="SemiBold" FontSize="14" Margin="0,0,0,8" />
+
+        <DockPanel Margin="0,0,0,8">
+            <Label Content="{loc:Str Settings_LogLevel}" Style="{StaticResource FieldLabelStyle}" />
+            <ComboBox x:Name="LogLevelCombo"
+                      SelectedValuePath="Value" DisplayMemberPath="Label"
+                      Style="{StaticResource ComboBoxStyle}" MinWidth="260" HorizontalAlignment="Left" />
+        </DockPanel>
+
+        <TextBlock Text="{loc:Str Settings_LogPath}"
+                   Foreground="{StaticResource BrushMuted}" FontSize="12" />
+        <TextBox x:Name="LogPathText"
+                 Style="{StaticResource TextBoxStyle}"
+                 IsReadOnly="True" FontFamily="Consolas" FontSize="12"
+                 Margin="0,4,0,8" />
+
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+            <Button Content="{loc:Str Settings_OpenLogFolder}"
+                    Style="{StaticResource SecondaryButtonStyle}" Click="OpenLogFolder_Click" Margin="0,0,8,0" />
+            <Button Content="{loc:Str Settings_DeleteLogs}"
+                    Style="{StaticResource SecondaryButtonStyle}" Click="DeleteLogs_Click" Margin="0,0,12,0" />
+            <TextBlock x:Name="LogActionStatus" VerticalAlignment="Center"
+                       Foreground="{StaticResource BrushMuted}" FontSize="12" />
+        </StackPanel>
+
+        <!-- ── Support ID ── -->
+        <TextBlock Text="{loc:Str Settings_SupportIdHeading}"
+                   FontWeight="SemiBold" FontSize="14" Margin="0,0,0,8" />
+
+        <DockPanel Margin="0,0,0,6">
+            <Button DockPanel.Dock="Right" Content="{loc:Str Common_Copy}"
+                    Style="{StaticResource CopyButtonStyle}" Click="CopyId_Click" />
+            <TextBox x:Name="SupportIdText"
+                     Style="{StaticResource TextBoxStyle}"
+                     IsReadOnly="True" FontFamily="Consolas" FontSize="12" />
+        </DockPanel>
+        <TextBlock Text="{loc:Str Settings_SupportIdHint}" TextWrapping="Wrap"
+                   Foreground="{StaticResource BrushMuted}" FontSize="12" Margin="0,0,0,8" />
+        <Button Content="{loc:Str Settings_ResetId}"
+                Style="{StaticResource SecondaryButtonStyle}" HorizontalAlignment="Left"
+                Click="ResetId_Click" Margin="0,0,0,24" />
+
+        <!-- ── Footer ── -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="{loc:Str Common_OK}"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    MinWidth="90" IsDefault="True" Click="Ok_Click" Margin="0,0,8,0" />
+            <Button Content="{loc:Str Common_Cancel}"
+                    Style="{StaticResource SecondaryButtonStyle}"
+                    MinWidth="90" IsCancel="True" />
+        </StackPanel>
     </StackPanel>
 </Window>

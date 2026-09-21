@@ -165,6 +165,68 @@ Alpha builds stop running after {2} days so that testers always use current code
     <value>View collected data…</value>
     <comment>Button in Settings that opens the telemetry data viewer.</comment>
   </data>
+  <data name="Settings_LoggingHeading" xml:space="preserve">
+    <value>Logging</value>
+    <comment>Section heading in Settings.</comment>
+  </data>
+  <data name="Settings_LogLevel" xml:space="preserve">
+    <value>Write to log files:</value>
+    <comment>Label before the log level dropdown.</comment>
+  </data>
+  <data name="LogLevel_Off" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="LogLevel_Error" xml:space="preserve">
+    <value>Errors only</value>
+  </data>
+  <data name="LogLevel_Information" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="LogLevel_Debug" xml:space="preserve">
+    <value>Detailed (recommended for test builds)</value>
+  </data>
+  <data name="Settings_LogPath" xml:space="preserve">
+    <value>Log files are stored in:</value>
+  </data>
+  <data name="Settings_OpenLogFolder" xml:space="preserve">
+    <value>Open log folder</value>
+    <comment>Button. Opens the log folder in Windows Explorer.</comment>
+  </data>
+  <data name="Settings_DeleteLogs" xml:space="preserve">
+    <value>Delete log files</value>
+    <comment>Button.</comment>
+  </data>
+  <data name="Settings_DeleteLogsConfirm" xml:space="preserve">
+    <value>Delete all {0} log files? This cannot be undone.</value>
+    <comment>Confirmation question. {0} is the app name.</comment>
+  </data>
+  <data name="Settings_DeleteLogsDone" xml:space="preserve">
+    <value>{0} log file(s) deleted.</value>
+    <comment>{0} is a number.</comment>
+  </data>
+  <data name="Settings_SupportIdHeading" xml:space="preserve">
+    <value>Support ID</value>
+    <comment>Section heading in Settings.</comment>
+  </data>
+  <data name="Settings_SupportIdHint" xml:space="preserve">
+    <value>A random identifier created when you first ran the program. It is the only identifier ever sent in diagnostic reports, and lets a support request be matched to them. Resetting it breaks that link for all past reports and deletes their local copies.</value>
+  </data>
+  <data name="Settings_ResetId" xml:space="preserve">
+    <value>Reset Support ID…</value>
+    <comment>Button.</comment>
+  </data>
+  <data name="Settings_ResetIdConfirm" xml:space="preserve">
+    <value>Create a new Support ID? Past diagnostic reports can no longer be matched to this installation, and their local copies will be deleted.</value>
+    <comment>Confirmation question.</comment>
+  </data>
+  <data name="Common_OK" xml:space="preserve">
+    <value>OK</value>
+    <comment>Button. Saves changes and closes the dialog.</comment>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>Button. Discards changes and closes the dialog.</comment>
+  </data>
   <data name="Menu_HelpViewData" xml:space="preserve">
     <value>_View collected data</value>
     <comment>Help menu item. Opens the telemetry data viewer.</comment>

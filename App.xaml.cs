@@ -21,11 +21,13 @@ public partial class App : Application
     {
         base.OnStartup(e);
 
-        ConfigureSerilog();
+        // Settings are read before the host exists because the log level lives there.
+        var earlySettings = new SettingsService();
+        AppLogger.Configure(AppLogger.ResolveLevel(earlySettings.Current.LogLevel));
 
         _host = Host.CreateDefaultBuilder()
             .UseSerilog()
-            .ConfigureServices(RegisterServices)
+            .ConfigureServices(s => RegisterServices(s, earlySettings))
             .Build();
 
         await _host.StartAsync();
@@ -93,11 +95,11 @@ public partial class App : Application
 
     // ── Service registration ─────────────────────────────────────────────
 
-    private static void RegisterServices(IServiceCollection services)
+    private static void RegisterServices(IServiceCollection services, SettingsService earlySettings)
     {
         // Infrastructure
         services.AddSingleton<AppLogger>();
-        services.AddSingleton<SettingsService>();
+        services.AddSingleton(earlySettings);
         services.AddSingleton(new HttpClient { Timeout = TimeSpan.FromSeconds(5) });
         services.AddSingleton<TelemetryService>();
 
@@ -123,26 +125,4 @@ public partial class App : Application
         services.AddTransient<MainWindow>();
     }
 
-    // ── Logging setup ────────────────────────────────────────────────────
-
-    private static void ConfigureSerilog()
-    {
-        var logDir = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            BrandingInfo.SuiteName,
-            BrandingInfo.AppName,
-            BrandingInfo.LogFolder);
-
-        Directory.CreateDirectory(logDir);
-
-        Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Debug()
-            .WriteTo.File(
-                path: Path.Combine(logDir, BrandingInfo.LogFileName),
-                rollingInterval: RollingInterval.Day,
-                retainedFileCountLimit: 7,
-                outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
-            .WriteTo.Debug()
-            .CreateLogger();
-    }
 }

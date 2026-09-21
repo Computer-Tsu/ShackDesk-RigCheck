@@ -52,6 +52,9 @@ public class RigCheckSettings
     public string InstallId         { get; set; } = Guid.NewGuid().ToString("D");
     public bool   TelemetryEnabled  { get; set; } = false;
     public bool   TelemetryPrompted { get; set; } = false;
+
+    // Logging level; empty means the channel default (see AppLogger).
+    public string LogLevel          { get; set; } = string.Empty;
 }
 
 // ── Settings service ──────────────────────────────────────────────────────
