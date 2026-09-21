@@ -17,6 +17,7 @@ namespace RigCheck.ViewModels;
 public partial class MainViewModel : ObservableObject
 {
     private readonly TestRunnerService   _testRunner;
+    private readonly EnvironmentCheckService _envCheck;
     private readonly LogExportService    _logExport;
     private readonly HamlibLocatorService _hamlib;
     private readonly SettingsService     _settings;
@@ -28,7 +29,9 @@ public partial class MainViewModel : ObservableObject
 
     // ── Observable state ─────────────────────────────────────────────────
 
-    [ObservableProperty] private bool   _isRunning;
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(RunTestsCommand), nameof(ScanEnvironmentCommand))]
+    private bool   _isRunning;
     [ObservableProperty] private bool   _rawConsoleVisible;
     [ObservableProperty] private bool   _chromeVisible;
     [ObservableProperty] private bool   _alwaysOnTop;
@@ -60,6 +63,7 @@ public partial class MainViewModel : ObservableObject
         TestResultsViewModel results,
         RawConsoleViewModel  rawConsole,
         TestRunnerService    testRunner,
+        EnvironmentCheckService envCheck,
         LogExportService     logExport,
         HamlibLocatorService hamlib,
         SettingsService      settings,
@@ -69,6 +73,7 @@ public partial class MainViewModel : ObservableObject
         Results     = results;
         RawConsole  = rawConsole;
         _testRunner = testRunner;
+        _envCheck   = envCheck;
         _logExport  = logExport;
         _hamlib     = hamlib;
         _settings   = settings;
@@ -98,7 +103,7 @@ public partial class MainViewModel : ObservableObject
     {
         IsRunning = true;
         StatusMessage = Strings.Get("Status_Running");
-        Results.Clear();
+        Results.Clear(TestRunnerService.SuiteTests);
         CopyResultsCommand.NotifyCanExecuteChanged();
 
         var cfg = Connection.BuildConfig();
@@ -147,6 +152,46 @@ public partial class MainViewModel : ObservableObject
     }
 
     private bool CanRunTests() => !IsRunning && _hamlib.IsAvailable && Connection.IsReady;
+
+    // Environment scan: PC-side checks only, no radio needed, so it is not
+    // gated on readiness — it is the thing to run when Run Tests is greyed
+    // out and the operator wants to know why. Always operator-initiated.
+    [RelayCommand(CanExecute = nameof(CanScan))]
+    private async Task ScanEnvironmentAsync()
+    {
+        IsRunning = true;
+        StatusMessage = Strings.Get("Status_Scanning");
+        Results.Clear(EnvironmentCheckService.Checks);
+        CopyResultsCommand.NotifyCanExecuteChanged();
+
+        try
+        {
+            var progress = new Progress<TestResult>(result =>
+                Application.Current.Dispatcher.Invoke(() => Results.AddResult(result)));
+
+            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
+            var suite = await _envCheck.RunAllAsync(Connection.BuildConfig(), progress, cts.Token);
+
+            Results.SetSuiteResult(suite);
+            TaskCompleted?.Invoke(suite.AllPassed);
+            StatusMessage = Strings.Format("Status_ScanDone", suite.WarningCount + suite.FailCount);
+
+            Log.Information("Environment scan complete: {Pass} ok, {Fail} fail, {Warn} warn",
+                suite.PassCount, suite.FailCount, suite.WarningCount);
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = Strings.Get("Status_RunFailed");
+            Log.Error(ex, "Environment scan threw an exception");
+        }
+        finally
+        {
+            IsRunning = false;
+            CopyResultsCommand.NotifyCanExecuteChanged();
+        }
+    }
+
+    private bool CanScan() => !IsRunning;
 
     [RelayCommand]
     private async Task ExportLogAsync()

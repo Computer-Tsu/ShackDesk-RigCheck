@@ -33,6 +33,13 @@ public class TestRunnerService
     /// Progress is reported via the <paramref name="progress"/> callback
     /// so the UI can update results in real time as each test completes.
     /// </summary>
+    /// <summary>The connection tests, in run order — used for the pending placeholders.</summary>
+    public static readonly IReadOnlyList<TestId> SuiteTests =
+    [
+        TestId.OpenConnection, TestId.GetFrequency, TestId.GetMode, TestId.GetPtt,
+        TestId.GetSmeter, TestId.GetVfo, TestId.SetFrequency,
+    ];
+
     public async Task<TestSuiteResult> RunAllAsync(
         ConnectionConfig cfg,
         bool includeSetFreqTest,

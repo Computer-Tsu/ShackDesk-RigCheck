@@ -334,6 +334,14 @@
                         Command="{Binding RunTestsCommand}"
                         Style="{StaticResource RunButtonStyle}"
                         IsEnabled="{Binding IsRunning, Converter={StaticResource InverseBool}}" />
+
+                <!-- Scan — PC-side checks, no radio needed. Never runs on its own. -->
+                <Button Content="{loc:Str Main_Scan}"
+                        Command="{Binding ScanEnvironmentCommand}"
+                        Style="{StaticResource SecondaryButtonStyle}"
+                        HorizontalAlignment="Left"
+                        Margin="8,0,0,0"
+                        ToolTip="{loc:Str Main_ScanTip}" />
             </DockPanel>
         </Border>
 

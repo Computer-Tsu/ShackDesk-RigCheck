@@ -247,15 +247,19 @@ public partial class TestResultsViewModel : ObservableObject
 
     public TestSuiteResult? SuiteResult { get; private set; }
 
-    public void Clear()
+    /// <summary>
+    /// Start a new run: one pending placeholder per test so the operator
+    /// sees what is coming. The list differs between the connection tests
+    /// and the environment scan.
+    /// </summary>
+    public void Clear(IEnumerable<TestId> plannedTests)
     {
         Items.Clear();
         SummaryText = string.Empty;
         HasResults  = false;
         SuiteResult = null;
 
-        // Add pending placeholders for all tests
-        foreach (TestId id in Enum.GetValues<TestId>())
+        foreach (var id in plannedTests)
             Items.Add(new TestResultItemViewModel(TestResult.Pending(id)));
     }
 

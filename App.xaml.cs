@@ -118,6 +118,7 @@ public partial class App : Application
         services.AddSingleton<RadioPresetsService>();
         services.AddSingleton<DiagnosisEngine>();
         services.AddTransient<TestRunnerService>();
+        services.AddTransient<EnvironmentCheckService>();
         services.AddTransient<LogExportService>();
 
         // ViewModels

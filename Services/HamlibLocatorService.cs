@@ -58,6 +58,17 @@ public class HamlibLocatorService
     }
 
     /// <summary>
+    /// Every rigctl.exe that actually exists, in priority order, first one
+    /// being the copy RigCheck uses. Several is normal — WSJT-X and Fldigi
+    /// each bundle their own — and the environment scan lists them all.
+    /// </summary>
+    public IReadOnlyList<(string Path, string Via)> FindAll() =>
+        CandidatePaths()
+            .Where(c => File.Exists(c.Path))
+            .DistinctBy(c => c.Path, StringComparer.OrdinalIgnoreCase)
+            .ToList();
+
+    /// <summary>
     /// Returns all candidate (path, source-label) pairs in priority order.
     /// </summary>
     public IEnumerable<(string Path, string Via)> CandidatePaths()

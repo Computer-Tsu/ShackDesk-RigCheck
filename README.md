@@ -154,6 +154,28 @@ Target users:
   rigctld network
 - Detect and test GPS (USB serial receivers, puck)
 
+### PC Scan (no radio needed)
+The **Scan PC** button checks the computer side before any radio is
+involved, so "Run Tests is greyed out — why?" has an answer:
+
+- Windows version and architecture
+- Every copy of Hamlib found (WSJT-X, Fldigi, standalone, PATH) and which one RigCheck uses
+- `rigctl --version` actually runs
+- Whether `rigctl` is on PATH — if not, the commands RigCheck shows will not work in a plain
+  command window, and the exact `setx` line to fix it is shown
+- The selected radio model, called out unmistakably when it is Hamlib's dummy rig (model 1)
+- Serial port drivers: ports present, plus any Plug and Play device with a problem code
+  (28 = no driver, 10 = cannot start, 22 = disabled)
+- Whether anything is listening on the rigctld port (and Flrig's), and whether that matches
+  the selected connection mode
+- rigctld startup entries and Windows Firewall rules for it — a Block rule from a dismissed
+  prompt is a classic
+- Installed radio software (WSJT-X, Fldigi, JS8Call, Flrig, Winlink Express)
+
+Everything is read-only. RigCheck never changes PATH, firewall rules, drivers, or startup
+entries — it shows the command or the setting and leaves the change to you. The scan runs only
+when you click it; nothing enumerates processes or ports at startup.
+
 ### Diagnostic Test Suite
 Run a sequence of standard Hamlib queries and 
 display pass/fail results in plain English:

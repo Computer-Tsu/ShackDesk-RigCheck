@@ -5,6 +5,23 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
+## [0.6.7] - 2026-09-21
+
+First half of the 0.7.0 milestone: the PC-side checks.
+
+### Added
+- **Scan PC** button: ten read-only checks that need no radio — Windows version, every Hamlib
+  copy found and which one is used, `rigctl --version`, rigctl on PATH (with the `setx` fix
+  shown), the selected radio model with a clear warning if it is Hamlib's dummy rig, serial
+  driver problem codes, whether anything listens on the rigctld and Flrig ports, rigctld startup
+  entries, Windows Firewall rules for rigctld, and installed radio software
+- Scan results use the same results panel, Copy Results, and Export Log as the connection tests
+- Completion notification also fires when a scan finishes
+
+### Changed
+- The results panel shows pending placeholders only for the checks about to run, instead of
+  every test RigCheck knows about
+
 ## [0.6.6] - 2026-09-21
 
 Results you can select and copy; a heads-up when a run finishes.

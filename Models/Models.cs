@@ -29,6 +29,7 @@ public record ConnectionConfig
 
 public enum TestId
 {
+    // Connection tests — need a radio
     OpenConnection,
     GetFrequency,
     GetMode,
@@ -36,6 +37,18 @@ public enum TestId
     GetSmeter,
     GetVfo,
     SetFrequency,
+
+    // Environment checks — user-initiated Scan, no radio needed
+    EnvWindows,
+    EnvHamlib,
+    EnvRigctlVersion,
+    EnvRigctlPath,
+    EnvRadioModel,
+    EnvSerialDrivers,
+    EnvRigctld,
+    EnvAutostart,
+    EnvFirewall,
+    EnvRadioApps,
 }
 
 public enum TestStatus

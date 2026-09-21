@@ -888,4 +888,204 @@ Continue?</value>
   <data name="Settings_NotifySound" xml:space="preserve">
     <value>Play a sound</value>
   </data>
+  <data name="Test_EnvWindows" xml:space="preserve">
+    <value>Windows version</value>
+  </data>
+  <data name="Test_EnvHamlib" xml:space="preserve">
+    <value>Hamlib (rigctl.exe)</value>
+  </data>
+  <data name="Test_EnvRigctlVersion" xml:space="preserve">
+    <value>rigctl runs</value>
+  </data>
+  <data name="Test_EnvRigctlPath" xml:space="preserve">
+    <value>rigctl on PATH</value>
+  </data>
+  <data name="Test_EnvRadioModel" xml:space="preserve">
+    <value>Selected radio</value>
+  </data>
+  <data name="Test_EnvSerialDrivers" xml:space="preserve">
+    <value>Serial port drivers</value>
+  </data>
+  <data name="Test_EnvRigctld" xml:space="preserve">
+    <value>rigctld server</value>
+  </data>
+  <data name="Test_EnvAutostart" xml:space="preserve">
+    <value>rigctld at startup</value>
+  </data>
+  <data name="Test_EnvFirewall" xml:space="preserve">
+    <value>Windows Firewall</value>
+  </data>
+  <data name="Test_EnvRadioApps" xml:space="preserve">
+    <value>Radio software installed</value>
+  </data>
+  <data name="Env_CheckFailed" xml:space="preserve">
+    <value>Check could not run: {0}</value>
+  </data>
+  <data name="Env_Windows" xml:space="preserve">
+    <value>{0} {1} (build {2}, {3})</value>
+    <comment>Placeholders: {0} product name, {1} release such as 24H2, {2} build number, {3} architecture.</comment>
+  </data>
+  <data name="Env_HamlibNone" xml:space="preserve">
+    <value>Not found</value>
+  </data>
+  <data name="Env_HamlibNone_Summary" xml:space="preserve">
+    <value>Hamlib is not installed, or not where RigCheck looks.</value>
+  </data>
+  <data name="Env_HamlibNone_1" xml:space="preserve">
+    <value>Install WSJT-X, Fldigi, or the standalone Hamlib for Windows — each includes rigctl.exe</value>
+  </data>
+  <data name="Env_HamlibNone_2" xml:space="preserve">
+    <value>RigCheck looks in the WSJT-X, Fldigi, and Hamlib install folders and on PATH</value>
+  </data>
+  <data name="Env_HamlibOne" xml:space="preserve">
+    <value>Using {0}: {1}</value>
+  </data>
+  <data name="Env_HamlibMany" xml:space="preserve">
+    <value>{0} copies found — using {1}: {2}. Also: {3}</value>
+    <comment>Placeholders: {0} count, {1} where the used copy came from, {2} its path, {3} list of the other copies.</comment>
+  </data>
+  <data name="Env_SkippedNoHamlib" xml:space="preserve">
+    <value>Skipped — Hamlib not found</value>
+  </data>
+  <data name="Env_RigctlVersionFail" xml:space="preserve">
+    <value>rigctl did not run: {0}</value>
+  </data>
+  <data name="Env_RigctlVersionFail_Summary" xml:space="preserve">
+    <value>rigctl.exe was found but could not be started.</value>
+  </data>
+  <data name="Env_RigctlVersionFail_1" xml:space="preserve">
+    <value>Antivirus may have quarantined it — check the security software's history</value>
+  </data>
+  <data name="Env_RigctlVersionFail_2" xml:space="preserve">
+    <value>Reinstall WSJT-X or Hamlib to restore it</value>
+  </data>
+  <data name="Env_RigctlPathYes" xml:space="preserve">
+    <value>Yes — {0}</value>
+  </data>
+  <data name="Env_RigctlPathNo" xml:space="preserve">
+    <value>No — the commands RigCheck shows will not run in a plain command window</value>
+  </data>
+  <data name="Env_RigctlPathNo_Summary" xml:space="preserve">
+    <value>The folder containing rigctl.exe is not on PATH.</value>
+  </data>
+  <data name="Env_RigctlPathNo_1" xml:space="preserve">
+    <value>The commands shown here start with just "rigctl"; Windows needs to know where that is</value>
+  </data>
+  <data name="Env_RigctlPathNo_2" xml:space="preserve">
+    <value>Run the command below in an Administrator command prompt, then open a new window</value>
+  </data>
+  <data name="Env_RadioModel" xml:space="preserve">
+    <value>{0} (Hamlib model {1})</value>
+  </data>
+  <data name="Env_RadioModelNone" xml:space="preserve">
+    <value>No radio chosen — pick one under Connection</value>
+  </data>
+  <data name="Env_RadioModelDummy" xml:space="preserve">
+    <value>Hamlib dummy rig (model 1) — a simulation, not your radio</value>
+  </data>
+  <data name="Env_RadioModelDummy_Summary" xml:space="preserve">
+    <value>Model 1 is Hamlib's built-in test rig. Every command succeeds without any radio attached.</value>
+  </data>
+  <data name="Env_RadioModelDummy_1" xml:space="preserve">
+    <value>Choose your real radio from the list before trusting any result</value>
+  </data>
+  <data name="Env_SerialOk" xml:space="preserve">
+    <value>{0} port(s), no driver problems: {1}</value>
+  </data>
+  <data name="Env_SerialNone" xml:space="preserve">
+    <value>Windows sees no COM ports</value>
+  </data>
+  <data name="Env_SerialNone_Summary" xml:space="preserve">
+    <value>No serial port is present.</value>
+  </data>
+  <data name="Env_SerialNone_1" xml:space="preserve">
+    <value>Plug in the USB cable and check it is a data cable, not a charge-only one</value>
+  </data>
+  <data name="Env_SerialNone_2" xml:space="preserve">
+    <value>Some radios need a driver from the maker (Silicon Labs CP210x for most Icom, Yaesu, and Kenwood USB ports)</value>
+  </data>
+  <data name="Env_SerialProblem" xml:space="preserve">
+    <value>{0} (problem code {1})</value>
+  </data>
+  <data name="Env_SerialProblem_Summary" xml:space="preserve">
+    <value>A serial device has a driver problem.</value>
+  </data>
+  <data name="Env_SerialProblem_1" xml:space="preserve">
+    <value>Code 28: no driver installed — install the maker's USB driver</value>
+  </data>
+  <data name="Env_SerialProblem_2" xml:space="preserve">
+    <value>Code 10: the device cannot start — try another USB port or cable</value>
+  </data>
+  <data name="Env_SerialProblem_3" xml:space="preserve">
+    <value>Code 22: the device is disabled in Device Manager</value>
+  </data>
+  <data name="Env_RigctldListening" xml:space="preserve">
+    <value>Listening on port {0} ({1})</value>
+  </data>
+  <data name="Env_RigctldNone" xml:space="preserve">
+    <value>Nothing listening on port {0} — fine for direct serial</value>
+    <comment>Shown when nothing listens on the rigctld port and direct serial is selected — this is the normal case.</comment>
+  </data>
+  <data name="Env_RigctldNeeded" xml:space="preserve">
+    <value>Nothing listening on port {0}, but rigctld mode is selected</value>
+  </data>
+  <data name="Env_RigctldNeeded_Summary" xml:space="preserve">
+    <value>rigctld is not running.</value>
+  </data>
+  <data name="Env_RigctldNeeded_1" xml:space="preserve">
+    <value>Start rigctld yourself — WSJT-X and Fldigi do not start it for you</value>
+  </data>
+  <data name="Env_RigctldNeeded_2" xml:space="preserve">
+    <value>Or switch to direct serial under Connection</value>
+  </data>
+  <data name="Env_FlrigListening" xml:space="preserve">
+    <value>Flrig is also listening on port {0}</value>
+  </data>
+  <data name="Env_ProcessUnknown" xml:space="preserve">
+    <value>unknown program</value>
+  </data>
+  <data name="Env_AutostartNone" xml:space="preserve">
+    <value>Not configured — normal, most operators start it by hand</value>
+  </data>
+  <data name="Env_AutostartFound" xml:space="preserve">
+    <value>Configured: {0}</value>
+  </data>
+  <data name="Env_FirewallUnreadable" xml:space="preserve">
+    <value>Skipped — firewall rules could not be read</value>
+  </data>
+  <data name="Env_FirewallNone" xml:space="preserve">
+    <value>No rule for rigctld yet — Windows will ask the first time it listens; choose Allow</value>
+  </data>
+  <data name="Env_FirewallAllow" xml:space="preserve">
+    <value>Allow rule present for rigctld</value>
+  </data>
+  <data name="Env_FirewallBlock" xml:space="preserve">
+    <value>A Block rule exists for rigctld</value>
+  </data>
+  <data name="Env_FirewallBlock_Summary" xml:space="preserve">
+    <value>Windows Firewall is blocking rigctld.</value>
+  </data>
+  <data name="Env_FirewallBlock_1" xml:space="preserve">
+    <value>This usually comes from clicking Cancel on the firewall prompt the first time rigctld ran</value>
+  </data>
+  <data name="Env_FirewallBlock_2" xml:space="preserve">
+    <value>Windows Security › Firewall &amp; network protection › Allow an app through firewall — tick rigctld for Private networks</value>
+    <comment>Path through the Windows Security app; use the exact menu names Windows shows in your language.</comment>
+  </data>
+  <data name="Env_AppsNone" xml:space="preserve">
+    <value>None of WSJT-X, Fldigi, JS8Call, Flrig, or Winlink Express found</value>
+  </data>
+  <data name="Status_Scanning" xml:space="preserve">
+    <value>Scanning this PC…</value>
+  </data>
+  <data name="Status_ScanDone" xml:space="preserve">
+    <value>Scan complete — {0} item(s) need attention</value>
+  </data>
+  <data name="Main_Scan" xml:space="preserve">
+    <value>Scan PC</value>
+    <comment>Button. Runs the PC-side checks (no radio). Keep short.</comment>
+  </data>
+  <data name="Main_ScanTip" xml:space="preserve">
+    <value>Check Hamlib, drivers, rigctld, and the firewall on this PC — no radio needed. Runs only when you click it.</value>
+  </data>
 </root>
