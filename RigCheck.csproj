@@ -86,7 +86,6 @@
   <ItemGroup>
     <!-- Embedded assets -->
     <Resource Include="Assets\**" />
-    <EmbeddedResource Include="Resources\**" />
 
     <!-- Data files copied to output -->
     <None Update="Assets\usb_devices.json">

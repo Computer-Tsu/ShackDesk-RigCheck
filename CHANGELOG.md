@@ -14,8 +14,10 @@ Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for 
 - Help topics shown alongside timeout and no-response failures
 - Main window code-behind: window position persistence, console Enter/Up/Down key handling
 - Raw console command history persists across sessions
+- Dark theme: color palette, control styles, and value converters for the main window
 
 ### Changed
+- Zoom applies a layout transform to the window content instead of a render transform on the window, so content reflows rather than clipping
 - `DiagnosticResult` and `HelpTopic` moved to the Models namespace
 - Zoom buttons bind to ViewModel commands instead of code-behind handlers
 

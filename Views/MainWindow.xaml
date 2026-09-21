@@ -13,11 +13,11 @@
         Closing="Window_Closing"
         Loaded="Window_Loaded">
 
-    <Window.RenderTransform>
-        <ScaleTransform ScaleX="{Binding ScaleFactor}" ScaleY="{Binding ScaleFactor}" />
-    </Window.RenderTransform>
-
     <Grid>
+        <Grid.LayoutTransform>
+            <ScaleTransform ScaleX="{Binding ScaleFactor}" ScaleY="{Binding ScaleFactor}" />
+        </Grid.LayoutTransform>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />   <!-- chrome bar (hidden by default) -->
             <RowDefinition Height="Auto" />   <!-- Hamlib status bar -->
