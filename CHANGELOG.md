@@ -5,6 +5,17 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
+## [Unreleased]
+
+### Changed
+- Target runtime moved from .NET 8 to .NET 10 (LTS, supported through 2028-11-14).
+  No change to supported Windows versions; see the Platform section of the README.
+- Microsoft.Extensions, System.Management, System.IO.Ports, and Serilog.Extensions.Hosting
+  packages updated to their 10.x releases
+
+### Added
+- Dependabot, CodeQL analysis, and dependency review workflows
+
 ## [0.6.1] - 2026-09-21
 
 First successful build. The application compiles in CI and produces a

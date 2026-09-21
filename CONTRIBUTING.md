@@ -31,7 +31,7 @@ All contributors must agree to the [Contributor License Agreement](CLA.md) befor
 - **Logging via Serilog only.** No `Console.WriteLine`, `Debug.WriteLine`, or `Trace`.
 - **Offline-first.** Nothing may block startup or a diagnostic run on network access. Network features fail silently when offline.
 - **Query-only during discovery.** Code that probes an unidentified serial device must never send a command that changes radio state.
-- **C# 12 / .NET 8** target only.
+- **.NET 10** target only. See the Platform section of the README for why.
 
 ## Pull Request Process
 

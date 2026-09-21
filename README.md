@@ -11,9 +11,46 @@ Brand: ShackDesk<br>
 Developer: Mark McDow N4TEK / My Computer Guru LLC<br>
 GitHub: github.com/Computer-Tsu<br>
 Suite site: shackdesk.com<br>
-Technology: C# WPF .NET 8, MVVM architecture,
+Technology: C# WPF .NET 10, MVVM architecture,
             dependency injection, Serilog logging,
             GitHub Actions CI/CD, no local compiler
+
+## Platform
+
+RigCheck runs on Windows 10 (version 21H2 or later)
+and Windows 11, 64-bit. Nothing else needs to be
+installed: the .NET runtime is bundled inside the
+single RigCheck.exe.
+
+Windows 11 on ARM runs it through the built-in x64
+emulation. Windows 7 and 8.1 are not supported.
+
+### Why .NET 10
+
+RigCheck moved from .NET 8 to .NET 10 in September
+2026. This changed nothing about which versions of
+Windows it runs on — .NET 8 and .NET 10 support the
+identical list of Windows client versions, and
+neither supports Windows 7 or 8.1.
+
+The reason is support lifetime. .NET 8 reaches end
+of support on November 10, 2026, after which the
+runtime bundled inside every RigCheck build would
+stop receiving security fixes. .NET 10 is the
+current long-term-support release, supported through
+November 14, 2028.
+
+### Hamlib
+
+RigCheck does not include Hamlib. It finds the
+rigctl.exe already on the computer from any of:
+
+- WSJT-X (includes Hamlib) — wsjt.sourceforge.io
+- Fldigi (includes Hamlib) — w1hkj.com
+- Standalone Hamlib for Windows —
+  github.com/Hamlib/Hamlib/releases
+
+Most operators already have WSJT-X installed.
 
 ## RigCheck Purpose
 

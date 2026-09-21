@@ -44,7 +44,7 @@ on:
         type: boolean
 
 env:
-  DOTNET_VERSION: '8.0.x'
+  DOTNET_VERSION: '10.0.x'
   PROJECT:        'RigCheck.csproj'
   RID:            'win-x64'
   APP_EXE:        'RigCheck.exe'
