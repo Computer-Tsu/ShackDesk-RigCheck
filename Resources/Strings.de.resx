@@ -403,4 +403,8 @@ Fortfahren?</value></data>
   <data name="Disc_Summary" xml:space="preserve"><value>Ihr Funkgerät: {0} an {1} — {2} Baud, 8N{3} (8 Datenbits, keine Parität, {3} Stopp)</value></data>
   <data name="Disc_SummaryRigctld" xml:space="preserve"><value>Ihr Funkgerät ist über rigctld unter {0} erreichbar</value></data>
   <data name="Diag_PortInUse_Running" xml:space="preserve"><value>Läuft gerade: {0} — mit großer Wahrscheinlichkeit das Programm, das die Schnittstelle belegt. Beenden Sie es (oder trennen Sie dort die Gerätesteuerung) und versuchen Sie es erneut</value></data>
+  <data name="Msg_VfoNotSupported" xml:space="preserve"><value>Dieses Funkgerät meldet sein aktives VFO nicht über Hamlib (normal für {0} und die meisten Icoms) — kein Problem</value></data>
+  <data name="Msg_SmeterNotSupported" xml:space="preserve"><value>Dieses Funkgerät meldet die Signalstärke nicht über Hamlib ({0}) — kein Problem</value></data>
+  <data name="Diag_NotSupported_Summary" xml:space="preserve"><value>Der Hamlib-Treiber für das {0} implementiert diese Abfrage nicht.</value></data>
+  <data name="Diag_NotSupported_1" xml:space="preserve"><value>Das Funkgerät antwortet; nur dieser eine Befehl existiert für es nicht. WSJT-X und die anderen Programme brauchen ihn nicht.</value></data>
 </root>

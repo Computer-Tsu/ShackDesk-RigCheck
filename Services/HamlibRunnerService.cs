@@ -100,12 +100,18 @@ public class HamlibRunnerService
             Log.Debug("rigctl exit={Exit} stdout={Out} stderr={Err}",
                 exitCode, stdout, stderr);
 
-            if (exitCode == 0)
+            // rigctl exits 0 even when the command itself failed (seen with
+            // "v" on an IC-7300: "Feature not available", exit 0, plus a
+            // trace dump). Treat Hamlib's own error text as failure and
+            // keep only the message, never the trace.
+            var commandError = HamlibErrorLine(stdout) ?? HamlibErrorLine(stderr);
+            if (exitCode == 0 && commandError is null)
                 return RigctlResult.Success(command, stdout);
 
-            // Exit code non-zero — classify the error
-            var error = ClassifyError(exitCode, stderr, stdout);
-            return RigctlResult.Failure(command, error, stderr.Length > 0 ? stderr : stdout);
+            var error = commandError is not null && commandError.Contains("Feature not available", StringComparison.OrdinalIgnoreCase)
+                ? RigctlError.NotSupported
+                : ClassifyError(exitCode, stderr, stdout);
+            return RigctlResult.Failure(command, error, commandError ?? (stderr.Length > 0 ? stderr : stdout));
         }
         catch (OperationCanceledException)
         {
@@ -131,6 +137,19 @@ public class HamlibRunnerService
     //   Opened rig model 3073, 'IC-7300'
 
     private static readonly string[] Verbosity = ["-vv"];
+
+    /// <summary>
+    /// Hamlib reports a failed command as "get_vfo: error = Feature not
+    /// available" or a bare "Feature not available" line, often buried in a
+    /// trace dump. Returns that one line, or null when there is none.
+    /// </summary>
+    private static string? HamlibErrorLine(string output) =>
+        output.Split('\n')
+              .Select(l => l.Trim())
+              .FirstOrDefault(l => l.Contains(": error = ", StringComparison.Ordinal)
+                                || l.StartsWith("Feature not available", StringComparison.OrdinalIgnoreCase)
+                                || l.StartsWith("Communication timed out", StringComparison.OrdinalIgnoreCase)
+                                || l.StartsWith("IO error", StringComparison.OrdinalIgnoreCase));
 
     private static string StripBanner(string stdout) =>
         string.Join('\n', stdout.Split('\n')
@@ -199,6 +218,8 @@ public enum RigctlError
     NoResponse,
     WrongModel,
     RigctldNotRunning,
+    /// <summary>The radio's Hamlib backend does not implement this query (get_vfo on many Icoms). Not a fault.</summary>
+    NotSupported,
     Cancelled,
     Unknown,
 }

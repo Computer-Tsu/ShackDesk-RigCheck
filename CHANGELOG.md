@@ -5,6 +5,17 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
+## [0.6.16] - 2026-09-21
+
+First all-green run on an IC-7300; one false pass corrected.
+
+### Fixed
+- "Get VFO" reported a pass with a page of Hamlib trace as the VFO name. The IC-7300 (like most
+  Icoms) has no get_vfo in Hamlib; rigctl printed "Feature not available" but still exited 0.
+  Hamlib's own error line is now recognised whatever the exit code, and an unsupported query is a
+  warning that says so — the radio is fine, the command just does not exist for it
+- Result messages show only the first line of rigctl's output, never a trace
+
 ## [0.6.15] - 2026-09-21
 
 Failures now say why.

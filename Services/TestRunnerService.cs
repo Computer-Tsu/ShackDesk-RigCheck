@@ -196,7 +196,13 @@ public class TestRunnerService
         if (result.IsSuccess)
             return TestResult.Warning(
                 TestId.GetSmeter,
-                Strings.Format("Msg_SmeterUnparsed", result.RawOutput),
+                Strings.Format("Msg_SmeterUnparsed", FirstLine(result.RawOutput)),
+                cmd.DisplayCommand);
+
+        if (result.Error == RigctlError.NotSupported)
+            return TestResult.Warning(
+                TestId.GetSmeter,
+                Strings.Format("Msg_SmeterNotSupported", cfg.RadioModelName),
                 cmd.DisplayCommand);
 
         return TestResult.Fail(
@@ -215,7 +221,17 @@ public class TestRunnerService
         if (result.IsSuccess)
             return TestResult.Pass(
                 TestId.GetVfo,
-                Strings.Format("Msg_Vfo", result.RawOutput.Trim()),
+                Strings.Format("Msg_Vfo", FirstLine(result.RawOutput)),
+                cmd.DisplayCommand);
+
+        // Many Icom backends (IC-7300 included) have no get_vfo: Hamlib says
+        // "Feature not available". The radio is fine; the query just does
+        // not exist for it. A warning, so the run can still be all green
+        // in spirit, with the reason spelled out.
+        if (result.Error == RigctlError.NotSupported)
+            return TestResult.Warning(
+                TestId.GetVfo,
+                Strings.Format("Msg_VfoNotSupported", cfg.RadioModelName),
                 cmd.DisplayCommand);
 
         return TestResult.Fail(
@@ -304,6 +320,11 @@ public class TestRunnerService
             : $"S{Math.Clamp((int)Math.Round(9 + db / 6.0), 0, 9)}";
         return true;
     }
+
+    /// <summary>The first non-empty line of rigctl output — the value, never a trace.</summary>
+    private static string FirstLine(string output) =>
+        output.Split('
+', StringSplitOptions.RemoveEmptyEntries).FirstOrDefault()?.Trim() ?? string.Empty;
 
     private static IEnumerable<TestId> RemainingTests() =>
     [

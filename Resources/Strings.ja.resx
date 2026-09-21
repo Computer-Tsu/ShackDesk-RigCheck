@@ -403,4 +403,8 @@
   <data name="Disc_Summary" xml:space="preserve"><value>あなたの無線機: {1} の {0} — {2} ボー、8N{3}（データ 8 ビット、パリティなし、ストップ {3} ビット）</value></data>
   <data name="Disc_SummaryRigctld" xml:space="preserve"><value>あなたの無線機は {0} の rigctld 経由で利用できます</value></data>
   <data name="Diag_PortInUse_Running" xml:space="preserve"><value>現在実行中: {0} — ほぼ確実にポートを占有しているプログラムです。終了する（またはそのリグ制御を切断する）してから、もう一度お試しください</value></data>
+  <data name="Msg_VfoNotSupported" xml:space="preserve"><value>この無線機は Hamlib 経由でアクティブ VFO を報告しません（{0} や多くの Icom 機では正常）— 問題ありません</value></data>
+  <data name="Msg_SmeterNotSupported" xml:space="preserve"><value>この無線機は Hamlib 経由で信号強度を報告しません（{0}）— 問題ありません</value></data>
+  <data name="Diag_NotSupported_Summary" xml:space="preserve"><value>{0} 用の Hamlib ドライバーはこの問い合わせを実装していません。</value></data>
+  <data name="Diag_NotSupported_1" xml:space="preserve"><value>無線機は応答しています。このコマンドがこの機種に存在しないだけです。WSJT-X などのプログラムには不要です。</value></data>
 </root>

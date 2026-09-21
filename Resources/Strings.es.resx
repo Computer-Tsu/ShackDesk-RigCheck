@@ -403,4 +403,8 @@ Los detalles se han guardado en el registro. Si esto sigue ocurriendo, infórmel
   <data name="Disc_Summary" xml:space="preserve"><value>Su radio: {0} en {1} — {2} baudios, 8N{3} (8 bits de datos, sin paridad, {3} de parada)</value></data>
   <data name="Disc_SummaryRigctld" xml:space="preserve"><value>Su radio es accesible a través de rigctld en {0}</value></data>
   <data name="Diag_PortInUse_Running" xml:space="preserve"><value>En ejecución ahora mismo: {0} — casi con seguridad el programa que retiene el puerto. Ciérrelo (o desconecte su control de radio) y vuelva a intentarlo</value></data>
+  <data name="Msg_VfoNotSupported" xml:space="preserve"><value>Esta radio no informa su VFO activo a través de Hamlib (normal para {0} y la mayoría de Icom) — no es un problema</value></data>
+  <data name="Msg_SmeterNotSupported" xml:space="preserve"><value>Esta radio no informa la intensidad de señal a través de Hamlib ({0}) — no es un problema</value></data>
+  <data name="Diag_NotSupported_Summary" xml:space="preserve"><value>El controlador de Hamlib para {0} no implementa esta consulta.</value></data>
+  <data name="Diag_NotSupported_1" xml:space="preserve"><value>La radio responde; simplemente este comando no existe para ella. WSJT-X y los demás programas no lo necesitan.</value></data>
 </root>

@@ -30,6 +30,7 @@ public class DiagnosisEngine
             RigctlError.NoResponse         => NoResponse(cfg),
             RigctlError.WrongModel         => WrongModel(cfg),
             RigctlError.RigctldNotRunning  => RigctldNotRunning(cfg),
+            RigctlError.NotSupported       => NotSupported(cfg),
             RigctlError.Cancelled          => Cancelled(),
             _                              => Unknown(result.ErrorMessage),
         };
@@ -154,6 +155,12 @@ public class DiagnosisEngine
                   + (cfg.BaudRate > 0 ? $" -s {cfg.BaudRate}" : string.Empty)
                   + $" -t {cfg.RigctldPort}",
         LearnMoreUrl: BrandingInfo.HelpUrl + "-firewall");
+
+    private static DiagnosticResult NotSupported(ConnectionConfig cfg) => new(
+        Summary: Strings.Format("Diag_NotSupported_Summary", cfg.RadioModelName),
+        Checks:  [Strings.Get("Diag_NotSupported_1")],
+        FixCommand: null,
+        LearnMoreUrl: null);
 
     private static DiagnosticResult Cancelled() => new(
         Summary: Strings.Get("Diag_Cancelled_Summary"),
