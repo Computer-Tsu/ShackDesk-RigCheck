@@ -5,6 +5,16 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
+## [0.7.0] - 2026-09-21
+
+**Milestone: environment checks and Find my radio, proven on a real Icom IC-7300.**
+
+Scan PC, Find my radio, and Run Tests all did their job on real hardware today. Everything the
+bench found — CI-V broadcast never answers, WSJT-X names its Hamlib `rigctl-wsjtx.exe`, the
+connection test hung in rigctl's interactive mode, Hamlib says nothing on failure without `-vv`,
+`get_vfo` is not a fault on Icoms — is fixed in 0.6.10 through 0.6.17 below. This is the version
+the first beta will be cut from.
+
 ## [0.6.17] - 2026-09-21
 
 ### Fixed
