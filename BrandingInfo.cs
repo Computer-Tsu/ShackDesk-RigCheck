@@ -24,8 +24,7 @@ public static class BrandingInfo
     // ── URLs ─────────────────────────────────────────────────────
     public const string SuiteUrl    = "https://shackdesk.com";
     public const string AppUrl      = "https://shackdesk.com/rigcheck/";
-    // Product page until a RigCheck-specific FAQ page exists on the site
-    public const string HelpUrl     = "https://shackdesk.com/rigcheck/";
+    public const string HelpUrl     = "https://shackdesk.com/faq/#rigcheck";
     public const string GitHubOrg   = "https://github.com/Computer-Tsu";
     public const string GitHubRepo  = "https://github.com/Computer-Tsu/ShackDesk-RigCheck";
     public const string ReleasesUrl = "https://github.com/Computer-Tsu/ShackDesk-RigCheck/releases";

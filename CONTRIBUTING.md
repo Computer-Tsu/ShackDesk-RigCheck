@@ -17,6 +17,7 @@ Thank you for your interest in contributing to RigCheck by ShackDesk.
 | Bug report | Open an issue with your exported RigCheck log attached |
 | Feature request | Open an issue describing the problem you are trying to solve |
 | Radio or cable database entry | Open an issue or submit a PR editing the data files under `Assets/` |
+| Translation | See [TRANSLATING.md](TRANSLATING.md) — no programming needed |
 | Code | Fork, branch, and submit a pull request (see below) |
 
 ## CLA
