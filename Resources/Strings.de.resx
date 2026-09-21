@@ -127,7 +127,7 @@ Details wurden in das Protokoll geschrieben. Falls dies wiederholt auftritt, mel
 
   <data name="Status_HamlibFound" xml:space="preserve"><value>Hamlib gefunden über {0}</value></data>
   <data name="Status_HamlibMissing" xml:space="preserve"><value>Hamlib nicht gefunden — WSJT-X installieren oder Hamlib herunterladen</value></data>
-  <data name="Status_HamlibMissingLong" xml:space="preserve"><value>Hamlib nicht gefunden. „Tests starten“ ist erst verfügbar, wenn Hamlib installiert ist.</value></data>
+  <data name="Status_HamlibMissingLong" xml:space="preserve"><value>Hamlib nicht gefunden — „Tests starten“ braucht es (die Tests sind Hamlib-Befehle). „Mein Funkgerät finden“ und „PC prüfen“ funktionieren auch ohne.</value></data>
   <data name="Status_Running" xml:space="preserve"><value>Tests laufen…</value></data>
   <data name="Status_AllPassed" xml:space="preserve"><value>Alle {0} Tests bestanden.</value></data>
   <data name="Status_SomeFailed" xml:space="preserve"><value>{0} Test(s) fehlgeschlagen — Details in den Ergebnissen.</value></data>
@@ -397,4 +397,7 @@ Fortfahren?</value></data>
   <data name="Handoff_DiffBaud" xml:space="preserve"><value>Baud Rate auf {0}</value></data>
   <data name="Handoff_DiffRigctl" xml:space="preserve"><value>{0} verwendet rigctl ({1}) — das funktioniert, solange rigctld läuft</value></data>
   <data name="Handoff_DiffSerialVsRigctld" xml:space="preserve"><value>{0} ist auf {1} an {2} mit {3} Baud eingestellt — so lassen oder auf Hamlib NET rigctl umstellen, um das Funkgerät über rigctld zu teilen</value></data>
+  <data name="Disc_NoHamlibVerify" xml:space="preserve"><value>Hamlib ist nicht installiert, daher können die vollständigen rigctl-Tests nicht laufen — ein Funkgerät, das sich über die serielle Schnittstelle identifiziert hat, gilt als geprüft. Installieren Sie WSJT-X oder Hamlib, um die Tests auszuführen.</value></data>
+  <data name="Disc_VerifiedByProbe" xml:space="preserve"><value>{0} an {1} durch direkte Abfrage geprüft</value></data>
+  <data name="Disc_Echo" xml:space="preserve"><value>unser eigener Rahmen kam zurück — ein CI-V-Funkgerät mit eingeschaltetem Echo Back hört mit {0} Baud zu; jede bekannte CI-V-Adresse wird nun der Reihe nach abgefragt</value></data>
 </root>

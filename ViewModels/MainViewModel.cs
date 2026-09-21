@@ -256,8 +256,26 @@ public partial class MainViewModel : ObservableObject
             }
 
             // ── Stage 3: verify every find with the real test suite ───────
+            // Without Hamlib there is no rigctl to verify with, but the probe
+            // already had a real exchange with the radio — a rig that named
+            // itself, or answered with a frequency inside a ham band, is
+            // verified by that exchange. Say so, rather than fail a step
+            // that cannot run.
+            var hamlibMissing = !_hamlib.IsAvailable;
+            if (hamlibMissing && found.Count > 0)
+                Results.AddTranscript(TranscriptKind.Note, Strings.Get("Disc_NoHamlibVerify"));
+
             foreach (var rig in found)
             {
+                if (hamlibMissing)
+                {
+                    if (rig.UseRigctld || rig.Score < 0.8) continue;
+                    verified.Add((rig, new TestSuiteResult([], Connection.BuildConfig())));
+                    Results.AddTranscript(TranscriptKind.Found,
+                        Strings.Format("Disc_VerifiedByProbe", rig.ModelName, rig.Port));
+                    continue;
+                }
+
                 Results.AddTranscript(TranscriptKind.Command,
                     Strings.Format("Disc_Verifying", rig.ModelName, rig.Port, rig.Baud));
 

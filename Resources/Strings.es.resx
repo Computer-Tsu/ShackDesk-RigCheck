@@ -127,7 +127,7 @@ Los detalles se han guardado en el registro. Si esto sigue ocurriendo, infórmel
 
   <data name="Status_HamlibFound" xml:space="preserve"><value>Hamlib encontrado mediante {0}</value></data>
   <data name="Status_HamlibMissing" xml:space="preserve"><value>Hamlib no encontrado — instale WSJT-X o descargue Hamlib</value></data>
-  <data name="Status_HamlibMissingLong" xml:space="preserve"><value>Hamlib no encontrado. «Ejecutar pruebas» no estará disponible hasta que Hamlib esté instalado.</value></data>
+  <data name="Status_HamlibMissingLong" xml:space="preserve"><value>Hamlib no encontrado — «Ejecutar pruebas» lo necesita (las pruebas son comandos de Hamlib). «Buscar mi radio» y «Analizar PC» funcionan sin él.</value></data>
   <data name="Status_Running" xml:space="preserve"><value>Ejecutando pruebas…</value></data>
   <data name="Status_AllPassed" xml:space="preserve"><value>Las {0} pruebas se superaron.</value></data>
   <data name="Status_SomeFailed" xml:space="preserve"><value>{0} prueba(s) fallaron — vea los resultados para más detalles.</value></data>
@@ -397,4 +397,7 @@ Los detalles se han guardado en el registro. Si esto sigue ocurriendo, infórmel
   <data name="Handoff_DiffBaud" xml:space="preserve"><value>Baud Rate a {0}</value></data>
   <data name="Handoff_DiffRigctl" xml:space="preserve"><value>{0} usa rigctl ({1}) — eso funciona siempre que rigctld esté en ejecución</value></data>
   <data name="Handoff_DiffSerialVsRigctld" xml:space="preserve"><value>{0} está configurado con {1} en {2} a {3} baudios — déjelo así, o cámbielo a Hamlib NET rigctl para compartir la radio a través de rigctld</value></data>
+  <data name="Disc_NoHamlibVerify" xml:space="preserve"><value>Hamlib no está instalado, así que las pruebas completas de rigctl no pueden ejecutarse — una radio que se identificó por el puerto serie cuenta como verificada. Instale WSJT-X o Hamlib para ejecutar las pruebas.</value></data>
+  <data name="Disc_VerifiedByProbe" xml:space="preserve"><value>{0} en {1} verificada por consulta directa</value></data>
+  <data name="Disc_Echo" xml:space="preserve"><value>volvió nuestra propia trama — una radio CI-V con Echo Back activado está escuchando a {0} baudios; preguntando a cada dirección CI-V conocida por turno</value></data>
 </root>

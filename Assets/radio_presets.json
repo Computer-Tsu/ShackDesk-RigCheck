@@ -6,10 +6,10 @@
     "Name": "Icom IC-7300",
     "Manufacturer": "Icom",
     "HamlibModelId": 3073,
-    "BaudRate": 19200,
+    "BaudRate": 115200,
     "PttMethod": "CAT",
     "Popularity": 100,
-    "Notes": "CI-V address default 0x94. USB cable to the radio's USB port; driver is Silicon Labs CP210x."
+    "Notes": "CI-V address default 0x94. USB cable to the radio's USB port; driver is Silicon Labs CP210x. CI-V USB baud rate is 115200 unless changed in the radio's menu (Set > Connectors > CI-V > CI-V USB Baud Rate); Echo Back is on by default."
   },
   {
     "Name": "Icom IC-705",

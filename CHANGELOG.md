@@ -5,6 +5,30 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
+## [0.6.10] - 2026-09-21
+
+First lessons from a real IC-7300.
+
+### Fixed
+- Find my radio never got an answer from an Icom: the read-ID was sent to CI-V address 00
+  (broadcast), which rigs act on but by design never answer. When only our own echo comes
+  back (Echo Back is on by default on the IC-7300) or nothing at all, RigCheck now addresses
+  each CI-V address in `rig_ids.json` in turn, the selected radio's first
+- Our own frame echoed back is now reported as what it is — a CI-V radio listening at that
+  speed — instead of "nothing recognisable"
+- Without Hamlib installed, Find my radio reported a found radio as unverified because the
+  rigctl tests could not run. A radio that named itself over the serial port now counts as
+  verified, the Connection panel is filled in, and the handoff is shown; the note says to
+  install WSJT-X or Hamlib for the full tests
+- The status bar now explains that Run Tests needs Hamlib because the tests are Hamlib
+  commands, and that Find my radio and Scan PC work without it
+
+### Changed
+- Icom baud order is now 115200 first (the IC-7300's USB default), then 19200, 9600, 4800; the
+  IC-7300 preset uses 115200
+- The reply window waits a little longer for silence so an echo and the answer behind it are
+  read as one exchange
+
 ## [0.6.9] - 2026-09-21
 
 Find my radio hands you the settings; Hamlib's dummy rig can no longer pass unnoticed.

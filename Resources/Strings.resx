@@ -429,7 +429,7 @@ Details have been written to the log. If this keeps happening, please report it 
     <value>Hamlib not found — install WSJT-X or download Hamlib</value>
   </data>
   <data name="Status_HamlibMissingLong" xml:space="preserve">
-    <value>Hamlib not found. Run Tests will be unavailable until Hamlib is installed.</value>
+    <value>Hamlib not found — Run Tests needs it (the tests are Hamlib commands). Find my radio and Scan PC work without it.</value>
   </data>
   <data name="Status_Running" xml:space="preserve">
     <value>Running tests…</value>
@@ -1273,5 +1273,14 @@ Continue?</value>
   </data>
   <data name="Handoff_DiffSerialVsRigctld" xml:space="preserve">
     <value>{0} is set to {1} on {2} at {3} baud — keep that, or switch it to Hamlib NET rigctl to share the radio through rigctld</value>
+  </data>
+  <data name="Disc_NoHamlibVerify" xml:space="preserve">
+    <value>Hamlib is not installed, so the full rigctl tests cannot run — a radio that named itself over the serial port counts as verified. Install WSJT-X or Hamlib to run the tests.</value>
+  </data>
+  <data name="Disc_VerifiedByProbe" xml:space="preserve">
+    <value>{0} on {1} verified by direct query</value>
+  </data>
+  <data name="Disc_Echo" xml:space="preserve">
+    <value>our own frame came back — a CI-V radio with Echo Back on is listening at {0} baud; asking each known CI-V address in turn</value>
   </data>
 </root>

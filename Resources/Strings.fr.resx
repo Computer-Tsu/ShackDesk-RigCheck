@@ -127,7 +127,7 @@ Les détails ont été écrits dans le journal. Si cela se reproduit, merci de l
 
   <data name="Status_HamlibFound" xml:space="preserve"><value>Hamlib trouvé via {0}</value></data>
   <data name="Status_HamlibMissing" xml:space="preserve"><value>Hamlib introuvable — installez WSJT-X ou téléchargez Hamlib</value></data>
-  <data name="Status_HamlibMissingLong" xml:space="preserve"><value>Hamlib introuvable. « Lancer les tests » ne sera disponible qu'une fois Hamlib installé.</value></data>
+  <data name="Status_HamlibMissingLong" xml:space="preserve"><value>Hamlib introuvable — « Lancer les tests » en a besoin (les tests sont des commandes Hamlib). « Trouver ma radio » et « Analyser le PC » fonctionnent sans.</value></data>
   <data name="Status_Running" xml:space="preserve"><value>Tests en cours…</value></data>
   <data name="Status_AllPassed" xml:space="preserve"><value>Les {0} tests ont réussi.</value></data>
   <data name="Status_SomeFailed" xml:space="preserve"><value>{0} test(s) échoué(s) — voir les résultats pour les détails.</value></data>
@@ -397,4 +397,7 @@ Continuer ?</value></data>
   <data name="Handoff_DiffBaud" xml:space="preserve"><value>Baud Rate en {0}</value></data>
   <data name="Handoff_DiffRigctl" xml:space="preserve"><value>{0} utilise rigctl ({1}) — cela fonctionne tant que rigctld tourne</value></data>
   <data name="Handoff_DiffSerialVsRigctld" xml:space="preserve"><value>{0} est réglé sur {1} sur {2} à {3} bauds — gardez cela, ou passez à Hamlib NET rigctl pour partager la radio via rigctld</value></data>
+  <data name="Disc_NoHamlibVerify" xml:space="preserve"><value>Hamlib n'est pas installé, les tests rigctl complets ne peuvent donc pas s'exécuter — une radio qui s'est identifiée sur le port série compte comme vérifiée. Installez WSJT-X ou Hamlib pour lancer les tests.</value></data>
+  <data name="Disc_VerifiedByProbe" xml:space="preserve"><value>{0} sur {1} vérifiée par requête directe</value></data>
+  <data name="Disc_Echo" xml:space="preserve"><value>notre propre trame est revenue — une radio CI-V avec Echo Back activé écoute à {0} bauds ; interrogation de chaque adresse CI-V connue à tour de rôle</value></data>
 </root>

@@ -1,6 +1,6 @@
 [
   {
-    "_comment": "RigCheck by ShackDesk — protocol families for Find my radio. Each family names ONE probe operation from RigCheck's fixed, compiled, query-only set (KenwoodId, IcomReadId, IcomReadFreq, YaesuLegacyReadFreq) and the baud rates to sweep, most likely first. This file can never contain command bytes; it only chooses which built-in query to send. Weight orders families when nothing else hints; HamlibBackend is the thousands digit of the Hamlib model number (1 Yaesu, 2 Kenwood/Elecraft, 3 Icom). HandoffStopBits is what the operator should enter in WSJT-X — the probe itself always uses 8N1. Validate at jsonlint.com before submitting."
+    "_comment": "RigCheck by ShackDesk — protocol families for Find my radio. Each family names ONE probe operation from RigCheck's fixed, compiled, query-only set (KenwoodId, IcomReadId, IcomReadFreq, YaesuLegacyReadFreq) and the baud rates to sweep, most likely first. This file can never contain command bytes; it only chooses which built-in query to send. For Icom, the CI-V addresses tried after the broadcast attempt come from rig_ids.json. Weight orders families when nothing else hints; HamlibBackend is the thousands digit of the Hamlib model number (1 Yaesu, 2 Kenwood/Elecraft, 3 Icom). HandoffStopBits is what the operator should enter in WSJT-X — the probe itself always uses 8N1. Validate at jsonlint.com before submitting."
   },
   {
     "Id": "Kenwood",
@@ -18,7 +18,7 @@
     "Name": "Icom CI-V",
     "Probe": "IcomReadId",
     "FallbackProbe": "IcomReadFreq",
-    "Bauds": [ 19200, 9600, 115200, 4800 ],
+    "Bauds": [ 115200, 19200, 9600, 4800 ],
     "HamlibBackends": [ 3 ],
     "VendorHints": [ "Icom" ],
     "HandoffStopBits": 1,

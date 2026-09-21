@@ -29,7 +29,8 @@ public record DiscoveryRequest(
 public class DiscoveryEngine
 {
     private const int ReplyTimeoutMs = 300;   // how long to wait for the first byte
-    private const int QuietMs        = 40;    // reply is complete after this much silence
+    private const int QuietMs        = 60;    // reply is complete after this much silence (echo and answer arrive as two frames)
+    private const int AddressedTimeoutMs = 150; // CI-V answers within a few ms; the address sweep must stay quick
 
     private readonly DiscoveryDataService _data;
     private readonly RadioPresetsService  _presets;
@@ -172,9 +173,27 @@ public class DiscoveryEngine
         ProbeOperations.TryParse(family.Probe, out var op);
         var (_, parsed) = await ExchangeAsync(probe, port.PortName, op, events, ct);
 
+        // CI-V: the first frame goes to the broadcast address, which rigs act
+        // on but never answer. If only our own echo came back (Echo Back is
+        // on and the speed is right) — or nothing at all, since Echo Back can
+        // be off — address each known rig in turn. Addresses come from
+        // rig_ids.json; the frame layout is fixed here.
+        if (op == ProbeOperation.IcomReadId && parsed.Kind is not (ProbeReplyKind.Identity or ProbeReplyKind.Frequency))
+        {
+            if (parsed.Kind == ProbeReplyKind.Echo)
+                events.Add(new(ProbeEventKind.Note, port.PortName, Strings.Format("Disc_Echo", baud)));
+
+            foreach (var address in CivAddresses(family, request))
+            {
+                ct.ThrowIfCancellationRequested();
+                (_, parsed) = await ExchangeAsync(probe, port.PortName, op, events, ct, address, AddressedTimeoutMs);
+                if (parsed.Kind is ProbeReplyKind.Identity or ProbeReplyKind.Frequency) break;
+            }
+        }
+
         // Icom rigs that predate the read-ID command answer NG or nothing;
         // a plain read-frequency still proves the family and the baud.
-        if (parsed.Kind is (ProbeReplyKind.None or ProbeReplyKind.Acknowledged)
+        if (parsed.Kind is (ProbeReplyKind.None or ProbeReplyKind.Acknowledged or ProbeReplyKind.Echo)
             && family.FallbackProbe is not null
             && ProbeOperations.TryParse(family.FallbackProbe, out var fallback))
         {
@@ -192,13 +211,32 @@ public class DiscoveryEngine
         return (rig, events);
     }
 
-    private static async Task<(byte[] Reply, ProbeReply Parsed)> ExchangeAsync(
-        SerialProbe probe, string portName, ProbeOperation op, List<ProbeEvent> events, CancellationToken ct)
+    // Every CI-V address rig_ids.json knows for this family, the address of
+    // the radio chosen in the Connection panel first.
+    private IEnumerable<byte> CivAddresses(RigFamily family, DiscoveryRequest request)
     {
-        var request = ProbeOperations.Bytes(op);
+        var entries = _data.Ids.Where(i => i.Family.Equals(family.Id, StringComparison.OrdinalIgnoreCase)).ToList();
+        var ordered = entries
+            .OrderByDescending(i => i.HamlibModelId == request.PreferredModelId)
+            .ThenByDescending(i => request.Clues.Any(c => c.ModelId == i.HamlibModelId))
+            .Select(i => i.Reply);
+
+        var seen = new HashSet<byte>();
+        foreach (var reply in ordered)
+        {
+            if (byte.TryParse(reply, System.Globalization.NumberStyles.HexNumber, null, out var address) && seen.Add(address))
+                yield return address;
+        }
+    }
+
+    private static async Task<(byte[] Reply, ProbeReply Parsed)> ExchangeAsync(
+        SerialProbe probe, string portName, ProbeOperation op, List<ProbeEvent> events, CancellationToken ct,
+        byte civAddress = 0x00, int timeoutMs = ReplyTimeoutMs)
+    {
+        var request = ProbeOperations.Bytes(op, civAddress);
         events.Add(new(ProbeEventKind.Sent, portName, op.ToString(), ProbeOperations.Dump(request)));
 
-        var reply = await probe.ExchangeAsync(request, ReplyTimeoutMs, QuietMs, ct);
+        var reply = await probe.ExchangeAsync(request, timeoutMs, QuietMs, ct);
         if (reply.Length > 0)
             events.Add(new(ProbeEventKind.Received, portName, string.Empty, ProbeOperations.Dump(reply)));
         else
