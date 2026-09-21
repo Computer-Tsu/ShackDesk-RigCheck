@@ -20,7 +20,7 @@ public class RigCheckSettings
     public string  StopBits        { get; set; } = BrandingInfo.DefaultStopBits;
     public string  FlowControl     { get; set; } = BrandingInfo.DefaultFlowCtrl;
     public string  PttMethod       { get; set; } = BrandingInfo.DefaultPttMethod;
-    public int     RadioModelId    { get; set; } = 1;   // Hamlib rig ID
+    public int     RadioModelId    { get; set; } = 0;   // Hamlib rig ID; 0 = none chosen
     public string  RadioModelName  { get; set; } = string.Empty;
 
     // Network / rigctld
@@ -46,6 +46,15 @@ public class RigCheckSettings
 
     // Command history for raw console (most recent first)
     public List<string> CommandHistory { get; set; } = [];
+
+    // Telemetry. InstallId is a random GUID created once per install; it is the
+    // only identifier ever sent and lets a support request be matched to reports.
+    public string InstallId         { get; set; } = Guid.NewGuid().ToString("D");
+    public bool   TelemetryEnabled  { get; set; } = false;
+    public bool   TelemetryPrompted { get; set; } = false;
+
+    // Logging level; empty means the channel default (see AppLogger).
+    public string LogLevel          { get; set; } = string.Empty;
 }
 
 // ── Settings service ──────────────────────────────────────────────────────

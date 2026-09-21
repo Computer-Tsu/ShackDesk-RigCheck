@@ -53,18 +53,19 @@ public enum TestStatus
 /// DisplayCommand is the rigctl command the user can copy and run themselves.
 /// </summary>
 public record TestResult(
-    TestId          Id,
-    TestStatus      Status,
-    string          Message,
-    string          DisplayCommand,
-    DiagnosticResult? Diagnosis = null)
+    TestId            Id,
+    TestStatus        Status,
+    string            Message,
+    string            DisplayCommand,
+    DiagnosticResult? Diagnosis = null,
+    Services.RigctlError? Error = null)
 {
     public static TestResult Pass(TestId id, string message, string displayCommand) =>
         new(id, TestStatus.Pass, message, displayCommand);
 
     public static TestResult Fail(TestId id, string message, string displayCommand,
-                                   DiagnosticResult diagnosis) =>
-        new(id, TestStatus.Fail, message, displayCommand, diagnosis);
+                                   DiagnosticResult diagnosis, Services.RigctlError? error = null) =>
+        new(id, TestStatus.Fail, message, displayCommand, diagnosis, error);
 
     public static TestResult Warning(TestId id, string message, string displayCommand) =>
         new(id, TestStatus.Warning, message, displayCommand);
@@ -123,6 +124,7 @@ public record RadioPreset
     public string FlowControl  { get; init; } = "None";
     public string PttMethod    { get; init; } = "CAT";
     public string Notes        { get; init; } = string.Empty;  // e.g. "CI-V address default 94"
+    public int    Popularity   { get; init; } = 0;             // higher sorts first in the list
 }
 
 // ── COM port info ─────────────────────────────────────────────────────────
@@ -155,11 +157,35 @@ public record ComPortInfo(
     public bool HasRadioHint => RadioFamily is not null;
 }
 
-// ── Diagnostic result (referenced by TestResult) ──────────────────────────
-// Defined in DiagnosisEngine.cs — declared here for the record type reference
-// to avoid circular namespace issues. The concrete record is in Services.
-// Re-exported here so Models namespace is self-contained for consumers.
+// ── Diagnosis ─────────────────────────────────────────────────────────────
 
-// NOTE: DiagnosticResult is defined in RigCheck.Services to keep service
-// logic together. TestResult holds a nullable reference to it.
-// No re-export needed — consumers reference RigCheck.Services directly.
+/// <summary>
+/// A short help article surfaced alongside a failed test.
+/// </summary>
+public record HelpTopic(string Title, string Body);
+
+/// <summary>
+/// Plain-English explanation of a failed test: what happened, what to check,
+/// and an optional command or link that may fix it.
+/// </summary>
+public record DiagnosticResult(
+    string      Summary,
+    string[]    Checks,
+    string?     FixCommand,
+    string?     LearnMoreUrl,
+    string?     RawError    = null,
+    HelpTopic[] HelpTopics  = null!)
+{
+    public HelpTopic[] HelpTopics { get; init; } = HelpTopics ?? [];
+
+    public static readonly DiagnosticResult Ok = new(
+        Summary:    string.Empty,
+        Checks:     [],
+        FixCommand: null,
+        LearnMoreUrl: null);
+
+    public bool HasChecks     => Checks.Length > 0;
+    public bool HasFixCommand => FixCommand is not null;
+    public bool HasHelpTopics => HelpTopics.Length > 0;
+    public bool IsOk          => string.IsNullOrEmpty(Summary);
+}

@@ -73,7 +73,7 @@ public class DiagnosisEngine
         Checks:
         [
             "Is the radio powered on?",
-            $"Is the baud rate correct? Your radio manual lists the CAT baud rate. Currently set to {cfg.BaudRate}.",
+            $"Is the baud rate correct? Your radio manual lists the CAT baud rate. Currently set to {(cfg.BaudRate > 0 ? cfg.BaudRate.ToString() : "the radio's default")}.",
             "Is the CAT / CI-V / RS-232 cable connected to the correct port on the radio?",
             "Does your radio need CAT control enabled in its menu? Check the manual for \"CAT\", \"CI-V\", or \"RS-232\" settings.",
             "Some radios use a different data bits / parity / stop bits setting. Check the radio manual.",
@@ -136,29 +136,4 @@ public class DiagnosisEngine
         FixCommand: null,
         LearnMoreUrl: BrandingInfo.IssueUrl,
         RawError: rawMessage);
-}
-
-// ── Result type ───────────────────────────────────────────────────────────
-
-public record DiagnosticResult(
-    string      Summary,
-    string[]    Checks,
-    string?     FixCommand,
-    string?     LearnMoreUrl,
-    string?     RawError    = null,
-    HelpTopic[] HelpTopics  = null!)
-{
-    // Ensure HelpTopics is never null
-    public HelpTopic[] HelpTopics { get; init; } = HelpTopics ?? [];
-
-    public static readonly DiagnosticResult Ok = new(
-        Summary:    string.Empty,
-        Checks:     [],
-        FixCommand: null,
-        LearnMoreUrl: null);
-
-    public bool HasChecks     => Checks.Length > 0;
-    public bool HasFixCommand => FixCommand is not null;
-    public bool HasHelpTopics => HelpTopics.Length > 0;
-    public bool IsOk          => string.IsNullOrEmpty(Summary);
 }

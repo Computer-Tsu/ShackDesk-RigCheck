@@ -1,0 +1,124 @@
+[
+  {
+    "_comment": "RigCheck by ShackDesk — quick-start radio presets. Selecting one fills the connection fields; the operator can override any field. HamlibModelId is from `rigctl -l`. BaudRate 0 means let Hamlib use the model default. Popularity orders the list (higher first). Validate JSON at jsonlint.com before submitting. Community entries welcome — see CONTRIBUTING.md."
+  },
+  {
+    "Name": "Icom IC-7300",
+    "Manufacturer": "Icom",
+    "HamlibModelId": 3073,
+    "BaudRate": 19200,
+    "PttMethod": "CAT",
+    "Popularity": 100,
+    "Notes": "CI-V address default 0x94. USB cable to the radio's USB port; driver is Silicon Labs CP210x."
+  },
+  {
+    "Name": "Icom IC-705",
+    "Manufacturer": "Icom",
+    "HamlibModelId": 3085,
+    "BaudRate": 115200,
+    "PttMethod": "CAT",
+    "Popularity": 90,
+    "Notes": "CI-V address default 0xA4. USB cable to the radio's USB port."
+  },
+  {
+    "Name": "Yaesu FT-991A",
+    "Manufacturer": "Yaesu",
+    "HamlibModelId": 1035,
+    "BaudRate": 38400,
+    "PttMethod": "CAT",
+    "Popularity": 85,
+    "Notes": "USB cable to the radio's USB port. Set CAT RATE to 38400 in the radio menu."
+  },
+  {
+    "Name": "Yaesu FT-891",
+    "Manufacturer": "Yaesu",
+    "HamlibModelId": 1036,
+    "BaudRate": 38400,
+    "PttMethod": "CAT",
+    "Popularity": 70,
+    "Notes": "USB cable to the radio's USB port. Set CAT RATE in the radio menu to match."
+  },
+  {
+    "Name": "Yaesu FT-DX10",
+    "Manufacturer": "Yaesu",
+    "HamlibModelId": 1042,
+    "BaudRate": 38400,
+    "PttMethod": "CAT",
+    "Popularity": 60,
+    "Notes": "USB cable to the radio's USB port."
+  },
+  {
+    "Name": "Yaesu FT-DX101D",
+    "Manufacturer": "Yaesu",
+    "HamlibModelId": 1040,
+    "BaudRate": 38400,
+    "PttMethod": "CAT",
+    "Popularity": 40,
+    "Notes": "USB cable to the radio's USB port."
+  },
+  {
+    "Name": "Icom IC-7610",
+    "Manufacturer": "Icom",
+    "HamlibModelId": 3078,
+    "BaudRate": 115200,
+    "PttMethod": "CAT",
+    "Popularity": 55,
+    "Notes": "CI-V address default 0x98. The radio presents two COM ports; use the first (CI-V) one."
+  },
+  {
+    "Name": "Icom IC-9700",
+    "Manufacturer": "Icom",
+    "HamlibModelId": 3081,
+    "BaudRate": 115200,
+    "PttMethod": "CAT",
+    "Popularity": 50,
+    "Notes": "CI-V address default 0xA2. The radio presents two COM ports; use the first (CI-V) one."
+  },
+  {
+    "Name": "Kenwood TS-590SG",
+    "Manufacturer": "Kenwood",
+    "HamlibModelId": 2037,
+    "BaudRate": 115200,
+    "FlowControl": "Hardware",
+    "PttMethod": "CAT",
+    "Popularity": 50,
+    "Notes": "Enable hardware flow control (RTS/CTS) in the radio menu to match."
+  },
+  {
+    "Name": "Kenwood TS-890S",
+    "Manufacturer": "Kenwood",
+    "HamlibModelId": 2041,
+    "BaudRate": 115200,
+    "FlowControl": "Hardware",
+    "PttMethod": "CAT",
+    "Popularity": 35,
+    "Notes": ""
+  },
+  {
+    "Name": "Elecraft K3",
+    "Manufacturer": "Elecraft",
+    "HamlibModelId": 2029,
+    "BaudRate": 38400,
+    "PttMethod": "CAT",
+    "Popularity": 45,
+    "Notes": ""
+  },
+  {
+    "Name": "Elecraft KX3",
+    "Manufacturer": "Elecraft",
+    "HamlibModelId": 2045,
+    "BaudRate": 38400,
+    "PttMethod": "CAT",
+    "Popularity": 45,
+    "Notes": ""
+  },
+  {
+    "Name": "Elecraft KX2",
+    "Manufacturer": "Elecraft",
+    "HamlibModelId": 2044,
+    "BaudRate": 38400,
+    "PttMethod": "CAT",
+    "Popularity": 35,
+    "Notes": ""
+  }
+]

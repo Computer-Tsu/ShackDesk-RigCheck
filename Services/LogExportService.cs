@@ -69,8 +69,8 @@ public class LogExportService
         {
             sb.AppendLine($"  Mode:       Direct serial");
             sb.AppendLine($"  COM port:   {cfg.ComPort}");
-            sb.AppendLine($"  Baud rate:  {cfg.BaudRate}");
-            sb.AppendLine($"  Data bits:  {cfg.DataBits}");
+            sb.AppendLine($"  Baud rate:  {(cfg.BaudRate > 0 ? cfg.BaudRate.ToString() : "radio default")}");
+            sb.AppendLine($"  Data bits:  {(cfg.DataBits > 0 ? cfg.DataBits.ToString() : "radio default")}");
             sb.AppendLine($"  Parity:     {cfg.Parity}");
             sb.AppendLine($"  Stop bits:  {cfg.StopBits}");
             sb.AppendLine($"  Flow ctrl:  {cfg.FlowControl}");

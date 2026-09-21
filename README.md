@@ -11,9 +11,107 @@ Brand: ShackDesk<br>
 Developer: Mark McDow N4TEK / My Computer Guru LLC<br>
 GitHub: github.com/Computer-Tsu<br>
 Suite site: shackdesk.com<br>
-Technology: C# WPF .NET 8, MVVM architecture,
+Technology: C# WPF .NET 10, MVVM architecture,
             dependency injection, Serilog logging,
             GitHub Actions CI/CD, no local compiler
+
+## Platform
+
+RigCheck runs on Windows 10 (version 21H2 or later)
+and Windows 11, 64-bit. Nothing else needs to be
+installed: the .NET runtime is bundled inside the
+single RigCheck.exe.
+
+Windows 11 on ARM runs it through the built-in x64
+emulation. Windows 7 and 8.1 are not supported.
+
+### Why .NET 10
+
+RigCheck moved from .NET 8 to .NET 10 in September
+2026. This changed nothing about which versions of
+Windows it runs on — .NET 8 and .NET 10 support the
+identical list of Windows client versions, and
+neither supports Windows 7 or 8.1.
+
+The reason is support lifetime. .NET 8 reaches end
+of support on November 10, 2026, after which the
+runtime bundled inside every RigCheck build would
+stop receiving security fixes. .NET 10 is the
+current long-term-support release, supported through
+November 14, 2028.
+
+### Build channels and expiry
+
+RigCheck is published in three channels:
+
+- **Alpha** — built from every change on the
+  `develop` branch. **Alpha builds stop running
+  30 days after they were built.** This keeps
+  testers on current code and steers everyday
+  users toward stable releases. The expiry date
+  is shown in the window title and in Help >
+  About. When an alpha expires, starting it shows
+  a notice with a link to the latest build.
+- **Beta** — tagged pre-releases. Beta builds warn
+  in the status bar 90 days after they were built
+  but keep running.
+- **Stable** — tagged releases. Never expire.
+
+The window title shows the version, channel, and
+expiry date, for example
+`RigCheck by ShackDesk 0.6.2-alpha — expires 2026-10-21`.
+
+### Where RigCheck keeps its files
+
+RigCheck is a single portable exe and writes only
+to your local application data folder. Nothing goes
+in the registry.
+
+```
+%LOCALAPPDATA%\ShackDesk\RigCheck\
+    rigcheck-settings.json   all settings, plain JSON
+    Logs\                    daily log files, 7 kept
+    Telemetry\               local copies of diagnostic reports
+```
+
+Delete `rigcheck-settings.json` to reset every
+setting to its default. Settings › Logging shows
+the log folder and can open or empty it.
+
+### Anonymous diagnostics
+
+On first launch RigCheck asks whether it may send
+anonymous diagnostic reports. Nothing is sent
+unless you say yes, and you can change the choice
+in Settings at any time. Every report is also
+stored locally and can be inspected under
+Help > View collected data.
+
+What is sent: the RigCheck and Windows versions,
+whether Hamlib was found, and after each test run
+the radio model, serial settings, USB cable
+identifiers, and which tests passed or failed.
+This is what improves the radio and cable
+database for everyone.
+
+Never sent: callsign, computer name, file paths,
+serial numbers, or IP address. The only identifier
+is a random ID created on first run, shown in
+Help > About as a Support ID. Reports go to the
+shared ShackDesk endpoint; see
+shackdesk.com/privacy for the full policy.
+
+### Hamlib
+
+RigCheck does not include Hamlib. It finds the
+rigctl.exe already on the computer from any of:
+
+- WSJT-X (includes Hamlib) — wsjt.sourceforge.io
+- Fldigi (includes Hamlib) — w1hkj.com
+- Standalone Hamlib for Windows —
+  github.com/Hamlib/Hamlib/releases
+
+Most operators already have WSJT-X installed.
 
 ## RigCheck Purpose
 
@@ -75,7 +173,7 @@ Test 4: Get PTT state
   Fail: with diagnostic suggestion
 
 Test 5: Get signal meter (S-meter)
-  Pass: "Signal strength: S7 (-73 dBm)"
+  Pass: "Signal strength: S7 (-85 dBm)"
   Fail: with diagnostic suggestion
 
 Test 6: Get VFO

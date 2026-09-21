@@ -1,5 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using RigCheck.Localization;
 using RigCheck.Models;
 using RigCheck.Services;
 using System.Collections.ObjectModel;
@@ -25,32 +26,72 @@ public partial class ConnectionViewModel : ObservableObject
     public ObservableCollection<ComPortInfo> AvailablePorts   { get; } = [];
     public ObservableCollection<RadioPreset> AvailablePresets { get; } = [];
 
-    public IReadOnlyList<int> BaudRates { get; } =
-        [1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200];
+    // Every optional serial setting offers "Radio default" first: the operator
+    // usually doesn't know these, and Hamlib's model database does. Choice
+    // values are what gets stored and passed to rigctl; labels are localized.
+    public IReadOnlyList<BaudOption> BaudRates { get; } =
+    [
+        new(0, Strings.Get("Option_RadioDefault")),
+        new(1200, "1200"), new(2400, "2400"), new(4800, "4800"), new(9600, "9600"),
+        new(19200, "19200"), new(38400, "38400"), new(57600, "57600"), new(115200, "115200"),
+    ];
 
-    public IReadOnlyList<string> DataBitsOptions  { get; } = ["7", "8"];
-    public IReadOnlyList<string> ParityOptions    { get; } = ["None", "Even", "Odd", "Mark", "Space"];
-    public IReadOnlyList<string> StopBitsOptions  { get; } = ["1", "1.5", "2"];
-    public IReadOnlyList<string> FlowCtrlOptions  { get; } = ["None", "Hardware", "Software"];
-    public IReadOnlyList<string> PttMethods       { get; } = ["CAT", "RTS", "DTR", "VOX", "None"];
+    public IReadOnlyList<Choice> DataBitsOptions { get; } =
+        [Choice.RadioDefault, Choice.Literal("7"), Choice.Literal("8")];
+
+    public IReadOnlyList<Choice> ParityOptions { get; } =
+        [Choice.RadioDefault, Choice.Localized("None"), Choice.Localized("Even"),
+         Choice.Localized("Odd"), Choice.Localized("Mark"), Choice.Localized("Space")];
+
+    public IReadOnlyList<Choice> StopBitsOptions { get; } =
+        [Choice.RadioDefault, Choice.Literal("1"), Choice.Literal("1.5"), Choice.Literal("2")];
+
+    public IReadOnlyList<Choice> FlowCtrlOptions { get; } =
+        [Choice.RadioDefault, Choice.Localized("None"), Choice.Localized("Hardware"), Choice.Localized("Software")];
+
+    public IReadOnlyList<Choice> PttMethods { get; } =
+        [Choice.RadioDefault, Choice.Localized("CAT"), Choice.Localized("RTS"),
+         Choice.Localized("DTR"), Choice.Localized("VOX"), Choice.Localized("None")];
 
     // ── Connection fields ─────────────────────────────────────────────────
 
-    [ObservableProperty] private ComPortInfo? _selectedPort;
-    [ObservableProperty] private int          _baudRate    = 9600;
-    [ObservableProperty] private string       _dataBits    = "8";
-    [ObservableProperty] private string       _parity      = "None";
-    [ObservableProperty] private string       _stopBits    = "1";
-    [ObservableProperty] private string       _flowControl = "None";
-    [ObservableProperty] private string       _pttMethod   = "CAT";
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsReady), nameof(ReadinessHint))]
+    private ComPortInfo? _selectedPort;
 
-    // Hamlib model fields
-    [ObservableProperty] private int    _modelId   = 1;
+    [ObservableProperty] private int          _baudRate    = BrandingInfo.DefaultBaudRate;
+    [ObservableProperty] private string       _dataBits    = BrandingInfo.DefaultDataBits;
+    [ObservableProperty] private string       _parity      = BrandingInfo.DefaultParity;
+    [ObservableProperty] private string       _stopBits    = BrandingInfo.DefaultStopBits;
+    [ObservableProperty] private string       _flowControl = BrandingInfo.DefaultFlowCtrl;
+    [ObservableProperty] private string       _pttMethod   = BrandingInfo.DefaultPttMethod;
+
+    // Hamlib model fields. 0 = no radio chosen. Model 1 is Hamlib's dummy
+    // rig, which would make every test pass against a simulation — so it is
+    // never treated as a valid selection.
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsReady), nameof(ReadinessHint))]
+    private int    _modelId   = 0;
+
     [ObservableProperty] private string _modelName = string.Empty;
     [ObservableProperty] private string _modelSearch = string.Empty;
 
+    // ── Readiness ─────────────────────────────────────────────────────────
+
+    /// <summary>True when enough is configured to run the test suite.</summary>
+    public bool IsReady => UseRigctld || (ModelId > 1 && SelectedPort is not null);
+
+    /// <summary>What the operator still needs to choose, or empty when ready.</summary>
+    public string ReadinessHint =>
+        UseRigctld              ? string.Empty
+        : ModelId <= 1          ? Strings.Get("Ready_ChooseRadio")
+        : SelectedPort is null  ? Strings.Get("Ready_SelectPort")
+        : string.Empty;
+
     // Network / rigctld
-    [ObservableProperty] private bool   _useRigctld   = false;
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsReady), nameof(ReadinessHint))]
+    private bool   _useRigctld   = false;
     [ObservableProperty] private string _rigctldHost  = "localhost";
     [ObservableProperty] private int    _rigctldPort  = 4532;
 
@@ -88,15 +129,17 @@ public partial class ConnectionViewModel : ObservableObject
         LoadPresets();
     }
 
+    // Ports are never auto-selected: many shacks have several COM ports and
+    // guessing wrong sends the operator down the wrong diagnosis path.
     [RelayCommand]
     public void RefreshPorts()
     {
+        var previous = SelectedPort?.PortName;
         AvailablePorts.Clear();
         foreach (var p in _ports.GetAvailablePorts())
             AvailablePorts.Add(p);
 
-        if (SelectedPort is null && AvailablePorts.Count > 0)
-            SelectedPort = AvailablePorts[0];
+        SelectedPort = AvailablePorts.FirstOrDefault(p => p.PortName == previous);
     }
 
     private void LoadPresets()
@@ -124,7 +167,7 @@ public partial class ConnectionViewModel : ObservableObject
         RadioModelName = ModelName,
         ComPort        = SelectedPort?.PortName ?? string.Empty,
         BaudRate       = BaudRate,
-        DataBits       = int.Parse(DataBits),
+        DataBits       = int.TryParse(DataBits, out var bits) ? bits : 0,
         Parity         = Parity,
         StopBits       = StopBits,
         FlowControl    = FlowControl,
@@ -167,6 +210,26 @@ public partial class ConnectionViewModel : ObservableObject
         s.RigctldHost    = RigctldHost;
         s.RigctldPort    = RigctldPort;
     }
+}
+
+/// <summary>A baud rate choice; Value 0 means omit the flag and let Hamlib decide.</summary>
+public record BaudOption(int Value, string Label);
+
+/// <summary>
+/// A dropdown choice for a serial setting. Value is the stable, language-
+/// independent string that is saved to settings and passed to rigctl;
+/// Label is what the operator sees.
+/// </summary>
+public record Choice(string Value, string Label)
+{
+    public static readonly Choice RadioDefault =
+        new(BrandingInfo.RadioDefault, Strings.Get("Option_RadioDefault"));
+
+    /// <summary>A choice whose label needs no translation (numbers).</summary>
+    public static Choice Literal(string value) => new(value, value);
+
+    /// <summary>A choice whose label comes from Strings.resx as Option_{value}.</summary>
+    public static Choice Localized(string value) => new(value, Strings.Get($"Option_{value}"));
 }
 
 // ═══════════════════════════════════════════════════════════════════════════

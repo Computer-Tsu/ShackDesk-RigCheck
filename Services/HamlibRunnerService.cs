@@ -78,11 +78,13 @@ public class HamlibRunnerService
             process.BeginOutputReadLine();
             process.BeginErrorReadLine();
 
-            var completed = await process
-                .WaitForExitAsync(ct)
-                .WaitAsync(TimeSpan.FromMilliseconds(TimeoutMs), ct);
-
-            if (!completed)
+            try
+            {
+                await process
+                    .WaitForExitAsync(ct)
+                    .WaitAsync(TimeSpan.FromMilliseconds(TimeoutMs), ct);
+            }
+            catch (TimeoutException)
             {
                 try { process.Kill(); } catch { /* best effort */ }
                 return RigctlResult.Failure(command, RigctlError.Timeout,

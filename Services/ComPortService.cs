@@ -109,34 +109,30 @@ public class ComPortService
 
     // ── USB database ──────────────────────────────────────────────────────
 
+    // External copy first, embedded copy last — see DataFileLocator.
+    // A CableHint may be a Strings.resx key (localized) or plain text (passed through).
     private static List<UsbDeviceEntry> LoadUsbDatabase()
     {
         try
         {
-            var candidates = new[]
-            {
-                Path.Combine(AppContext.BaseDirectory, "usb_devices.json"),
-                Path.Combine(AppContext.BaseDirectory, "Assets", "usb_devices.json"),
-            };
+            var json = DataFileLocator.ReadAllText("usb_devices.json");
+            if (json is null) return [];
 
-            foreach (var path in candidates)
-            {
-                if (!File.Exists(path)) continue;
-                var json = File.ReadAllText(path);
-                var db   = JsonConvert.DeserializeObject<List<UsbDeviceEntry>>(json);
-                if (db is not null)
-                {
-                    Log.Debug("USB device database: {Count} entries from {Path}", db.Count, path);
-                    return db;
-                }
-            }
+            var db = JsonConvert.DeserializeObject<List<UsbDeviceEntry>>(json)?
+                .Where(e => !string.IsNullOrEmpty(e.Vid))
+                .ToList() ?? [];
+
+            foreach (var e in db)
+                e.CableHint = Localization.Strings.TryGet(e.CableHint, out var text) ? text : e.CableHint;
+
+            Log.Debug("USB device database: {Count} entries", db.Count);
+            return db;
         }
         catch (Exception ex)
         {
             Log.Warning(ex, "Failed to load USB device database — cable hints unavailable");
+            return [];
         }
-
-        return [];
     }
 
     private UsbDeviceEntry? LookupUsb(string vid, string? pid)

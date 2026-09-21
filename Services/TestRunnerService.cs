@@ -99,7 +99,7 @@ public class TestRunnerService
             TestId.OpenConnection,
             $"Could not connect to radio",
             cmd.DisplayCommand,
-            diag);
+            diag, result.Error);
     }
 
     private async Task<TestResult> TestGetFrequencyAsync(ConnectionConfig cfg, CancellationToken ct)
@@ -124,7 +124,7 @@ public class TestRunnerService
             TestId.GetFrequency,
             "Radio did not respond to frequency query",
             cmd.DisplayCommand,
-            diag);
+            diag, result.Error);
     }
 
     private async Task<TestResult> TestGetModeAsync(ConnectionConfig cfg, CancellationToken ct)
@@ -148,7 +148,7 @@ public class TestRunnerService
             TestId.GetMode,
             "Radio did not respond to mode query",
             cmd.DisplayCommand,
-            diag);
+            diag, result.Error);
     }
 
     private async Task<TestResult> TestGetPttAsync(ConnectionConfig cfg, CancellationToken ct)
@@ -170,7 +170,7 @@ public class TestRunnerService
             TestId.GetPtt,
             "Radio did not respond to PTT query",
             cmd.DisplayCommand,
-            diag);
+            diag, result.Error);
     }
 
     private async Task<TestResult> TestGetSmeterAsync(ConnectionConfig cfg, CancellationToken ct)
@@ -195,7 +195,7 @@ public class TestRunnerService
             TestId.GetSmeter,
             "Radio did not respond to S-meter query (some radios don't support this)",
             cmd.DisplayCommand,
-            diag);
+            diag, result.Error);
     }
 
     private async Task<TestResult> TestGetVfoAsync(ConnectionConfig cfg, CancellationToken ct)
@@ -214,7 +214,7 @@ public class TestRunnerService
             TestId.GetVfo,
             "Radio did not respond to VFO query",
             cmd.DisplayCommand,
-            diag);
+            diag, result.Error);
     }
 
     private async Task<TestResult> TestSetFrequencyAsync(ConnectionConfig cfg, CancellationToken ct)
@@ -228,7 +228,7 @@ public class TestRunnerService
                 TestId.SetFrequency,
                 "Could not read current frequency before set test",
                 getCmd.DisplayCommand,
-                _diagnosis.Diagnose(getResult, cfg));
+                _diagnosis.Diagnose(getResult, cfg), getResult.Error);
         }
 
         // Offset by +1 kHz for the test
@@ -242,7 +242,7 @@ public class TestRunnerService
                 TestId.SetFrequency,
                 "Failed to set frequency",
                 setCmd.DisplayCommand,
-                _diagnosis.Diagnose(setResult, cfg));
+                _diagnosis.Diagnose(setResult, cfg), setResult.Error);
         }
 
         // Read back and verify
@@ -286,13 +286,14 @@ public class TestRunnerService
     private static bool TryParseSmeter(string raw, out string sLabel, out string dbm)
     {
         sLabel = "?"; dbm = "?";
-        if (!double.TryParse(raw.Trim(), out var val)) return false;
+        if (!double.TryParse(raw.Trim(), out var db)) return false;
 
-        // Hamlib returns S-meter in dBm-ish units (actual values depend on radio)
-        // Standard S-unit: S9 = -73 dBm, each S unit = 6 dB below
-        dbm = $"{val:F0}";
-        var sUnits = Math.Clamp((int)Math.Round((val + 127.0) / 6.0), 0, 9);
-        sLabel = sUnits >= 9 ? $"S9+{(int)(val + 73)}" : $"S{sUnits}";
+        // Hamlib STRENGTH is dB relative to S9: -54 = S0, 0 = S9, +20 = S9+20.
+        // One S-unit is 6 dB. S9 is -73 dBm by the HF convention.
+        dbm = $"{-73 + db:F0}";
+        sLabel = db >= 0
+            ? (db < 1 ? "S9" : $"S9+{db:F0}")
+            : $"S{Math.Clamp((int)Math.Round(9 + db / 6.0), 0, 9)}";
         return true;
     }
 

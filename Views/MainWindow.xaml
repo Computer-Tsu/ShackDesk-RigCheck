@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:RigCheck.ViewModels"
         xmlns:models="clr-namespace:RigCheck.Models"
+        xmlns:loc="clr-namespace:RigCheck.Localization"
         Title="{Binding WindowTitle}"
         MinWidth="560" MinHeight="480"
         Width="{Binding Source={StaticResource Settings}, Path=Current.WindowWidth, Mode=TwoWay}"
@@ -13,9 +14,49 @@
         Closing="Window_Closing"
         Loaded="Window_Loaded">
 
-    <Window.RenderTransform>
-        <ScaleTransform ScaleX="{Binding ScaleFactor}" ScaleY="{Binding ScaleFactor}" />
-    </Window.RenderTransform>
+    <Window.InputBindings>
+        <KeyBinding Key="F1" Command="{Binding OpenHelpCommand}" />
+    </Window.InputBindings>
+
+    <DockPanel>
+        <DockPanel.LayoutTransform>
+            <ScaleTransform ScaleX="{Binding ScaleFactor}" ScaleY="{Binding ScaleFactor}" />
+        </DockPanel.LayoutTransform>
+
+        <!-- ── Menu bar ── -->
+        <Menu DockPanel.Dock="Top" Style="{StaticResource MenuBarStyle}">
+            <MenuItem Header="{loc:Str Menu_Settings}"
+                      Style="{StaticResource TopMenuItemStyle}"
+                      Click="Settings_Click" />
+            <MenuItem Header="{loc:Str Menu_Help}" Style="{StaticResource TopMenuItemStyle}">
+                <MenuItem Style="{StaticResource SubMenuItemStyle}"
+                          Command="{Binding OpenHelpCommand}"
+                          InputGestureText="F1">
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <AccessText Text="{loc:Str Menu_HelpContents}" />
+                            <TextBlock Style="{StaticResource ExternalLinkIconStyle}" />
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+                <MenuItem Style="{StaticResource SubMenuItemStyle}"
+                          Command="{Binding OpenReleasesCommand}">
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <AccessText Text="{loc:Str Menu_HelpDownload}" />
+                            <TextBlock Style="{StaticResource ExternalLinkIconStyle}" />
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+                <MenuItem Header="{loc:Str Menu_HelpViewData}"
+                          Style="{StaticResource SubMenuItemStyle}"
+                          Click="ViewData_Click" />
+                <Separator />
+                <MenuItem x:Name="AboutMenuItem"
+                          Style="{StaticResource SubMenuItemStyle}"
+                          Click="About_Click" />
+            </MenuItem>
+        </Menu>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -38,11 +79,11 @@
                            Style="{StaticResource ChromeTitleStyle}" />
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
                     <Button Content="–" Style="{StaticResource ChromeButtonStyle}"
-                            Click="ScaleDown_Click" ToolTip="Scale down" />
+                            Command="{Binding ScaleDownCommand}" ToolTip="Scale down" />
                     <Button Content="+" Style="{StaticResource ChromeButtonStyle}"
-                            Click="ScaleUp_Click"   ToolTip="Scale up" />
+                            Command="{Binding ScaleUpCommand}"   ToolTip="Scale up" />
                     <Button Content="⊡" Style="{StaticResource ChromeButtonStyle}"
-                            Click="ScaleReset_Click" ToolTip="Reset scale" />
+                            Command="{Binding ScaleResetCommand}" ToolTip="Reset scale" />
                     <CheckBox Content="On top" IsChecked="{Binding AlwaysOnTop}"
                               Style="{StaticResource ChromeCheckStyle}" />
                 </StackPanel>
@@ -56,10 +97,15 @@
                          Fill="{Binding IsHamlibAvailable, Converter={StaticResource BoolToStatusColor}}" />
                 <TextBlock Text="{Binding HamlibStatus}"
                            Style="{StaticResource StatusTextStyle}" />
-                <Button DockPanel.Dock="Right" Content="How to install"
+                <Button DockPanel.Dock="Right"
                         Style="{StaticResource LinkButtonStyle}"
                         Visibility="{Binding IsHamlibMissing, Converter={StaticResource BoolToVisibility}}"
-                        Command="{Binding OpenHamlibDownloadCommand}" />
+                        Command="{Binding OpenHamlibDownloadCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="How to install" />
+                        <TextBlock Style="{StaticResource ExternalLinkIconStyle}" />
+                    </StackPanel>
+                </Button>
             </DockPanel>
         </Border>
 
@@ -79,6 +125,7 @@
                     <ComboBox ItemsSource="{Binding Connection.AvailablePresets}"
                               SelectedItem="{Binding Connection.SelectedPreset}"
                               DisplayMemberPath="Name"
+                              Tag="{loc:Str Placeholder_ChooseRadio}"
                               Style="{StaticResource ComboBoxStyle}"
                               Width="240" />
                 </DockPanel>
@@ -110,6 +157,7 @@
                               ItemsSource="{Binding Connection.AvailablePorts}"
                               SelectedItem="{Binding Connection.SelectedPort}"
                               DisplayMemberPath="DisplayName"
+                              Tag="{loc:Str Placeholder_SelectPort}"
                               Style="{StaticResource ComboBoxStyle}" MinWidth="160" />
                     <Button Grid.Column="2" Content="↻" ToolTip="Refresh ports"
                             Command="{Binding Connection.RefreshPortsCommand}"
@@ -119,8 +167,9 @@
                     <Label Grid.Column="3" Content="Baud:" Style="{StaticResource FieldLabelStyle}" />
                     <ComboBox Grid.Column="4"
                               ItemsSource="{Binding Connection.BaudRates}"
-                              SelectedItem="{Binding Connection.BaudRate}"
-                              Style="{StaticResource ComboBoxStyle}" Width="90" />
+                              SelectedValuePath="Value" DisplayMemberPath="Label"
+                              SelectedValue="{Binding Connection.BaudRate}"
+                              Style="{StaticResource ComboBoxStyle}" MinWidth="120" />
                 </Grid>
 
                 <!-- rigctld panel -->
@@ -146,35 +195,41 @@
                           Visibility="{Binding Connection.UseRigctld, Converter={StaticResource InverseBoolToVisibility}}"
                           Margin="0,4,0,0">
                     <WrapPanel Margin="4,4,0,0">
+                        <!-- Widths are minimums so translated labels can grow. -->
                         <StackPanel Orientation="Horizontal" Margin="0,0,16,0">
                             <Label Content="PTT:" Style="{StaticResource FieldLabelStyle}" />
                             <ComboBox ItemsSource="{Binding Connection.PttMethods}"
-                                      SelectedItem="{Binding Connection.PttMethod}"
-                                      Style="{StaticResource ComboBoxStyle}" Width="80" />
+                                      SelectedValuePath="Value" DisplayMemberPath="Label"
+                                      SelectedValue="{Binding Connection.PttMethod}"
+                                      Style="{StaticResource ComboBoxStyle}" MinWidth="120" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,16,0">
                             <Label Content="Data:" Style="{StaticResource FieldLabelStyle}" />
                             <ComboBox ItemsSource="{Binding Connection.DataBitsOptions}"
-                                      SelectedItem="{Binding Connection.DataBits}"
-                                      Style="{StaticResource ComboBoxStyle}" Width="40" />
+                                      SelectedValuePath="Value" DisplayMemberPath="Label"
+                                      SelectedValue="{Binding Connection.DataBits}"
+                                      Style="{StaticResource ComboBoxStyle}" MinWidth="120" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,16,0">
                             <Label Content="Parity:" Style="{StaticResource FieldLabelStyle}" />
                             <ComboBox ItemsSource="{Binding Connection.ParityOptions}"
-                                      SelectedItem="{Binding Connection.Parity}"
-                                      Style="{StaticResource ComboBoxStyle}" Width="70" />
+                                      SelectedValuePath="Value" DisplayMemberPath="Label"
+                                      SelectedValue="{Binding Connection.Parity}"
+                                      Style="{StaticResource ComboBoxStyle}" MinWidth="120" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,16,0">
                             <Label Content="Stop:" Style="{StaticResource FieldLabelStyle}" />
                             <ComboBox ItemsSource="{Binding Connection.StopBitsOptions}"
-                                      SelectedItem="{Binding Connection.StopBits}"
-                                      Style="{StaticResource ComboBoxStyle}" Width="50" />
+                                      SelectedValuePath="Value" DisplayMemberPath="Label"
+                                      SelectedValue="{Binding Connection.StopBits}"
+                                      Style="{StaticResource ComboBoxStyle}" MinWidth="120" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Flow:" Style="{StaticResource FieldLabelStyle}" />
                             <ComboBox ItemsSource="{Binding Connection.FlowCtrlOptions}"
-                                      SelectedItem="{Binding Connection.FlowControl}"
-                                      Style="{StaticResource ComboBoxStyle}" Width="90" />
+                                      SelectedValuePath="Value" DisplayMemberPath="Label"
+                                      SelectedValue="{Binding Connection.FlowControl}"
+                                      Style="{StaticResource ComboBoxStyle}" MinWidth="120" />
                         </StackPanel>
                     </WrapPanel>
                 </Expander>
@@ -297,7 +352,7 @@
                             Command="{Binding RawConsole.ClearConsoleCommand}"
                             Style="{StaticResource SecondaryButtonStyle}" />
                     <Button DockPanel.Dock="Right" Content="Send"
-                            Command="{Binding RawConsole.SendCommandCommand}"
+                            Command="{Binding SendRawCommandCommand}"
                             Style="{StaticResource PrimaryButtonStyle}" Margin="0,0,4,0" />
                     <TextBox x:Name="ConsoleInput"
                              Text="{Binding RawConsole.InputText, UpdateSourceTrigger=PropertyChanged}"
@@ -340,4 +395,5 @@
         </Border>
 
     </Grid>
+    </DockPanel>
 </Window>

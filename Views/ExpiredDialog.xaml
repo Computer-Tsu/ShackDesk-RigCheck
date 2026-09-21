@@ -1,0 +1,31 @@
+<Window x:Class="RigCheck.Views.ExpiredDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:loc="clr-namespace:RigCheck.Localization"
+        Width="440" SizeToContent="Height"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource BrushBackground}"
+        Foreground="{StaticResource BrushForeground}">
+
+    <!--
+        Shown instead of the main window when an alpha build is past its
+        expiry date. The only actions are to download a newer build or exit.
+    -->
+
+    <StackPanel Margin="24,20,24,16">
+        <TextBlock x:Name="MessageText" TextWrapping="Wrap" Margin="0,0,0,20" />
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Style="{StaticResource PrimaryButtonStyle}" Click="Download_Click" Margin="0,0,8,0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{loc:Str Expired_Download}" />
+                    <TextBlock Style="{StaticResource ExternalLinkIconStyle}" />
+                </StackPanel>
+            </Button>
+            <Button Content="{loc:Str Common_Close}"
+                    Style="{StaticResource SecondaryButtonStyle}"
+                    MinWidth="90" IsCancel="True" />
+        </StackPanel>
+    </StackPanel>
+</Window>

@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    RigCheck user-visible text — English source.
+    Translations live beside this file as Strings.{ietf-tag}.resx and contain
+    only the <data> entries; untranslated keys fall back to this file.
+
+    Translators: change only the text inside <value>. Keep {0}, {1} placeholders.
+    Keep "_" before the letter that should be the keyboard shortcut in menus.
+    Brand and product names are never in this file by design.
+  -->
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- ── Menu ─────────────────────────────────────────────────────── -->
+  <data name="Menu_Settings" xml:space="preserve">
+    <value>_Settings</value>
+    <comment>Top-level menu item. Opens the settings window.</comment>
+  </data>
+  <data name="Menu_Help" xml:space="preserve">
+    <value>_Help</value>
+    <comment>Top-level menu item.</comment>
+  </data>
+  <data name="Menu_HelpContents" xml:space="preserve">
+    <value>_Contents</value>
+    <comment>Help menu item. Opens the online help page in a web browser.</comment>
+  </data>
+  <data name="Menu_HelpAbout" xml:space="preserve">
+    <value>_About {0}</value>
+    <comment>Help menu item. {0} is the application name.</comment>
+  </data>
+
+  <!-- ── Common ───────────────────────────────────────────────────── -->
+  <data name="Common_Close" xml:space="preserve">
+    <value>Close</value>
+    <comment>Button that closes a dialog window.</comment>
+  </data>
+
+  <!-- ── Settings window ──────────────────────────────────────────── -->
+  <data name="Settings_Title" xml:space="preserve">
+    <value>Settings</value>
+    <comment>Window title.</comment>
+  </data>
+  <data name="Settings_ComingSoon" xml:space="preserve">
+    <value>Settings will appear here in a future release.</value>
+  </data>
+
+  <!-- ── About window ─────────────────────────────────────────────── -->
+  <data name="About_Title" xml:space="preserve">
+    <value>About {0}</value>
+    <comment>Window title. {0} is the application name.</comment>
+  </data>
+  <data name="About_Version" xml:space="preserve">
+    <value>Version {0}</value>
+    <comment>{0} is a version number such as 0.6.2.</comment>
+  </data>
+  <data name="About_DevelopedBy" xml:space="preserve">
+    <value>Developed by {0}</value>
+    <comment>{0} is the developer's name and callsign.</comment>
+  </data>
+  <data name="About_License" xml:space="preserve">
+    <value>Licensed under {0}</value>
+    <comment>{0} is the license name, e.g. GPL v3.</comment>
+  </data>
+  <data name="About_Website" xml:space="preserve">
+    <value>Website</value>
+    <comment>Link that opens the product web page in a browser.</comment>
+  </data>
+  <data name="About_SourceCode" xml:space="preserve">
+    <value>Source code</value>
+    <comment>Link that opens the GitHub repository in a browser.</comment>
+  </data>
+
+  <data name="About_Channel" xml:space="preserve">
+    <value>{0} build, compiled {1}</value>
+    <comment>{0} is the channel (alpha, beta, stable); {1} is a date like 2026-09-21.</comment>
+  </data>
+  <data name="About_Expires" xml:space="preserve">
+    <value>This {0} build expires on {1}.</value>
+    <comment>{0} is the channel; {1} is a date like 2026-10-21.</comment>
+  </data>
+
+  <!-- ── Build expiry ─────────────────────────────────────────────── -->
+  <data name="Expiry_TitleBar" xml:space="preserve">
+    <value>expires {0}</value>
+    <comment>Appended to the window title on alpha and beta builds. {0} is a date.</comment>
+  </data>
+  <data name="Expiry_Warning" xml:space="preserve">
+    <value>This {0} build expires in {1} day(s), on {2}. Download the current build from the Help menu.</value>
+    <comment>Status strip message in the final days before expiry. {0} channel, {1} number of days, {2} date.</comment>
+  </data>
+  <data name="Expiry_WarningToday" xml:space="preserve">
+    <value>This {0} build expires today. Download the current build from the Help menu.</value>
+    <comment>Status strip message on the last day. {0} is the channel.</comment>
+  </data>
+  <data name="Expiry_BetaExpired" xml:space="preserve">
+    <value>This beta build expired on {0}. It still runs, but a newer build is available.</value>
+    <comment>Status strip message on an expired beta. {0} is a date.</comment>
+  </data>
+  <data name="Expired_Title" xml:space="preserve">
+    <value>{0} build expired</value>
+    <comment>Window title of the dialog shown when an expired alpha is started. {0} is the app name.</comment>
+  </data>
+  <data name="Expired_Message" xml:space="preserve">
+    <value>This alpha build of {0} expired on {1}.
+
+Alpha builds stop running after {2} days so that testers always use current code. Please download the latest build.</value>
+    <comment>{0} app name, {1} date, {2} number of days.</comment>
+  </data>
+  <data name="Expired_Download" xml:space="preserve">
+    <value>Download latest build</value>
+    <comment>Button. Opens the releases page in a web browser.</comment>
+  </data>
+  <data name="Menu_HelpDownload" xml:space="preserve">
+    <value>_Download latest build</value>
+    <comment>Help menu item. Opens the releases page in a web browser.</comment>
+  </data>
+
+  <!-- ── Telemetry ────────────────────────────────────────────────── -->
+  <data name="FirstRun_Title" xml:space="preserve">
+    <value>Welcome to {0}</value>
+    <comment>Window title of the first-run dialog. {0} is the app name.</comment>
+  </data>
+  <data name="FirstRun_Intro" xml:space="preserve">
+    <value>{0} can send anonymous diagnostic reports that help improve the radio and cable database for everyone.</value>
+    <comment>{0} is the app name.</comment>
+  </data>
+  <data name="Telemetry_Checkbox" xml:space="preserve">
+    <value>Send anonymous diagnostic reports</value>
+    <comment>Checkbox label in the first-run dialog and in Settings.</comment>
+  </data>
+  <data name="Telemetry_WhatIsSent" xml:space="preserve">
+    <value>What is sent: the {0} version and Windows version, whether Hamlib was found, and after each test run the radio model, serial settings, USB cable identifiers, and which tests passed or failed.</value>
+    <comment>{0} is the app name.</comment>
+  </data>
+  <data name="Telemetry_WhatIsNotSent" xml:space="preserve">
+    <value>Never sent: your callsign, computer name, file paths, serial numbers, or IP address. The only identifier is a random ID created when you first ran the program.</value>
+  </data>
+  <data name="Telemetry_ChangeLater" xml:space="preserve">
+    <value>You can change this at any time in Settings, and see every report under Help.</value>
+  </data>
+  <data name="Telemetry_PrivacyLink" xml:space="preserve">
+    <value>Privacy policy</value>
+    <comment>Link that opens the privacy policy in a web browser.</comment>
+  </data>
+  <data name="Common_Continue" xml:space="preserve">
+    <value>Continue</value>
+    <comment>Button that closes the first-run dialog.</comment>
+  </data>
+  <data name="Settings_TelemetryHeading" xml:space="preserve">
+    <value>Anonymous diagnostics</value>
+    <comment>Section heading in Settings.</comment>
+  </data>
+  <data name="Settings_ViewData" xml:space="preserve">
+    <value>View collected data…</value>
+    <comment>Button in Settings that opens the telemetry data viewer.</comment>
+  </data>
+  <data name="Settings_LoggingHeading" xml:space="preserve">
+    <value>Logging</value>
+    <comment>Section heading in Settings.</comment>
+  </data>
+  <data name="Settings_LogLevel" xml:space="preserve">
+    <value>Write to log files:</value>
+    <comment>Label before the log level dropdown.</comment>
+  </data>
+  <data name="LogLevel_Off" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="LogLevel_Error" xml:space="preserve">
+    <value>Errors only</value>
+  </data>
+  <data name="LogLevel_Information" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="LogLevel_Debug" xml:space="preserve">
+    <value>Detailed (recommended for test builds)</value>
+  </data>
+  <data name="Settings_LogPath" xml:space="preserve">
+    <value>Log files are stored in:</value>
+  </data>
+  <data name="Settings_OpenLogFolder" xml:space="preserve">
+    <value>Open log folder</value>
+    <comment>Button. Opens the log folder in Windows Explorer.</comment>
+  </data>
+  <data name="Settings_DeleteLogs" xml:space="preserve">
+    <value>Delete log files</value>
+    <comment>Button.</comment>
+  </data>
+  <data name="Settings_DeleteLogsConfirm" xml:space="preserve">
+    <value>Delete all {0} log files? This cannot be undone.</value>
+    <comment>Confirmation question. {0} is the app name.</comment>
+  </data>
+  <data name="Settings_DeleteLogsDone" xml:space="preserve">
+    <value>{0} log file(s) deleted.</value>
+    <comment>{0} is a number.</comment>
+  </data>
+  <data name="Settings_SupportIdHeading" xml:space="preserve">
+    <value>Support ID</value>
+    <comment>Section heading in Settings.</comment>
+  </data>
+  <data name="Settings_SupportIdHint" xml:space="preserve">
+    <value>A random identifier created when you first ran the program. It is the only identifier ever sent in diagnostic reports, and lets a support request be matched to them. Resetting it breaks that link for all past reports and deletes their local copies.</value>
+  </data>
+  <data name="Settings_ResetId" xml:space="preserve">
+    <value>Reset Support ID…</value>
+    <comment>Button.</comment>
+  </data>
+  <data name="Settings_ResetIdConfirm" xml:space="preserve">
+    <value>Create a new Support ID? Past diagnostic reports can no longer be matched to this installation, and their local copies will be deleted.</value>
+    <comment>Confirmation question.</comment>
+  </data>
+  <data name="Common_OK" xml:space="preserve">
+    <value>OK</value>
+    <comment>Button. Saves changes and closes the dialog.</comment>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>Button. Discards changes and closes the dialog.</comment>
+  </data>
+  <data name="Menu_HelpViewData" xml:space="preserve">
+    <value>_View collected data</value>
+    <comment>Help menu item. Opens the telemetry data viewer.</comment>
+  </data>
+  <data name="DataViewer_Title" xml:space="preserve">
+    <value>Collected data</value>
+    <comment>Window title.</comment>
+  </data>
+  <data name="DataViewer_Intro" xml:space="preserve">
+    <value>Every diagnostic report this copy of {0} has sent or queued, newest first. Reports marked "pending" could not be sent yet and will be retried at the next start.</value>
+    <comment>{0} is the app name.</comment>
+  </data>
+  <data name="DataViewer_Empty" xml:space="preserve">
+    <value>No reports have been created yet.</value>
+  </data>
+  <data name="DataViewer_Clear" xml:space="preserve">
+    <value>Delete local copies</value>
+    <comment>Button. Deletes the locally stored report copies (does not affect what was already sent).</comment>
+  </data>
+  <data name="About_SupportId" xml:space="preserve">
+    <value>Support ID: {0}</value>
+    <comment>{0} is a random identifier. Users can quote it in support requests.</comment>
+  </data>
+  <data name="About_SupportIdHint" xml:space="preserve">
+    <value>Quote this ID in a support request to match it with your diagnostic reports, if you have enabled them.</value>
+  </data>
+  <data name="Common_Copy" xml:space="preserve">
+    <value>Copy</value>
+    <comment>Button that copies text to the clipboard.</comment>
+  </data>
+  <data name="Crash_Title" xml:space="preserve">
+    <value>{0} needs to close</value>
+    <comment>{0} is the app name.</comment>
+  </data>
+  <data name="Crash_Message" xml:space="preserve">
+    <value>{0} ran into an unexpected error and needs to close.
+
+Details have been written to the log. If this keeps happening, please report it with the exported log attached.</value>
+    <comment>{0} is the app name.</comment>
+  </data>
+
+  <!-- ── Connection readiness ─────────────────────────────────────── -->
+  <data name="Ready_ChooseRadio" xml:space="preserve">
+    <value>Choose your radio from the Quick preset list.</value>
+    <comment>Shown in the status strip until a radio is selected.</comment>
+  </data>
+  <data name="Ready_SelectPort" xml:space="preserve">
+    <value>Select the COM port your radio is connected to.</value>
+    <comment>Shown in the status strip until a port is selected.</comment>
+  </data>
+  <data name="Placeholder_ChooseRadio" xml:space="preserve">
+    <value>Choose your radio…</value>
+    <comment>Grey placeholder text inside the empty preset dropdown.</comment>
+  </data>
+  <data name="Placeholder_SelectPort" xml:space="preserve">
+    <value>Select a port…</value>
+    <comment>Grey placeholder text inside the empty COM port dropdown.</comment>
+  </data>
+
+  <!-- ── Serial setting choices ───────────────────────────────────── -->
+  <!-- "Radio default" means the setting is left to Hamlib's model database. -->
+  <data name="Option_RadioDefault" xml:space="preserve">
+    <value>Radio default</value>
+    <comment>First choice in every serial setting dropdown. Means: let Hamlib decide.</comment>
+  </data>
+  <data name="Option_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="Option_Even" xml:space="preserve">
+    <value>Even</value>
+    <comment>Serial parity.</comment>
+  </data>
+  <data name="Option_Odd" xml:space="preserve">
+    <value>Odd</value>
+    <comment>Serial parity.</comment>
+  </data>
+  <data name="Option_Mark" xml:space="preserve">
+    <value>Mark</value>
+    <comment>Serial parity.</comment>
+  </data>
+  <data name="Option_Space" xml:space="preserve">
+    <value>Space</value>
+    <comment>Serial parity.</comment>
+  </data>
+  <data name="Option_Hardware" xml:space="preserve">
+    <value>Hardware</value>
+    <comment>Serial flow control (RTS/CTS).</comment>
+  </data>
+  <data name="Option_Software" xml:space="preserve">
+    <value>Software</value>
+    <comment>Serial flow control (XON/XOFF).</comment>
+  </data>
+  <data name="Option_CAT" xml:space="preserve">
+    <value>CAT</value>
+    <comment>PTT method. Amateur radio term, usually left untranslated.</comment>
+  </data>
+  <data name="Option_RTS" xml:space="preserve">
+    <value>RTS</value>
+    <comment>PTT method via serial RTS line. Usually left untranslated.</comment>
+  </data>
+  <data name="Option_DTR" xml:space="preserve">
+    <value>DTR</value>
+    <comment>PTT method via serial DTR line. Usually left untranslated.</comment>
+  </data>
+  <data name="Option_VOX" xml:space="preserve">
+    <value>VOX</value>
+    <comment>PTT method. Amateur radio term, usually left untranslated.</comment>
+  </data>
+</root>

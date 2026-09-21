@@ -1,5 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using RigCheck.Localization;
 using RigCheck.Models;
 using RigCheck.Services;
 using Serilog;
@@ -19,6 +20,7 @@ public partial class MainViewModel : ObservableObject
     private readonly LogExportService    _logExport;
     private readonly HamlibLocatorService _hamlib;
     private readonly SettingsService     _settings;
+    private readonly TelemetryService    _telemetry;
 
     public ConnectionViewModel  Connection  { get; }
     public TestResultsViewModel Results     { get; }
@@ -28,14 +30,21 @@ public partial class MainViewModel : ObservableObject
 
     [ObservableProperty] private bool   _isRunning;
     [ObservableProperty] private bool   _rawConsoleVisible;
+    [ObservableProperty] private bool   _chromeVisible;
     [ObservableProperty] private bool   _alwaysOnTop;
     [ObservableProperty] private double _scaleFactor = 1.0;
     [ObservableProperty] private string _statusMessage = string.Empty;
     [ObservableProperty] private string _hamlibStatus  = string.Empty;
 
-    // Title shown in window chrome
+    public bool IsHamlibAvailable => _hamlib.IsAvailable;
+    public bool IsHamlibMissing   => !_hamlib.IsAvailable;
+
+    // Title shown in window chrome. Alpha and beta builds always show the
+    // expiry date here so it is visible without opening any dialog.
     public string WindowTitle =>
-        $"{BrandingInfo.FullName}  {BrandingInfo.Version}";
+        BuildInfo.ExpiryDate is { } exp
+            ? $"{BrandingInfo.FullName}  {BuildInfo.VersionLabel}  —  {Strings.Format("Expiry_TitleBar", exp.ToString("yyyy-MM-dd"))}"
+            : $"{BrandingInfo.FullName}  {BuildInfo.VersionLabel}";
 
     // ── Constructor ───────────────────────────────────────────────────────
 
@@ -46,7 +55,8 @@ public partial class MainViewModel : ObservableObject
         TestRunnerService    testRunner,
         LogExportService     logExport,
         HamlibLocatorService hamlib,
-        SettingsService      settings)
+        SettingsService      settings,
+        TelemetryService     telemetry)
     {
         Connection  = connection;
         Results     = results;
@@ -55,9 +65,23 @@ public partial class MainViewModel : ObservableObject
         _logExport  = logExport;
         _hamlib     = hamlib;
         _settings   = settings;
+        _telemetry  = telemetry;
 
         LoadSettings();
         CheckHamlib();
+
+        // Run Tests stays disabled until a radio and port are chosen; the
+        // status strip explains what is still missing.
+        Connection.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName is nameof(ConnectionViewModel.IsReady)
+                               or nameof(ConnectionViewModel.ReadinessHint))
+            {
+                RunTestsCommand.NotifyCanExecuteChanged();
+                UpdateReadinessStatus();
+            }
+        };
+        UpdateReadinessStatus();
     }
 
     // ── Commands ──────────────────────────────────────────────────────────
@@ -98,6 +122,9 @@ public partial class MainViewModel : ObservableObject
 
             Log.Information("Test suite complete: {Pass} pass, {Fail} fail, {Warn} warn",
                 suite.PassCount, suite.FailCount, suite.WarningCount);
+
+            // Fire-and-forget; the report must never delay showing results.
+            _ = _telemetry.ReportTestRunAsync(suite, Connection.SelectedPort);
         }
         catch (Exception ex)
         {
@@ -110,7 +137,7 @@ public partial class MainViewModel : ObservableObject
         }
     }
 
-    private bool CanRunTests() => !IsRunning && _hamlib.IsAvailable;
+    private bool CanRunTests() => !IsRunning && _hamlib.IsAvailable && Connection.IsReady;
 
     [RelayCommand]
     private async Task ExportLogAsync()
@@ -141,8 +168,32 @@ public partial class MainViewModel : ObservableObject
     }
 
     [RelayCommand]
+    private Task SendRawCommandAsync() =>
+        RawConsole.SendCommandCommand.ExecuteAsync(Connection.BuildConfig());
+
+    [RelayCommand]
+    private void OpenHamlibDownload() => OpenUrl(BrandingInfo.HamlibDownloadUrl);
+
+    [RelayCommand]
+    private void OpenHelp() => OpenUrl(BrandingInfo.HelpUrl);
+
+    [RelayCommand]
+    private void OpenReleases() => OpenUrl(BrandingInfo.ReleasesUrl);
+
+    private static void OpenUrl(string url) =>
+        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+        {
+            FileName        = url,
+            UseShellExecute = true,
+        });
+
+    [RelayCommand]
     private void ToggleRawConsole() =>
         RawConsoleVisible = !RawConsoleVisible;
+
+    [RelayCommand]
+    private void ToggleChrome() =>
+        ChromeVisible = !ChromeVisible;
 
     [RelayCommand]
     private void ScaleUp()   => ScaleFactor = Math.Min(ScaleFactor + 0.1, 2.0);
@@ -155,13 +206,16 @@ public partial class MainViewModel : ObservableObject
 
     // ── Window lifecycle ──────────────────────────────────────────────────
 
-    public void OnWindowClosing()
+    public void OnWindowClosing(double windowLeft, double windowTop)
     {
         _settings.Update(s =>
         {
             s.RawConsoleOpen = RawConsoleVisible;
             s.ScaleFactor    = ScaleFactor;
             s.AlwaysOnTop    = AlwaysOnTop;
+            s.WindowLeft     = windowLeft;
+            s.WindowTop      = windowTop;
+            s.CommandHistory = RawConsole.GetHistory();
             Connection.SaveTo(s);
         });
     }
@@ -174,6 +228,7 @@ public partial class MainViewModel : ObservableObject
         RawConsoleVisible = s.RawConsoleOpen;
         ScaleFactor       = s.ScaleFactor;
         AlwaysOnTop       = s.AlwaysOnTop;
+        RawConsole.LoadHistory(s.CommandHistory);
         Connection.LoadFrom(s);
     }
 
@@ -187,10 +242,38 @@ public partial class MainViewModel : ObservableObject
         else
         {
             HamlibStatus = "Hamlib not found — install WSJT-X or download Hamlib";
-            StatusMessage = "Hamlib not found. Run Tests will be unavailable until Hamlib is installed.";
             Log.Warning("Hamlib not available");
         }
 
         RunTestsCommand.NotifyCanExecuteChanged();
+    }
+
+    // Status strip shows the single most important message. An imminent
+    // expiry outranks everything because nothing else matters once the
+    // build stops running.
+    private void UpdateReadinessStatus()
+    {
+        if (IsRunning) return;
+
+        StatusMessage = ExpiryMessage()
+            ?? (!_hamlib.IsAvailable
+                ? "Hamlib not found. Run Tests will be unavailable until Hamlib is installed."
+                : Connection.ReadinessHint);
+    }
+
+    private static string? ExpiryMessage()
+    {
+        if (BuildInfo.ExpiryDate is not { } exp) return null;
+        var date = exp.ToString("yyyy-MM-dd");
+
+        if (BuildInfo.IsExpired)
+            return BuildInfo.IsBeta ? Strings.Format("Expiry_BetaExpired", date) : null;
+
+        if (!BuildInfo.IsExpiringSoon) return null;
+
+        var days = BuildInfo.DaysUntilExpiry ?? 0;
+        return days == 0
+            ? Strings.Format("Expiry_WarningToday", BuildInfo.Channel)
+            : Strings.Format("Expiry_Warning", BuildInfo.Channel, days, date);
     }
 }

@@ -1,0 +1,43 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--
+        RigCheck color palette.
+        Colors are defined once, then exposed as brushes. Styles.xaml and the
+        converters reference only the Brush* keys, so a light theme or a
+        high-contrast theme can be added by supplying a dictionary with the
+        same keys and different values.
+    -->
+
+    <!-- Surfaces -->
+    <Color x:Key="ColorBackground">#FF1B1E23</Color>
+    <Color x:Key="ColorSurface">#FF23272E</Color>
+    <Color x:Key="ColorSurfaceRaised">#FF2B3038</Color>
+    <Color x:Key="ColorConsole">#FF111316</Color>
+    <Color x:Key="ColorBorder">#FF3A4049</Color>
+
+    <!-- Text -->
+    <Color x:Key="ColorForeground">#FFE6E8EB</Color>
+    <Color x:Key="ColorMuted">#FF8B929C</Color>
+
+    <!-- Semantic -->
+    <Color x:Key="ColorAccent">#FF4FB3BF</Color>
+    <Color x:Key="ColorAccentHover">#FF6AC5D0</Color>
+    <Color x:Key="ColorPass">#FF5FCF80</Color>
+    <Color x:Key="ColorFail">#FFE85D5D</Color>
+    <Color x:Key="ColorWarn">#FFE9B949</Color>
+
+    <SolidColorBrush x:Key="BrushBackground"    Color="{StaticResource ColorBackground}" />
+    <SolidColorBrush x:Key="BrushSurface"       Color="{StaticResource ColorSurface}" />
+    <SolidColorBrush x:Key="BrushSurfaceRaised" Color="{StaticResource ColorSurfaceRaised}" />
+    <SolidColorBrush x:Key="BrushConsole"       Color="{StaticResource ColorConsole}" />
+    <SolidColorBrush x:Key="BrushBorder"        Color="{StaticResource ColorBorder}" />
+    <SolidColorBrush x:Key="BrushForeground"    Color="{StaticResource ColorForeground}" />
+    <SolidColorBrush x:Key="BrushMuted"         Color="{StaticResource ColorMuted}" />
+    <SolidColorBrush x:Key="BrushAccent"        Color="{StaticResource ColorAccent}" />
+    <SolidColorBrush x:Key="BrushAccentHover"   Color="{StaticResource ColorAccentHover}" />
+    <SolidColorBrush x:Key="BrushPass"          Color="{StaticResource ColorPass}" />
+    <SolidColorBrush x:Key="BrushFail"          Color="{StaticResource ColorFail}" />
+    <SolidColorBrush x:Key="BrushWarn"          Color="{StaticResource ColorWarn}" />
+
+</ResourceDictionary>
