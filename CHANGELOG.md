@@ -5,6 +5,12 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
+## [Unreleased]
+
+### Fixed
+- The app closed after Continue on the first-run diagnostics dialog, because that dialog was the
+  first window shown and WPF treated it as the main window
+
 ## [0.6.4] - 2026-09-21
 
 Radio and cable databases as data files.

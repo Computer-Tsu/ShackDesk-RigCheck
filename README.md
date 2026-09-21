@@ -61,6 +61,23 @@ The window title shows the version, channel, and
 expiry date, for example
 `RigCheck by ShackDesk 0.6.2-alpha — expires 2026-10-21`.
 
+### Where RigCheck keeps its files
+
+RigCheck is a single portable exe and writes only
+to your local application data folder. Nothing goes
+in the registry.
+
+```
+%LOCALAPPDATA%\ShackDesk\RigCheck\
+    rigcheck-settings.json   all settings, plain JSON
+    Logs\                    daily log files, 7 kept
+    Telemetry\               local copies of diagnostic reports
+```
+
+Delete `rigcheck-settings.json` to reset every
+setting to its default. Settings › Logging shows
+the log folder and can open or empty it.
+
 ### Anonymous diagnostics
 
 On first launch RigCheck asks whether it may send

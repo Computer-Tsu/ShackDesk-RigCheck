@@ -49,13 +49,18 @@ public partial class App : Application
         var telemetry = _host.Services.GetRequiredService<TelemetryService>();
         Resources["Settings"] = settings;
 
+        DispatcherUnhandledException += (_, e) => OnUnhandledException(e, telemetry);
+
+        // Create the main window before any dialog. ShutdownMode is
+        // OnMainWindowClose, and WPF treats the first window shown as the
+        // main window — so a dialog shown first would end the app when closed.
+        var mainWindow = _host.Services.GetRequiredService<MainWindow>();
+        MainWindow = mainWindow;
+
         // Ask once about anonymous diagnostics before anything is sent.
         if (!settings.Current.TelemetryPrompted)
             new FirstRunDialog(settings).ShowDialog();
 
-        DispatcherUnhandledException += (_, e) => OnUnhandledException(e, telemetry);
-
-        var mainWindow = _host.Services.GetRequiredService<MainWindow>();
         mainWindow.Show();
 
         // Fire-and-forget: neither call may delay the window or fail loudly.
