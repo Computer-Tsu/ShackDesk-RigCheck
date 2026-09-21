@@ -5,6 +5,18 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
+## [0.7.1] - 2026-09-21
+
+### Added
+- Beta and stable releases are built from version tags: `v0.7.0-beta.1` publishes
+  `RigCheck-0.7.0-beta.1.exe` as a pre-release on the beta channel (90-day reminder), `v0.7.0`
+  publishes `RigCheck-0.7.0.exe` as a stable release. The tag must match the project version.
+  The version in the title bar shows the tag suffix (`0.7.0-beta.1`)
+
+### Changed
+- RigCheck runs as a single instance: starting it again brings the open window to the front.
+  Two instances contended for the same COM port and overwrote each other's settings (#10)
+
 ## [0.7.0] - 2026-09-21
 
 **Milestone: environment checks and Find my radio, proven on a real Icom IC-7300.**
