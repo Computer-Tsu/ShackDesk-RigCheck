@@ -16,7 +16,7 @@ starting from nothing, and it is the most useful thing you can do.
 <!-- coverage:start -->
 | Language | File | Coverage | Status |
 | --- | --- | --- | --- |
-| English (source) | `Strings.resx` | 100% | Source |
+| English (source) | `Strings.resx` | 100% (233 of 233) | Source |
 <!-- coverage:end -->
 
 ---
