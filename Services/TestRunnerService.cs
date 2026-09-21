@@ -286,13 +286,14 @@ public class TestRunnerService
     private static bool TryParseSmeter(string raw, out string sLabel, out string dbm)
     {
         sLabel = "?"; dbm = "?";
-        if (!double.TryParse(raw.Trim(), out var val)) return false;
+        if (!double.TryParse(raw.Trim(), out var db)) return false;
 
-        // Hamlib returns S-meter in dBm-ish units (actual values depend on radio)
-        // Standard S-unit: S9 = -73 dBm, each S unit = 6 dB below
-        dbm = $"{val:F0}";
-        var sUnits = Math.Clamp((int)Math.Round((val + 127.0) / 6.0), 0, 9);
-        sLabel = sUnits >= 9 ? $"S9+{(int)(val + 73)}" : $"S{sUnits}";
+        // Hamlib STRENGTH is dB relative to S9: -54 = S0, 0 = S9, +20 = S9+20.
+        // One S-unit is 6 dB. S9 is -73 dBm by the HF convention.
+        dbm = $"{-73 + db:F0}";
+        sLabel = db >= 0
+            ? (db < 1 ? "S9" : $"S9+{db:F0}")
+            : $"S{Math.Clamp((int)Math.Round(9 + db / 6.0), 0, 9)}";
         return true;
     }
 

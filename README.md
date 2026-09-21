@@ -112,7 +112,7 @@ Test 4: Get PTT state
   Fail: with diagnostic suggestion
 
 Test 5: Get signal meter (S-meter)
-  Pass: "Signal strength: S7 (-73 dBm)"
+  Pass: "Signal strength: S7 (-85 dBm)"
   Fail: with diagnostic suggestion
 
 Test 6: Get VFO

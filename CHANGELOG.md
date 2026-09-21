@@ -16,6 +16,9 @@ Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for 
 ### Added
 - Dependabot, CodeQL analysis, and dependency review workflows
 
+### Fixed
+- S-meter reading interpreted Hamlib's dB-relative-to-S9 value as dBm, so an S9 signal displayed as "S9+73"
+
 ## [0.6.1] - 2026-09-21
 
 First successful build. The application compiles in CI and produces a
