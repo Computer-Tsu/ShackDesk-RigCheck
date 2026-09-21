@@ -1289,4 +1289,7 @@ Continue?</value>
   <data name="Disc_SummaryRigctld" xml:space="preserve">
     <value>Your radio is reachable through rigctld at {0}</value>
   </data>
+  <data name="Diag_PortInUse_Running" xml:space="preserve">
+    <value>Running right now: {0} — almost certainly the program holding the port. Close it (or disconnect its rig control) and try again</value>
+  </data>
 </root>

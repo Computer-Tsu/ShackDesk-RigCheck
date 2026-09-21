@@ -220,6 +220,11 @@ public partial class ConnectionViewModel : ObservableObject
 
         var saved = AvailablePorts.FirstOrDefault(p => p.PortName == s.ComPort);
         if (saved is not null) SelectedPort = saved;
+
+        // Show the matching preset in the picker without re-applying its
+        // defaults — the saved baud and serial settings must win.
+        _selectedPreset = AvailablePresets.FirstOrDefault(p => p.HamlibModelId == s.RadioModelId);
+        OnPropertyChanged(nameof(SelectedPreset));
     }
 
     public void SaveTo(RigCheckSettings s)

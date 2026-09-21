@@ -48,7 +48,7 @@ public class HamlibRunnerService
         var startInfo = new ProcessStartInfo
         {
             FileName               = rigctlPath,
-            Arguments              = string.Join(" ", command.Args.Select(QuoteIfNeeded)),
+            Arguments              = string.Join(" ", Verbosity.Concat(command.Args).Select(QuoteIfNeeded)),
             UseShellExecute        = false,
             RedirectStandardOutput = true,
             RedirectStandardError  = true,
@@ -93,7 +93,7 @@ public class HamlibRunnerService
                     "rigctl did not respond within the timeout period.");
             }
 
-            var stdout = stdoutBuilder.ToString().Trim();
+            var stdout = StripBanner(stdoutBuilder.ToString()).Trim();
             var stderr = stderrBuilder.ToString().Trim();
             var exitCode = process.ExitCode;
 
@@ -118,6 +118,24 @@ public class HamlibRunnerService
         }
     }
 
+    // ── Verbosity ─────────────────────────────────────────────────────────
+    // At its default verbosity rigctl (Hamlib 4.7.1) says NOTHING when it
+    // fails — exit code 2 and empty output — so a port held by WSJT-X, a
+    // missing rigctld, and a radio that is switched off all looked the same.
+    // "-vv" makes it name the cause on stderr:
+    //   serial_open: serial port COM3 is already open
+    //   serial_open: serial port COM9 does not exist
+    //   network_open: failed to connect to localhost:4532
+    // and adds one banner line to stdout on success, which is stripped so
+    // the command's own output stays parseable:
+    //   Opened rig model 3073, 'IC-7300'
+
+    private static readonly string[] Verbosity = ["-vv"];
+
+    private static string StripBanner(string stdout) =>
+        string.Join('\n', stdout.Split('\n')
+            .Where(l => !l.StartsWith("Opened rig model", StringComparison.Ordinal)));
+
     // ── Error classification ──────────────────────────────────────────────
 
     private static RigctlError ClassifyError(int exitCode, string stderr, string stdout)
@@ -125,20 +143,21 @@ public class HamlibRunnerService
         var combined = (stderr + stdout).ToLowerInvariant();
 
         if (combined.Contains("port in use") || combined.Contains("access denied")
-            || combined.Contains("sharing violation"))
+            || combined.Contains("sharing violation") || combined.Contains("already open"))
             return RigctlError.PortInUse;
 
         if (combined.Contains("timeout") || combined.Contains("timed out"))
             return RigctlError.Timeout;
 
         if (combined.Contains("no such device") || combined.Contains("cannot open")
-            || combined.Contains("file not found"))
+            || combined.Contains("file not found") || combined.Contains("does not exist"))
             return RigctlError.PortNotFound;
 
         if (combined.Contains("invalid model") || combined.Contains("unknown rig"))
             return RigctlError.WrongModel;
 
-        if (combined.Contains("connection refused") || combined.Contains("rigctld"))
+        if (combined.Contains("connection refused") || combined.Contains("failed to connect")
+            || combined.Contains("rigctld"))
             return RigctlError.RigctldNotRunning;
 
         if (combined.Contains("no response") || combined.Contains("io_err"))

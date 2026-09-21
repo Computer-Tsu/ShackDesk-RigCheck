@@ -402,4 +402,5 @@ Continuer ?</value></data>
   <data name="Disc_Echo" xml:space="preserve"><value>notre propre trame est revenue — une radio CI-V avec Echo Back activé écoute à {0} bauds ; interrogation de chaque adresse CI-V connue à tour de rôle</value></data>
   <data name="Disc_Summary" xml:space="preserve"><value>Votre radio : {0} sur {1} — {2} bauds, 8N{3} (8 bits de données, sans parité, {3} stop)</value></data>
   <data name="Disc_SummaryRigctld" xml:space="preserve"><value>Votre radio est joignable via rigctld à {0}</value></data>
+  <data name="Diag_PortInUse_Running" xml:space="preserve"><value>En cours d'exécution : {0} — presque certainement le programme qui occupe le port. Fermez-le (ou déconnectez-y le contrôle de la radio) et réessayez</value></data>
 </root>

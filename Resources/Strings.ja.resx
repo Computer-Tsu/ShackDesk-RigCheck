@@ -402,4 +402,5 @@
   <data name="Disc_Echo" xml:space="preserve"><value>自分のフレームがそのまま返ってきました — Echo Back が有効な CI-V 無線機が {0} ボーで受信しています。既知の CI-V アドレスを順に問い合わせます</value></data>
   <data name="Disc_Summary" xml:space="preserve"><value>あなたの無線機: {1} の {0} — {2} ボー、8N{3}（データ 8 ビット、パリティなし、ストップ {3} ビット）</value></data>
   <data name="Disc_SummaryRigctld" xml:space="preserve"><value>あなたの無線機は {0} の rigctld 経由で利用できます</value></data>
+  <data name="Diag_PortInUse_Running" xml:space="preserve"><value>現在実行中: {0} — ほぼ確実にポートを占有しているプログラムです。終了する（またはそのリグ制御を切断する）してから、もう一度お試しください</value></data>
 </root>

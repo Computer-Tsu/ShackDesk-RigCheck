@@ -5,6 +5,22 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
+## [0.6.15] - 2026-09-21
+
+Failures now say why.
+
+### Fixed
+- Hamlib 4.7.1 prints nothing when rigctl fails at its default verbosity, so a port held by
+  WSJT-X, a missing rigctld, and a radio that is off all came out as "an unexpected error".
+  rigctl now runs with `-vv`, its banner line is stripped from the output, and its actual
+  messages ("serial port COM3 is already open", "does not exist", "failed to connect") drive the
+  diagnosis
+- The "port in use" diagnosis names the program that is running right now (WSJT-X, Fldigi,
+  JS8Call, Flrig, rigctld, Winlink Express, VARA) — checked only when that failure occurs
+- The suggested rigctld command uses the name that exists on the PC (`rigctld-wsjtx`) and omits
+  `-s` when the baud is Radio default
+- The Quick preset picker shows the saved radio on startup instead of "Choose your radio…"
+
 ## [0.6.14] - 2026-09-21
 
 Run Tests works against a real radio.

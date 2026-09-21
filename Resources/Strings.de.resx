@@ -402,4 +402,5 @@ Fortfahren?</value></data>
   <data name="Disc_Echo" xml:space="preserve"><value>unser eigener Rahmen kam zurück — ein CI-V-Funkgerät mit eingeschaltetem Echo Back hört mit {0} Baud zu; jede bekannte CI-V-Adresse wird nun der Reihe nach abgefragt</value></data>
   <data name="Disc_Summary" xml:space="preserve"><value>Ihr Funkgerät: {0} an {1} — {2} Baud, 8N{3} (8 Datenbits, keine Parität, {3} Stopp)</value></data>
   <data name="Disc_SummaryRigctld" xml:space="preserve"><value>Ihr Funkgerät ist über rigctld unter {0} erreichbar</value></data>
+  <data name="Diag_PortInUse_Running" xml:space="preserve"><value>Läuft gerade: {0} — mit großer Wahrscheinlichkeit das Programm, das die Schnittstelle belegt. Beenden Sie es (oder trennen Sie dort die Gerätesteuerung) und versuchen Sie es erneut</value></data>
 </root>
