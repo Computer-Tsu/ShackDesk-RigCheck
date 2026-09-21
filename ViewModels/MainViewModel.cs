@@ -1,5 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using RigCheck.Localization;
 using RigCheck.Models;
 using RigCheck.Services;
 using Serilog;
@@ -37,9 +38,12 @@ public partial class MainViewModel : ObservableObject
     public bool IsHamlibAvailable => _hamlib.IsAvailable;
     public bool IsHamlibMissing   => !_hamlib.IsAvailable;
 
-    // Title shown in window chrome
+    // Title shown in window chrome. Alpha and beta builds always show the
+    // expiry date here so it is visible without opening any dialog.
     public string WindowTitle =>
-        $"{BrandingInfo.FullName}  {BrandingInfo.Version}";
+        BuildInfo.ExpiryDate is { } exp
+            ? $"{BrandingInfo.FullName}  {BuildInfo.VersionLabel}  —  {Strings.Format("Expiry_TitleBar", exp.ToString("yyyy-MM-dd"))}"
+            : $"{BrandingInfo.FullName}  {BuildInfo.VersionLabel}";
 
     // ── Constructor ───────────────────────────────────────────────────────
 
@@ -167,6 +171,9 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     private void OpenHelp() => OpenUrl(BrandingInfo.HelpUrl);
 
+    [RelayCommand]
+    private void OpenReleases() => OpenUrl(BrandingInfo.ReleasesUrl);
+
     private static void OpenUrl(string url) =>
         System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
         {
@@ -235,13 +242,32 @@ public partial class MainViewModel : ObservableObject
         RunTestsCommand.NotifyCanExecuteChanged();
     }
 
-    // Status strip shows the single most important thing blocking a test run.
+    // Status strip shows the single most important message. An imminent
+    // expiry outranks everything because nothing else matters once the
+    // build stops running.
     private void UpdateReadinessStatus()
     {
         if (IsRunning) return;
 
-        StatusMessage = !_hamlib.IsAvailable
-            ? "Hamlib not found. Run Tests will be unavailable until Hamlib is installed."
-            : Connection.ReadinessHint;
+        StatusMessage = ExpiryMessage()
+            ?? (!_hamlib.IsAvailable
+                ? "Hamlib not found. Run Tests will be unavailable until Hamlib is installed."
+                : Connection.ReadinessHint);
+    }
+
+    private static string? ExpiryMessage()
+    {
+        if (BuildInfo.ExpiryDate is not { } exp) return null;
+        var date = exp.ToString("yyyy-MM-dd");
+
+        if (BuildInfo.IsExpired)
+            return BuildInfo.IsBeta ? Strings.Format("Expiry_BetaExpired", date) : null;
+
+        if (!BuildInfo.IsExpiringSoon) return null;
+
+        var days = BuildInfo.DaysUntilExpiry ?? 0;
+        return days == 0
+            ? Strings.Format("Expiry_WarningToday", BuildInfo.Channel)
+            : Strings.Format("Expiry_Warning", BuildInfo.Channel, days, date);
     }
 }

@@ -39,6 +39,15 @@
                         </StackPanel>
                     </MenuItem.Header>
                 </MenuItem>
+                <MenuItem Style="{StaticResource SubMenuItemStyle}"
+                          Command="{Binding OpenReleasesCommand}">
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <AccessText Text="{loc:Str Menu_HelpDownload}" />
+                            <TextBlock Style="{StaticResource ExternalLinkIconStyle}" />
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
                 <Separator />
                 <MenuItem x:Name="AboutMenuItem"
                           Style="{StaticResource SubMenuItemStyle}"

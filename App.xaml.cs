@@ -27,12 +27,23 @@ public partial class App : Application
 
         await _host.StartAsync();
 
+        Log.Information("{App} {Version} ({Channel}, built {Built}) starting",
+            BrandingInfo.AppName, BrandingInfo.Version, BuildInfo.Channel, BuildInfo.BuildDate);
+
+        // An expired alpha shows only the expiry notice and exits. Beta builds
+        // keep running past expiry and warn in the status strip instead.
+        if (BuildInfo.IsExpired && BuildInfo.BlocksWhenExpired)
+        {
+            Log.Warning("Alpha build expired on {Expiry}; refusing to start", BuildInfo.ExpiryDate);
+            new ExpiredDialog().ShowDialog();
+            Shutdown();
+            return;
+        }
+
         Resources["Settings"] = _host.Services.GetRequiredService<SettingsService>();
 
         var mainWindow = _host.Services.GetRequiredService<MainWindow>();
         mainWindow.Show();
-
-        Log.Information("{App} {Version} started", BrandingInfo.AppName, BrandingInfo.Version);
     }
 
     protected override async void OnExit(ExitEventArgs e)

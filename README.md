@@ -40,6 +40,27 @@ stop receiving security fixes. .NET 10 is the
 current long-term-support release, supported through
 November 14, 2028.
 
+### Build channels and expiry
+
+RigCheck is published in three channels:
+
+- **Alpha** — built from every change on the
+  `develop` branch. **Alpha builds stop running
+  30 days after they were built.** This keeps
+  testers on current code and steers everyday
+  users toward stable releases. The expiry date
+  is shown in the window title and in Help >
+  About. When an alpha expires, starting it shows
+  a notice with a link to the latest build.
+- **Beta** — tagged pre-releases. Beta builds warn
+  in the status bar 90 days after they were built
+  but keep running.
+- **Stable** — tagged releases. Never expire.
+
+The window title shows the version, channel, and
+expiry date, for example
+`RigCheck by ShackDesk 0.6.2-alpha — expires 2026-10-21`.
+
 ### Hamlib
 
 RigCheck does not include Hamlib. It finds the

@@ -14,6 +14,12 @@
 #   - pull_request                 — build only
 #   - workflow_dispatch (manual)   — build; optionally publish the exe artifact
 #
+# Channel  : develop → alpha (30-day expiry), main → stable. The channel and
+#            the UTC build date are passed to MSBuild and stamped into the
+#            assembly; BuildInfo.cs reads them at runtime.
+#
+# Artifact : RigCheck-{version}-{channel}-{yyyyMMdd}-{sha7}.exe plus .sha256
+#
 # Manual trigger : Actions tab → "Build" → "Run workflow" → select branch
 # ──────────────────────────────────────────────────────────────────────────────
 name: Build
@@ -61,15 +67,36 @@ jobs:
           fetch-depth: 0
 
       - name: Setup .NET ${{ env.DOTNET_VERSION }}
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Determine channel, version, and build date
+        id: meta
+        shell: pwsh
+        run: |
+          $channel = if ('${{ github.ref }}' -eq 'refs/heads/main') { 'stable' } else { 'alpha' }
+          $version = (Select-String -Path '${{ env.PROJECT }}' -Pattern '<Version>([^<]+)</Version>').Matches[0].Groups[1].Value
+          $date    = [DateTime]::UtcNow.ToString('yyyy-MM-dd')
+          $stamp   = [DateTime]::UtcNow.ToString('yyyyMMdd')
+          $sha     = '${{ github.sha }}'.Substring(0, 7)
+          $name    = if ($channel -eq 'stable') { "RigCheck-$version" } else { "RigCheck-$version-$channel-$stamp-$sha" }
+          "channel=$channel"   >> $env:GITHUB_OUTPUT
+          "version=$version"   >> $env:GITHUB_OUTPUT
+          "date=$date"         >> $env:GITHUB_OUTPUT
+          "name=$name"         >> $env:GITHUB_OUTPUT
+          Write-Host "Channel: $channel  Version: $version  Built: $date  Artifact: $name"
 
       - name: Restore NuGet packages
         run: dotnet restore ${{ env.PROJECT }}
 
       - name: Build — Release
-        run: dotnet build ${{ env.PROJECT }} --configuration Release --no-restore
+        run: >
+          dotnet build ${{ env.PROJECT }}
+          --configuration Release
+          --no-restore
+          -p:Channel=${{ steps.meta.outputs.channel }}
+          -p:BuildDateUtc=${{ steps.meta.outputs.date }}
 
       - name: Publish — single self-contained exe
         if: ${{ github.event_name != 'pull_request' && (github.event_name != 'workflow_dispatch' || inputs.publish_artifact) }}
@@ -81,21 +108,25 @@ jobs:
           --no-restore
           -p:PublishSingleFile=true
           -p:IncludeNativeLibrariesForSelfExtract=true
+          -p:Channel=${{ steps.meta.outputs.channel }}
+          -p:BuildDateUtc=${{ steps.meta.outputs.date }}
           --output ./publish
 
-      - name: Compute SHA-256
+      - name: Name the exe and compute SHA-256
         if: ${{ github.event_name != 'pull_request' && (github.event_name != 'workflow_dispatch' || inputs.publish_artifact) }}
         shell: pwsh
         run: |
-          $hash = (Get-FileHash -Algorithm SHA256 './publish/${{ env.APP_EXE }}').Hash.ToLower()
-          $hash | Out-File -FilePath './publish/${{ env.APP_EXE }}.sha256' -NoNewline
+          $name = '${{ steps.meta.outputs.name }}'
+          Rename-Item './publish/${{ env.APP_EXE }}' "$name.exe"
+          $hash = (Get-FileHash -Algorithm SHA256 "./publish/$name.exe").Hash.ToLower()
+          "$hash  $name.exe" | Out-File -FilePath "./publish/$name.exe.sha256" -NoNewline
           Write-Host "SHA-256: $hash"
 
       - name: Upload exe artifact
         if: ${{ github.event_name != 'pull_request' && (github.event_name != 'workflow_dispatch' || inputs.publish_artifact) }}
         uses: actions/upload-artifact@v7
         with:
-          name: RigCheck-${{ github.sha }}
+          name: ${{ steps.meta.outputs.name }}
           path: |
-            ./publish/${{ env.APP_EXE }}
-            ./publish/${{ env.APP_EXE }}.sha256
+            ./publish/${{ steps.meta.outputs.name }}.exe
+            ./publish/${{ steps.meta.outputs.name }}.exe.sha256

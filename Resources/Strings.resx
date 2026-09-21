@@ -81,6 +81,51 @@
     <comment>Link that opens the GitHub repository in a browser.</comment>
   </data>
 
+  <data name="About_Channel" xml:space="preserve">
+    <value>{0} build, compiled {1}</value>
+    <comment>{0} is the channel (alpha, beta, stable); {1} is a date like 2026-09-21.</comment>
+  </data>
+  <data name="About_Expires" xml:space="preserve">
+    <value>This {0} build expires on {1}.</value>
+    <comment>{0} is the channel; {1} is a date like 2026-10-21.</comment>
+  </data>
+
+  <!-- ── Build expiry ─────────────────────────────────────────────── -->
+  <data name="Expiry_TitleBar" xml:space="preserve">
+    <value>expires {0}</value>
+    <comment>Appended to the window title on alpha and beta builds. {0} is a date.</comment>
+  </data>
+  <data name="Expiry_Warning" xml:space="preserve">
+    <value>This {0} build expires in {1} day(s), on {2}. Download the current build from the Help menu.</value>
+    <comment>Status strip message in the final days before expiry. {0} channel, {1} number of days, {2} date.</comment>
+  </data>
+  <data name="Expiry_WarningToday" xml:space="preserve">
+    <value>This {0} build expires today. Download the current build from the Help menu.</value>
+    <comment>Status strip message on the last day. {0} is the channel.</comment>
+  </data>
+  <data name="Expiry_BetaExpired" xml:space="preserve">
+    <value>This beta build expired on {0}. It still runs, but a newer build is available.</value>
+    <comment>Status strip message on an expired beta. {0} is a date.</comment>
+  </data>
+  <data name="Expired_Title" xml:space="preserve">
+    <value>{0} build expired</value>
+    <comment>Window title of the dialog shown when an expired alpha is started. {0} is the app name.</comment>
+  </data>
+  <data name="Expired_Message" xml:space="preserve">
+    <value>This alpha build of {0} expired on {1}.
+
+Alpha builds stop running after {2} days so that testers always use current code. Please download the latest build.</value>
+    <comment>{0} app name, {1} date, {2} number of days.</comment>
+  </data>
+  <data name="Expired_Download" xml:space="preserve">
+    <value>Download latest build</value>
+    <comment>Button. Opens the releases page in a web browser.</comment>
+  </data>
+  <data name="Menu_HelpDownload" xml:space="preserve">
+    <value>_Download latest build</value>
+    <comment>Help menu item. Opens the releases page in a web browser.</comment>
+  </data>
+
   <!-- ── Connection readiness ─────────────────────────────────────── -->
   <data name="Ready_ChooseRadio" xml:space="preserve">
     <value>Choose your radio from the Quick preset list.</value>

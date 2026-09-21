@@ -22,12 +22,25 @@ public static class BrandingInfo
     public const string Copyright  = "© 2025–2026 My Computer Guru LLC";
 
     // ── URLs ─────────────────────────────────────────────────────
-    public const string SuiteUrl   = "https://shackdesk.com";
-    public const string AppUrl     = "https://shackdesk.com/rigcheck";
-    public const string HelpUrl    = "https://shackdesk.com/faq";
-    public const string GitHubOrg  = "https://github.com/Computer-Tsu";
-    public const string GitHubRepo = "https://github.com/Computer-Tsu/ShackDesk-RigCheck";
-    public const string IssueUrl   = "https://github.com/Computer-Tsu/ShackDesk-RigCheck/issues";
+    public const string SuiteUrl    = "https://shackdesk.com";
+    public const string AppUrl      = "https://shackdesk.com/rigcheck/";
+    // Product page until a RigCheck-specific FAQ page exists on the site
+    public const string HelpUrl     = "https://shackdesk.com/rigcheck/";
+    public const string GitHubOrg   = "https://github.com/Computer-Tsu";
+    public const string GitHubRepo  = "https://github.com/Computer-Tsu/ShackDesk-RigCheck";
+    public const string ReleasesUrl = "https://github.com/Computer-Tsu/ShackDesk-RigCheck/releases";
+    public const string IssueUrl    = "https://github.com/Computer-Tsu/ShackDesk-RigCheck/issues";
+
+    // ── Build channels and expiry ─────────────────────────────────
+    // Alpha builds stop running after AlphaExpiryDays so testers stay on
+    // current builds and end users are steered away from alphas. Beta
+    // builds warn but keep working. Stable builds never expire.
+    public const string ChannelAlpha     = "alpha";
+    public const string ChannelBeta      = "beta";
+    public const string ChannelStable    = "stable";
+    public const int    AlphaExpiryDays  = 30;
+    public const int    BetaExpiryDays   = 90;
+    public const int    ExpiryWarnDays   = 9;   // warn from day 21 of a 30-day alpha
 
     // ── Hamlib / rigctl resources ─────────────────────────────────
     public const string HamlibDownloadUrl  = "https://github.com/Hamlib/Hamlib/releases";

@@ -16,9 +16,17 @@ public partial class AboutDialog : Window
         InitializeComponent();
 
         Title              = Strings.Format("About_Title", BrandingInfo.AppName);
-        VersionText.Text   = Strings.Format("About_Version", BrandingInfo.Version);
+        VersionText.Text   = Strings.Format("About_Version", BuildInfo.VersionLabel);
+        ChannelText.Text   = Strings.Format("About_Channel", BuildInfo.Channel,
+                                            BuildInfo.BuildDate?.ToString("yyyy-MM-dd") ?? "?");
         DeveloperText.Text = Strings.Format("About_DevelopedBy", BrandingInfo.Developer);
         LicenseText.Text   = Strings.Format("About_License", BrandingInfo.License);
+
+        if (BuildInfo.ExpiryDate is { } exp)
+        {
+            ExpiryText.Text       = Strings.Format("About_Expires", BuildInfo.Channel, exp.ToString("yyyy-MM-dd"));
+            ExpiryText.Visibility = Visibility.Visible;
+        }
     }
 
     // Each link button carries its URL in Tag so one handler serves them all.

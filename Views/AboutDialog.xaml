@@ -32,6 +32,9 @@
         </DockPanel>
 
         <TextBlock x:Name="VersionText" Margin="0,0,0,2" />
+        <TextBlock x:Name="ChannelText" Foreground="{StaticResource BrushMuted}" />
+        <TextBlock x:Name="ExpiryText" Foreground="{StaticResource BrushWarn}" Margin="0,4,0,8"
+                   TextWrapping="Wrap" Visibility="Collapsed" />
         <TextBlock x:Name="DeveloperText" Foreground="{StaticResource BrushMuted}" />
         <TextBlock Text="{x:Static app:BrandingInfo.Company}"
                    Foreground="{StaticResource BrushMuted}" />

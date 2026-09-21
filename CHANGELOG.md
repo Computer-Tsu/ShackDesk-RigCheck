@@ -5,6 +5,23 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
+## [Unreleased]
+
+### Added
+- Build channel and date stamped into the assembly at compile time; alpha builds expire
+  30 days after they are built and refuse to start afterwards, beta builds warn after 90 days,
+  stable builds never expire
+- Expiry date shown in the window title, in Help > About, and in the status strip during
+  the final nine days
+- Help > Download latest build (opens the releases page)
+- Alpha/beta/stable channels and expiry documented in the README
+
+### Changed
+- Help > Contents opens the RigCheck product page instead of the site's general FAQ
+- CI artifacts are named `RigCheck-{version}-{channel}-{date}-{sha}.exe` and the SHA-256 file
+  lists the filename it applies to
+- `actions/setup-dotnet` updated to v5 (Node 20 runtime deprecation)
+
 ## [0.6.2] - 2026-09-21
 
 First launch feedback and the move to .NET 10.

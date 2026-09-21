@@ -61,6 +61,27 @@
     <WarningsAsErrors>CS8600;CS8601;CS8602;CS8603;CS8604</WarningsAsErrors>
   </PropertyGroup>
 
+  <!--
+    Build channel and date, read at runtime by BuildInfo.cs.
+    CI passes these on the command line:  -p:Channel=alpha -p:BuildDateUtc=2026-09-21
+    A local build gets channel "dev" and today's date, and never expires.
+  -->
+  <PropertyGroup>
+    <Channel Condition="'$(Channel)' == ''">dev</Channel>
+    <BuildDateUtc Condition="'$(BuildDateUtc)' == ''">$([System.DateTime]::UtcNow.ToString('yyyy-MM-dd'))</BuildDateUtc>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>Channel</_Parameter1>
+      <_Parameter2>$(Channel)</_Parameter2>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>BuildDateUtc</_Parameter1>
+      <_Parameter2>$(BuildDateUtc)</_Parameter2>
+    </AssemblyAttribute>
+  </ItemGroup>
+
   <ItemGroup>
     <!-- Serilog structured logging — mirrors PortPane -->
     <PackageReference Include="Serilog" Version="4.*" />
