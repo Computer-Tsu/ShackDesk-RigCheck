@@ -21,8 +21,8 @@
 #            the UTC build date are passed to MSBuild and stamped into the
 #            assembly; BuildInfo.cs reads them at runtime.
 #
-# Artifact : RigCheck-{version}-{channel}-{yyyyMMdd}-{sha7}.exe plus .sha256
-# Release  : tag alpha/{yyyyMMdd}-{sha7} (same stamp as the filename), marked
+# Artifact : RigCheck-{version}-{channel}-{yyyyMMdd}-{HHmm}-{sha7}.exe plus .sha256
+# Release  : tag alpha/{yyyyMMdd}-{HHmm}-{sha7} (same stamp as the filename), marked
 #            pre-release. Alpha releases
 #            older than 30 days are deleted after each new one is published,
 #            since their builds have expired anyway.
@@ -113,7 +113,9 @@ jobs:
           $channel = if ($branch -eq 'main') { 'stable' } else { 'alpha' }
           $version = (Select-String -Path '${{ env.PROJECT }}' -Pattern '<Version>([^<]+)</Version>').Matches[0].Groups[1].Value
           $date    = [DateTime]::UtcNow.ToString('yyyy-MM-dd')
-          $stamp   = [DateTime]::UtcNow.ToString('yyyyMMdd')
+          # Date AND time: GitHub sorts the release list by tag name, so several
+          # alphas on one day must carry the time to stay in order.
+          $stamp   = [DateTime]::UtcNow.ToString('yyyyMMdd-HHmm')
           $name    = if ($channel -eq 'stable') { "RigCheck-$version" } else { "RigCheck-$version-$channel-$stamp-$sha7" }
 
           $event   = '${{ github.event_name }}'
