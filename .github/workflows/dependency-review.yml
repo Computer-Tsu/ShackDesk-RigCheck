@@ -1,0 +1,35 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# RigCheck by ShackDesk
+# Project : https://github.com/Computer-Tsu/ShackDesk-RigCheck
+# Author  : Mark McDow (N4TEK) — My Computer Guru LLC
+# License : GPLv3 (see LICENSE)
+#
+# Workflow : Dependency Review
+# Purpose  : Blocks a pull request that introduces a dependency with a known
+#            vulnerability or an incompatible license. Runs only on PRs
+#            because it compares the PR's dependency set against the base.
+# ──────────────────────────────────────────────────────────────────────────────
+name: Dependency Review
+
+on:
+  pull_request:
+    branches: [ develop, main ]
+
+permissions:
+  contents: read
+
+jobs:
+  review:
+    name: Review dependency changes
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Dependency review
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: moderate
+          # GPLv3 project: block source-available licenses that cannot be combined with it
+          deny-licenses: 'SSPL-1.0, BUSL-1.1'
