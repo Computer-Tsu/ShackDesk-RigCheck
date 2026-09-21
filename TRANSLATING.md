@@ -16,11 +16,11 @@ starting from nothing, and it is the most useful thing you can do.
 <!-- coverage:start -->
 | Language | File | Coverage | Status |
 | --- | --- | --- | --- |
-| English (source) | `Strings.resx` | 100% (362 of 362) | Source |
-| German (`de`) | `Strings.de.resx` | 100% (362 of 362) | Machine translated — review wanted |
-| Spanish (`es`) | `Strings.es.resx` | 100% (362 of 362) | Machine translated — review wanted |
-| French (`fr`) | `Strings.fr.resx` | 100% (362 of 362) | Machine translated — review wanted |
-| Japanese (`ja`) | `Strings.ja.resx` | 100% (362 of 362) | Machine translated — review wanted |
+| English (source) | `Strings.resx` | 100% (365 of 365) | Source |
+| German (`de`) | `Strings.de.resx` | 100% (365 of 365) | Machine translated — review wanted |
+| Spanish (`es`) | `Strings.es.resx` | 100% (365 of 365) | Machine translated — review wanted |
+| French (`fr`) | `Strings.fr.resx` | 100% (365 of 365) | Machine translated — review wanted |
+| Japanese (`ja`) | `Strings.ja.resx` | 100% (365 of 365) | Machine translated — review wanted |
 <!-- coverage:end -->
 
 ---
