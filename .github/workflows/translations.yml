@@ -79,7 +79,8 @@ jobs:
             $t = Read-Resx $file.FullName
             $translated = 0
             foreach ($k in $sourceKeys) {
-              if ($t.ContainsKey($k) -and $t[$k].Trim() -ne '' -and $t[$k] -ne $source[$k]) { $translated++ }
+              # Present and non-empty counts; some terms (CAT, PTT, OK) are correctly identical to English
+              if ($t.ContainsKey($k) -and $t[$k].Trim() -ne '') { $translated++ }
             }
             $pct        = if ($total -gt 0) { [math]::Round(100.0 * $translated / $total) } else { 0 }
             $status     = Read-Meta $file.FullName 'Meta_Status'

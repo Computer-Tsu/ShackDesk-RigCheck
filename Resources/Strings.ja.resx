@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    RigCheck — 日本語 (ja)
+    機械翻訳です。日本語を母語とするアマチュア無線家による校正をお願いします。
+    Meta_Translator にお名前を記入し、Meta_Status を "reviewed" に変更してください。TRANSLATING.md を参照。
+    <value> と </value> の間の文だけを変更し、{0}、{1} はそのまま残してください。
+  -->
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+
+  <data name="Meta_Status" xml:space="preserve"><value>machine-translated</value></data>
+  <data name="Meta_Translator" xml:space="preserve"><value></value></data>
+  <data name="About_Translation" xml:space="preserve"><value>{0}翻訳: {1}</value></data>
+
+  <data name="Menu_Settings" xml:space="preserve"><value>設定(_S)</value></data>
+  <data name="Menu_Help" xml:space="preserve"><value>ヘルプ(_H)</value></data>
+  <data name="Menu_HelpContents" xml:space="preserve"><value>目次(_C)</value></data>
+  <data name="Menu_HelpAbout" xml:space="preserve"><value>{0} について(_A)</value></data>
+  <data name="Menu_HelpDownload" xml:space="preserve"><value>最新ビルドをダウンロード(_D)</value></data>
+  <data name="Menu_HelpViewData" xml:space="preserve"><value>収集データを表示(_V)</value></data>
+  <data name="Common_Close" xml:space="preserve"><value>閉じる</value></data>
+  <data name="Common_Continue" xml:space="preserve"><value>続行</value></data>
+  <data name="Common_OK" xml:space="preserve"><value>OK</value></data>
+  <data name="Common_Cancel" xml:space="preserve"><value>キャンセル</value></data>
+  <data name="Common_Copy" xml:space="preserve"><value>コピー</value></data>
+
+  <data name="Settings_Title" xml:space="preserve"><value>設定</value></data>
+  <data name="Settings_ComingSoon" xml:space="preserve"><value>設定は今後のバージョンでここに表示されます。</value></data>
+  <data name="Settings_TelemetryHeading" xml:space="preserve"><value>匿名診断データ</value></data>
+  <data name="Settings_ViewData" xml:space="preserve"><value>収集データを表示…</value></data>
+  <data name="Settings_LoggingHeading" xml:space="preserve"><value>ログ</value></data>
+  <data name="Settings_LogLevel" xml:space="preserve"><value>ログファイルへの書き込み:</value></data>
+  <data name="LogLevel_Off" xml:space="preserve"><value>オフ</value></data>
+  <data name="LogLevel_Error" xml:space="preserve"><value>エラーのみ</value></data>
+  <data name="LogLevel_Information" xml:space="preserve"><value>標準</value></data>
+  <data name="LogLevel_Debug" xml:space="preserve"><value>詳細（テストビルドに推奨）</value></data>
+  <data name="Settings_LogPath" xml:space="preserve"><value>ログファイルの保存先:</value></data>
+  <data name="Settings_OpenLogFolder" xml:space="preserve"><value>ログフォルダーを開く</value></data>
+  <data name="Settings_DeleteLogs" xml:space="preserve"><value>ログファイルを削除</value></data>
+  <data name="Settings_DeleteLogsConfirm" xml:space="preserve"><value>{0} のログファイルをすべて削除しますか？ この操作は元に戻せません。</value></data>
+  <data name="Settings_DeleteLogsDone" xml:space="preserve"><value>{0} 個のログファイルを削除しました。</value></data>
+  <data name="Settings_SupportIdHeading" xml:space="preserve"><value>サポート ID</value></data>
+  <data name="Settings_SupportIdHint" xml:space="preserve"><value>初回起動時に作成されたランダムな識別子です。診断レポートで送信される唯一の識別子で、サポート依頼とレポートを照合するために使われます。リセットすると過去のレポートとの関連が切れ、ローカルのコピーも削除されます。</value></data>
+  <data name="Settings_ResetId" xml:space="preserve"><value>サポート ID をリセット…</value></data>
+  <data name="Settings_ResetIdConfirm" xml:space="preserve"><value>新しいサポート ID を作成しますか？ 過去の診断レポートはこのインストールと照合できなくなり、ローカルのコピーは削除されます。</value></data>
+
+  <data name="About_Title" xml:space="preserve"><value>{0} について</value></data>
+  <data name="About_Version" xml:space="preserve"><value>バージョン {0}</value></data>
+  <data name="About_DevelopedBy" xml:space="preserve"><value>開発: {0}</value></data>
+  <data name="About_License" xml:space="preserve"><value>ライセンス: {0}</value></data>
+  <data name="About_Website" xml:space="preserve"><value>ウェブサイト</value></data>
+  <data name="About_SourceCode" xml:space="preserve"><value>ソースコード</value></data>
+  <data name="About_Channel" xml:space="preserve"><value>{0} ビルド、{1} 作成</value></data>
+  <data name="About_Expires" xml:space="preserve"><value>この {0} ビルドは {1} に期限切れになります。</value></data>
+  <data name="About_SupportId" xml:space="preserve"><value>サポート ID: {0}</value></data>
+  <data name="About_SupportIdHint" xml:space="preserve"><value>診断レポートを有効にしている場合、サポート依頼にこの ID を記載するとレポートと照合できます。</value></data>
+
+  <data name="Expiry_TitleBar" xml:space="preserve"><value>期限 {0}</value></data>
+  <data name="Expiry_Warning" xml:space="preserve"><value>この {0} ビルドはあと {1} 日、{2} に期限切れになります。ヘルプメニューから最新ビルドをダウンロードしてください。</value></data>
+  <data name="Expiry_WarningToday" xml:space="preserve"><value>この {0} ビルドは本日期限切れになります。ヘルプメニューから最新ビルドをダウンロードしてください。</value></data>
+  <data name="Expiry_BetaExpired" xml:space="preserve"><value>このベータビルドは {0} に期限切れになりました。動作は継続しますが、新しいビルドが利用できます。</value></data>
+  <data name="Expired_Title" xml:space="preserve"><value>{0} ビルドの期限切れ</value></data>
+  <data name="Expired_Message" xml:space="preserve"><value>この {0} のアルファビルドは {1} に期限切れになりました。
+
+アルファビルドは、テスターが常に最新のコードを使うよう {2} 日で動作を停止します。最新ビルドをダウンロードしてください。</value></data>
+  <data name="Expired_Download" xml:space="preserve"><value>最新ビルドをダウンロード</value></data>
+
+  <data name="FirstRun_Title" xml:space="preserve"><value>{0} へようこそ</value></data>
+  <data name="FirstRun_Intro" xml:space="preserve"><value>{0} は匿名の診断レポートを送信して、無線機とケーブルのデータベースを皆で改善するのに役立てることができます。</value></data>
+  <data name="Telemetry_Checkbox" xml:space="preserve"><value>匿名の診断レポートを送信する</value></data>
+  <data name="Telemetry_WhatIsSent" xml:space="preserve"><value>送信内容: {0} と Windows のバージョン、Hamlib が見つかったかどうか、および各テスト実行後の無線機モデル、シリアル設定、USB ケーブルの識別子、各テストの合否。</value></data>
+  <data name="Telemetry_WhatIsNotSent" xml:space="preserve"><value>送信しないもの: コールサイン、コンピューター名、ファイルパス、シリアル番号、IP アドレス。唯一の識別子は初回起動時に作成されたランダムな ID です。</value></data>
+  <data name="Telemetry_ChangeLater" xml:space="preserve"><value>この設定は「設定」でいつでも変更でき、すべてのレポートは「ヘルプ」から確認できます。</value></data>
+  <data name="Telemetry_PrivacyLink" xml:space="preserve"><value>プライバシーポリシー</value></data>
+
+  <data name="DataViewer_Title" xml:space="preserve"><value>収集データ</value></data>
+  <data name="DataViewer_Intro" xml:space="preserve"><value>この {0} が送信または送信待ちにしたすべての診断レポートを、新しい順に表示しています。「pending」と表示されたレポートはまだ送信できておらず、次回起動時に再試行されます。</value></data>
+  <data name="DataViewer_Empty" xml:space="preserve"><value>レポートはまだ作成されていません。</value></data>
+  <data name="DataViewer_Clear" xml:space="preserve"><value>ローカルのコピーを削除</value></data>
+
+  <data name="Crash_Title" xml:space="preserve"><value>{0} を終了する必要があります</value></data>
+  <data name="Crash_Message" xml:space="preserve"><value>{0} で予期しないエラーが発生したため終了します。
+
+詳細はログに記録されました。繰り返し発生する場合は、エクスポートしたログを添えて報告してください。</value></data>
+
+  <data name="Ready_ChooseRadio" xml:space="preserve"><value>クイックプリセットの一覧から無線機を選んでください。</value></data>
+  <data name="Ready_SelectPort" xml:space="preserve"><value>無線機が接続されている COM ポートを選んでください。</value></data>
+  <data name="Placeholder_ChooseRadio" xml:space="preserve"><value>無線機を選択…</value></data>
+  <data name="Placeholder_SelectPort" xml:space="preserve"><value>ポートを選択…</value></data>
+
+  <data name="Main_Connection" xml:space="preserve"><value>接続</value></data>
+  <data name="Main_QuickPreset" xml:space="preserve"><value>クイックプリセット:</value></data>
+  <data name="Main_DirectSerial" xml:space="preserve"><value>直接シリアル（COM ポート）</value></data>
+  <data name="Main_Rigctld" xml:space="preserve"><value>rigctld（ネットワーク）</value></data>
+  <data name="Main_Port" xml:space="preserve"><value>ポート:</value></data>
+  <data name="Main_Baud" xml:space="preserve"><value>ボーレート:</value></data>
+  <data name="Main_Host" xml:space="preserve"><value>ホスト:</value></data>
+  <data name="Main_RefreshPorts" xml:space="preserve"><value>ポートを更新</value></data>
+  <data name="Main_AdvancedSerial" xml:space="preserve"><value>シリアル詳細設定</value></data>
+  <data name="Main_Ptt" xml:space="preserve"><value>PTT:</value></data>
+  <data name="Main_DataBits" xml:space="preserve"><value>データ:</value></data>
+  <data name="Main_Parity" xml:space="preserve"><value>パリティ:</value></data>
+  <data name="Main_StopBits" xml:space="preserve"><value>ストップ:</value></data>
+  <data name="Main_FlowControl" xml:space="preserve"><value>フロー:</value></data>
+  <data name="Main_Results" xml:space="preserve"><value>診断結果</value></data>
+  <data name="Main_CopyCommand" xml:space="preserve"><value>コピー</value></data>
+  <data name="Main_CopyCommandTip" xml:space="preserve"><value>コマンドをクリップボードにコピー — コマンドプロンプトに貼り付けて自分で実行できます</value></data>
+  <data name="Main_CommandTip" xml:space="preserve"><value>このテストで使用した rigctl コマンド</value></data>
+  <data name="Main_RawConsole" xml:space="preserve"><value>詳細 — Hamlib コマンドを直接入力</value></data>
+  <data name="Main_ConsoleTip" xml:space="preserve"><value>rigctl のサブコマンドを入力（例: f, m, t, v, l STRENGTH）</value></data>
+  <data name="Main_Clear" xml:space="preserve"><value>クリア</value></data>
+  <data name="Main_Send" xml:space="preserve"><value>送信</value></data>
+  <data name="Main_RunTests" xml:space="preserve"><value>▶  テストを実行</value></data>
+  <data name="Main_Advanced" xml:space="preserve"><value>詳細 ▾</value></data>
+  <data name="Main_ExportLog" xml:space="preserve"><value>ログをエクスポート</value></data>
+  <data name="Main_ExportLogTip" xml:space="preserve"><value>結果をテキストファイルに保存して、メールや掲示板で助けを求めるときに使えます</value></data>
+  <data name="Main_CopyResults" xml:space="preserve"><value>結果をコピー</value></data>
+  <data name="Main_CopyResultsTip" xml:space="preserve"><value>すべての結果をプレーンテキストでクリップボードにコピー</value></data>
+  <data name="Main_HowToInstall" xml:space="preserve"><value>インストール方法</value></data>
+  <data name="Main_ScaleDown" xml:space="preserve"><value>縮小</value></data>
+  <data name="Main_ScaleUp" xml:space="preserve"><value>拡大</value></data>
+  <data name="Main_ScaleReset" xml:space="preserve"><value>表示倍率をリセット</value></data>
+  <data name="Main_OnTop" xml:space="preserve"><value>常に手前に表示</value></data>
+
+  <data name="Status_HamlibFound" xml:space="preserve"><value>Hamlib を {0} 経由で検出</value></data>
+  <data name="Status_HamlibMissing" xml:space="preserve"><value>Hamlib が見つかりません — WSJT-X をインストールするか Hamlib をダウンロードしてください</value></data>
+  <data name="Status_HamlibMissingLong" xml:space="preserve"><value>Hamlib が見つかりません。Hamlib をインストールするまで「テストを実行」は使用できません。</value></data>
+  <data name="Status_Running" xml:space="preserve"><value>テストを実行中…</value></data>
+  <data name="Status_AllPassed" xml:space="preserve"><value>{0} 件のテストがすべて合格しました。</value></data>
+  <data name="Status_SomeFailed" xml:space="preserve"><value>{0} 件のテストが失敗しました — 詳細は結果を確認してください。</value></data>
+  <data name="Status_RunFailed" xml:space="preserve"><value>テストの実行が予期せず失敗しました。</value></data>
+  <data name="Status_LogSaved" xml:space="preserve"><value>ログを {0} に保存しました</value></data>
+  <data name="Status_LogFailed" xml:space="preserve"><value>ログのエクスポートに失敗しました — アプリケーションログを確認してください。</value></data>
+  <data name="Status_Copied" xml:space="preserve"><value>結果をクリップボードにコピーしました。</value></data>
+  <data name="Confirm_SetFreq_Title" xml:space="preserve"><value>周波数テストの確認</value></data>
+  <data name="Confirm_SetFreq_Message" xml:space="preserve"><value>周波数設定テストは、無線機の VFO 周波数を一時的に 1 kHz 変更してから元に戻します。
+
+続行しますか？</value></data>
+  <data name="Export_NoResults_Title" xml:space="preserve"><value>結果がありません</value></data>
+  <data name="Export_NoResults_Message" xml:space="preserve"><value>エクスポートする前にテストを実行してください。</value></data>
+  <data name="Export_DialogTitle" xml:space="preserve"><value>{0} のログをエクスポート</value></data>
+  <data name="Export_Filter" xml:space="preserve"><value>テキストファイル (*.txt)|*.txt|すべてのファイル (*.*)|*.*</value></data>
+  <data name="Summary_AllPassed" xml:space="preserve"><value>✓ {0} 件のテストがすべて合格</value></data>
+  <data name="Summary_Mixed" xml:space="preserve"><value>失敗 {0} · 合格 {1} · 警告 {2}</value></data>
+  <data name="Cable_Detected" xml:space="preserve"><value>検出: {0}</value></data>
+
+  <data name="Test_OpenConnection" xml:space="preserve"><value>接続を開く</value></data>
+  <data name="Test_GetFrequency" xml:space="preserve"><value>周波数を取得</value></data>
+  <data name="Test_GetMode" xml:space="preserve"><value>モードを取得</value></data>
+  <data name="Test_GetPtt" xml:space="preserve"><value>PTT 状態を取得</value></data>
+  <data name="Test_GetSmeter" xml:space="preserve"><value>S メーターを取得</value></data>
+  <data name="Test_GetVfo" xml:space="preserve"><value>VFO を取得</value></data>
+  <data name="Test_SetFrequency" xml:space="preserve"><value>周波数を設定して確認</value></data>
+  <data name="Test_Cancelled" xml:space="preserve"><value>キャンセル</value></data>
+  <data name="Test_SkippedNoConnection" xml:space="preserve"><value>スキップ — 接続を確立できませんでした</value></data>
+
+  <data name="Msg_Connected" xml:space="preserve"><value>{1} で {0} に接続しました</value></data>
+  <data name="Msg_ConnectFailed" xml:space="preserve"><value>無線機に接続できませんでした</value></data>
+  <data name="Msg_Frequency" xml:space="preserve"><value>VFO A の周波数: {0} MHz</value></data>
+  <data name="Msg_FrequencyUnparsed" xml:space="preserve"><value>無線機は応答しましたが、周波数を解釈できませんでした: {0}</value></data>
+  <data name="Msg_FrequencyNoResponse" xml:space="preserve"><value>無線機が周波数の問い合わせに応答しませんでした</value></data>
+  <data name="Msg_Mode" xml:space="preserve"><value>現在のモード: {0}、帯域幅: {1} Hz</value></data>
+  <data name="Msg_ModeNoResponse" xml:space="preserve"><value>無線機がモードの問い合わせに応答しませんでした</value></data>
+  <data name="Msg_PttOn" xml:space="preserve"><value>PTT オン — 送信機が送信中です</value></data>
+  <data name="Msg_PttOff" xml:space="preserve"><value>PTT オフ（送信していません）</value></data>
+  <data name="Msg_PttNoResponse" xml:space="preserve"><value>無線機が PTT の問い合わせに応答しませんでした</value></data>
+  <data name="Msg_Smeter" xml:space="preserve"><value>信号強度: {0}（{1} dBm）</value></data>
+  <data name="Msg_SmeterUnparsed" xml:space="preserve"><value>S メーターは応答しましたが、値を解釈できませんでした: {0}</value></data>
+  <data name="Msg_SmeterNoResponse" xml:space="preserve"><value>無線機が S メーターの問い合わせに応答しませんでした（対応していない機種もあります）</value></data>
+  <data name="Msg_Vfo" xml:space="preserve"><value>使用中の VFO: {0}</value></data>
+  <data name="Msg_VfoNoResponse" xml:space="preserve"><value>無線機が VFO の問い合わせに応答しませんでした</value></data>
+  <data name="Msg_SetFreqReadFailed" xml:space="preserve"><value>設定テストの前に現在の周波数を読み取れませんでした</value></data>
+  <data name="Msg_SetFreqFailed" xml:space="preserve"><value>周波数を設定できませんでした</value></data>
+  <data name="Msg_SetFreqVerified" xml:space="preserve"><value>周波数設定を確認 — {0} MHz に設定し、{1} MHz を読み戻しました。元の周波数に戻しました。</value></data>
+  <data name="Msg_SetFreqMismatch" xml:space="preserve"><value>周波数は設定されましたが、読み戻した値が正確に一致しませんでした</value></data>
+
+  <data name="Diag_BaudDefault" xml:space="preserve"><value>無線機の既定値</value></data>
+  <data name="Diag_HamlibNotFound_Summary" xml:space="preserve"><value>Hamlib（rigctl.exe）がインストールされていないか、見つかりませんでした。</value></data>
+  <data name="Diag_HamlibNotFound_1" xml:space="preserve"><value>WSJT-X をインストールしてください — Hamlib が自動的に含まれます。</value></data>
+  <data name="Diag_HamlibNotFound_2" xml:space="preserve"><value>または hamlib.github.io から Windows 版 Hamlib をダウンロードしてください。</value></data>
+  <data name="Diag_HamlibNotFound_3" xml:space="preserve"><value>インストール後、新しいファイルを検出できるよう {0} を再起動してください。</value></data>
+  <data name="Diag_PortInUse_Summary" xml:space="preserve"><value>{0} は既に別のプログラムが開いています。</value></data>
+  <data name="Diag_PortInUse_1" xml:space="preserve"><value>WSJT-X、Fldigi、JS8Call、Winlink のいずれかが実行中ではありませんか？</value></data>
+  <data name="Diag_PortInUse_2" xml:space="preserve"><value>そのプログラムを終了してから再試行してください。</value></data>
+  <data name="Diag_PortInUse_3" xml:space="preserve"><value>送信していないときでもポートを開いたままにするプログラムがあります。</value></data>
+  <data name="Diag_PortInUse_4" xml:space="preserve"><value>WSJT-X の場合: ファイル → 設定 → 無線機 — ここでテストする前にリグ制御を切断してください。</value></data>
+  <data name="Diag_PortNotFound_Summary" xml:space="preserve"><value>{0} はこのコンピューターに見つかりませんでした。</value></data>
+  <data name="Diag_PortNotFound_1" xml:space="preserve"><value>USB シリアルケーブルは接続されていますか？</value></data>
+  <data name="Diag_PortNotFound_2" xml:space="preserve"><value>デバイスマネージャーで Windows が割り当てた COM ポートを確認してください。</value></data>
+  <data name="Diag_PortNotFound_3" xml:space="preserve"><value>ポート番号が変わった可能性があります — 別の COM ポート番号を試してください。</value></data>
+  <data name="Diag_PortNotFound_4" xml:space="preserve"><value>ドライバーのインストールが必要な無線機もあります（例: Icom IC-7300 は Silicon Labs CP210x を使用）。</value></data>
+  <data name="Diag_Timeout_Summary" xml:space="preserve"><value>無線機が制限時間内に応答しませんでした。</value></data>
+  <data name="Diag_Timeout_1" xml:space="preserve"><value>無線機の電源は入っていますか？</value></data>
+  <data name="Diag_Timeout_2" xml:space="preserve"><value>ボーレートは正しいですか？ 無線機の取扱説明書に CAT のボーレートが記載されています。現在の設定: {0}。</value></data>
+  <data name="Diag_Timeout_3" xml:space="preserve"><value>CAT / CI-V / RS-232 ケーブルは無線機の正しい端子に接続されていますか？</value></data>
+  <data name="Diag_Timeout_4" xml:space="preserve"><value>無線機のメニューで CAT 制御を有効にする必要はありませんか？ 取扱説明書で「CAT」「CI-V」「RS-232」の設定を確認してください。</value></data>
+  <data name="Diag_Timeout_5" xml:space="preserve"><value>データビット、パリティ、ストップビットの設定が異なる無線機もあります。取扱説明書を確認してください。</value></data>
+  <data name="Diag_NoResponse_Summary" xml:space="preserve"><value>ポートには接続できましたが、無線機からデータが返ってきませんでした。</value></data>
+  <data name="Diag_NoResponse_1" xml:space="preserve"><value>選択した機種が実際の無線機と一致しているか確認してください。現在: {0}。</value></data>
+  <data name="Diag_NoResponse_2" xml:space="preserve"><value>より低いボーレートを試してください — 多くの無線機の既定値は 9600 です。</value></data>
+  <data name="Diag_NoResponse_3" xml:space="preserve"><value>無線機側の CAT/CI-V ボーレート設定が {0} と一致しているか確認してください。</value></data>
+  <data name="Diag_NoResponse_4" xml:space="preserve"><value>ストレートケーブルとヌルモデムケーブルのどちらが必要ですか？ 機種によって異なります。</value></data>
+  <data name="Diag_WrongModel_Summary" xml:space="preserve"><value>無線機は応答しましたが、データが想定した機種と一致しませんでした。</value></data>
+  <data name="Diag_WrongModel_1" xml:space="preserve"><value>選択中の機種は「{0}」です — 実際の無線機と一致していますか？</value></data>
+  <data name="Diag_WrongModel_2" xml:space="preserve"><value>無線機の選択欄で正確な型番を検索してください。</value></data>
+  <data name="Diag_WrongModel_3" xml:space="preserve"><value>Hamlib に複数の項目がある機種もあります — 一覧の近くの項目を試してください。</value></data>
+  <data name="Diag_WrongModel_4" xml:space="preserve"><value>Icom 機の場合、無線機のメニューと {0} の両方で CI-V アドレスを確認してください。</value></data>
+  <data name="Diag_Rigctld_Summary" xml:space="preserve"><value>{0}:{1} の rigctld に接続できませんでした。</value></data>
+  <data name="Diag_Rigctld_1" xml:space="preserve"><value>rigctld は起動していますか？ {0} が接続する前に、別途起動しておく必要があります。</value></data>
+  <data name="Diag_Rigctld_2" xml:space="preserve"><value>ホストが正しいか確認してください — 現在の設定は「{0}」です。</value></data>
+  <data name="Diag_Rigctld_3" xml:space="preserve"><value>ポートが正しいか確認してください — 現在の設定は {0} です（既定値は 4532）。</value></data>
+  <data name="Diag_Rigctld_4" xml:space="preserve"><value>ファイアウォールが rigctld をブロックしていないか確認してください。</value></data>
+  <data name="Diag_Cancelled_Summary" xml:space="preserve"><value>操作はキャンセルされました。</value></data>
+  <data name="Diag_Unknown_Summary" xml:space="preserve"><value>予期しないエラーが発生しました。</value></data>
+  <data name="Diag_Unknown_1" xml:space="preserve"><value>下のエラーメッセージに手がかりがないか確認してください。</value></data>
+  <data name="Diag_Unknown_2" xml:space="preserve"><value>表示されたコマンドをコマンドプロンプトで手動実行し、完全な出力を確認してください。</value></data>
+  <data name="Diag_Unknown_3" xml:space="preserve"><value>ログをエクスポートして、所属クラブやサポート掲示板で助けを求めてください。</value></data>
+
+  <data name="Help_EnableCat_Title" xml:space="preserve"><value>無線機の CAT 制御を有効にする</value></data>
+  <data name="Help_EnableCat_Body" xml:space="preserve"><value>ほとんどの無線機は、CAT 制御が無効または既定の速度に設定された状態で出荷されます。無線機のメニューで CAT、CI-V、RS-232、PC 制御といった名前の設定を探し、有効になっていることを確認してください。Icom では CI-V、Yaesu と Kenwood では CAT と呼ばれます。正確なメニュー番号は取扱説明書の「リモート制御」の項にあります。</value></data>
+  <data name="Help_Baud_Title" xml:space="preserve"><value>ボーレートを合わせる</value></data>
+  <data name="Help_Baud_Body" xml:space="preserve"><value>{0} で設定したボーレートは、無線機側の設定と一致している必要があります。一般的な既定値: Icom IC-7300 と IC-705 は 19200 または 115200、Yaesu FT-991A と FT-DX10 は 38400、Kenwood TS-590SG は 115200、Elecraft K3 は 38400。不明な場合はまず 9600 を試してください — ほぼすべての無線機が対応しています。</value></data>
+  <data name="Help_CivAddress_Title" xml:space="preserve"><value>Icom の CI-V アドレス</value></data>
+  <data name="Help_CivAddress_Body" xml:space="preserve"><value>Icom の無線機はそれぞれ CI-V アドレスに応答します。アドレスは無線機のメニューに 94h のような 16 進数で表示されます。Hamlib は選択した機種の既定アドレスを使用します。無線機側でアドレスが変更されている場合は、既定値に戻すか、シリアル詳細設定で一致するアドレスを指定してください。</value></data>
+
+  <data name="Export_ReportGenerated" xml:space="preserve"><value>レポート作成日時</value></data>
+  <data name="Export_Computer" xml:space="preserve"><value>コンピューター</value></data>
+  <data name="Export_ConnectionSettings" xml:space="preserve"><value>接続設定</value></data>
+  <data name="Export_Mode" xml:space="preserve"><value>モード</value></data>
+  <data name="Export_ModeRigctld" xml:space="preserve"><value>rigctld ネットワーク</value></data>
+  <data name="Export_ModeSerial" xml:space="preserve"><value>直接シリアル</value></data>
+  <data name="Export_Host" xml:space="preserve"><value>ホスト</value></data>
+  <data name="Export_Port" xml:space="preserve"><value>ポート</value></data>
+  <data name="Export_ComPort" xml:space="preserve"><value>COM ポート</value></data>
+  <data name="Export_BaudRate" xml:space="preserve"><value>ボーレート</value></data>
+  <data name="Export_DataBits" xml:space="preserve"><value>データビット</value></data>
+  <data name="Export_Parity" xml:space="preserve"><value>パリティ</value></data>
+  <data name="Export_StopBits" xml:space="preserve"><value>ストップビット</value></data>
+  <data name="Export_FlowCtrl" xml:space="preserve"><value>フロー制御</value></data>
+  <data name="Export_PttMethod" xml:space="preserve"><value>PTT 方式</value></data>
+  <data name="Export_Radio" xml:space="preserve"><value>無線機</value></data>
+  <data name="Export_HamlibId" xml:space="preserve"><value>{0}（Hamlib ID {1}）</value></data>
+  <data name="Export_RadioDefault" xml:space="preserve"><value>無線機の既定値</value></data>
+  <data name="Export_TestResults" xml:space="preserve"><value>テスト結果</value></data>
+  <data name="Export_Command" xml:space="preserve"><value>コマンド: {0}</value></data>
+  <data name="Export_Diagnosis" xml:space="preserve"><value>診断: {0}</value></data>
+  <data name="Export_Try" xml:space="preserve"><value>試してください: {0}</value></data>
+  <data name="Export_Summary" xml:space="preserve"><value>まとめ</value></data>
+  <data name="Export_Passed" xml:space="preserve"><value>合格</value></data>
+  <data name="Export_Failed" xml:space="preserve"><value>失敗</value></data>
+  <data name="Export_Warnings" xml:space="preserve"><value>警告</value></data>
+  <data name="Export_AllPassed" xml:space="preserve"><value>すべてのテストに合格しました。リグ制御の接続は良好です！</value></data>
+  <data name="Export_SomeFailed" xml:space="preserve"><value>1 つ以上のテストが失敗しました。診断は上の FAIL の項目を参照してください。</value></data>
+  <data name="Export_Issues" xml:space="preserve"><value>問題の報告 / ご意見: {0}</value></data>
+
+  <data name="Option_RadioDefault" xml:space="preserve"><value>無線機の既定値</value></data>
+  <data name="Option_None" xml:space="preserve"><value>なし</value></data>
+  <data name="Option_Even" xml:space="preserve"><value>偶数</value></data>
+  <data name="Option_Odd" xml:space="preserve"><value>奇数</value></data>
+  <data name="Option_Mark" xml:space="preserve"><value>マーク</value></data>
+  <data name="Option_Space" xml:space="preserve"><value>スペース</value></data>
+  <data name="Option_Hardware" xml:space="preserve"><value>ハードウェア</value></data>
+  <data name="Option_Software" xml:space="preserve"><value>ソフトウェア</value></data>
+  <data name="Option_CAT" xml:space="preserve"><value>CAT</value></data>
+  <data name="Option_RTS" xml:space="preserve"><value>RTS</value></data>
+  <data name="Option_DTR" xml:space="preserve"><value>DTR</value></data>
+  <data name="Option_VOX" xml:space="preserve"><value>VOX</value></data>
+</root>

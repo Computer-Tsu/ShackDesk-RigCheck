@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    RigCheck — Español (es)
+    Traducción automática. Por favor, que la revise un radioaficionado hispanohablante:
+    rellene Meta_Translator y cambie Meta_Status a "reviewed". Vea TRANSLATING.md.
+    Cambie solo el texto entre <value> y </value>. Deje {0}, {1} tal cual.
+  -->
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+
+  <data name="Meta_Status" xml:space="preserve"><value>machine-translated</value></data>
+  <data name="Meta_Translator" xml:space="preserve"><value></value></data>
+  <data name="About_Translation" xml:space="preserve"><value>Traducción al {0}: {1}</value></data>
+
+  <data name="Menu_Settings" xml:space="preserve"><value>_Configuración</value></data>
+  <data name="Menu_Help" xml:space="preserve"><value>_Ayuda</value></data>
+  <data name="Menu_HelpContents" xml:space="preserve"><value>_Contenido</value></data>
+  <data name="Menu_HelpAbout" xml:space="preserve"><value>_Acerca de {0}</value></data>
+  <data name="Menu_HelpDownload" xml:space="preserve"><value>_Descargar la última versión</value></data>
+  <data name="Menu_HelpViewData" xml:space="preserve"><value>_Ver datos recopilados</value></data>
+  <data name="Common_Close" xml:space="preserve"><value>Cerrar</value></data>
+  <data name="Common_Continue" xml:space="preserve"><value>Continuar</value></data>
+  <data name="Common_OK" xml:space="preserve"><value>Aceptar</value></data>
+  <data name="Common_Cancel" xml:space="preserve"><value>Cancelar</value></data>
+  <data name="Common_Copy" xml:space="preserve"><value>Copiar</value></data>
+
+  <data name="Settings_Title" xml:space="preserve"><value>Configuración</value></data>
+  <data name="Settings_ComingSoon" xml:space="preserve"><value>La configuración aparecerá aquí en una versión futura.</value></data>
+  <data name="Settings_TelemetryHeading" xml:space="preserve"><value>Diagnósticos anónimos</value></data>
+  <data name="Settings_ViewData" xml:space="preserve"><value>Ver datos recopilados…</value></data>
+  <data name="Settings_LoggingHeading" xml:space="preserve"><value>Registro</value></data>
+  <data name="Settings_LogLevel" xml:space="preserve"><value>Escribir en archivos de registro:</value></data>
+  <data name="LogLevel_Off" xml:space="preserve"><value>Desactivado</value></data>
+  <data name="LogLevel_Error" xml:space="preserve"><value>Solo errores</value></data>
+  <data name="LogLevel_Information" xml:space="preserve"><value>Normal</value></data>
+  <data name="LogLevel_Debug" xml:space="preserve"><value>Detallado (recomendado para versiones de prueba)</value></data>
+  <data name="Settings_LogPath" xml:space="preserve"><value>Los archivos de registro se guardan en:</value></data>
+  <data name="Settings_OpenLogFolder" xml:space="preserve"><value>Abrir carpeta de registros</value></data>
+  <data name="Settings_DeleteLogs" xml:space="preserve"><value>Eliminar archivos de registro</value></data>
+  <data name="Settings_DeleteLogsConfirm" xml:space="preserve"><value>¿Eliminar todos los archivos de registro de {0}? Esta acción no se puede deshacer.</value></data>
+  <data name="Settings_DeleteLogsDone" xml:space="preserve"><value>{0} archivo(s) de registro eliminado(s).</value></data>
+  <data name="Settings_SupportIdHeading" xml:space="preserve"><value>ID de soporte</value></data>
+  <data name="Settings_SupportIdHint" xml:space="preserve"><value>Un identificador aleatorio creado la primera vez que ejecutó el programa. Es el único identificador que se envía en los informes de diagnóstico y permite relacionar una solicitud de soporte con ellos. Restablecerlo rompe ese vínculo con todos los informes anteriores y elimina sus copias locales.</value></data>
+  <data name="Settings_ResetId" xml:space="preserve"><value>Restablecer ID de soporte…</value></data>
+  <data name="Settings_ResetIdConfirm" xml:space="preserve"><value>¿Crear un nuevo ID de soporte? Los informes de diagnóstico anteriores ya no podrán relacionarse con esta instalación y se eliminarán sus copias locales.</value></data>
+
+  <data name="About_Title" xml:space="preserve"><value>Acerca de {0}</value></data>
+  <data name="About_Version" xml:space="preserve"><value>Versión {0}</value></data>
+  <data name="About_DevelopedBy" xml:space="preserve"><value>Desarrollado por {0}</value></data>
+  <data name="About_License" xml:space="preserve"><value>Licencia: {0}</value></data>
+  <data name="About_Website" xml:space="preserve"><value>Sitio web</value></data>
+  <data name="About_SourceCode" xml:space="preserve"><value>Código fuente</value></data>
+  <data name="About_Channel" xml:space="preserve"><value>Versión {0}, compilada el {1}</value></data>
+  <data name="About_Expires" xml:space="preserve"><value>Esta versión {0} caduca el {1}.</value></data>
+  <data name="About_SupportId" xml:space="preserve"><value>ID de soporte: {0}</value></data>
+  <data name="About_SupportIdHint" xml:space="preserve"><value>Indique este ID en una solicitud de soporte para relacionarla con sus informes de diagnóstico, si los ha activado.</value></data>
+
+  <data name="Expiry_TitleBar" xml:space="preserve"><value>caduca el {0}</value></data>
+  <data name="Expiry_Warning" xml:space="preserve"><value>Esta versión {0} caduca en {1} día(s), el {2}. Descargue la versión actual desde el menú Ayuda.</value></data>
+  <data name="Expiry_WarningToday" xml:space="preserve"><value>Esta versión {0} caduca hoy. Descargue la versión actual desde el menú Ayuda.</value></data>
+  <data name="Expiry_BetaExpired" xml:space="preserve"><value>Esta versión beta caducó el {0}. Sigue funcionando, pero hay una versión más reciente disponible.</value></data>
+  <data name="Expired_Title" xml:space="preserve"><value>Versión de {0} caducada</value></data>
+  <data name="Expired_Message" xml:space="preserve"><value>Esta versión alfa de {0} caducó el {1}.
+
+Las versiones alfa dejan de funcionar a los {2} días para que los probadores usen siempre el código más reciente. Por favor, descargue la última versión.</value></data>
+  <data name="Expired_Download" xml:space="preserve"><value>Descargar la última versión</value></data>
+
+  <data name="FirstRun_Title" xml:space="preserve"><value>Bienvenido a {0}</value></data>
+  <data name="FirstRun_Intro" xml:space="preserve"><value>{0} puede enviar informes de diagnóstico anónimos que ayudan a mejorar la base de datos de radios y cables para todos.</value></data>
+  <data name="Telemetry_Checkbox" xml:space="preserve"><value>Enviar informes de diagnóstico anónimos</value></data>
+  <data name="Telemetry_WhatIsSent" xml:space="preserve"><value>Qué se envía: la versión de {0} y de Windows, si se encontró Hamlib y, tras cada ejecución de pruebas, el modelo de radio, la configuración serie, los identificadores del cable USB y qué pruebas se superaron o fallaron.</value></data>
+  <data name="Telemetry_WhatIsNotSent" xml:space="preserve"><value>Nunca se envía: su indicativo, el nombre del equipo, rutas de archivos, números de serie ni la dirección IP. El único identificador es un ID aleatorio creado la primera vez que ejecutó el programa.</value></data>
+  <data name="Telemetry_ChangeLater" xml:space="preserve"><value>Puede cambiarlo en cualquier momento en Configuración y ver cada informe en el menú Ayuda.</value></data>
+  <data name="Telemetry_PrivacyLink" xml:space="preserve"><value>Política de privacidad</value></data>
+
+  <data name="DataViewer_Title" xml:space="preserve"><value>Datos recopilados</value></data>
+  <data name="DataViewer_Intro" xml:space="preserve"><value>Todos los informes de diagnóstico que esta copia de {0} ha enviado o puesto en cola, el más reciente primero. Los informes marcados «pending» aún no se han podido enviar y se reintentarán en el próximo inicio.</value></data>
+  <data name="DataViewer_Empty" xml:space="preserve"><value>Todavía no se ha creado ningún informe.</value></data>
+  <data name="DataViewer_Clear" xml:space="preserve"><value>Eliminar copias locales</value></data>
+
+  <data name="Crash_Title" xml:space="preserve"><value>{0} debe cerrarse</value></data>
+  <data name="Crash_Message" xml:space="preserve"><value>{0} ha encontrado un error inesperado y debe cerrarse.
+
+Los detalles se han guardado en el registro. Si esto sigue ocurriendo, infórmelo adjuntando el registro exportado.</value></data>
+
+  <data name="Ready_ChooseRadio" xml:space="preserve"><value>Elija su radio en la lista de preajustes rápidos.</value></data>
+  <data name="Ready_SelectPort" xml:space="preserve"><value>Seleccione el puerto COM al que está conectada su radio.</value></data>
+  <data name="Placeholder_ChooseRadio" xml:space="preserve"><value>Elija su radio…</value></data>
+  <data name="Placeholder_SelectPort" xml:space="preserve"><value>Seleccione un puerto…</value></data>
+
+  <data name="Main_Connection" xml:space="preserve"><value>Conexión</value></data>
+  <data name="Main_QuickPreset" xml:space="preserve"><value>Preajuste rápido:</value></data>
+  <data name="Main_DirectSerial" xml:space="preserve"><value>Serie directa (puerto COM)</value></data>
+  <data name="Main_Rigctld" xml:space="preserve"><value>rigctld (red)</value></data>
+  <data name="Main_Port" xml:space="preserve"><value>Puerto:</value></data>
+  <data name="Main_Baud" xml:space="preserve"><value>Baudios:</value></data>
+  <data name="Main_Host" xml:space="preserve"><value>Host:</value></data>
+  <data name="Main_RefreshPorts" xml:space="preserve"><value>Actualizar puertos</value></data>
+  <data name="Main_AdvancedSerial" xml:space="preserve"><value>Configuración serie avanzada</value></data>
+  <data name="Main_Ptt" xml:space="preserve"><value>PTT:</value></data>
+  <data name="Main_DataBits" xml:space="preserve"><value>Datos:</value></data>
+  <data name="Main_Parity" xml:space="preserve"><value>Paridad:</value></data>
+  <data name="Main_StopBits" xml:space="preserve"><value>Parada:</value></data>
+  <data name="Main_FlowControl" xml:space="preserve"><value>Flujo:</value></data>
+  <data name="Main_Results" xml:space="preserve"><value>Resultados del diagnóstico</value></data>
+  <data name="Main_CopyCommand" xml:space="preserve"><value>Copiar</value></data>
+  <data name="Main_CopyCommandTip" xml:space="preserve"><value>Copiar el comando al portapapeles — péguelo en una ventana de comandos para ejecutarlo usted mismo</value></data>
+  <data name="Main_CommandTip" xml:space="preserve"><value>El comando rigctl usado en esta prueba</value></data>
+  <data name="Main_RawConsole" xml:space="preserve"><value>Avanzado — comandos Hamlib directos</value></data>
+  <data name="Main_ConsoleTip" xml:space="preserve"><value>Escriba un subcomando de rigctl (p. ej. f, m, t, v, l STRENGTH)</value></data>
+  <data name="Main_Clear" xml:space="preserve"><value>Limpiar</value></data>
+  <data name="Main_Send" xml:space="preserve"><value>Enviar</value></data>
+  <data name="Main_RunTests" xml:space="preserve"><value>▶  Ejecutar pruebas</value></data>
+  <data name="Main_Advanced" xml:space="preserve"><value>Avanzado ▾</value></data>
+  <data name="Main_ExportLog" xml:space="preserve"><value>Exportar registro</value></data>
+  <data name="Main_ExportLogTip" xml:space="preserve"><value>Guardar los resultados en un archivo de texto para enviarlo por correo o pedir ayuda</value></data>
+  <data name="Main_CopyResults" xml:space="preserve"><value>Copiar resultados</value></data>
+  <data name="Main_CopyResultsTip" xml:space="preserve"><value>Copiar todos los resultados al portapapeles como texto sin formato</value></data>
+  <data name="Main_HowToInstall" xml:space="preserve"><value>Cómo instalar</value></data>
+  <data name="Main_ScaleDown" xml:space="preserve"><value>Reducir</value></data>
+  <data name="Main_ScaleUp" xml:space="preserve"><value>Ampliar</value></data>
+  <data name="Main_ScaleReset" xml:space="preserve"><value>Restablecer tamaño</value></data>
+  <data name="Main_OnTop" xml:space="preserve"><value>Siempre visible</value></data>
+
+  <data name="Status_HamlibFound" xml:space="preserve"><value>Hamlib encontrado mediante {0}</value></data>
+  <data name="Status_HamlibMissing" xml:space="preserve"><value>Hamlib no encontrado — instale WSJT-X o descargue Hamlib</value></data>
+  <data name="Status_HamlibMissingLong" xml:space="preserve"><value>Hamlib no encontrado. «Ejecutar pruebas» no estará disponible hasta que Hamlib esté instalado.</value></data>
+  <data name="Status_Running" xml:space="preserve"><value>Ejecutando pruebas…</value></data>
+  <data name="Status_AllPassed" xml:space="preserve"><value>Las {0} pruebas se superaron.</value></data>
+  <data name="Status_SomeFailed" xml:space="preserve"><value>{0} prueba(s) fallaron — vea los resultados para más detalles.</value></data>
+  <data name="Status_RunFailed" xml:space="preserve"><value>La ejecución de pruebas falló de forma inesperada.</value></data>
+  <data name="Status_LogSaved" xml:space="preserve"><value>Registro guardado en {0}</value></data>
+  <data name="Status_LogFailed" xml:space="preserve"><value>La exportación del registro falló — consulte el registro de la aplicación.</value></data>
+  <data name="Status_Copied" xml:space="preserve"><value>Resultados copiados al portapapeles.</value></data>
+  <data name="Confirm_SetFreq_Title" xml:space="preserve"><value>Confirmar prueba de frecuencia</value></data>
+  <data name="Confirm_SetFreq_Message" xml:space="preserve"><value>La prueba de ajuste de frecuencia cambiará brevemente la frecuencia del VFO de su radio en 1 kHz y luego la restaurará.
+
+¿Continuar?</value></data>
+  <data name="Export_NoResults_Title" xml:space="preserve"><value>Sin resultados</value></data>
+  <data name="Export_NoResults_Message" xml:space="preserve"><value>Ejecute primero las pruebas antes de exportar.</value></data>
+  <data name="Export_DialogTitle" xml:space="preserve"><value>Exportar registro de {0}</value></data>
+  <data name="Export_Filter" xml:space="preserve"><value>Archivos de texto (*.txt)|*.txt|Todos los archivos (*.*)|*.*</value></data>
+  <data name="Summary_AllPassed" xml:space="preserve"><value>✓ Las {0} pruebas se superaron</value></data>
+  <data name="Summary_Mixed" xml:space="preserve"><value>{0} fallidas · {1} superadas · {2} avisos</value></data>
+  <data name="Cable_Detected" xml:space="preserve"><value>Detectado: {0}</value></data>
+
+  <data name="Test_OpenConnection" xml:space="preserve"><value>Abrir conexión</value></data>
+  <data name="Test_GetFrequency" xml:space="preserve"><value>Leer frecuencia</value></data>
+  <data name="Test_GetMode" xml:space="preserve"><value>Leer modo</value></data>
+  <data name="Test_GetPtt" xml:space="preserve"><value>Leer estado del PTT</value></data>
+  <data name="Test_GetSmeter" xml:space="preserve"><value>Leer medidor S</value></data>
+  <data name="Test_GetVfo" xml:space="preserve"><value>Leer VFO</value></data>
+  <data name="Test_SetFrequency" xml:space="preserve"><value>Ajustar y verificar frecuencia</value></data>
+  <data name="Test_Cancelled" xml:space="preserve"><value>Cancelada</value></data>
+  <data name="Test_SkippedNoConnection" xml:space="preserve"><value>Omitida — no se pudo establecer la conexión</value></data>
+
+  <data name="Msg_Connected" xml:space="preserve"><value>Conectado a {0} en {1}</value></data>
+  <data name="Msg_ConnectFailed" xml:space="preserve"><value>No se pudo conectar con la radio</value></data>
+  <data name="Msg_Frequency" xml:space="preserve"><value>Frecuencia del VFO A: {0} MHz</value></data>
+  <data name="Msg_FrequencyUnparsed" xml:space="preserve"><value>La radio respondió pero no se pudo interpretar la frecuencia: {0}</value></data>
+  <data name="Msg_FrequencyNoResponse" xml:space="preserve"><value>La radio no respondió a la consulta de frecuencia</value></data>
+  <data name="Msg_Mode" xml:space="preserve"><value>Modo actual: {0}, ancho de banda: {1} Hz</value></data>
+  <data name="Msg_ModeNoResponse" xml:space="preserve"><value>La radio no respondió a la consulta de modo</value></data>
+  <data name="Msg_PttOn" xml:space="preserve"><value>PTT ACTIVADO — el transmisor está EN TRANSMISIÓN</value></data>
+  <data name="Msg_PttOff" xml:space="preserve"><value>PTT desactivado (transmisor en reposo)</value></data>
+  <data name="Msg_PttNoResponse" xml:space="preserve"><value>La radio no respondió a la consulta de PTT</value></data>
+  <data name="Msg_Smeter" xml:space="preserve"><value>Intensidad de señal: {0} ({1} dBm)</value></data>
+  <data name="Msg_SmeterUnparsed" xml:space="preserve"><value>El medidor S respondió pero no se pudo interpretar el valor: {0}</value></data>
+  <data name="Msg_SmeterNoResponse" xml:space="preserve"><value>La radio no respondió a la consulta del medidor S (algunas radios no lo admiten)</value></data>
+  <data name="Msg_Vfo" xml:space="preserve"><value>VFO activo: {0}</value></data>
+  <data name="Msg_VfoNoResponse" xml:space="preserve"><value>La radio no respondió a la consulta de VFO</value></data>
+  <data name="Msg_SetFreqReadFailed" xml:space="preserve"><value>No se pudo leer la frecuencia actual antes de la prueba de ajuste</value></data>
+  <data name="Msg_SetFreqFailed" xml:space="preserve"><value>No se pudo ajustar la frecuencia</value></data>
+  <data name="Msg_SetFreqVerified" xml:space="preserve"><value>Ajuste de frecuencia verificado — se ajustó a {0} MHz, se leyó {1} MHz. Frecuencia original restaurada.</value></data>
+  <data name="Msg_SetFreqMismatch" xml:space="preserve"><value>La frecuencia se ajustó, pero la lectura no coincidió exactamente</value></data>
+
+  <data name="Diag_BaudDefault" xml:space="preserve"><value>el valor predeterminado de la radio</value></data>
+  <data name="Diag_HamlibNotFound_Summary" xml:space="preserve"><value>Hamlib (rigctl.exe) no está instalado o no se pudo encontrar.</value></data>
+  <data name="Diag_HamlibNotFound_1" xml:space="preserve"><value>Instale WSJT-X — incluye Hamlib automáticamente.</value></data>
+  <data name="Diag_HamlibNotFound_2" xml:space="preserve"><value>O descargue Hamlib para Windows desde hamlib.github.io.</value></data>
+  <data name="Diag_HamlibNotFound_3" xml:space="preserve"><value>Tras instalarlo, reinicie {0} para que encuentre los nuevos archivos.</value></data>
+  <data name="Diag_PortInUse_Summary" xml:space="preserve"><value>{0} ya está abierto por otro programa.</value></data>
+  <data name="Diag_PortInUse_1" xml:space="preserve"><value>¿Está en ejecución WSJT-X, Fldigi, JS8Call o Winlink?</value></data>
+  <data name="Diag_PortInUse_2" xml:space="preserve"><value>Cierre el otro programa e inténtelo de nuevo.</value></data>
+  <data name="Diag_PortInUse_3" xml:space="preserve"><value>Algunos programas mantienen el puerto abierto aunque no estén transmitiendo.</value></data>
+  <data name="Diag_PortInUse_4" xml:space="preserve"><value>En WSJT-X: Archivo → Configuración → Radio — desconecte el control de la radio antes de probar aquí.</value></data>
+  <data name="Diag_PortNotFound_Summary" xml:space="preserve"><value>{0} no se encontró en este equipo.</value></data>
+  <data name="Diag_PortNotFound_1" xml:space="preserve"><value>¿Está conectado el cable USB-serie?</value></data>
+  <data name="Diag_PortNotFound_2" xml:space="preserve"><value>Compruebe en el Administrador de dispositivos qué puerto COM asignó Windows.</value></data>
+  <data name="Diag_PortNotFound_3" xml:space="preserve"><value>Puede que el puerto haya cambiado — pruebe con otro número de puerto COM.</value></data>
+  <data name="Diag_PortNotFound_4" xml:space="preserve"><value>Algunas radios necesitan un controlador instalado (p. ej. el Icom IC-7300 usa Silicon Labs CP210x).</value></data>
+  <data name="Diag_Timeout_Summary" xml:space="preserve"><value>La radio no respondió dentro del tiempo límite.</value></data>
+  <data name="Diag_Timeout_1" xml:space="preserve"><value>¿Está encendida la radio?</value></data>
+  <data name="Diag_Timeout_2" xml:space="preserve"><value>¿Es correcta la velocidad en baudios? El manual de su radio indica la velocidad CAT. Actualmente: {0}.</value></data>
+  <data name="Diag_Timeout_3" xml:space="preserve"><value>¿Está el cable CAT / CI-V / RS-232 conectado al puerto correcto de la radio?</value></data>
+  <data name="Diag_Timeout_4" xml:space="preserve"><value>¿Necesita su radio activar el control CAT en su menú? Busque en el manual los ajustes «CAT», «CI-V» o «RS-232».</value></data>
+  <data name="Diag_Timeout_5" xml:space="preserve"><value>Algunas radios usan otros ajustes de bits de datos, paridad o bits de parada. Consulte el manual de la radio.</value></data>
+  <data name="Diag_NoResponse_Summary" xml:space="preserve"><value>Conectado al puerto, pero la radio no devolvió datos.</value></data>
+  <data name="Diag_NoResponse_1" xml:space="preserve"><value>Compruebe que el modelo seleccionado coincide con su radio real. Actualmente: {0}.</value></data>
+  <data name="Diag_NoResponse_2" xml:space="preserve"><value>Pruebe una velocidad menor — muchas radios usan 9600 baudios por defecto.</value></data>
+  <data name="Diag_NoResponse_3" xml:space="preserve"><value>Compruebe que la velocidad CAT/CI-V de la radio coincide con la de {0}.</value></data>
+  <data name="Diag_NoResponse_4" xml:space="preserve"><value>¿Se necesita un cable directo o un cable null-modem? Algunas radios requieren uno u otro.</value></data>
+  <data name="Diag_WrongModel_Summary" xml:space="preserve"><value>La radio respondió, pero los datos no coincidían con el modelo esperado.</value></data>
+  <data name="Diag_WrongModel_1" xml:space="preserve"><value>El modelo seleccionado es «{0}» — ¿coincide con su radio real?</value></data>
+  <data name="Diag_WrongModel_2" xml:space="preserve"><value>Busque el número de modelo exacto en el selector de radio.</value></data>
+  <data name="Diag_WrongModel_3" xml:space="preserve"><value>Algunas radios tienen varias entradas en Hamlib — pruebe las entradas cercanas de la lista.</value></data>
+  <data name="Diag_WrongModel_4" xml:space="preserve"><value>En radios Icom, compruebe la dirección CI-V tanto en el menú de la radio como en {0}.</value></data>
+  <data name="Diag_Rigctld_Summary" xml:space="preserve"><value>No se pudo conectar con rigctld en {0}:{1}.</value></data>
+  <data name="Diag_Rigctld_1" xml:space="preserve"><value>¿Está rigctld en ejecución? Debe iniciarse por separado antes de que {0} pueda conectarse.</value></data>
+  <data name="Diag_Rigctld_2" xml:space="preserve"><value>Compruebe que el host es correcto — actualmente «{0}».</value></data>
+  <data name="Diag_Rigctld_3" xml:space="preserve"><value>Compruebe que el puerto es correcto — actualmente {0} (el predeterminado es 4532).</value></data>
+  <data name="Diag_Rigctld_4" xml:space="preserve"><value>Compruebe que su cortafuegos no bloquea rigctld.</value></data>
+  <data name="Diag_Cancelled_Summary" xml:space="preserve"><value>La operación se canceló.</value></data>
+  <data name="Diag_Unknown_Summary" xml:space="preserve"><value>Se produjo un error inesperado.</value></data>
+  <data name="Diag_Unknown_1" xml:space="preserve"><value>Busque pistas en el mensaje de error de abajo.</value></data>
+  <data name="Diag_Unknown_2" xml:space="preserve"><value>Ejecute manualmente el comando mostrado en una ventana de comandos para ver la salida completa.</value></data>
+  <data name="Diag_Unknown_3" xml:space="preserve"><value>Exporte el registro y pida ayuda en su radioclub o en un foro de soporte.</value></data>
+
+  <data name="Help_EnableCat_Title" xml:space="preserve"><value>Activar el control CAT en su radio</value></data>
+  <data name="Help_EnableCat_Body" xml:space="preserve"><value>La mayoría de las radios vienen con el control CAT desactivado o a una velocidad predeterminada. Busque en el menú de la radio un ajuste llamado CAT, CI-V, RS-232 o control por PC y asegúrese de que está activado. Icom lo llama CI-V; Yaesu y Kenwood lo llaman CAT. El número exacto del menú está en el manual de su radio, en «control remoto».</value></data>
+  <data name="Help_Baud_Title" xml:space="preserve"><value>Hacer coincidir la velocidad en baudios</value></data>
+  <data name="Help_Baud_Body" xml:space="preserve"><value>La velocidad configurada en {0} debe coincidir con la configurada en la radio. Valores habituales: Icom IC-7300 e IC-705 usan 19200 o 115200; Yaesu FT-991A y FT-DX10 usan 38400; Kenwood TS-590SG usa 115200; Elecraft K3 usa 38400. Si no está seguro, pruebe primero 9600 — casi todas las radios lo admiten.</value></data>
+  <data name="Help_CivAddress_Title" xml:space="preserve"><value>Dirección CI-V de Icom</value></data>
+  <data name="Help_CivAddress_Body" xml:space="preserve"><value>Cada radio Icom responde a una dirección CI-V, mostrada en el menú de la radio como un número hexadecimal, por ejemplo 94h. Hamlib usa la dirección predeterminada del modelo seleccionado. Si se cambió la dirección en la radio, restablézcala al valor predeterminado o indique la dirección correcta en la configuración serie avanzada.</value></data>
+
+  <data name="Export_ReportGenerated" xml:space="preserve"><value>Informe generado</value></data>
+  <data name="Export_Computer" xml:space="preserve"><value>Equipo</value></data>
+  <data name="Export_ConnectionSettings" xml:space="preserve"><value>CONFIGURACIÓN DE CONEXIÓN</value></data>
+  <data name="Export_Mode" xml:space="preserve"><value>Modo</value></data>
+  <data name="Export_ModeRigctld" xml:space="preserve"><value>red rigctld</value></data>
+  <data name="Export_ModeSerial" xml:space="preserve"><value>Serie directa</value></data>
+  <data name="Export_Host" xml:space="preserve"><value>Host</value></data>
+  <data name="Export_Port" xml:space="preserve"><value>Puerto</value></data>
+  <data name="Export_ComPort" xml:space="preserve"><value>Puerto COM</value></data>
+  <data name="Export_BaudRate" xml:space="preserve"><value>Baudios</value></data>
+  <data name="Export_DataBits" xml:space="preserve"><value>Bits de datos</value></data>
+  <data name="Export_Parity" xml:space="preserve"><value>Paridad</value></data>
+  <data name="Export_StopBits" xml:space="preserve"><value>Bits de parada</value></data>
+  <data name="Export_FlowCtrl" xml:space="preserve"><value>Ctrl. de flujo</value></data>
+  <data name="Export_PttMethod" xml:space="preserve"><value>Método PTT</value></data>
+  <data name="Export_Radio" xml:space="preserve"><value>Radio</value></data>
+  <data name="Export_HamlibId" xml:space="preserve"><value>{0} (ID Hamlib {1})</value></data>
+  <data name="Export_RadioDefault" xml:space="preserve"><value>predeterminado de la radio</value></data>
+  <data name="Export_TestResults" xml:space="preserve"><value>RESULTADOS DE LAS PRUEBAS</value></data>
+  <data name="Export_Command" xml:space="preserve"><value>Comando: {0}</value></data>
+  <data name="Export_Diagnosis" xml:space="preserve"><value>DIAGNÓSTICO: {0}</value></data>
+  <data name="Export_Try" xml:space="preserve"><value>Pruebe: {0}</value></data>
+  <data name="Export_Summary" xml:space="preserve"><value>RESUMEN</value></data>
+  <data name="Export_Passed" xml:space="preserve"><value>Superadas</value></data>
+  <data name="Export_Failed" xml:space="preserve"><value>Fallidas</value></data>
+  <data name="Export_Warnings" xml:space="preserve"><value>Avisos</value></data>
+  <data name="Export_AllPassed" xml:space="preserve"><value>Todas las pruebas se superaron. ¡Su conexión de control de la radio funciona bien!</value></data>
+  <data name="Export_SomeFailed" xml:space="preserve"><value>Una o más pruebas fallaron. Vea las entradas FAIL de arriba para el diagnóstico.</value></data>
+  <data name="Export_Issues" xml:space="preserve"><value>Incidencias / comentarios: {0}</value></data>
+
+  <data name="Option_RadioDefault" xml:space="preserve"><value>Predeterminado de la radio</value></data>
+  <data name="Option_None" xml:space="preserve"><value>Ninguno</value></data>
+  <data name="Option_Even" xml:space="preserve"><value>Par</value></data>
+  <data name="Option_Odd" xml:space="preserve"><value>Impar</value></data>
+  <data name="Option_Mark" xml:space="preserve"><value>Marca</value></data>
+  <data name="Option_Space" xml:space="preserve"><value>Espacio</value></data>
+  <data name="Option_Hardware" xml:space="preserve"><value>Hardware</value></data>
+  <data name="Option_Software" xml:space="preserve"><value>Software</value></data>
+  <data name="Option_CAT" xml:space="preserve"><value>CAT</value></data>
+  <data name="Option_RTS" xml:space="preserve"><value>RTS</value></data>
+  <data name="Option_DTR" xml:space="preserve"><value>DTR</value></data>
+  <data name="Option_VOX" xml:space="preserve"><value>VOX</value></data>
+</root>
