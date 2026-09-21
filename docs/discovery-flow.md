@@ -182,6 +182,8 @@ reproduce it with a terminal program.
 ## Not in scope for the first version
 
 - OmniRig and LAN-connected rigs (inventory only — no probe).
+- Fldigi's own configuration as a clue (it stores baud as a list index and
+  models in its own numbering); WSJT-X and JS8Call are read.
 - Telemetry-weighted priors (needs volume first).
 - Aggressive probing (see below).
 

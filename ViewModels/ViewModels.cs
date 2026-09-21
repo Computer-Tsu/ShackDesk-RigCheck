@@ -402,6 +402,13 @@ public partial class RawConsoleViewModel : ObservableObject
         var cmd = RigctlCommandBuilder.RawCommand(cfg, input);
         AddEntry(ConsoleEntryKind.Command, cmd.DisplayCommand);
 
+        // The test suite refuses model 1, but the console lets an operator
+        // type anything. Model 1 is Hamlib's dummy rig: every reply is
+        // simulated, so say so beside each command rather than let a
+        // convincing-looking answer stand.
+        if (cfg.ModelId == 1 && !cfg.UseRigctld)
+            AddEntry(ConsoleEntryKind.Error, Strings.Get("Console_DummyRig"));
+
         IsRunning = true;
         try
         {

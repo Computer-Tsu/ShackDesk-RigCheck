@@ -378,4 +378,23 @@ Continuer ?</value></data>
   <data name="Disc_VerifyFailed" xml:space="preserve"><value>{0} sur {1} : {2} test(s) échoué(s)</value></data>
   <data name="Disc_Applied" xml:space="preserve"><value>Panneau Connexion réglé sur {0} (modèle {1}), {2}, {3} bauds — Lancer les tests utilise ces réglages maintenant</value></data>
   <data name="Export_Transcript" xml:space="preserve"><value>TRANSCRIPTION DE TROUVER MA RADIO</value></data>
+  <data name="Console_DummyRig" xml:space="preserve"><value>Le modèle 1 est la radio factice de Hamlib — toutes les réponses ci-dessous sont simulées, pas issues d'une radio</value></data>
+  <data name="Handoff_Heading" xml:space="preserve"><value>Réglages à saisir — copiez la ligne de votre programme</value></data>
+  <data name="Handoff_WsjtxPath" xml:space="preserve"><value>WSJT-X et JS8Call : File › Settings › Radio</value></data>
+  <data name="Handoff_Wsjtx" xml:space="preserve"><value>Rig: {0} · Serial Port: {1} · Baud Rate: {2} · Data Bits: Eight · Stop Bits: {3} · Handshake: None · PTT Method: {4}</value></data>
+  <data name="Handoff_WsjtxNet" xml:space="preserve"><value>Rig: Hamlib NET rigctl · Network Server: {0}</value></data>
+  <data name="Handoff_FldigiPath" xml:space="preserve"><value>Fldigi : Configure › Rig Control › Hamlib</value></data>
+  <data name="Handoff_Fldigi" xml:space="preserve"><value>Rig: {0} · Device: {1} · Baud rate: {2} · Stopbits: {3} · PTT via Hamlib command</value></data>
+  <data name="Handoff_FldigiNet" xml:space="preserve"><value>Rig: Hamlib NET rigctl · Device: {0}</value></data>
+  <data name="Handoff_WinlinkPath" xml:space="preserve"><value>Winlink Express : Session › Radio Setup (sa propre liste de radios — choisissez le modèle le plus proche)</value></data>
+  <data name="Handoff_Winlink" xml:space="preserve"><value>Radio: {0} · Serial Port: {1} · Baud: {2} · PTT: {3}</value></data>
+  <data name="Handoff_Clue" xml:space="preserve"><value>{0} est configuré pour {1} sur {2} à {3} bauds</value></data>
+  <data name="Handoff_ClueRigctl" xml:space="preserve"><value>{0} est configuré pour utiliser rigctl à {1}</value></data>
+  <data name="Handoff_DiffMatch" xml:space="preserve"><value>{0} a déjà ces réglages</value></data>
+  <data name="Handoff_DiffChange" xml:space="preserve"><value>{0} est réglé sur {1} sur {2} à {3} bauds — changez {4}</value></data>
+  <data name="Handoff_DiffRig" xml:space="preserve"><value>Rig en {0}</value></data>
+  <data name="Handoff_DiffPort" xml:space="preserve"><value>Serial Port en {0}</value></data>
+  <data name="Handoff_DiffBaud" xml:space="preserve"><value>Baud Rate en {0}</value></data>
+  <data name="Handoff_DiffRigctl" xml:space="preserve"><value>{0} utilise rigctl ({1}) — cela fonctionne tant que rigctld tourne</value></data>
+  <data name="Handoff_DiffSerialVsRigctld" xml:space="preserve"><value>{0} est réglé sur {1} sur {2} à {3} bauds — gardez cela, ou passez à Hamlib NET rigctl pour partager la radio via rigctld</value></data>
 </root>

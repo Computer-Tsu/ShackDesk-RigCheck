@@ -19,6 +19,8 @@ public partial class MainViewModel : ObservableObject
     private readonly TestRunnerService   _testRunner;
     private readonly EnvironmentCheckService _envCheck;
     private readonly DiscoveryEngine     _discovery;
+    private readonly ConfigClueService   _clues;
+    private readonly HandoffBuilder      _handoff;
     private readonly LogExportService    _logExport;
     private readonly HamlibLocatorService _hamlib;
     private readonly SettingsService     _settings;
@@ -66,6 +68,8 @@ public partial class MainViewModel : ObservableObject
         TestRunnerService    testRunner,
         EnvironmentCheckService envCheck,
         DiscoveryEngine      discovery,
+        ConfigClueService    clues,
+        HandoffBuilder       handoff,
         LogExportService     logExport,
         HamlibLocatorService hamlib,
         SettingsService      settings,
@@ -77,6 +81,8 @@ public partial class MainViewModel : ObservableObject
         _testRunner = testRunner;
         _envCheck   = envCheck;
         _discovery  = discovery;
+        _clues      = clues;
+        _handoff    = handoff;
         _logExport  = logExport;
         _hamlib     = hamlib;
         _settings   = settings;
@@ -216,7 +222,21 @@ public partial class MainViewModel : ObservableObject
         try
         {
             using var cts = new CancellationTokenSource(TimeSpan.FromMinutes(3));
-            var request = new DiscoveryRequest(ports, Connection.ModelId, Connection.BaudRate);
+            // What the operator's own programs are set to is the best first
+            // guess: their port is probed first, and their radio stands in
+            // for the Connection panel when nothing is chosen there.
+            var clues = _clues.ReadAll();
+            foreach (var clue in clues)
+                Results.AddTranscript(TranscriptKind.Note, HandoffBuilder.Describe(clue));
+
+            var orderedPorts = ports
+                .OrderByDescending(p => clues.Any(c => c.Port.Equals(p.PortName, StringComparison.OrdinalIgnoreCase)))
+                .ToList();
+            var preferredModel = Connection.ModelId > 1
+                ? Connection.ModelId
+                : clues.FirstOrDefault(c => c.ModelId > 1)?.ModelId ?? 0;
+
+            var request = new DiscoveryRequest(orderedPorts, preferredModel, Connection.BaudRate, Clues: clues);
 
             Results.AddTranscript(TranscriptKind.Note, Strings.Format("Disc_Start", ports.Count));
 
@@ -266,6 +286,11 @@ public partial class MainViewModel : ObservableObject
                 Results.SetSuiteResult(best.Suite);
                 Results.AddTranscript(TranscriptKind.Found,
                     Strings.Format("Disc_Applied", best.Rig.ModelName, best.Rig.HamlibModelId, best.Rig.Port, best.Rig.Baud));
+
+                // Stage 4: the settings to type into each program, and how
+                // they differ from what those programs use today.
+                foreach (var line in _handoff.Build(best.Rig, clues))
+                    Results.AddTranscript(line.Kind, line.Text);
                 StatusMessage = verified.Count == 1
                     ? Strings.Format("Status_DiscoveredOne", best.Rig.ModelName, best.Rig.Port)
                     : Strings.Format("Status_DiscoveredMany", verified.Count, best.Rig.ModelName, best.Rig.Port);

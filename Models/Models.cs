@@ -276,3 +276,21 @@ public record ProbeEvent(
     string         Message,
     string?        Bytes    = null,      // hex dump of what was sent or received
     DiscoveredRig? Rig      = null);
+
+/// <summary>
+/// What one of the operator's digital-mode programs is configured to use,
+/// read from its own settings file. Values are the program's own strings
+/// ("Eight", "Two", "Hardware"), not RigCheck's.
+/// </summary>
+public record ConfigClue(
+    string App,             // "WSJT-X", "JS8Call"
+    string FilePath,
+    string RigName,         // Hamlib display name, e.g. "Icom IC-7300"
+    int    ModelId,         // resolved Hamlib model, 0 if unknown
+    string Port,            // "COM3", or "localhost:4532" for rigctl mode
+    int    Baud,            // 0 = not set
+    string DataBits,
+    string StopBits,
+    string Handshake,
+    string PttMethod,
+    bool   UseRigctld);

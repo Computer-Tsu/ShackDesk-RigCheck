@@ -11,7 +11,11 @@ public record DiscoveryRequest(
     IReadOnlyList<ComPortInfo> Ports,          // already ticked by the operator
     int  PreferredModelId  = 0,                // from the Connection panel, 0 = none
     int  PreferredBaud     = 0,                // 0 = radio default / unknown
-    bool CheckNetwork      = true);            // rigctld and Flrig ports
+    bool CheckNetwork      = true,             // rigctld and Flrig ports
+    IReadOnlyList<ConfigClue> Clues = null!)   // what WSJT-X etc. are configured for
+{
+    public IReadOnlyList<ConfigClue> Clues { get; init; } = Clues ?? [];
+}
 
 /// <summary>
 /// Find my radio, stages 0–2: inventory the ticked ports, rank protocol
@@ -121,17 +125,25 @@ public class DiscoveryEngine
 
     // ── Stage 1: ranking ──────────────────────────────────────────────────
     // Family order: the family of the radio already chosen in the Connection
-    // panel, then the family the cable's VID/PID hints at, then by weight.
-    // Baud order is the family's list, with the operator's chosen baud
-    // moved to the front for that family.
+    // panel, then the family WSJT-X / JS8Call are configured for, then the
+    // family the cable's VID/PID hints at, then by weight. Baud order is the
+    // family's list, with the operator's chosen baud and any configured
+    // baud moved to the front for their families — the common failure is
+    // "right radio, wrong port or speed", so the configured values are the
+    // best first guess and the configured port is probed first by the caller.
 
     private List<(RigFamily Family, int Baud)> RankCandidates(ComPortInfo port, DiscoveryRequest request)
     {
         var preferred = _data.FamilyForModel(request.PreferredModelId);
         var hinted    = _data.FamilyForVendor(port.RadioFamily);
+        var clueFamilies = request.Clues
+            .Select(c => (Family: _data.FamilyForModel(c.ModelId), c.Baud))
+            .Where(x => x.Family is not null)
+            .ToList();
 
         var families = _data.Families
-            .OrderByDescending(f => f == preferred ? 2 : 0)
+            .OrderByDescending(f => f == preferred ? 3 : 0)
+            .ThenByDescending(f => clueFamilies.Any(c => c.Family == f) ? 2 : 0)
             .ThenByDescending(f => f == hinted ? 1 : 0)
             .ThenByDescending(f => f.Weight)
             .ToList();
@@ -139,10 +151,11 @@ public class DiscoveryEngine
         var list = new List<(RigFamily, int)>();
         foreach (var family in families)
         {
-            IEnumerable<int> bauds = family.Bauds;
-            if (family == preferred && request.PreferredBaud > 0)
-                bauds = new[] { request.PreferredBaud }.Concat(family.Bauds.Where(b => b != request.PreferredBaud));
-            foreach (var baud in bauds)
+            var first = new List<int>();
+            if (family == preferred && request.PreferredBaud > 0) first.Add(request.PreferredBaud);
+            first.AddRange(clueFamilies.Where(c => c.Family == family && c.Baud > 0).Select(c => c.Baud));
+
+            foreach (var baud in first.Distinct().Concat(family.Bauds.Where(b => !first.Contains(b))))
                 list.Add((family, baud));
         }
         return list;

@@ -35,9 +35,9 @@
     <RootNamespace>RigCheck</RootNamespace>
     <ApplicationIcon>Assets\rigcheck.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <Version>0.6.8</Version>
-    <AssemblyVersion>0.6.8.0</AssemblyVersion>
-    <FileVersion>0.6.8.0</FileVersion>
+    <Version>0.6.9</Version>
+    <AssemblyVersion>0.6.9.0</AssemblyVersion>
+    <FileVersion>0.6.9.0</FileVersion>
     <Company>My Computer Guru LLC</Company>
     <Copyright>Copyright © 2025-2026 My Computer Guru LLC</Copyright>
     <Product>RigCheck by ShackDesk</Product>

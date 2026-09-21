@@ -187,7 +187,7 @@ model to pick, **Find my radio** works it out:
    frequency inside an amateur band is taken as its family's most likely model.
 4. Every find is verified with the same Hamlib test suite as **Run Tests**, and the best
    verified one is written into the Connection panel.
-5. A rigctld already listening on 4532 is reported as a working connection; Flrig on 12345
+6. A rigctld already listening on 4532 is reported as a working connection; Flrig on 12345
    is noted.
 
 Everything sent and received is shown in the results panel, with a Copy button per line, and

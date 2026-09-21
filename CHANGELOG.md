@@ -5,6 +5,18 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
+## [0.6.9] - 2026-09-21
+
+Find my radio hands you the settings; Hamlib's dummy rig can no longer pass unnoticed.
+
+### Added
+- Settings handoff after a verified find: the exact fields for WSJT-X / JS8Call (File › Settings ›
+  Radio), Fldigi (Rig Control › Hamlib), and Winlink Express, each as one copyable line
+- RigCheck reads what WSJT-X and JS8Call are configured to use (`WSJT-X.ini`, `JS8Call.ini`):
+  their port is probed first, their radio stands in when none is chosen, and after the sweep
+  each program gets a one-line verdict — already matches, or exactly which fields to change
+- The raw console warns beside every command sent to Hamlib model 1, the dummy rig
+
 ## [0.6.8] - 2026-09-21
 
 Find my radio — the second half of the 0.7.0 milestone, first cut.
