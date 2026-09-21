@@ -5,6 +5,11 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
+## [0.8.0] - unreleased
+
+Next milestone line. 0.7.2 was promoted to the first beta on 2026-09-21; fixes for that beta
+land on `main` as 0.7.3-beta onward and are cherry-picked here.
+
 ## [0.7.2] - 2026-09-21
 
 ### Changed
