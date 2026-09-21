@@ -93,4 +93,4 @@ appears on the repository's contributors page.
 
 ## Questions
 
-Ask in [Discussions](https://github.com/Computer-Tsu/ShackDesk-RigCheck/discussions).
+Ask in the [Translations](https://github.com/Computer-Tsu/ShackDesk-RigCheck/discussions/categories/translations) category of Discussions.
