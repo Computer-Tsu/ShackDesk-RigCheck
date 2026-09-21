@@ -80,7 +80,7 @@ flowchart TD
         P6 -- garbage --> P9[Score 0.2: maybe wrong baud<br/>keep sweeping] --> P7
         P6 -- ID reply --> P10[Look up model in rig_ids.json<br/>score 1.0 — confirmed]
         P6 -- frequency reply --> P11{Inside a ham band?}
-        P11 -- yes --> P12[Score 0.8 — family confirmed,<br/>model from prior or ask]
+        P11 -- yes --> P12[Score 0.8 — family confirmed,<br/>model = highest prior in family,<br/>verify settles it]
         P11 -- no --> P9
         P10 --> P13[Emit Found: port, model, baud] --> P0
         P12 --> P13
@@ -183,4 +183,25 @@ reproduce it with a terminal program.
 
 - OmniRig and LAN-connected rigs (inventory only — no probe).
 - Telemetry-weighted priors (needs volume first).
-- Guessing a model from a frequency-only reply: the operator is asked.
+- Aggressive probing (see below).
+
+## What counts as identified
+
+A working exchange that the verify stage confirms is enough. If a rig
+answers a frequency query with a plausible value but never names itself,
+the engine takes the highest-prior model in that family (from the preset
+selected, the operator's own config, or popularity) and hands it to
+`rigctl`. If the verify suite passes, the model, port, and speed are
+reported as found — the operator is not asked to pick from a list.
+
+## Aggressive probing (future, Advanced option)
+
+The default sweep sends only the identify and read-frequency queries above.
+An **Aggressive** option under Advanced will send more queries per
+candidate — additional read commands, more baud rates, more families —
+accepting that some rigs will log an error or briefly show confusion at an
+unrecognised command. The premise is that no read command in the set can
+damage a radio or change its state; the trade is a longer, noisier sweep
+for a better chance of a match on rare or older rigs. Off by default, and
+still query-only: the aggressive set is a larger allowlist, never a
+different kind of command.

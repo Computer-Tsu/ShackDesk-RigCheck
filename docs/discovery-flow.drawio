@@ -88,7 +88,7 @@
         <mxCell id="p11" value="Frequency reply:&#xa;inside a ham band?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="probe">
           <mxGeometry x="220" y="370" width="160" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="p12" value="Score 0.8 - family confirmed&#xa;model from prior, or ask" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="probe">
+        <mxCell id="p12" value="Score 0.8 - family confirmed&#xa;model = highest prior in family" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="probe">
           <mxGeometry x="220" y="480" width="200" height="60" as="geometry" />
         </mxCell>
         <mxCell id="p13" value="Emit Found: port, model, baud" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="probe">
