@@ -22,6 +22,10 @@ Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for 
 ### Removed
 - Dependency-injection registrations for services and ViewModels not yet implemented
 
+### Fixed
+- rigctl timeout was never detected — `Task.WaitAsync` throws on timeout rather than returning false
+- Missing `System.IO.Ports` and `Serilog.Extensions.Hosting` package references
+
 ## [0.6.0] - 2026-09-20
 
 Project structure and licensing milestone. No functional changes to the application.

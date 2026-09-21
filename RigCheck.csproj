@@ -66,14 +66,15 @@
     <PackageReference Include="Serilog" Version="4.*" />
     <PackageReference Include="Serilog.Sinks.File" Version="6.*" />
     <PackageReference Include="Serilog.Sinks.Debug" Version="3.*" />
-    <PackageReference Include="Serilog.Extensions.Logging" Version="8.*" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="8.*" />
 
     <!-- Microsoft DI container — mirrors PortPane -->
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.*" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.*" />
 
-    <!-- WMI access for COM port enumeration -->
+    <!-- COM port enumeration: WMI for friendly names, SerialPort as fallback -->
     <PackageReference Include="System.Management" Version="8.*" />
+    <PackageReference Include="System.IO.Ports" Version="8.*" />
 
     <!-- CommunityToolkit.Mvvm for RelayCommand, ObservableObject, etc. -->
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.*" />
