@@ -158,6 +158,16 @@ jobs:
           -p:BuildDateUtc=${{ steps.meta.outputs.date }}
           --output ./publish
 
+      - name: Verify single-file output
+        if: steps.meta.outputs.publish == 'true'
+        shell: pwsh
+        run: |
+          # The portable promise is one exe. Satellite resource assemblies
+          # (de\, ja\, …) must be inside it, not beside it. Fail loudly if not.
+          Get-ChildItem ./publish -Recurse | ForEach-Object { "  $($_.FullName.Substring((Resolve-Path ./publish).Path.Length))  $($_.Length)" }
+          $extra = Get-ChildItem ./publish -Recurse -File | Where-Object { $_.Name -ne '${{ env.APP_EXE }}' -and $_.Name -notlike '*.pdb' }
+          if ($extra) { Write-Error "publish/ contains files besides the exe — single-file bundling is incomplete: $($extra.Name -join ', ')" }
+
       - name: Name the exe and compute SHA-256
         if: steps.meta.outputs.publish == 'true'
         shell: pwsh
