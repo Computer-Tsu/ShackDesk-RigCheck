@@ -273,4 +273,109 @@
   <data name="Settings_NotifyHeading" xml:space="preserve"><value>実行が終了したとき</value></data>
   <data name="Settings_NotifyFlash" xml:space="preserve"><value>ウィンドウが背面にある場合、タスクバーのボタンを点滅させる</value></data>
   <data name="Settings_NotifySound" xml:space="preserve"><value>サウンドを再生する</value></data>
+  <data name="Test_EnvWindows" xml:space="preserve"><value>Windows のバージョン</value></data>
+  <data name="Test_EnvHamlib" xml:space="preserve"><value>Hamlib (rigctl.exe)</value></data>
+  <data name="Test_EnvRigctlVersion" xml:space="preserve"><value>rigctl の実行</value></data>
+  <data name="Test_EnvRigctlPath" xml:space="preserve"><value>PATH 上の rigctl</value></data>
+  <data name="Test_EnvRadioModel" xml:space="preserve"><value>選択した無線機</value></data>
+  <data name="Test_EnvSerialDrivers" xml:space="preserve"><value>シリアルポートのドライバー</value></data>
+  <data name="Test_EnvRigctld" xml:space="preserve"><value>rigctld サーバー</value></data>
+  <data name="Test_EnvAutostart" xml:space="preserve"><value>起動時の rigctld</value></data>
+  <data name="Test_EnvFirewall" xml:space="preserve"><value>Windows ファイアウォール</value></data>
+  <data name="Test_EnvRadioApps" xml:space="preserve"><value>インストール済みの無線ソフト</value></data>
+  <data name="Env_CheckFailed" xml:space="preserve"><value>チェックを実行できませんでした: {0}</value></data>
+  <data name="Env_Windows" xml:space="preserve"><value>{0} {1} (ビルド {2}、{3})</value></data>
+  <data name="Env_HamlibNone" xml:space="preserve"><value>見つかりません</value></data>
+  <data name="Env_HamlibNone_Summary" xml:space="preserve"><value>Hamlib がインストールされていないか、RigCheck が探す場所にありません。</value></data>
+  <data name="Env_HamlibNone_1" xml:space="preserve"><value>WSJT-X、Fldigi、または Windows 用の単体 Hamlib をインストールしてください — いずれにも rigctl.exe が含まれています</value></data>
+  <data name="Env_HamlibNone_2" xml:space="preserve"><value>RigCheck は WSJT-X、Fldigi、Hamlib のインストールフォルダーと PATH を探します</value></data>
+  <data name="Env_HamlibOne" xml:space="preserve"><value>使用中: {0}: {1}</value></data>
+  <data name="Env_HamlibMany" xml:space="preserve"><value>{0} 個見つかりました — 使用中: {1}: {2}。その他: {3}</value></data>
+  <data name="Env_SkippedNoHamlib" xml:space="preserve"><value>スキップ — Hamlib が見つかりません</value></data>
+  <data name="Env_RigctlVersionFail" xml:space="preserve"><value>rigctl を実行できませんでした: {0}</value></data>
+  <data name="Env_RigctlVersionFail_Summary" xml:space="preserve"><value>rigctl.exe は見つかりましたが、起動できませんでした。</value></data>
+  <data name="Env_RigctlVersionFail_1" xml:space="preserve"><value>ウイルス対策ソフトが隔離した可能性があります — セキュリティソフトの履歴を確認してください</value></data>
+  <data name="Env_RigctlVersionFail_2" xml:space="preserve"><value>WSJT-X または Hamlib を再インストールして復元してください</value></data>
+  <data name="Env_RigctlPathYes" xml:space="preserve"><value>はい — {0}</value></data>
+  <data name="Env_RigctlPathNo" xml:space="preserve"><value>いいえ — RigCheck が表示するコマンドは通常のコマンドウィンドウでは動作しません</value></data>
+  <data name="Env_RigctlPathNo_Summary" xml:space="preserve"><value>rigctl.exe のあるフォルダーが PATH にありません。</value></data>
+  <data name="Env_RigctlPathNo_1" xml:space="preserve"><value>ここに表示されるコマンドは「rigctl」で始まるだけなので、Windows はその場所を知る必要があります</value></data>
+  <data name="Env_RigctlPathNo_2" xml:space="preserve"><value>下のコマンドを管理者のコマンドプロンプトで実行し、その後で新しいウィンドウを開いてください</value></data>
+  <data name="Env_RadioModel" xml:space="preserve"><value>{0} (Hamlib モデル {1})</value></data>
+  <data name="Env_RadioModelNone" xml:space="preserve"><value>無線機が選択されていません — 「接続」で選択してください</value></data>
+  <data name="Env_RadioModelDummy" xml:space="preserve"><value>Hamlib のダミーリグ (モデル 1) — シミュレーションであり、あなたの無線機ではありません</value></data>
+  <data name="Env_RadioModelDummy_Summary" xml:space="preserve"><value>モデル 1 は Hamlib 内蔵のテスト用リグです。無線機を接続していなくてもすべてのコマンドが成功します。</value></data>
+  <data name="Env_RadioModelDummy_1" xml:space="preserve"><value>結果を信頼する前に、一覧から実際の無線機を選択してください</value></data>
+  <data name="Env_SerialOk" xml:space="preserve"><value>{0} 個のポート、ドライバーの問題なし: {1}</value></data>
+  <data name="Env_SerialNone" xml:space="preserve"><value>Windows に COM ポートが見えません</value></data>
+  <data name="Env_SerialNone_Summary" xml:space="preserve"><value>シリアルポートがありません。</value></data>
+  <data name="Env_SerialNone_1" xml:space="preserve"><value>USB ケーブルを接続し、充電専用ではなくデータケーブルであることを確認してください</value></data>
+  <data name="Env_SerialNone_2" xml:space="preserve"><value>一部の無線機にはメーカー提供のドライバーが必要です (Icom、Yaesu、Kenwood のほとんどの USB ポートには Silicon Labs CP210x)</value></data>
+  <data name="Env_SerialProblem" xml:space="preserve"><value>{0} (問題コード {1})</value></data>
+  <data name="Env_SerialProblem_Summary" xml:space="preserve"><value>シリアルデバイスにドライバーの問題があります。</value></data>
+  <data name="Env_SerialProblem_1" xml:space="preserve"><value>コード 28: ドライバーが未インストール — メーカーの USB ドライバーをインストールしてください</value></data>
+  <data name="Env_SerialProblem_2" xml:space="preserve"><value>コード 10: デバイスを開始できません — 別の USB ポートまたはケーブルを試してください</value></data>
+  <data name="Env_SerialProblem_3" xml:space="preserve"><value>コード 22: デバイスマネージャーでデバイスが無効になっています</value></data>
+  <data name="Env_RigctldListening" xml:space="preserve"><value>ポート {0} で待ち受け中 ({1})</value></data>
+  <data name="Env_RigctldNone" xml:space="preserve"><value>ポート {0} で待ち受けているものはありません — シリアル直結なら問題ありません</value></data>
+  <data name="Env_RigctldNeeded" xml:space="preserve"><value>ポート {0} で待ち受けているものはありませんが、rigctld モードが選択されています</value></data>
+  <data name="Env_RigctldNeeded_Summary" xml:space="preserve"><value>rigctld が実行されていません。</value></data>
+  <data name="Env_RigctldNeeded_1" xml:space="preserve"><value>rigctld は自分で起動してください — WSJT-X や Fldigi は起動してくれません</value></data>
+  <data name="Env_RigctldNeeded_2" xml:space="preserve"><value>または「接続」でシリアル直結に切り替えてください</value></data>
+  <data name="Env_FlrigListening" xml:space="preserve"><value>Flrig もポート {0} で待ち受けています</value></data>
+  <data name="Env_ProcessUnknown" xml:space="preserve"><value>不明なプログラム</value></data>
+  <data name="Env_AutostartNone" xml:space="preserve"><value>未設定 — 通常です。ほとんどの局は手動で起動します</value></data>
+  <data name="Env_AutostartFound" xml:space="preserve"><value>設定済み: {0}</value></data>
+  <data name="Env_FirewallUnreadable" xml:space="preserve"><value>スキップ — ファイアウォールの規則を読み取れませんでした</value></data>
+  <data name="Env_FirewallNone" xml:space="preserve"><value>rigctld の規則はまだありません — 初めて待ち受けるときに Windows が確認するので「許可」を選んでください</value></data>
+  <data name="Env_FirewallAllow" xml:space="preserve"><value>rigctld の許可規則があります</value></data>
+  <data name="Env_FirewallBlock" xml:space="preserve"><value>rigctld のブロック規則が存在します</value></data>
+  <data name="Env_FirewallBlock_Summary" xml:space="preserve"><value>Windows ファイアウォールが rigctld をブロックしています。</value></data>
+  <data name="Env_FirewallBlock_1" xml:space="preserve"><value>rigctld を初めて実行したときにファイアウォールの確認で「キャンセル」を押したことが原因であることがほとんどです</value></data>
+  <data name="Env_FirewallBlock_2" xml:space="preserve"><value>Windows セキュリティ › ファイアウォールとネットワーク保護 › ファイアウォールによるアプリケーションの許可 — プライベートネットワークで rigctld にチェックを入れてください</value></data>
+  <data name="Env_AppsNone" xml:space="preserve"><value>WSJT-X、Fldigi、JS8Call、Flrig、Winlink Express のいずれも見つかりません</value></data>
+  <data name="Status_Scanning" xml:space="preserve"><value>この PC をスキャン中…</value></data>
+  <data name="Status_ScanDone" xml:space="preserve"><value>スキャン完了 — 要確認の項目: {0} 件</value></data>
+  <data name="Main_Scan" xml:space="preserve"><value>PC をスキャン</value></data>
+  <data name="Main_ScanTip" xml:space="preserve"><value>この PC の Hamlib、ドライバー、rigctld、ファイアウォールを確認します — 無線機は不要です。クリックしたときだけ実行されます。</value></data>
+  <data name="Main_FindRadio" xml:space="preserve"><value>無線機を探す</value></data>
+  <data name="Main_FindRadioTip" xml:space="preserve"><value>チェックした COM ポートを読み取り専用の問い合わせで走査し、無線機が応答したら検証して「接続」パネルに設定を入れます。送信機を送信状態にすることはありません。</value></data>
+  <data name="Discovery_Title" xml:space="preserve"><value>無線機を探す</value></data>
+  <data name="Discovery_Intro" xml:space="preserve"><value>RigCheck が開いてよいポートにチェックを入れてください。送るのは読み取りコマンド（識別、周波数の読み取り）だけで、数種類の速度を試し、各ポートで最初に応答した無線機で止まります。</value></data>
+  <data name="Discovery_NoPorts" xml:space="preserve"><value>COM ポートが見つかりません。無線機の USB または シリアルケーブルを接続して、もう一度お試しください。</value></data>
+  <data name="Discovery_Safety" xml:space="preserve"><value>RTS と DTR は決して有効にしません — 多くのインターフェースではこれが PTT の線だからです。ローテーター、アンプ、GPS、Bluetooth に見えるポートは最初はチェックが外れています。</value></data>
+  <data name="Discovery_SkipReason" xml:space="preserve"><value>{0}のようです — チェック解除中。確実な場合だけチェックしてください</value></data>
+  <data name="Discovery_Start" xml:space="preserve"><value>開始</value></data>
+  <data name="DeviceClass_rotator" xml:space="preserve"><value>ローテーターコントローラー</value></data>
+  <data name="DeviceClass_amplifier" xml:space="preserve"><value>アンプ</value></data>
+  <data name="DeviceClass_antenna" xml:space="preserve"><value>アンテナコントローラー</value></data>
+  <data name="DeviceClass_gps" xml:space="preserve"><value>GPS 受信機</value></data>
+  <data name="DeviceClass_bluetooth" xml:space="preserve"><value>Bluetooth 接続</value></data>
+  <data name="Status_Discovering" xml:space="preserve"><value>無線機を探しています…</value></data>
+  <data name="Status_DiscoveredOne" xml:space="preserve"><value>発見・検証済み: {1} の {0} — 「接続」パネルに設定しました</value></data>
+  <data name="Status_DiscoveredMany" xml:space="preserve"><value>動作する接続が {0} 件見つかりました — {2} の {1} を使用します</value></data>
+  <data name="Status_DiscoveredUnverified" xml:space="preserve"><value>無線機は応答しましたが、Hamlib のテストに合格しませんでした — 結果をご覧ください</value></data>
+  <data name="Status_DiscoveredNone" xml:space="preserve"><value>チェックしたポートでは無線機が応答しませんでした</value></data>
+  <data name="Status_DiscoveryTimeout" xml:space="preserve"><value>無線機の検索を中止しました — 時間がかかりすぎました</value></data>
+  <data name="Disc_Start" xml:space="preserve"><value>{0} 個のポートを走査中</value></data>
+  <data name="Disc_SkippedClass" xml:space="preserve"><value>{0}: スキップ — {1}のようです</value></data>
+  <data name="Disc_InUse" xml:space="preserve"><value>{0}: 他のプログラムが使用中です（WSJT-X、Fldigi、rigctld がすでに使っています — それが動作している経路です）</value></data>
+  <data name="Disc_OpenFailed" xml:space="preserve"><value>{0}: 開けませんでした — {1}</value></data>
+  <data name="Disc_Trying" xml:space="preserve"><value>{0}、{1} ボー — {2}</value></data>
+  <data name="Disc_NoReply" xml:space="preserve"><value>応答なし</value></data>
+  <data name="Disc_Garbage" xml:space="preserve"><value>バイトは返ってきましたが認識できません — おそらく速度が違います</value></data>
+  <data name="Disc_Acknowledged" xml:space="preserve"><value>{0} の無線機が {1} ボーで応答しましたが、機種名は返しませんでした</value></data>
+  <data name="Disc_FrequencyReply" xml:space="preserve"><value>周波数の応答: {0} MHz{1}</value></data>
+  <data name="Disc_InBand" xml:space="preserve"><value>（アマチュアバンド内）</value></data>
+  <data name="Disc_SharedId" xml:space="preserve"><value>{0} は {1} で共通です — {2} を使用します</value></data>
+  <data name="Disc_UnknownId" xml:space="preserve"><value>{0} は {1} の RigCheck の一覧にまだありません — ファミリーの既定値を使用します。報告をお願いします</value></data>
+  <data name="Disc_Found" xml:space="preserve"><value>{2} の {3} ボーで {0}（Hamlib モデル {1}）を発見</value></data>
+  <data name="Disc_FoundRigctld" xml:space="preserve"><value>rigctld がすでにポート {0} で動作しています — これは動作する接続です</value></data>
+  <data name="Disc_FlrigSeen" xml:space="preserve"><value>Flrig がポート 12345 で動作しています（経由するには Hamlib モデル 4 を使用）</value></data>
+  <data name="Disc_NoAnswer" xml:space="preserve"><value>{0}: 無線機の応答なし</value></data>
+  <data name="Disc_Verifying" xml:space="preserve"><value>rigctl で {1} の {0}（{2} ボー）を検証中</value></data>
+  <data name="Disc_Verified" xml:space="preserve"><value>{1} の {0} は Hamlib のテストに合格しました</value></data>
+  <data name="Disc_VerifyFailed" xml:space="preserve"><value>{1} の {0}: {2} 件のテストが失敗</value></data>
+  <data name="Disc_Applied" xml:space="preserve"><value>「接続」パネルを {0}（モデル {1}）、{2}、{3} ボーに設定しました — 「テストを実行」はこの設定を使います</value></data>
+  <data name="Export_Transcript" xml:space="preserve"><value>「無線機を探す」の記録</value></data>
 </root>

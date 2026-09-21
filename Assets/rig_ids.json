@@ -1,0 +1,43 @@
+[
+  {
+    "_comment": "RigCheck by ShackDesk — how a radio names itself, mapped to its Hamlib model number. Kenwood, Elecraft, and Yaesu CAT rigs answer 'ID;' with 'IDnnn;'. Icom rigs answer a CI-V read-ID with their own CI-V address (two hex digits); Reply holds that address. Where several rigs share one reply (Elecraft K3 / KX3 / KX2 all answer ID017;), the first entry is the default and the others are listed so a selected preset can override. Model numbers follow Hamlib's riglist.h: thousands = backend (1 Yaesu, 2 Kenwood/Elecraft, 3 Icom). Validate at jsonlint.com; corrections and additions welcome — see CONTRIBUTING.md."
+  },
+
+  { "Family": "Kenwood", "Reply": "ID019;", "Name": "Kenwood TS-2000",  "HamlibModelId": 2014 },
+  { "Family": "Kenwood", "Reply": "ID020;", "Name": "Kenwood TS-480",   "HamlibModelId": 2028 },
+  { "Family": "Kenwood", "Reply": "ID021;", "Name": "Kenwood TS-590S",  "HamlibModelId": 2031 },
+  { "Family": "Kenwood", "Reply": "ID023;", "Name": "Kenwood TS-590SG", "HamlibModelId": 2037 },
+  { "Family": "Kenwood", "Reply": "ID024;", "Name": "Kenwood TS-890S",  "HamlibModelId": 2041 },
+
+  { "Family": "Kenwood", "Reply": "ID017;", "Name": "Elecraft K3",  "HamlibModelId": 2029 },
+  { "Family": "Kenwood", "Reply": "ID017;", "Name": "Elecraft KX3", "HamlibModelId": 2045 },
+  { "Family": "Kenwood", "Reply": "ID017;", "Name": "Elecraft KX2", "HamlibModelId": 2044 },
+
+  { "Family": "YaesuCat", "Reply": "ID0251;", "Name": "Yaesu FT-2000",    "HamlibModelId": 1029 },
+  { "Family": "YaesuCat", "Reply": "ID0241;", "Name": "Yaesu FT-450",     "HamlibModelId": 1033 },
+  { "Family": "YaesuCat", "Reply": "ID0310;", "Name": "Yaesu FT-950",     "HamlibModelId": 1034 },
+  { "Family": "YaesuCat", "Reply": "ID0362;", "Name": "Yaesu FTDX5000",   "HamlibModelId": 1032 },
+  { "Family": "YaesuCat", "Reply": "ID0462;", "Name": "Yaesu FTDX3000",   "HamlibModelId": 1037 },
+  { "Family": "YaesuCat", "Reply": "ID0583;", "Name": "Yaesu FTDX1200",   "HamlibModelId": 1038 },
+  { "Family": "YaesuCat", "Reply": "ID0570;", "Name": "Yaesu FT-991",     "HamlibModelId": 1035 },
+  { "Family": "YaesuCat", "Reply": "ID0670;", "Name": "Yaesu FT-991A",    "HamlibModelId": 1035 },
+  { "Family": "YaesuCat", "Reply": "ID0650;", "Name": "Yaesu FT-891",     "HamlibModelId": 1036 },
+  { "Family": "YaesuCat", "Reply": "ID0681;", "Name": "Yaesu FTDX101D",   "HamlibModelId": 1040 },
+  { "Family": "YaesuCat", "Reply": "ID0682;", "Name": "Yaesu FTDX101MP",  "HamlibModelId": 1041 },
+  { "Family": "YaesuCat", "Reply": "ID0761;", "Name": "Yaesu FTDX10",     "HamlibModelId": 1042 },
+
+  { "Family": "Icom", "Reply": "58", "Name": "Icom IC-706MkIIG", "HamlibModelId": 3020 },
+  { "Family": "Icom", "Reply": "5E", "Name": "Icom IC-718",      "HamlibModelId": 3021 },
+  { "Family": "Icom", "Reply": "6A", "Name": "Icom IC-7800",     "HamlibModelId": 3037 },
+  { "Family": "Icom", "Reply": "74", "Name": "Icom IC-7700",     "HamlibModelId": 3062 },
+  { "Family": "Icom", "Reply": "76", "Name": "Icom IC-7200",     "HamlibModelId": 3061 },
+  { "Family": "Icom", "Reply": "7A", "Name": "Icom IC-7600",     "HamlibModelId": 3049 },
+  { "Family": "Icom", "Reply": "7C", "Name": "Icom IC-9100",     "HamlibModelId": 3068 },
+  { "Family": "Icom", "Reply": "80", "Name": "Icom IC-7410",     "HamlibModelId": 3067 },
+  { "Family": "Icom", "Reply": "88", "Name": "Icom IC-7100",     "HamlibModelId": 3070 },
+  { "Family": "Icom", "Reply": "8E", "Name": "Icom IC-7851",     "HamlibModelId": 3075 },
+  { "Family": "Icom", "Reply": "94", "Name": "Icom IC-7300",     "HamlibModelId": 3073 },
+  { "Family": "Icom", "Reply": "98", "Name": "Icom IC-7610",     "HamlibModelId": 3078 },
+  { "Family": "Icom", "Reply": "A2", "Name": "Icom IC-9700",     "HamlibModelId": 3081 },
+  { "Family": "Icom", "Reply": "A4", "Name": "Icom IC-705",      "HamlibModelId": 3085 }
+]

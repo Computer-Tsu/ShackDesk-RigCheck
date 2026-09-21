@@ -16,11 +16,11 @@ starting from nothing, and it is the most useful thing you can do.
 <!-- coverage:start -->
 | Language | File | Coverage | Status |
 | --- | --- | --- | --- |
-| English (source) | `Strings.resx` | 100% (238 of 238) | Source |
-| German (`de`) | `Strings.de.resx` | 100% (238 of 238) | Machine translated — review wanted |
-| Spanish (`es`) | `Strings.es.resx` | 100% (238 of 238) | Machine translated — review wanted |
-| French (`fr`) | `Strings.fr.resx` | 100% (238 of 238) | Machine translated — review wanted |
-| Japanese (`ja`) | `Strings.ja.resx` | 100% (238 of 238) | Machine translated — review wanted |
+| English (source) | `Strings.resx` | 100% (343 of 343) | Source |
+| German (`de`) | `Strings.de.resx` | 100% (343 of 343) | Machine translated — review wanted |
+| Spanish (`es`) | `Strings.es.resx` | 100% (343 of 343) | Machine translated — review wanted |
+| French (`fr`) | `Strings.fr.resx` | 100% (343 of 343) | Machine translated — review wanted |
+| Japanese (`ja`) | `Strings.ja.resx` | 100% (343 of 343) | Machine translated — review wanted |
 <!-- coverage:end -->
 
 ---
@@ -93,4 +93,4 @@ appears on the repository's contributors page.
 
 ## Questions
 
-Ask in [Discussions](https://github.com/Computer-Tsu/ShackDesk-RigCheck/discussions).
+Ask in the [Translations](https://github.com/Computer-Tsu/ShackDesk-RigCheck/discussions/categories/translations) category of Discussions.

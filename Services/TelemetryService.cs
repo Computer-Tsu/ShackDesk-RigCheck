@@ -80,6 +80,28 @@ public sealed class TelemetryService
             }),
         });
 
+    /// <summary>
+    /// Outcome of a Find my radio run: how many ports were swept and what
+    /// answered. Model, family, baud, and score per find — this is the data
+    /// that improves the family weights and baud orders in rig_families.json.
+    /// No port names or bytes.
+    /// </summary>
+    public Task ReportDiscoveryAsync(int portsSwept, IReadOnlyList<DiscoveredRig> found, IReadOnlyList<DiscoveredRig> verified) =>
+        ReportAsync("discovery", new Dictionary<string, object?>
+        {
+            ["ports_swept"] = portsSwept,
+            ["found"]       = found.Count,
+            ["verified"]    = verified.Count,
+            ["rigs"]        = found.Select(r => new
+            {
+                family   = r.FamilyId,
+                model_id = r.HamlibModelId,
+                baud     = r.Baud,
+                score    = r.Score,
+                verified = verified.Contains(r),
+            }),
+        });
+
     /// <summary>Exception type and message only — never the stack trace, which can contain file paths.</summary>
     public Task ReportCrashAsync(Exception ex) =>
         ReportAsync("crash", new Dictionary<string, object?>

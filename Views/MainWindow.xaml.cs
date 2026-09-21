@@ -18,13 +18,16 @@ public partial class MainWindow : Window
     private readonly MainViewModel          _vm;
     private readonly SettingsService        _settings;
     private readonly TelemetryService       _telemetry;
+    private readonly DiscoveryDataService   _discoveryData;
     private readonly ResultsDocumentBuilder _resultsDoc = new();
 
-    public MainWindow(MainViewModel vm, SettingsService settings, TelemetryService telemetry)
+    public MainWindow(MainViewModel vm, SettingsService settings, TelemetryService telemetry,
+                      DiscoveryDataService discoveryData)
     {
-        _vm        = vm;
-        _settings  = settings;
-        _telemetry = telemetry;
+        _vm            = vm;
+        _settings      = settings;
+        _telemetry     = telemetry;
+        _discoveryData = discoveryData;
         // Set DataContext before InitializeComponent so bindings resolve on first layout
         DataContext = vm;
         InitializeComponent();
@@ -70,6 +73,17 @@ public partial class MainWindow : Window
 
     private void About_Click(object sender, RoutedEventArgs e) =>
         new AboutDialog(_settings.Current.InstallId) { Owner = this }.ShowDialog();
+
+    // Find my radio: the operator ticks the ports it may open, then the
+    // ViewModel runs the sweep. Refreshing first catches a cable plugged in
+    // since the window opened.
+    private void FindRadio_Click(object sender, RoutedEventArgs e)
+    {
+        _vm.Connection.RefreshPorts();
+        var dlg = new DiscoveryDialog(_vm.Connection.AvailablePorts.ToList(), _discoveryData) { Owner = this };
+        if (dlg.ShowDialog() == true)
+            _ = _vm.FindRadioCommand.ExecuteAsync(dlg.SelectedPorts);
+    }
 
     // ── Window placement ──────────────────────────────────────────────────
     // Width and height are bound directly to settings in XAML. Left/Top are

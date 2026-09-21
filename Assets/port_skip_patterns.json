@@ -1,0 +1,16 @@
+[
+  {
+    "_comment": "RigCheck by ShackDesk — COM ports whose name contains any of these (case-insensitive) are classified as that DeviceClass and never opened by Find my radio. Stray bytes to a rotator, amplifier, or antenna controller are a real-world hazard, and GPS pucks and Bluetooth links are never a radio CAT port. The operator can still tick such a port by hand. The same classes will drive future device-specific discovery (rotators, GPS, loggers) with their own protocol families. Add entries by pull request — see CONTRIBUTING.md."
+  },
+  { "Pattern": "rotor",       "DeviceClass": "rotator" },
+  { "Pattern": "rotator",     "DeviceClass": "rotator" },
+  { "Pattern": "GS-232",      "DeviceClass": "rotator" },
+  { "Pattern": "amplifier",   "DeviceClass": "amplifier" },
+  { "Pattern": "SPE Expert",  "DeviceClass": "amplifier" },
+  { "Pattern": "SteppIR",     "DeviceClass": "antenna" },
+  { "Pattern": "GPS",         "DeviceClass": "gps" },
+  { "Pattern": "u-blox",      "DeviceClass": "gps" },
+  { "Pattern": "NMEA",        "DeviceClass": "gps" },
+  { "Pattern": "Garmin",      "DeviceClass": "gps" },
+  { "Pattern": "Bluetooth",   "DeviceClass": "bluetooth" }
+]

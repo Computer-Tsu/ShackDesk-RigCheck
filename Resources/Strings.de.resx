@@ -273,4 +273,109 @@ Fortfahren?</value></data>
   <data name="Settings_NotifyHeading" xml:space="preserve"><value>Wenn ein Durchlauf beendet ist</value></data>
   <data name="Settings_NotifyFlash" xml:space="preserve"><value>Taskleistenschaltfläche blinken lassen, wenn das Fenster im Hintergrund ist</value></data>
   <data name="Settings_NotifySound" xml:space="preserve"><value>Einen Ton abspielen</value></data>
+  <data name="Test_EnvWindows" xml:space="preserve"><value>Windows-Version</value></data>
+  <data name="Test_EnvHamlib" xml:space="preserve"><value>Hamlib (rigctl.exe)</value></data>
+  <data name="Test_EnvRigctlVersion" xml:space="preserve"><value>rigctl läuft</value></data>
+  <data name="Test_EnvRigctlPath" xml:space="preserve"><value>rigctl im PATH</value></data>
+  <data name="Test_EnvRadioModel" xml:space="preserve"><value>Ausgewähltes Funkgerät</value></data>
+  <data name="Test_EnvSerialDrivers" xml:space="preserve"><value>Treiber der seriellen Schnittstellen</value></data>
+  <data name="Test_EnvRigctld" xml:space="preserve"><value>rigctld-Server</value></data>
+  <data name="Test_EnvAutostart" xml:space="preserve"><value>rigctld beim Systemstart</value></data>
+  <data name="Test_EnvFirewall" xml:space="preserve"><value>Windows-Firewall</value></data>
+  <data name="Test_EnvRadioApps" xml:space="preserve"><value>Installierte Funksoftware</value></data>
+  <data name="Env_CheckFailed" xml:space="preserve"><value>Prüfung konnte nicht ausgeführt werden: {0}</value></data>
+  <data name="Env_Windows" xml:space="preserve"><value>{0} {1} (Build {2}, {3})</value></data>
+  <data name="Env_HamlibNone" xml:space="preserve"><value>Nicht gefunden</value></data>
+  <data name="Env_HamlibNone_Summary" xml:space="preserve"><value>Hamlib ist nicht installiert oder nicht dort, wo RigCheck sucht.</value></data>
+  <data name="Env_HamlibNone_1" xml:space="preserve"><value>Installieren Sie WSJT-X, Fldigi oder das eigenständige Hamlib für Windows — jedes enthält rigctl.exe</value></data>
+  <data name="Env_HamlibNone_2" xml:space="preserve"><value>RigCheck sucht in den Installationsordnern von WSJT-X, Fldigi und Hamlib sowie im PATH</value></data>
+  <data name="Env_HamlibOne" xml:space="preserve"><value>Verwendet {0}: {1}</value></data>
+  <data name="Env_HamlibMany" xml:space="preserve"><value>{0} Kopien gefunden — verwendet {1}: {2}. Außerdem: {3}</value></data>
+  <data name="Env_SkippedNoHamlib" xml:space="preserve"><value>Übersprungen — Hamlib nicht gefunden</value></data>
+  <data name="Env_RigctlVersionFail" xml:space="preserve"><value>rigctl wurde nicht ausgeführt: {0}</value></data>
+  <data name="Env_RigctlVersionFail_Summary" xml:space="preserve"><value>rigctl.exe wurde gefunden, konnte aber nicht gestartet werden.</value></data>
+  <data name="Env_RigctlVersionFail_1" xml:space="preserve"><value>Möglicherweise hat der Virenschutz die Datei in Quarantäne verschoben — prüfen Sie den Verlauf der Sicherheitssoftware</value></data>
+  <data name="Env_RigctlVersionFail_2" xml:space="preserve"><value>Installieren Sie WSJT-X oder Hamlib neu, um die Datei wiederherzustellen</value></data>
+  <data name="Env_RigctlPathYes" xml:space="preserve"><value>Ja — {0}</value></data>
+  <data name="Env_RigctlPathNo" xml:space="preserve"><value>Nein — die von RigCheck angezeigten Befehle laufen in einem normalen Eingabeaufforderungsfenster nicht</value></data>
+  <data name="Env_RigctlPathNo_Summary" xml:space="preserve"><value>Der Ordner mit rigctl.exe ist nicht im PATH.</value></data>
+  <data name="Env_RigctlPathNo_1" xml:space="preserve"><value>Die hier gezeigten Befehle beginnen nur mit „rigctl“; Windows muss wissen, wo diese Datei liegt</value></data>
+  <data name="Env_RigctlPathNo_2" xml:space="preserve"><value>Führen Sie den folgenden Befehl in einer Administrator-Eingabeaufforderung aus und öffnen Sie danach ein neues Fenster</value></data>
+  <data name="Env_RadioModel" xml:space="preserve"><value>{0} (Hamlib-Modell {1})</value></data>
+  <data name="Env_RadioModelNone" xml:space="preserve"><value>Kein Funkgerät gewählt — wählen Sie eines unter Verbindung</value></data>
+  <data name="Env_RadioModelDummy" xml:space="preserve"><value>Hamlib-Dummy-Gerät (Modell 1) — eine Simulation, nicht Ihr Funkgerät</value></data>
+  <data name="Env_RadioModelDummy_Summary" xml:space="preserve"><value>Modell 1 ist das eingebaute Testgerät von Hamlib. Jeder Befehl gelingt, ohne dass ein Funkgerät angeschlossen ist.</value></data>
+  <data name="Env_RadioModelDummy_1" xml:space="preserve"><value>Wählen Sie Ihr tatsächliches Funkgerät aus der Liste, bevor Sie einem Ergebnis vertrauen</value></data>
+  <data name="Env_SerialOk" xml:space="preserve"><value>{0} Schnittstelle(n), keine Treiberprobleme: {1}</value></data>
+  <data name="Env_SerialNone" xml:space="preserve"><value>Windows sieht keine COM-Schnittstellen</value></data>
+  <data name="Env_SerialNone_Summary" xml:space="preserve"><value>Es ist keine serielle Schnittstelle vorhanden.</value></data>
+  <data name="Env_SerialNone_1" xml:space="preserve"><value>Stecken Sie das USB-Kabel ein und prüfen Sie, ob es ein Datenkabel ist und kein reines Ladekabel</value></data>
+  <data name="Env_SerialNone_2" xml:space="preserve"><value>Manche Funkgeräte brauchen einen Treiber des Herstellers (Silicon Labs CP210x für die meisten USB-Anschlüsse von Icom, Yaesu und Kenwood)</value></data>
+  <data name="Env_SerialProblem" xml:space="preserve"><value>{0} (Problemcode {1})</value></data>
+  <data name="Env_SerialProblem_Summary" xml:space="preserve"><value>Ein serielles Gerät hat ein Treiberproblem.</value></data>
+  <data name="Env_SerialProblem_1" xml:space="preserve"><value>Code 28: kein Treiber installiert — installieren Sie den USB-Treiber des Herstellers</value></data>
+  <data name="Env_SerialProblem_2" xml:space="preserve"><value>Code 10: das Gerät kann nicht gestartet werden — versuchen Sie einen anderen USB-Anschluss oder ein anderes Kabel</value></data>
+  <data name="Env_SerialProblem_3" xml:space="preserve"><value>Code 22: das Gerät ist im Geräte-Manager deaktiviert</value></data>
+  <data name="Env_RigctldListening" xml:space="preserve"><value>Lauscht auf Port {0} ({1})</value></data>
+  <data name="Env_RigctldNone" xml:space="preserve"><value>Nichts lauscht auf Port {0} — für direkte serielle Verbindung in Ordnung</value></data>
+  <data name="Env_RigctldNeeded" xml:space="preserve"><value>Nichts lauscht auf Port {0}, aber der rigctld-Modus ist ausgewählt</value></data>
+  <data name="Env_RigctldNeeded_Summary" xml:space="preserve"><value>rigctld läuft nicht.</value></data>
+  <data name="Env_RigctldNeeded_1" xml:space="preserve"><value>Starten Sie rigctld selbst — WSJT-X und Fldigi starten es nicht für Sie</value></data>
+  <data name="Env_RigctldNeeded_2" xml:space="preserve"><value>Oder wechseln Sie unter Verbindung zur direkten seriellen Verbindung</value></data>
+  <data name="Env_FlrigListening" xml:space="preserve"><value>Flrig lauscht ebenfalls auf Port {0}</value></data>
+  <data name="Env_ProcessUnknown" xml:space="preserve"><value>unbekanntes Programm</value></data>
+  <data name="Env_AutostartNone" xml:space="preserve"><value>Nicht eingerichtet — normal, die meisten Funkamateure starten es von Hand</value></data>
+  <data name="Env_AutostartFound" xml:space="preserve"><value>Eingerichtet: {0}</value></data>
+  <data name="Env_FirewallUnreadable" xml:space="preserve"><value>Übersprungen — Firewall-Regeln konnten nicht gelesen werden</value></data>
+  <data name="Env_FirewallNone" xml:space="preserve"><value>Noch keine Regel für rigctld — Windows fragt beim ersten Lauschen; wählen Sie Zulassen</value></data>
+  <data name="Env_FirewallAllow" xml:space="preserve"><value>Zulassen-Regel für rigctld vorhanden</value></data>
+  <data name="Env_FirewallBlock" xml:space="preserve"><value>Für rigctld existiert eine Blockieren-Regel</value></data>
+  <data name="Env_FirewallBlock_Summary" xml:space="preserve"><value>Die Windows-Firewall blockiert rigctld.</value></data>
+  <data name="Env_FirewallBlock_1" xml:space="preserve"><value>Das kommt meist davon, dass beim ersten Start von rigctld in der Firewall-Abfrage auf Abbrechen geklickt wurde</value></data>
+  <data name="Env_FirewallBlock_2" xml:space="preserve"><value>Windows-Sicherheit › Firewall &amp; Netzwerkschutz › Eine App durch die Firewall zulassen — rigctld für private Netzwerke aktivieren</value></data>
+  <data name="Env_AppsNone" xml:space="preserve"><value>Weder WSJT-X, Fldigi, JS8Call, Flrig noch Winlink Express gefunden</value></data>
+  <data name="Status_Scanning" xml:space="preserve"><value>Dieser PC wird geprüft…</value></data>
+  <data name="Status_ScanDone" xml:space="preserve"><value>Prüfung abgeschlossen — {0} Punkt(e) brauchen Aufmerksamkeit</value></data>
+  <data name="Main_Scan" xml:space="preserve"><value>PC prüfen</value></data>
+  <data name="Main_ScanTip" xml:space="preserve"><value>Hamlib, Treiber, rigctld und die Firewall auf diesem PC prüfen — kein Funkgerät nötig. Läuft nur, wenn Sie darauf klicken.</value></data>
+  <data name="Main_FindRadio" xml:space="preserve"><value>Mein Funkgerät finden</value></data>
+  <data name="Main_FindRadioTip" xml:space="preserve"><value>Durchsucht die angehakten COM-Schnittstellen mit reinen Leseabfragen, bis ein Funkgerät antwortet, prüft es und füllt die Verbindungseinstellungen aus. Tastet nie den Sender.</value></data>
+  <data name="Discovery_Title" xml:space="preserve"><value>Mein Funkgerät finden</value></data>
+  <data name="Discovery_Intro" xml:space="preserve"><value>Haken Sie die Schnittstellen an, die RigCheck öffnen darf. Es sendet nur Lesebefehle (Identifizieren, Frequenz lesen) mit einigen Geschwindigkeiten und hört pro Schnittstelle beim ersten antwortenden Funkgerät auf.</value></data>
+  <data name="Discovery_NoPorts" xml:space="preserve"><value>Keine COM-Schnittstellen gefunden. Stecken Sie das USB- oder serielle Kabel des Funkgeräts ein und versuchen Sie es erneut.</value></data>
+  <data name="Discovery_Safety" xml:space="preserve"><value>RTS und DTR werden nie gesetzt — bei vielen Interfaces sind sie die PTT-Leitung. Schnittstellen, die nach Rotor, Endstufe, GPS oder Bluetooth aussehen, sind zunächst nicht angehakt.</value></data>
+  <data name="Discovery_SkipReason" xml:space="preserve"><value>Sieht aus wie {0} — nicht angehakt; nur anhaken, wenn Sie sicher sind</value></data>
+  <data name="Discovery_Start" xml:space="preserve"><value>Starten</value></data>
+  <data name="DeviceClass_rotator" xml:space="preserve"><value>eine Rotorsteuerung</value></data>
+  <data name="DeviceClass_amplifier" xml:space="preserve"><value>eine Endstufe</value></data>
+  <data name="DeviceClass_antenna" xml:space="preserve"><value>eine Antennensteuerung</value></data>
+  <data name="DeviceClass_gps" xml:space="preserve"><value>ein GPS-Empfänger</value></data>
+  <data name="DeviceClass_bluetooth" xml:space="preserve"><value>eine Bluetooth-Verbindung</value></data>
+  <data name="Status_Discovering" xml:space="preserve"><value>Suche nach Ihrem Funkgerät…</value></data>
+  <data name="Status_DiscoveredOne" xml:space="preserve"><value>Gefunden und geprüft: {0} an {1} — Verbindungseinstellungen ausgefüllt</value></data>
+  <data name="Status_DiscoveredMany" xml:space="preserve"><value>{0} funktionierende Verbindungen gefunden — verwendet {1} an {2}</value></data>
+  <data name="Status_DiscoveredUnverified" xml:space="preserve"><value>Ein Funkgerät hat geantwortet, aber die Hamlib-Tests sind nicht bestanden — siehe Ergebnisse</value></data>
+  <data name="Status_DiscoveredNone" xml:space="preserve"><value>An den angehakten Schnittstellen hat kein Funkgerät geantwortet</value></data>
+  <data name="Status_DiscoveryTimeout" xml:space="preserve"><value>Suche abgebrochen — sie hat zu lange gedauert</value></data>
+  <data name="Disc_Start" xml:space="preserve"><value>Durchsuche {0} Schnittstelle(n)</value></data>
+  <data name="Disc_SkippedClass" xml:space="preserve"><value>{0}: übersprungen — sieht aus wie {1}</value></data>
+  <data name="Disc_InUse" xml:space="preserve"><value>{0}: von einem anderen Programm belegt (WSJT-X, Fldigi oder rigctld hat sie bereits — das ist der funktionierende Weg)</value></data>
+  <data name="Disc_OpenFailed" xml:space="preserve"><value>{0}: konnte nicht geöffnet werden — {1}</value></data>
+  <data name="Disc_Trying" xml:space="preserve"><value>{0} mit {1} Baud — {2}</value></data>
+  <data name="Disc_NoReply" xml:space="preserve"><value>keine Antwort</value></data>
+  <data name="Disc_Garbage" xml:space="preserve"><value>es kamen Bytes zurück, aber nichts Erkennbares — vermutlich die falsche Geschwindigkeit</value></data>
+  <data name="Disc_Acknowledged" xml:space="preserve"><value>ein {0}-Gerät hat mit {1} Baud geantwortet, sich aber nicht identifiziert</value></data>
+  <data name="Disc_FrequencyReply" xml:space="preserve"><value>Frequenzantwort: {0} MHz{1}</value></data>
+  <data name="Disc_InBand" xml:space="preserve"><value>(innerhalb eines Amateurfunkbands)</value></data>
+  <data name="Disc_SharedId" xml:space="preserve"><value>{0} wird von {1} geteilt — verwendet {2}</value></data>
+  <data name="Disc_UnknownId" xml:space="preserve"><value>{0} steht für {1} noch nicht in der Liste von RigCheck — verwendet die Familienvorgabe; bitte melden</value></data>
+  <data name="Disc_Found" xml:space="preserve"><value>{0} (Hamlib-Modell {1}) an {2} mit {3} Baud gefunden</value></data>
+  <data name="Disc_FoundRigctld" xml:space="preserve"><value>rigctld läuft bereits auf Port {0} — das ist eine funktionierende Verbindung</value></data>
+  <data name="Disc_FlrigSeen" xml:space="preserve"><value>Flrig läuft auf Port 12345 (Hamlib-Modell 4 verbindet darüber)</value></data>
+  <data name="Disc_NoAnswer" xml:space="preserve"><value>{0}: kein Funkgerät hat geantwortet</value></data>
+  <data name="Disc_Verifying" xml:space="preserve"><value>Prüfe {0} an {1} mit {2} Baud über rigctl</value></data>
+  <data name="Disc_Verified" xml:space="preserve"><value>{0} an {1} hat die Hamlib-Tests bestanden</value></data>
+  <data name="Disc_VerifyFailed" xml:space="preserve"><value>{0} an {1}: {2} Test(s) fehlgeschlagen</value></data>
+  <data name="Disc_Applied" xml:space="preserve"><value>Verbindungseinstellungen auf {0} (Modell {1}), {2}, {3} Baud gesetzt — Tests ausführen verwendet diese jetzt</value></data>
+  <data name="Export_Transcript" xml:space="preserve"><value>PROTOKOLL „MEIN FUNKGERÄT FINDEN“</value></data>
 </root>

@@ -17,6 +17,8 @@ namespace RigCheck.ViewModels;
 public partial class MainViewModel : ObservableObject
 {
     private readonly TestRunnerService   _testRunner;
+    private readonly EnvironmentCheckService _envCheck;
+    private readonly DiscoveryEngine     _discovery;
     private readonly LogExportService    _logExport;
     private readonly HamlibLocatorService _hamlib;
     private readonly SettingsService     _settings;
@@ -28,7 +30,9 @@ public partial class MainViewModel : ObservableObject
 
     // ── Observable state ─────────────────────────────────────────────────
 
-    [ObservableProperty] private bool   _isRunning;
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(RunTestsCommand), nameof(ScanEnvironmentCommand), nameof(FindRadioCommand))]
+    private bool   _isRunning;
     [ObservableProperty] private bool   _rawConsoleVisible;
     [ObservableProperty] private bool   _chromeVisible;
     [ObservableProperty] private bool   _alwaysOnTop;
@@ -60,6 +64,8 @@ public partial class MainViewModel : ObservableObject
         TestResultsViewModel results,
         RawConsoleViewModel  rawConsole,
         TestRunnerService    testRunner,
+        EnvironmentCheckService envCheck,
+        DiscoveryEngine      discovery,
         LogExportService     logExport,
         HamlibLocatorService hamlib,
         SettingsService      settings,
@@ -69,6 +75,8 @@ public partial class MainViewModel : ObservableObject
         Results     = results;
         RawConsole  = rawConsole;
         _testRunner = testRunner;
+        _envCheck   = envCheck;
+        _discovery  = discovery;
         _logExport  = logExport;
         _hamlib     = hamlib;
         _settings   = settings;
@@ -98,7 +106,7 @@ public partial class MainViewModel : ObservableObject
     {
         IsRunning = true;
         StatusMessage = Strings.Get("Status_Running");
-        Results.Clear();
+        Results.Clear(TestRunnerService.SuiteTests);
         CopyResultsCommand.NotifyCanExecuteChanged();
 
         var cfg = Connection.BuildConfig();
@@ -148,6 +156,148 @@ public partial class MainViewModel : ObservableObject
 
     private bool CanRunTests() => !IsRunning && _hamlib.IsAvailable && Connection.IsReady;
 
+    // Environment scan: PC-side checks only, no radio needed, so it is not
+    // gated on readiness — it is the thing to run when Run Tests is greyed
+    // out and the operator wants to know why. Always operator-initiated.
+    [RelayCommand(CanExecute = nameof(CanScan))]
+    private async Task ScanEnvironmentAsync()
+    {
+        IsRunning = true;
+        StatusMessage = Strings.Get("Status_Scanning");
+        Results.Clear(EnvironmentCheckService.Checks);
+        CopyResultsCommand.NotifyCanExecuteChanged();
+
+        try
+        {
+            var progress = new Progress<TestResult>(result =>
+                Application.Current.Dispatcher.Invoke(() => Results.AddResult(result)));
+
+            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
+            var suite = await _envCheck.RunAllAsync(Connection.BuildConfig(), progress, cts.Token);
+
+            Results.SetSuiteResult(suite);
+            TaskCompleted?.Invoke(suite.AllPassed);
+            StatusMessage = Strings.Format("Status_ScanDone", suite.WarningCount + suite.FailCount);
+
+            Log.Information("Environment scan complete: {Pass} ok, {Fail} fail, {Warn} warn",
+                suite.PassCount, suite.FailCount, suite.WarningCount);
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = Strings.Get("Status_RunFailed");
+            Log.Error(ex, "Environment scan threw an exception");
+        }
+        finally
+        {
+            IsRunning = false;
+            CopyResultsCommand.NotifyCanExecuteChanged();
+        }
+    }
+
+    private bool CanScan() => !IsRunning;
+
+    // ── Find my radio ─────────────────────────────────────────────────────
+    // The window collects the ticked ports in a dialog and calls this. The
+    // engine's events become transcript lines as they arrive; each rig it
+    // finds is then verified with the ordinary test suite, and the best
+    // verified one is written into the Connection panel.
+
+    [RelayCommand(CanExecute = nameof(CanScan))]
+    private async Task FindRadioAsync(IReadOnlyList<ComPortInfo> ports)
+    {
+        IsRunning = true;
+        StatusMessage = Strings.Get("Status_Discovering");
+        Results.Clear([]);
+        CopyResultsCommand.NotifyCanExecuteChanged();
+
+        var found    = new List<DiscoveredRig>();
+        var verified = new List<(DiscoveredRig Rig, TestSuiteResult Suite)>();
+
+        try
+        {
+            using var cts = new CancellationTokenSource(TimeSpan.FromMinutes(3));
+            var request = new DiscoveryRequest(ports, Connection.ModelId, Connection.BaudRate);
+
+            Results.AddTranscript(TranscriptKind.Note, Strings.Format("Disc_Start", ports.Count));
+
+            await foreach (var ev in _discovery.RunAsync(request, cts.Token))
+            {
+                Results.AddTranscript(ev.Kind switch
+                {
+                    ProbeEventKind.Sent     => TranscriptKind.SerialTx,
+                    ProbeEventKind.Received => TranscriptKind.SerialRx,
+                    ProbeEventKind.Trying   => TranscriptKind.Trying,
+                    ProbeEventKind.Found    => TranscriptKind.Found,
+                    ProbeEventKind.Response => TranscriptKind.Response,
+                    _                       => TranscriptKind.Note,
+                }, ev.Bytes ?? ev.Message);
+
+                if (ev.Rig is not null) found.Add(ev.Rig);
+            }
+
+            // ── Stage 3: verify every find with the real test suite ───────
+            foreach (var rig in found)
+            {
+                Results.AddTranscript(TranscriptKind.Command,
+                    Strings.Format("Disc_Verifying", rig.ModelName, rig.Port, rig.Baud));
+
+                var cfg = rig.UseRigctld
+                    ? new ConnectionConfig { UseRigctld = true, RigctldHost = rig.Port.Split(':')[0],
+                                             RigctldPort = int.TryParse(rig.Port.Split(':').Last(), out var p) ? p : BrandingInfo.DefaultRigctldPort,
+                                             ModelId = rig.HamlibModelId, RadioModelName = rig.ModelName }
+                    : new ConnectionConfig { ModelId = rig.HamlibModelId, RadioModelName = rig.ModelName,
+                                             ComPort = rig.Port, BaudRate = rig.Baud };
+
+                var progress = new Progress<TestResult>(r =>
+                    Application.Current.Dispatcher.Invoke(() => Results.AddResult(r)));
+                var suite = await _testRunner.RunAllAsync(cfg, false, progress, cts.Token);
+                if (suite.AllPassed) verified.Add((rig, suite));
+
+                Results.AddTranscript(suite.AllPassed ? TranscriptKind.Found : TranscriptKind.Note,
+                    suite.AllPassed ? Strings.Format("Disc_Verified", rig.ModelName, rig.Port)
+                                    : Strings.Format("Disc_VerifyFailed", rig.ModelName, rig.Port, suite.FailCount));
+            }
+
+            // ── Stage 4 (first cut): hand the best one to the Connection panel
+            if (verified.Count > 0)
+            {
+                var best = verified.OrderByDescending(v => v.Rig.Score).First();
+                Connection.ApplyDiscovered(best.Rig);
+                Results.SetSuiteResult(best.Suite);
+                Results.AddTranscript(TranscriptKind.Found,
+                    Strings.Format("Disc_Applied", best.Rig.ModelName, best.Rig.HamlibModelId, best.Rig.Port, best.Rig.Baud));
+                StatusMessage = verified.Count == 1
+                    ? Strings.Format("Status_DiscoveredOne", best.Rig.ModelName, best.Rig.Port)
+                    : Strings.Format("Status_DiscoveredMany", verified.Count, best.Rig.ModelName, best.Rig.Port);
+            }
+            else
+            {
+                Results.SetSuiteResult(new TestSuiteResult([], Connection.BuildConfig()));
+                StatusMessage = found.Count > 0 ? Strings.Get("Status_DiscoveredUnverified") : Strings.Get("Status_DiscoveredNone");
+                Results.AddTranscript(TranscriptKind.Note, StatusMessage);
+            }
+
+            TaskCompleted?.Invoke(verified.Count > 0);
+            Log.Information("Discovery complete: {Found} found, {Verified} verified", found.Count, verified.Count);
+            _ = _telemetry.ReportDiscoveryAsync(ports.Count, found, verified.Select(v => v.Rig).ToList());
+        }
+        catch (OperationCanceledException)
+        {
+            StatusMessage = Strings.Get("Status_DiscoveryTimeout");
+            Results.AddTranscript(TranscriptKind.Note, StatusMessage);
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = Strings.Get("Status_RunFailed");
+            Log.Error(ex, "Discovery threw an exception");
+        }
+        finally
+        {
+            IsRunning = false;
+            CopyResultsCommand.NotifyCanExecuteChanged();
+        }
+    }
+
     [RelayCommand]
     private async Task ExportLogAsync()
     {
@@ -168,7 +318,7 @@ public partial class MainViewModel : ObservableObject
 
         if (dlg.ShowDialog() != true) return;
 
-        var path = await _logExport.ExportAsync(Results.SuiteResult, dlg.FileName);
+        var path = await _logExport.ExportAsync(Results.SuiteResult, dlg.FileName, Results.Transcript);
 
         StatusMessage = path is not null
             ? Strings.Format("Status_LogSaved", path)
@@ -180,7 +330,7 @@ public partial class MainViewModel : ObservableObject
     private void CopyResults()
     {
         if (Results.SuiteResult is null) return;
-        Clipboard.SetText(_logExport.BuildReport(Results.SuiteResult));
+        Clipboard.SetText(_logExport.BuildReport(Results.SuiteResult, Results.Transcript));
         StatusMessage = Strings.Get("Status_Copied");
     }
 

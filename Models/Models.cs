@@ -29,6 +29,7 @@ public record ConnectionConfig
 
 public enum TestId
 {
+    // Connection tests — need a radio
     OpenConnection,
     GetFrequency,
     GetMode,
@@ -36,6 +37,18 @@ public enum TestId
     GetSmeter,
     GetVfo,
     SetFrequency,
+
+    // Environment checks — user-initiated Scan, no radio needed
+    EnvWindows,
+    EnvHamlib,
+    EnvRigctlVersion,
+    EnvRigctlPath,
+    EnvRadioModel,
+    EnvSerialDrivers,
+    EnvRigctld,
+    EnvAutostart,
+    EnvFirewall,
+    EnvRadioApps,
 }
 
 public enum TestStatus
@@ -181,3 +194,85 @@ public record DiagnosticResult(
     public bool HasHelpTopics => HelpTopics.Length > 0;
     public bool IsOk          => string.IsNullOrEmpty(Summary);
 }
+
+// ── Results transcript ────────────────────────────────────────────────────
+// Free-form lines that sit between test results in the results panel: the
+// commands and raw serial exchanges of a discovery run, so a technical user
+// can replicate them with a terminal program.
+
+public enum TranscriptKind
+{
+    /// <summary>A rigctl / Hamlib command line as it would be typed.</summary>
+    Command,
+    /// <summary>Bytes written to the serial port (hex, with ASCII where printable).</summary>
+    SerialTx,
+    /// <summary>Bytes read back from the serial port.</summary>
+    SerialRx,
+    /// <summary>A reply from rigctl or the radio, already decoded.</summary>
+    Response,
+    /// <summary>Progress line while probing ("Trying COM3 at 9600…").</summary>
+    Trying,
+    /// <summary>Something found — a rig, a running rigctld.</summary>
+    Found,
+    /// <summary>Anything else worth showing in muted text.</summary>
+    Note,
+}
+
+public record TranscriptLine(TranscriptKind Kind, string Text);
+
+// ── Discovery (Find my radio) ─────────────────────────────────────────────
+// Declarative rig knowledge loaded from rig_families.json, rig_ids.json,
+// and port_skip_patterns.json. The data can only name a probe operation
+// from RigCheck's fixed set; it never carries command bytes.
+
+/// <summary>A protocol family and how to probe for it.</summary>
+public record RigFamily
+{
+    public string Id              { get; init; } = string.Empty;
+    public string Name            { get; init; } = string.Empty;
+    public string Probe           { get; init; } = string.Empty;   // ProbeOperation name
+    public string? FallbackProbe  { get; init; }                   // tried when Probe gets no reply
+    public int[]  Bauds           { get; init; } = [];
+    public int[]  HamlibBackends  { get; init; } = [];             // thousands digit of model numbers
+    public string[] VendorHints   { get; init; } = [];             // matched against cable RadioFamily
+    public int    HandoffStopBits { get; init; } = 1;
+    public int    DefaultModelId  { get; init; }                   // when the rig confirms the family but not itself
+    public double Weight          { get; init; } = 0.5;
+}
+
+/// <summary>How a rig names itself, mapped to a Hamlib model.</summary>
+public record RigIdEntry
+{
+    public string Family        { get; init; } = string.Empty;
+    public string Reply         { get; init; } = string.Empty;    // "ID023;" or CI-V address "94"
+    public string Name          { get; init; } = string.Empty;
+    public int    HamlibModelId { get; init; }
+}
+
+/// <summary>A port-name pattern discovery must never open.</summary>
+public record PortSkipPattern
+{
+    public string Pattern     { get; init; } = string.Empty;
+    public string DeviceClass { get; init; } = string.Empty;   // rotator, amplifier, antenna, gps, bluetooth
+}
+
+/// <summary>A working connection discovery found and verified.</summary>
+public record DiscoveredRig(
+    string  Port,             // "COM3", or "localhost:4532" for rigctld
+    int     Baud,             // 0 for network transports
+    string  FamilyId,
+    int     HamlibModelId,
+    string  ModelName,
+    double  Score,            // 1.0 = rig named itself, 0.8 = frequency reply in a ham band
+    int     HandoffStopBits,
+    bool    UseRigctld = false);
+
+public enum ProbeEventKind { Trying, Sent, Received, Response, Skipped, InUse, Found, PortDone, Note }
+
+/// <summary>One step of a discovery run, emitted as it happens.</summary>
+public record ProbeEvent(
+    ProbeEventKind Kind,
+    string         Port,
+    string         Message,
+    string?        Bytes    = null,      // hex dump of what was sent or received
+    DiscoveredRig? Rig      = null);

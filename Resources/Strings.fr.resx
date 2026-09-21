@@ -273,4 +273,109 @@ Continuer ?</value></data>
   <data name="Settings_NotifyHeading" xml:space="preserve"><value>Quand une exécution se termine</value></data>
   <data name="Settings_NotifyFlash" xml:space="preserve"><value>Faire clignoter le bouton de la barre des tâches si la fenêtre est en arrière-plan</value></data>
   <data name="Settings_NotifySound" xml:space="preserve"><value>Jouer un son</value></data>
+  <data name="Test_EnvWindows" xml:space="preserve"><value>Version de Windows</value></data>
+  <data name="Test_EnvHamlib" xml:space="preserve"><value>Hamlib (rigctl.exe)</value></data>
+  <data name="Test_EnvRigctlVersion" xml:space="preserve"><value>rigctl s'exécute</value></data>
+  <data name="Test_EnvRigctlPath" xml:space="preserve"><value>rigctl dans le PATH</value></data>
+  <data name="Test_EnvRadioModel" xml:space="preserve"><value>Radio sélectionnée</value></data>
+  <data name="Test_EnvSerialDrivers" xml:space="preserve"><value>Pilotes de port série</value></data>
+  <data name="Test_EnvRigctld" xml:space="preserve"><value>Serveur rigctld</value></data>
+  <data name="Test_EnvAutostart" xml:space="preserve"><value>rigctld au démarrage</value></data>
+  <data name="Test_EnvFirewall" xml:space="preserve"><value>Pare-feu Windows</value></data>
+  <data name="Test_EnvRadioApps" xml:space="preserve"><value>Logiciels radio installés</value></data>
+  <data name="Env_CheckFailed" xml:space="preserve"><value>La vérification n'a pas pu s'exécuter : {0}</value></data>
+  <data name="Env_Windows" xml:space="preserve"><value>{0} {1} (build {2}, {3})</value></data>
+  <data name="Env_HamlibNone" xml:space="preserve"><value>Introuvable</value></data>
+  <data name="Env_HamlibNone_Summary" xml:space="preserve"><value>Hamlib n'est pas installé, ou pas là où RigCheck le cherche.</value></data>
+  <data name="Env_HamlibNone_1" xml:space="preserve"><value>Installez WSJT-X, Fldigi ou le Hamlib autonome pour Windows — chacun inclut rigctl.exe</value></data>
+  <data name="Env_HamlibNone_2" xml:space="preserve"><value>RigCheck cherche dans les dossiers d'installation de WSJT-X, Fldigi et Hamlib ainsi que dans le PATH</value></data>
+  <data name="Env_HamlibOne" xml:space="preserve"><value>Utilise {0} : {1}</value></data>
+  <data name="Env_HamlibMany" xml:space="preserve"><value>{0} copies trouvées — utilise {1} : {2}. Également : {3}</value></data>
+  <data name="Env_SkippedNoHamlib" xml:space="preserve"><value>Ignoré — Hamlib introuvable</value></data>
+  <data name="Env_RigctlVersionFail" xml:space="preserve"><value>rigctl ne s'est pas exécuté : {0}</value></data>
+  <data name="Env_RigctlVersionFail_Summary" xml:space="preserve"><value>rigctl.exe a été trouvé mais n'a pas pu démarrer.</value></data>
+  <data name="Env_RigctlVersionFail_1" xml:space="preserve"><value>L'antivirus l'a peut-être mis en quarantaine — consultez l'historique du logiciel de sécurité</value></data>
+  <data name="Env_RigctlVersionFail_2" xml:space="preserve"><value>Réinstallez WSJT-X ou Hamlib pour le restaurer</value></data>
+  <data name="Env_RigctlPathYes" xml:space="preserve"><value>Oui — {0}</value></data>
+  <data name="Env_RigctlPathNo" xml:space="preserve"><value>Non — les commandes affichées par RigCheck ne fonctionneront pas dans une fenêtre de commandes ordinaire</value></data>
+  <data name="Env_RigctlPathNo_Summary" xml:space="preserve"><value>Le dossier contenant rigctl.exe n'est pas dans le PATH.</value></data>
+  <data name="Env_RigctlPathNo_1" xml:space="preserve"><value>Les commandes affichées ici commencent simplement par « rigctl » ; Windows doit savoir où il se trouve</value></data>
+  <data name="Env_RigctlPathNo_2" xml:space="preserve"><value>Exécutez la commande ci-dessous dans une invite de commandes administrateur, puis ouvrez une nouvelle fenêtre</value></data>
+  <data name="Env_RadioModel" xml:space="preserve"><value>{0} (modèle Hamlib {1})</value></data>
+  <data name="Env_RadioModelNone" xml:space="preserve"><value>Aucune radio choisie — choisissez-en une sous Connexion</value></data>
+  <data name="Env_RadioModelDummy" xml:space="preserve"><value>Radio factice Hamlib (modèle 1) — une simulation, pas votre radio</value></data>
+  <data name="Env_RadioModelDummy_Summary" xml:space="preserve"><value>Le modèle 1 est la radio de test intégrée à Hamlib. Chaque commande réussit sans aucune radio branchée.</value></data>
+  <data name="Env_RadioModelDummy_1" xml:space="preserve"><value>Choisissez votre vraie radio dans la liste avant de vous fier à un résultat</value></data>
+  <data name="Env_SerialOk" xml:space="preserve"><value>{0} port(s), aucun problème de pilote : {1}</value></data>
+  <data name="Env_SerialNone" xml:space="preserve"><value>Windows ne voit aucun port COM</value></data>
+  <data name="Env_SerialNone_Summary" xml:space="preserve"><value>Aucun port série n'est présent.</value></data>
+  <data name="Env_SerialNone_1" xml:space="preserve"><value>Branchez le câble USB et vérifiez qu'il s'agit d'un câble de données, pas d'un câble de charge seule</value></data>
+  <data name="Env_SerialNone_2" xml:space="preserve"><value>Certaines radios ont besoin d'un pilote du fabricant (Silicon Labs CP210x pour la plupart des ports USB Icom, Yaesu et Kenwood)</value></data>
+  <data name="Env_SerialProblem" xml:space="preserve"><value>{0} (code de problème {1})</value></data>
+  <data name="Env_SerialProblem_Summary" xml:space="preserve"><value>Un périphérique série a un problème de pilote.</value></data>
+  <data name="Env_SerialProblem_1" xml:space="preserve"><value>Code 28 : aucun pilote installé — installez le pilote USB du fabricant</value></data>
+  <data name="Env_SerialProblem_2" xml:space="preserve"><value>Code 10 : le périphérique ne peut pas démarrer — essayez un autre port USB ou un autre câble</value></data>
+  <data name="Env_SerialProblem_3" xml:space="preserve"><value>Code 22 : le périphérique est désactivé dans le Gestionnaire de périphériques</value></data>
+  <data name="Env_RigctldListening" xml:space="preserve"><value>À l'écoute sur le port {0} ({1})</value></data>
+  <data name="Env_RigctldNone" xml:space="preserve"><value>Rien n'écoute sur le port {0} — normal pour une liaison série directe</value></data>
+  <data name="Env_RigctldNeeded" xml:space="preserve"><value>Rien n'écoute sur le port {0}, mais le mode rigctld est sélectionné</value></data>
+  <data name="Env_RigctldNeeded_Summary" xml:space="preserve"><value>rigctld n'est pas en cours d'exécution.</value></data>
+  <data name="Env_RigctldNeeded_1" xml:space="preserve"><value>Démarrez rigctld vous-même — WSJT-X et Fldigi ne le démarrent pas pour vous</value></data>
+  <data name="Env_RigctldNeeded_2" xml:space="preserve"><value>Ou passez en liaison série directe sous Connexion</value></data>
+  <data name="Env_FlrigListening" xml:space="preserve"><value>Flrig écoute aussi sur le port {0}</value></data>
+  <data name="Env_ProcessUnknown" xml:space="preserve"><value>programme inconnu</value></data>
+  <data name="Env_AutostartNone" xml:space="preserve"><value>Non configuré — normal, la plupart des opérateurs le lancent à la main</value></data>
+  <data name="Env_AutostartFound" xml:space="preserve"><value>Configuré : {0}</value></data>
+  <data name="Env_FirewallUnreadable" xml:space="preserve"><value>Ignoré — les règles du pare-feu n'ont pas pu être lues</value></data>
+  <data name="Env_FirewallNone" xml:space="preserve"><value>Pas encore de règle pour rigctld — Windows demandera la première fois qu'il écoutera ; choisissez Autoriser</value></data>
+  <data name="Env_FirewallAllow" xml:space="preserve"><value>Règle d'autorisation présente pour rigctld</value></data>
+  <data name="Env_FirewallBlock" xml:space="preserve"><value>Une règle de blocage existe pour rigctld</value></data>
+  <data name="Env_FirewallBlock_Summary" xml:space="preserve"><value>Le Pare-feu Windows bloque rigctld.</value></data>
+  <data name="Env_FirewallBlock_1" xml:space="preserve"><value>Cela vient généralement d'un clic sur Annuler dans l'invite du pare-feu la première fois que rigctld a été lancé</value></data>
+  <data name="Env_FirewallBlock_2" xml:space="preserve"><value>Sécurité Windows › Pare-feu et protection du réseau › Autoriser une application via le pare-feu — cochez rigctld pour les réseaux privés</value></data>
+  <data name="Env_AppsNone" xml:space="preserve"><value>Aucun de WSJT-X, Fldigi, JS8Call, Flrig ou Winlink Express trouvé</value></data>
+  <data name="Status_Scanning" xml:space="preserve"><value>Analyse de ce PC…</value></data>
+  <data name="Status_ScanDone" xml:space="preserve"><value>Analyse terminée — {0} élément(s) demandent votre attention</value></data>
+  <data name="Main_Scan" xml:space="preserve"><value>Analyser le PC</value></data>
+  <data name="Main_ScanTip" xml:space="preserve"><value>Vérifie Hamlib, les pilotes, rigctld et le pare-feu sur ce PC — aucune radio nécessaire. Ne s'exécute que lorsque vous cliquez.</value></data>
+  <data name="Main_FindRadio" xml:space="preserve"><value>Trouver ma radio</value></data>
+  <data name="Main_FindRadioTip" xml:space="preserve"><value>Balaie les ports COM cochés avec des requêtes en lecture seule jusqu'à ce qu'une radio réponde, la vérifie et remplit le panneau Connexion. N'active jamais l'émetteur.</value></data>
+  <data name="Discovery_Title" xml:space="preserve"><value>Trouver ma radio</value></data>
+  <data name="Discovery_Intro" xml:space="preserve"><value>Cochez les ports que RigCheck peut ouvrir. Il n'envoie que des commandes de lecture (identification, lecture de fréquence) à quelques vitesses et s'arrête à la première radio qui répond sur chaque port.</value></data>
+  <data name="Discovery_NoPorts" xml:space="preserve"><value>Aucun port COM trouvé. Branchez le câble USB ou série de la radio, puis réessayez.</value></data>
+  <data name="Discovery_Safety" xml:space="preserve"><value>RTS et DTR ne sont jamais activés — sur beaucoup d'interfaces, c'est la ligne PTT. Les ports qui ressemblent à un rotor, un amplificateur, un GPS ou une liaison Bluetooth sont décochés au départ.</value></data>
+  <data name="Discovery_SkipReason" xml:space="preserve"><value>Ressemble à {0} — décoché ; ne le cochez que si vous êtes sûr</value></data>
+  <data name="Discovery_Start" xml:space="preserve"><value>Démarrer</value></data>
+  <data name="DeviceClass_rotator" xml:space="preserve"><value>un contrôleur de rotor</value></data>
+  <data name="DeviceClass_amplifier" xml:space="preserve"><value>un amplificateur</value></data>
+  <data name="DeviceClass_antenna" xml:space="preserve"><value>un contrôleur d'antenne</value></data>
+  <data name="DeviceClass_gps" xml:space="preserve"><value>un récepteur GPS</value></data>
+  <data name="DeviceClass_bluetooth" xml:space="preserve"><value>une liaison Bluetooth</value></data>
+  <data name="Status_Discovering" xml:space="preserve"><value>Recherche de votre radio…</value></data>
+  <data name="Status_DiscoveredOne" xml:space="preserve"><value>Trouvée et vérifiée : {0} sur {1} — panneau Connexion rempli</value></data>
+  <data name="Status_DiscoveredMany" xml:space="preserve"><value>{0} connexions fonctionnelles trouvées — utilisation de {1} sur {2}</value></data>
+  <data name="Status_DiscoveredUnverified" xml:space="preserve"><value>Une radio a répondu, mais les tests Hamlib n'ont pas réussi — voir les résultats</value></data>
+  <data name="Status_DiscoveredNone" xml:space="preserve"><value>Aucune radio n'a répondu sur les ports cochés</value></data>
+  <data name="Status_DiscoveryTimeout" xml:space="preserve"><value>Trouver ma radio s'est arrêté — cela a pris trop de temps</value></data>
+  <data name="Disc_Start" xml:space="preserve"><value>Balayage de {0} port(s)</value></data>
+  <data name="Disc_SkippedClass" xml:space="preserve"><value>{0} : ignoré — ressemble à {1}</value></data>
+  <data name="Disc_InUse" xml:space="preserve"><value>{0} : utilisé par un autre programme (WSJT-X, Fldigi ou rigctld l'a déjà — c'est la voie qui fonctionne)</value></data>
+  <data name="Disc_OpenFailed" xml:space="preserve"><value>{0} : impossible à ouvrir — {1}</value></data>
+  <data name="Disc_Trying" xml:space="preserve"><value>{0} à {1} bauds — {2}</value></data>
+  <data name="Disc_NoReply" xml:space="preserve"><value>pas de réponse</value></data>
+  <data name="Disc_Garbage" xml:space="preserve"><value>des octets sont revenus mais rien de reconnaissable — probablement la mauvaise vitesse</value></data>
+  <data name="Disc_Acknowledged" xml:space="preserve"><value>une radio {0} a répondu à {1} bauds mais ne s'est pas identifiée</value></data>
+  <data name="Disc_FrequencyReply" xml:space="preserve"><value>réponse de fréquence : {0} MHz{1}</value></data>
+  <data name="Disc_InBand" xml:space="preserve"><value>(dans une bande amateur)</value></data>
+  <data name="Disc_SharedId" xml:space="preserve"><value>{0} est partagé par {1} — utilisation de {2}</value></data>
+  <data name="Disc_UnknownId" xml:space="preserve"><value>{0} n'est pas encore dans la liste de RigCheck pour {1} — utilisation de la valeur par défaut de la famille ; merci de le signaler</value></data>
+  <data name="Disc_Found" xml:space="preserve"><value>{0} (modèle Hamlib {1}) trouvée sur {2} à {3} bauds</value></data>
+  <data name="Disc_FoundRigctld" xml:space="preserve"><value>rigctld tourne déjà sur le port {0} — c'est une connexion qui fonctionne</value></data>
+  <data name="Disc_FlrigSeen" xml:space="preserve"><value>Flrig tourne sur le port 12345 (utilisez le modèle Hamlib 4 pour passer par lui)</value></data>
+  <data name="Disc_NoAnswer" xml:space="preserve"><value>{0} : aucune radio n'a répondu</value></data>
+  <data name="Disc_Verifying" xml:space="preserve"><value>Vérification de {0} sur {1} à {2} bauds avec rigctl</value></data>
+  <data name="Disc_Verified" xml:space="preserve"><value>{0} sur {1} a réussi les tests Hamlib</value></data>
+  <data name="Disc_VerifyFailed" xml:space="preserve"><value>{0} sur {1} : {2} test(s) échoué(s)</value></data>
+  <data name="Disc_Applied" xml:space="preserve"><value>Panneau Connexion réglé sur {0} (modèle {1}), {2}, {3} bauds — Lancer les tests utilise ces réglages maintenant</value></data>
+  <data name="Export_Transcript" xml:space="preserve"><value>TRANSCRIPTION DE TROUVER MA RADIO</value></data>
 </root>

@@ -331,9 +331,27 @@
 
                 <!-- Run Tests — large, prominent -->
                 <Button Content="{loc:Str Main_RunTests}"
+                        DockPanel.Dock="Left"
                         Command="{Binding RunTestsCommand}"
                         Style="{StaticResource RunButtonStyle}"
                         IsEnabled="{Binding IsRunning, Converter={StaticResource InverseBool}}" />
+
+                <!-- Find my radio — sweeps the ticked COM ports with query-only probes -->
+                <Button DockPanel.Dock="Left"
+                        Content="{loc:Str Main_FindRadio}"
+                        Style="{StaticResource SecondaryButtonStyle}"
+                        Margin="8,0,0,0"
+                        IsEnabled="{Binding IsRunning, Converter={StaticResource InverseBool}}"
+                        Click="FindRadio_Click"
+                        ToolTip="{loc:Str Main_FindRadioTip}" />
+
+                <!-- Scan — PC-side checks, no radio needed. Never runs on its own. -->
+                <Button Content="{loc:Str Main_Scan}"
+                        Command="{Binding ScanEnvironmentCommand}"
+                        Style="{StaticResource SecondaryButtonStyle}"
+                        HorizontalAlignment="Left"
+                        Margin="8,0,0,0"
+                        ToolTip="{loc:Str Main_ScanTip}" />
             </DockPanel>
         </Border>
 

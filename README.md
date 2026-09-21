@@ -139,20 +139,64 @@ Target users:
 ## Core Features
 
 ### Connection Configuration
-- Radio model selector (searchable dropdown 
-  populated from Hamlib rig database)
-- COM port selector (populated from system, 
-  inherits detection logic from PortPane if installed)
-- Baud rate selector: 4800/9600/19200/38400/
-  57600/115200
-- Data bits, parity, stop bits (default 8N1)
-- Flow control: None/Hardware/Software
-- PTT method: CAT/RTS/DTR/VOX/None
-- Network mode: rigctld host:port (default 
-  localhost:4532)
-- Connection type toggle: Direct serial vs 
-  rigctld network
-- Detect and test GPS (USB serial receivers, puck)
+- Quick-start preset picker for popular radios (`Assets/radio_presets.json`), which fills
+  the Hamlib model and serial defaults; every field can be overridden afterwards
+- COM port list from Plug and Play, with the USB chip identified by VID/PID and a cable hint
+  when it is a known radio interface (`Assets/usb_devices.json`)
+- Baud rate: Radio default, or 1200 through 115200
+- Data bits, parity, stop bits, flow control, and PTT method, each defaulting to
+  "Radio default" so Hamlib's own model database decides
+- Direct serial or rigctld network mode (host:port, default localhost:4532)
+- Nothing is chosen for you: no port is auto-selected and the Hamlib dummy rig (model 1)
+  is never a valid selection, so a passing result always means a real radio answered
+
+### PC Scan (no radio needed)
+The **Scan PC** button checks the computer side before any radio is
+involved, so "Run Tests is greyed out — why?" has an answer:
+
+- Windows version and architecture
+- Every copy of Hamlib found (WSJT-X, Fldigi, standalone, PATH) and which one RigCheck uses
+- `rigctl --version` actually runs
+- Whether `rigctl` is on PATH — if not, the commands RigCheck shows will not work in a plain
+  command window, and the exact `setx` line to fix it is shown
+- The selected radio model, called out unmistakably when it is Hamlib's dummy rig (model 1)
+- Serial port drivers: ports present, plus any Plug and Play device with a problem code
+  (28 = no driver, 10 = cannot start, 22 = disabled)
+- Whether anything is listening on the rigctld port (and Flrig's), and whether that matches
+  the selected connection mode
+- rigctld startup entries and Windows Firewall rules for it — a Block rule from a dismissed
+  prompt is a classic
+- Installed radio software (WSJT-X, Fldigi, JS8Call, Flrig, Winlink Express)
+
+Everything is read-only. RigCheck never changes PATH, firewall rules, drivers, or startup
+entries — it shows the command or the setting and leaves the change to you. The scan runs only
+when you click it; nothing enumerates processes or ports at startup.
+
+### Find my radio
+When the operator does not know the port, the speed, or even which Hamlib
+model to pick, **Find my radio** works it out:
+
+1. The operator ticks the COM ports RigCheck may open (ports that look like a rotator,
+   amplifier, GPS, or Bluetooth link start unticked).
+2. Each port is swept with read-only queries — `ID;` for Kenwood, Elecraft, and Yaesu CAT
+   rigs, CI-V read-ID and read-frequency for Icom, the five-byte read-frequency for the
+   FT-817 family — at the baud rates that family is likely to use, most likely first. The
+   radio already chosen in the Connection panel and the cable's USB chip move their family
+   to the front of the queue.
+3. A rig that names itself is looked up in `Assets/rig_ids.json`. One that only reports a
+   frequency inside an amateur band is taken as its family's most likely model.
+4. Every find is verified with the same Hamlib test suite as **Run Tests**, and the best
+   verified one is written into the Connection panel.
+5. A rigctld already listening on 4532 is reported as a working connection; Flrig on 12345
+   is noted.
+
+Everything sent and received is shown in the results panel, with a Copy button per line, and
+goes into the exported log so the exchange can be replayed with a terminal program.
+
+Safety rules that do not have a setting: RTS and DTR are never asserted (on many interfaces they
+are PTT); only read commands are ever sent; the sweep runs only from the button and only on
+ticked ports. The data files (`rig_families.json`, `rig_ids.json`, `port_skip_patterns.json`)
+choose a built-in query by name and cannot contain command bytes. Design: `docs/discovery-flow.md`.
 
 ### Diagnostic Test Suite
 Run a sequence of standard Hamlib queries and 

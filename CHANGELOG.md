@@ -5,6 +5,47 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
+## [0.6.8] - 2026-09-21
+
+Find my radio — the second half of the 0.7.0 milestone, first cut.
+
+### Added
+- **Find my radio** button: tick the COM ports it may open, and it sweeps each with read-only
+  identify and read-frequency queries (Kenwood/Elecraft/Yaesu `ID;`, Icom CI-V, Yaesu 5-byte)
+  across the likely baud rates, stops on the first radio that answers, verifies it with the
+  normal Hamlib test suite, and fills in the Connection panel. rigctld already listening is
+  reported as a working connection; Flrig is noted
+- Every byte sent and received is shown in the results panel with a Copy button, and goes into
+  Copy Results and Export Log under a "Find my radio transcript" heading, so the exchange can be
+  replayed in a terminal program
+- Data files anyone can extend by pull request: `rig_families.json` (which built-in query and
+  which baud rates per protocol family), `rig_ids.json` (how each radio names itself → Hamlib
+  model), `port_skip_patterns.json` (ports classed as rotator, amplifier, GPS, or Bluetooth start
+  unticked). Data files choose a query by name; they can never contain command bytes
+- Design document: `docs/discovery-flow.md` (with the diagram) and `docs/discovery-flow.drawio`
+- Telemetry event `discovery` (ports swept, families/models/bauds that answered, verified count)
+
+### Safety
+- RTS and DTR are never asserted during discovery — on many interfaces they are the PTT line
+- The sweep only runs from the button, only on ticked ports, and sends read commands only
+
+## [0.6.7] - 2026-09-21
+
+First half of the 0.7.0 milestone: the PC-side checks.
+
+### Added
+- **Scan PC** button: ten read-only checks that need no radio — Windows version, every Hamlib
+  copy found and which one is used, `rigctl --version`, rigctl on PATH (with the `setx` fix
+  shown), the selected radio model with a clear warning if it is Hamlib's dummy rig, serial
+  driver problem codes, whether anything listens on the rigctld and Flrig ports, rigctld startup
+  entries, Windows Firewall rules for rigctld, and installed radio software
+- Scan results use the same results panel, Copy Results, and Export Log as the connection tests
+- Completion notification also fires when a scan finishes
+
+### Changed
+- The results panel shows pending placeholders only for the checks about to run, instead of
+  every test RigCheck knows about
+
 ## [0.6.6] - 2026-09-21
 
 Results you can select and copy; a heads-up when a run finishes.
