@@ -302,7 +302,15 @@ public partial class MainViewModel : ObservableObject
                 var best = verified.OrderByDescending(v => v.Rig.Score).First();
                 Connection.ApplyDiscovered(best.Rig);
                 Results.SetSuiteResult(best.Suite);
-                Results.AddTranscript(TranscriptKind.Found,
+
+                // The one sentence the operator came for. The probe itself
+                // used 8N1; the stop bits shown are what the radio's family
+                // expects from the digital-mode programs.
+                var summary = best.Rig.UseRigctld
+                    ? Strings.Format("Disc_SummaryRigctld", best.Rig.Port)
+                    : Strings.Format("Disc_Summary", best.Rig.ModelName, best.Rig.Port, best.Rig.Baud, best.Rig.HandoffStopBits);
+                Results.AddTranscript(TranscriptKind.Found, summary);
+                Results.AddTranscript(TranscriptKind.Note,
                     Strings.Format("Disc_Applied", best.Rig.ModelName, best.Rig.HamlibModelId, best.Rig.Port, best.Rig.Baud));
 
                 // Stage 4: the settings to type into each program, and how
@@ -310,7 +318,7 @@ public partial class MainViewModel : ObservableObject
                 foreach (var line in _handoff.Build(best.Rig, clues))
                     Results.AddTranscript(line.Kind, line.Text);
                 StatusMessage = verified.Count == 1
-                    ? Strings.Format("Status_DiscoveredOne", best.Rig.ModelName, best.Rig.Port)
+                    ? summary
                     : Strings.Format("Status_DiscoveredMany", verified.Count, best.Rig.ModelName, best.Rig.Port);
             }
             else

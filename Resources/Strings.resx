@@ -1283,4 +1283,10 @@ Continue?</value>
   <data name="Disc_Echo" xml:space="preserve">
     <value>our own frame came back — a CI-V radio with Echo Back on is listening at {0} baud; asking each known CI-V address in turn</value>
   </data>
+  <data name="Disc_Summary" xml:space="preserve">
+    <value>Your radio: {0} on {1} — {2} baud, 8 data bits, no parity, {3} stop bit(s)</value>
+  </data>
+  <data name="Disc_SummaryRigctld" xml:space="preserve">
+    <value>Your radio is reachable through rigctld at {0}</value>
+  </data>
 </root>

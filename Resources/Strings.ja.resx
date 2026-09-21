@@ -400,4 +400,6 @@
   <data name="Disc_NoHamlibVerify" xml:space="preserve"><value>Hamlib がインストールされていないため、rigctl の完全なテストは実行できません — シリアルポートで自ら名乗った無線機は検証済みとみなします。テストを実行するには WSJT-X または Hamlib をインストールしてください。</value></data>
   <data name="Disc_VerifiedByProbe" xml:space="preserve"><value>{1} の {0} は直接問い合わせで検証済み</value></data>
   <data name="Disc_Echo" xml:space="preserve"><value>自分のフレームがそのまま返ってきました — Echo Back が有効な CI-V 無線機が {0} ボーで受信しています。既知の CI-V アドレスを順に問い合わせます</value></data>
+  <data name="Disc_Summary" xml:space="preserve"><value>あなたの無線機: {1} の {0} — {2} ボー、データ 8 ビット、パリティなし、ストップ {3} ビット</value></data>
+  <data name="Disc_SummaryRigctld" xml:space="preserve"><value>あなたの無線機は {0} の rigctld 経由で利用できます</value></data>
 </root>

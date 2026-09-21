@@ -5,6 +5,12 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
+## [0.6.11] - 2026-09-21
+
+### Added
+- Find my radio ends with the sentence the operator came for — "Your radio: Icom IC-7300 on COM3
+  — 115200 baud, 8 data bits, no parity, 1 stop bit" — in the results and in the status bar
+
 ## [0.6.10] - 2026-09-21
 
 First lessons from a real IC-7300.

@@ -400,4 +400,6 @@ Fortfahren?</value></data>
   <data name="Disc_NoHamlibVerify" xml:space="preserve"><value>Hamlib ist nicht installiert, daher können die vollständigen rigctl-Tests nicht laufen — ein Funkgerät, das sich über die serielle Schnittstelle identifiziert hat, gilt als geprüft. Installieren Sie WSJT-X oder Hamlib, um die Tests auszuführen.</value></data>
   <data name="Disc_VerifiedByProbe" xml:space="preserve"><value>{0} an {1} durch direkte Abfrage geprüft</value></data>
   <data name="Disc_Echo" xml:space="preserve"><value>unser eigener Rahmen kam zurück — ein CI-V-Funkgerät mit eingeschaltetem Echo Back hört mit {0} Baud zu; jede bekannte CI-V-Adresse wird nun der Reihe nach abgefragt</value></data>
+  <data name="Disc_Summary" xml:space="preserve"><value>Ihr Funkgerät: {0} an {1} — {2} Baud, 8 Datenbits, keine Parität, {3} Stoppbit(s)</value></data>
+  <data name="Disc_SummaryRigctld" xml:space="preserve"><value>Ihr Funkgerät ist über rigctld unter {0} erreichbar</value></data>
 </root>

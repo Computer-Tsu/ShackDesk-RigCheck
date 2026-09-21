@@ -400,4 +400,6 @@ Continuer ?</value></data>
   <data name="Disc_NoHamlibVerify" xml:space="preserve"><value>Hamlib n'est pas installé, les tests rigctl complets ne peuvent donc pas s'exécuter — une radio qui s'est identifiée sur le port série compte comme vérifiée. Installez WSJT-X ou Hamlib pour lancer les tests.</value></data>
   <data name="Disc_VerifiedByProbe" xml:space="preserve"><value>{0} sur {1} vérifiée par requête directe</value></data>
   <data name="Disc_Echo" xml:space="preserve"><value>notre propre trame est revenue — une radio CI-V avec Echo Back activé écoute à {0} bauds ; interrogation de chaque adresse CI-V connue à tour de rôle</value></data>
+  <data name="Disc_Summary" xml:space="preserve"><value>Votre radio : {0} sur {1} — {2} bauds, 8 bits de données, sans parité, {3} bit(s) de stop</value></data>
+  <data name="Disc_SummaryRigctld" xml:space="preserve"><value>Votre radio est joignable via rigctld à {0}</value></data>
 </root>
