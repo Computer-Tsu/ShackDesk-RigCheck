@@ -139,32 +139,12 @@ public class HamlibLocatorService
     }
 
     // ── PATH management helpers ───────────────────────────────────────────
-    // These are informational — RigCheck never modifies PATH automatically.
-    // The user is shown the command to run themselves in an elevated prompt.
-    // Strings are constructed at runtime (not as literals) to avoid
-    // static-analysis heuristics that flag PATH-modification strings
-    // in binaries, even when they are never executed.
+    // Display only. RigCheck never modifies PATH; the user is shown the
+    // command to run themselves in an elevated prompt.
 
-    /// <summary>
-    /// Returns the command the user can paste into an elevated CMD prompt
-    /// to permanently add a Hamlib directory to the system PATH.
-    /// RigCheck never executes this command.
-    /// </summary>
-    public static string PathAddCommand(string hamlibBinDir)
-    {
-        // Constructed at runtime — never passed to Process.Start
-        var tool = "set" + "x";
-        var flag = "/M";
-        var var  = "PATH";
-        return $"{tool} {flag} {var} \"%PATH%;{hamlibBinDir}\"";
-    }
+    public static string PathAddCommand(string hamlibBinDir) =>
+        $"setx /M PATH \"%PATH%;{hamlibBinDir}\"";
 
-    /// <summary>
-    /// Returns the PowerShell equivalent. Same caveat — display only.
-    /// </summary>
-    public static string PathAddPowerShell(string hamlibBinDir)
-    {
-        var method = "SetEnvironmentVariable";
-        return $"[Environment]::{method}('Path', $env:Path + ';{hamlibBinDir}', 'Machine')";
-    }
+    public static string PathAddPowerShell(string hamlibBinDir) =>
+        $"[Environment]::SetEnvironmentVariable('Path', $env:Path + ';{hamlibBinDir}', 'Machine')";
 }

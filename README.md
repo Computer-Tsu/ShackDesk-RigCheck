@@ -1,5 +1,7 @@
 RigCheck is the second ShackDesk suite application.
 
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
+
 "Know your rig is ready."<br>
 Serial CAT communication diagnostics using Hamlib. Verify your radio connection before it matters.
 
@@ -141,4 +143,19 @@ email to a club Elmer or post to a support forum.
 Format: plain text, human readable, not JSON.
 Include: timestamp, radio model, port settings,
 each test result, any error messages.
+
+## Contributing
+
+Radio and cable database entries, bug reports with
+an exported log, and code are all welcome. See
+[CONTRIBUTING.md](CONTRIBUTING.md).
+
+## License
+
+RigCheck is licensed under the GNU General Public
+License, version 3. See [LICENSE](LICENSE).
+
+RigCheck and ShackDesk are trademarks of My Computer
+Guru LLC. See [LEGAL.md](LEGAL.md) for trademark and
+third-party notices.
 

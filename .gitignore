@@ -1,0 +1,34 @@
+# Build output
+bin/
+obj/
+publish/
+artifact/
+TestResults/
+
+# Visual Studio / Rider / VS Code
+.vs/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+
+# Local settings and logs
+*.log
+Logs/
+appsettings.*.local.json
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store

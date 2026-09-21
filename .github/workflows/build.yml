@@ -1,0 +1,101 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# RigCheck by ShackDesk
+# Project : https://github.com/Computer-Tsu/ShackDesk-RigCheck
+# Author  : Mark McDow (N4TEK) — My Computer Guru LLC
+# License : GPLv3 (see LICENSE)
+#
+# Workflow : Build
+# Purpose  : Compiles RigCheck and publishes the self-contained Windows
+#            executable as a workflow artifact. This is the project's only
+#            build path — there is no local toolchain.
+#
+# Triggers :
+#   - push to develop or main      — build and publish exe artifact
+#   - pull_request                 — build only
+#   - workflow_dispatch (manual)   — build; optionally publish the exe artifact
+#
+# Manual trigger : Actions tab → "Build" → "Run workflow" → select branch
+# ──────────────────────────────────────────────────────────────────────────────
+name: Build
+
+on:
+  push:
+    branches: [ develop, main ]
+    paths-ignore:
+      - '**/*.md'
+      - 'LICENSE'
+      - '.github/ISSUE_TEMPLATE/**'
+      - '.github/PULL_REQUEST_TEMPLATE.md'
+      - '.github/SECURITY.md'
+  pull_request:
+    branches: [ develop, main ]
+    paths-ignore:
+      - '**/*.md'
+      - 'LICENSE'
+      - '.github/ISSUE_TEMPLATE/**'
+      - '.github/PULL_REQUEST_TEMPLATE.md'
+      - '.github/SECURITY.md'
+  workflow_dispatch:
+    inputs:
+      publish_artifact:
+        description: 'Publish and upload RigCheck.exe artifact'
+        required: false
+        default: true
+        type: boolean
+
+env:
+  DOTNET_VERSION: '8.0.x'
+  PROJECT:        'RigCheck.csproj'
+  RID:            'win-x64'
+  APP_EXE:        'RigCheck.exe'
+
+jobs:
+  build:
+    name: Build
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET ${{ env.DOTNET_VERSION }}
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore NuGet packages
+        run: dotnet restore ${{ env.PROJECT }}
+
+      - name: Build — Release
+        run: dotnet build ${{ env.PROJECT }} --configuration Release --no-restore
+
+      - name: Publish — single self-contained exe
+        if: ${{ github.event_name != 'pull_request' && (github.event_name != 'workflow_dispatch' || inputs.publish_artifact) }}
+        run: >
+          dotnet publish ${{ env.PROJECT }}
+          --configuration Release
+          --runtime ${{ env.RID }}
+          --self-contained true
+          --no-restore
+          -p:PublishSingleFile=true
+          -p:IncludeNativeLibrariesForSelfExtract=true
+          --output ./publish
+
+      - name: Compute SHA-256
+        if: ${{ github.event_name != 'pull_request' && (github.event_name != 'workflow_dispatch' || inputs.publish_artifact) }}
+        shell: pwsh
+        run: |
+          $hash = (Get-FileHash -Algorithm SHA256 './publish/${{ env.APP_EXE }}').Hash.ToLower()
+          $hash | Out-File -FilePath './publish/${{ env.APP_EXE }}.sha256' -NoNewline
+          Write-Host "SHA-256: $hash"
+
+      - name: Upload exe artifact
+        if: ${{ github.event_name != 'pull_request' && (github.event_name != 'workflow_dispatch' || inputs.publish_artifact) }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: RigCheck-${{ github.sha }}
+          path: |
+            ./publish/${{ env.APP_EXE }}
+            ./publish/${{ env.APP_EXE }}.sha256
