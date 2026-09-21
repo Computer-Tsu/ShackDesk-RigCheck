@@ -252,7 +252,7 @@ jobs:
           echo "expires=$EXPIRES" >> "$GITHUB_OUTPUT"
 
       - name: Create pre-release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: alpha/${{ needs.build.outputs.stamp }}-${{ needs.build.outputs.sha7 }}
           target_commitish: ${{ needs.build.outputs.sha }}
