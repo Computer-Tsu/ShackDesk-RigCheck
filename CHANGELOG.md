@@ -5,6 +5,16 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
+## [0.6.12] - 2026-09-21
+
+### Added
+- When Scan PC finds no Hamlib, the diagnosis shows the one-line winget command that installs
+  WSJT-X (`winget install JoeTaylor.WSJT-x`) as a copyable fix — RigCheck never runs it
+
+### Fixed
+- Summary line reads "115200 baud, 8N1 (8 data bits, no parity, 1 stop)" instead of "1 stop bit(s)"
+- Text copied from the results panel no longer carries a trailing space where a Copy button sat
+
 ## [0.6.11] - 2026-09-21
 
 ### Added

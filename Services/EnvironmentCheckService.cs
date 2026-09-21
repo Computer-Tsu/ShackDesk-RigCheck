@@ -111,7 +111,7 @@ public class EnvironmentCheckService
         if (copies.Count == 0)
         {
             return TestResult.Fail(TestId.EnvHamlib, Strings.Get("Env_HamlibNone"), string.Empty,
-                Diag("Env_HamlibNone", 2, learnMore: BrandingInfo.HamlibDownloadUrl));
+                Diag("Env_HamlibNone", 2, fixCommand: BrandingInfo.WsjtxWingetCommand, learnMore: BrandingInfo.HamlibDownloadUrl));
         }
 
         var (path, via) = copies[0];

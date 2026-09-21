@@ -287,7 +287,7 @@ Los detalles se han guardado en el registro. Si esto sigue ocurriendo, infórmel
   <data name="Env_Windows" xml:space="preserve"><value>{0} {1} (compilación {2}, {3})</value></data>
   <data name="Env_HamlibNone" xml:space="preserve"><value>No encontrado</value></data>
   <data name="Env_HamlibNone_Summary" xml:space="preserve"><value>Hamlib no está instalado, o no está donde RigCheck lo busca.</value></data>
-  <data name="Env_HamlibNone_1" xml:space="preserve"><value>Instale WSJT-X, Fldigi o el Hamlib independiente para Windows — cada uno incluye rigctl.exe</value></data>
+  <data name="Env_HamlibNone_1" xml:space="preserve"><value>Instale WSJT-X, Fldigi o el Hamlib independiente para Windows — cada uno incluye rigctl.exe. El comando de abajo instala WSJT-X con winget</value></data>
   <data name="Env_HamlibNone_2" xml:space="preserve"><value>RigCheck busca en las carpetas de instalación de WSJT-X, Fldigi y Hamlib y en PATH</value></data>
   <data name="Env_HamlibOne" xml:space="preserve"><value>Usando {0}: {1}</value></data>
   <data name="Env_HamlibMany" xml:space="preserve"><value>{0} copias encontradas — usando {1}: {2}. También: {3}</value></data>
@@ -400,6 +400,6 @@ Los detalles se han guardado en el registro. Si esto sigue ocurriendo, infórmel
   <data name="Disc_NoHamlibVerify" xml:space="preserve"><value>Hamlib no está instalado, así que las pruebas completas de rigctl no pueden ejecutarse — una radio que se identificó por el puerto serie cuenta como verificada. Instale WSJT-X o Hamlib para ejecutar las pruebas.</value></data>
   <data name="Disc_VerifiedByProbe" xml:space="preserve"><value>{0} en {1} verificada por consulta directa</value></data>
   <data name="Disc_Echo" xml:space="preserve"><value>volvió nuestra propia trama — una radio CI-V con Echo Back activado está escuchando a {0} baudios; preguntando a cada dirección CI-V conocida por turno</value></data>
-  <data name="Disc_Summary" xml:space="preserve"><value>Su radio: {0} en {1} — {2} baudios, 8 bits de datos, sin paridad, {3} bit(s) de parada</value></data>
+  <data name="Disc_Summary" xml:space="preserve"><value>Su radio: {0} en {1} — {2} baudios, 8N{3} (8 bits de datos, sin paridad, {3} de parada)</value></data>
   <data name="Disc_SummaryRigctld" xml:space="preserve"><value>Su radio es accesible a través de rigctld en {0}</value></data>
 </root>

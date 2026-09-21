@@ -287,7 +287,7 @@ Fortfahren?</value></data>
   <data name="Env_Windows" xml:space="preserve"><value>{0} {1} (Build {2}, {3})</value></data>
   <data name="Env_HamlibNone" xml:space="preserve"><value>Nicht gefunden</value></data>
   <data name="Env_HamlibNone_Summary" xml:space="preserve"><value>Hamlib ist nicht installiert oder nicht dort, wo RigCheck sucht.</value></data>
-  <data name="Env_HamlibNone_1" xml:space="preserve"><value>Installieren Sie WSJT-X, Fldigi oder das eigenständige Hamlib für Windows — jedes enthält rigctl.exe</value></data>
+  <data name="Env_HamlibNone_1" xml:space="preserve"><value>Installieren Sie WSJT-X, Fldigi oder das eigenständige Hamlib für Windows — jedes enthält rigctl.exe. Der Befehl unten installiert WSJT-X mit winget</value></data>
   <data name="Env_HamlibNone_2" xml:space="preserve"><value>RigCheck sucht in den Installationsordnern von WSJT-X, Fldigi und Hamlib sowie im PATH</value></data>
   <data name="Env_HamlibOne" xml:space="preserve"><value>Verwendet {0}: {1}</value></data>
   <data name="Env_HamlibMany" xml:space="preserve"><value>{0} Kopien gefunden — verwendet {1}: {2}. Außerdem: {3}</value></data>
@@ -400,6 +400,6 @@ Fortfahren?</value></data>
   <data name="Disc_NoHamlibVerify" xml:space="preserve"><value>Hamlib ist nicht installiert, daher können die vollständigen rigctl-Tests nicht laufen — ein Funkgerät, das sich über die serielle Schnittstelle identifiziert hat, gilt als geprüft. Installieren Sie WSJT-X oder Hamlib, um die Tests auszuführen.</value></data>
   <data name="Disc_VerifiedByProbe" xml:space="preserve"><value>{0} an {1} durch direkte Abfrage geprüft</value></data>
   <data name="Disc_Echo" xml:space="preserve"><value>unser eigener Rahmen kam zurück — ein CI-V-Funkgerät mit eingeschaltetem Echo Back hört mit {0} Baud zu; jede bekannte CI-V-Adresse wird nun der Reihe nach abgefragt</value></data>
-  <data name="Disc_Summary" xml:space="preserve"><value>Ihr Funkgerät: {0} an {1} — {2} Baud, 8 Datenbits, keine Parität, {3} Stoppbit(s)</value></data>
+  <data name="Disc_Summary" xml:space="preserve"><value>Ihr Funkgerät: {0} an {1} — {2} Baud, 8N{3} (8 Datenbits, keine Parität, {3} Stopp)</value></data>
   <data name="Disc_SummaryRigctld" xml:space="preserve"><value>Ihr Funkgerät ist über rigctld unter {0} erreichbar</value></data>
 </root>

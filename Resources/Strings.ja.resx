@@ -287,7 +287,7 @@
   <data name="Env_Windows" xml:space="preserve"><value>{0} {1} (ビルド {2}、{3})</value></data>
   <data name="Env_HamlibNone" xml:space="preserve"><value>見つかりません</value></data>
   <data name="Env_HamlibNone_Summary" xml:space="preserve"><value>Hamlib がインストールされていないか、RigCheck が探す場所にありません。</value></data>
-  <data name="Env_HamlibNone_1" xml:space="preserve"><value>WSJT-X、Fldigi、または Windows 用の単体 Hamlib をインストールしてください — いずれにも rigctl.exe が含まれています</value></data>
+  <data name="Env_HamlibNone_1" xml:space="preserve"><value>WSJT-X、Fldigi、または Windows 用の単体 Hamlib をインストールしてください — いずれにも rigctl.exe が含まれています。下のコマンドは winget で WSJT-X をインストールします</value></data>
   <data name="Env_HamlibNone_2" xml:space="preserve"><value>RigCheck は WSJT-X、Fldigi、Hamlib のインストールフォルダーと PATH を探します</value></data>
   <data name="Env_HamlibOne" xml:space="preserve"><value>使用中: {0}: {1}</value></data>
   <data name="Env_HamlibMany" xml:space="preserve"><value>{0} 個見つかりました — 使用中: {1}: {2}。その他: {3}</value></data>
@@ -400,6 +400,6 @@
   <data name="Disc_NoHamlibVerify" xml:space="preserve"><value>Hamlib がインストールされていないため、rigctl の完全なテストは実行できません — シリアルポートで自ら名乗った無線機は検証済みとみなします。テストを実行するには WSJT-X または Hamlib をインストールしてください。</value></data>
   <data name="Disc_VerifiedByProbe" xml:space="preserve"><value>{1} の {0} は直接問い合わせで検証済み</value></data>
   <data name="Disc_Echo" xml:space="preserve"><value>自分のフレームがそのまま返ってきました — Echo Back が有効な CI-V 無線機が {0} ボーで受信しています。既知の CI-V アドレスを順に問い合わせます</value></data>
-  <data name="Disc_Summary" xml:space="preserve"><value>あなたの無線機: {1} の {0} — {2} ボー、データ 8 ビット、パリティなし、ストップ {3} ビット</value></data>
+  <data name="Disc_Summary" xml:space="preserve"><value>あなたの無線機: {1} の {0} — {2} ボー、8N{3}（データ 8 ビット、パリティなし、ストップ {3} ビット）</value></data>
   <data name="Disc_SummaryRigctld" xml:space="preserve"><value>あなたの無線機は {0} の rigctld 経由で利用できます</value></data>
 </root>
