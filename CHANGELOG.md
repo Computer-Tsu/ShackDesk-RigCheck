@@ -5,6 +5,16 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
+## [0.6.17] - 2026-09-21
+
+### Fixed
+- Pasting a full command line from the results (`rigctl-wsjtx -m 3073 -r COM3 -s 115200 f`) into
+  the raw console sent the connection options twice; the exe name and connection options are now
+  stripped so only the subcommand runs, and the box shows a placeholder saying so
+
+### Added
+- Screenshots from the first IC-7300 run in the README
+
 ## [0.6.16] - 2026-09-21
 
 First all-green run on an IC-7300; one false pass corrected.

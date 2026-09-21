@@ -407,4 +407,5 @@
   <data name="Msg_SmeterNotSupported" xml:space="preserve"><value>この無線機は Hamlib 経由で信号強度を報告しません（{0}）— 問題ありません</value></data>
   <data name="Diag_NotSupported_Summary" xml:space="preserve"><value>{0} 用の Hamlib ドライバーはこの問い合わせを実装していません。</value></data>
   <data name="Diag_NotSupported_1" xml:space="preserve"><value>無線機は応答しています。このコマンドがこの機種に存在しないだけです。WSJT-X などのプログラムには不要です。</value></data>
+  <data name="Main_ConsolePlaceholder" xml:space="preserve"><value>サブコマンドのみ（例: f  m  t  l STRENGTH）— 完全なコマンド行を貼り付けても自動的に短縮されます</value></data>
 </root>

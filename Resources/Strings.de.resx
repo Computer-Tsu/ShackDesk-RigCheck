@@ -407,4 +407,5 @@ Fortfahren?</value></data>
   <data name="Msg_SmeterNotSupported" xml:space="preserve"><value>Dieses Funkgerät meldet die Signalstärke nicht über Hamlib ({0}) — kein Problem</value></data>
   <data name="Diag_NotSupported_Summary" xml:space="preserve"><value>Der Hamlib-Treiber für das {0} implementiert diese Abfrage nicht.</value></data>
   <data name="Diag_NotSupported_1" xml:space="preserve"><value>Das Funkgerät antwortet; nur dieser eine Befehl existiert für es nicht. WSJT-X und die anderen Programme brauchen ihn nicht.</value></data>
+  <data name="Main_ConsolePlaceholder" xml:space="preserve"><value>nur der Unterbefehl, z. B.  f   m   t   l STRENGTH   — eine eingefügte vollständige Befehlszeile wird für Sie gekürzt</value></data>
 </root>

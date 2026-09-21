@@ -19,6 +19,7 @@
     <views:InverseBoolConverter                x:Key="InverseBool" />
     <views:InverseBoolToVisibilityConverter    x:Key="InverseBoolToVisibility" />
     <views:NullOrEmptyToCollapsedConverter     x:Key="NullOrEmptyToCollapsed" />
+    <views:EmptyToVisibleConverter             x:Key="EmptyToVisible" />
     <views:BoolToStatusColorConverter          x:Key="BoolToStatusColor" />
     <views:ConsoleKindToColorConverter         x:Key="ConsoleKindToColor" />
 

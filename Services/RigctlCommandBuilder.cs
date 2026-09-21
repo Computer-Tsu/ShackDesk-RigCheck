@@ -148,14 +148,36 @@ public class RigctlCommandBuilder
     /// </summary>
     public static RigctlCommand RawCommand(ConnectionConfig cfg, string rawInput)
     {
-        var tokens = rawInput.Trim().Split(' ',
-            StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        var tokens = StripConnectionPrefix(rawInput.Trim().Split(' ',
+            StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries));
         var conn = ConnArgs(cfg);
         return conn with
         {
             Args        = [..conn.Args, ..tokens],
-            DisplayCommand = $"{ExeName} {conn.ConnectionLabel} {rawInput.Trim()}"
+            DisplayCommand = $"{ExeName} {conn.ConnectionLabel} {string.Join(' ', tokens)}"
         };
+    }
+
+    // Operators paste the whole line the results panel shows them —
+    // "rigctl-wsjtx -m 3073 -r COM3 -s 115200 f" — into a console that only
+    // wants "f". Drop the exe name and the connection options so the panel's
+    // settings apply once, not twice.
+    private static readonly HashSet<string> ConnectionOptions =
+        ["-m", "-r", "-s", "-t", "-C", "-p", "-P", "-c", "--model", "--rig-file", "--serial-speed"];
+
+    private static string[] StripConnectionPrefix(string[] tokens)
+    {
+        if (tokens.Length == 0 || !tokens[0].StartsWith("rigctl", StringComparison.OrdinalIgnoreCase))
+            return tokens;
+
+        var rest = new List<string>();
+        for (int i = 1; i < tokens.Length; i++)
+        {
+            if (ConnectionOptions.Contains(tokens[i]) && i + 1 < tokens.Length) { i++; continue; }
+            if (tokens[i].StartsWith("-v", StringComparison.Ordinal)) continue;
+            rest.Add(tokens[i]);
+        }
+        return rest.ToArray();
     }
 
     // ── Private helpers ──────────────────────────────────────────────────

@@ -61,3 +61,12 @@ public sealed class ConsoleKindToColorConverter : IValueConverter
     public object ConvertBack(object value, Type t, object p, CultureInfo c) =>
         throw new NotSupportedException();
 }
+
+/// <summary>Visible while a string is empty — used for placeholder text over an empty TextBox.</summary>
+public sealed class EmptyToVisibleConverter : IValueConverter
+{
+    public object Convert(object value, Type t, object p, CultureInfo c) =>
+        string.IsNullOrEmpty(value as string) ? Visibility.Visible : Visibility.Collapsed;
+    public object ConvertBack(object value, Type t, object p, CultureInfo c) =>
+        throw new NotSupportedException();
+}

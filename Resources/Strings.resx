@@ -1304,4 +1304,7 @@ Continue?</value>
   <data name="Diag_NotSupported_1" xml:space="preserve">
     <value>The radio is answering; this one command simply does not exist for it. WSJT-X and the other programs do not need it.</value>
   </data>
+  <data name="Main_ConsolePlaceholder" xml:space="preserve">
+    <value>subcommand only, e.g.  f   m   t   l STRENGTH   — a pasted full command line is trimmed for you</value>
+  </data>
 </root>

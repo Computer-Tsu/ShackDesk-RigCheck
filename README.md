@@ -4,7 +4,7 @@ RigCheck is the second ShackDesk suite application.
 
 "Know your rig is ready."<br>
 
-![RigCheck main window](docs/screenshots/Screenshot_RigCheck-0.6.4-Main.png)
+![RigCheck — Find my radio found an IC-7300, verified it with Hamlib, and handed over the WSJT-X settings](docs/screenshots/Screenshot_RigCheck-0.6.16-FindMyRadio.png)
 
 Serial CAT communication diagnostics using Hamlib. Verify your radio connection before it matters.
 
@@ -151,6 +151,9 @@ Target users:
   is never a valid selection, so a passing result always means a real radio answered
 
 ### PC Scan (no radio needed)
+
+![Scan PC results](docs/screenshots/Screenshot_RigCheck-0.6.16-ScanPC.png)
+
 The **Scan PC** button checks the computer side before any radio is
 involved, so "Run Tests is greyed out — why?" has an answer:
 
@@ -199,6 +202,9 @@ ticked ports. The data files (`rig_families.json`, `rig_ids.json`, `port_skip_pa
 choose a built-in query by name and cannot contain command bytes. Design: `docs/discovery-flow.md`.
 
 ### Diagnostic Test Suite
+
+![Run Tests against an IC-7300](docs/screenshots/Screenshot_RigCheck-0.6.16-RunTests.png)
+
 Run a sequence of standard Hamlib queries and 
 display pass/fail results in plain English:
 

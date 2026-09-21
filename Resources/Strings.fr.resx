@@ -407,4 +407,5 @@ Continuer ?</value></data>
   <data name="Msg_SmeterNotSupported" xml:space="preserve"><value>Cette radio n'indique pas la force du signal via Hamlib ({0}) — pas un problème</value></data>
   <data name="Diag_NotSupported_Summary" xml:space="preserve"><value>Le pilote Hamlib du {0} n'implémente pas cette requête.</value></data>
   <data name="Diag_NotSupported_1" xml:space="preserve"><value>La radio répond ; cette commande n'existe simplement pas pour elle. WSJT-X et les autres programmes n'en ont pas besoin.</value></data>
+  <data name="Main_ConsolePlaceholder" xml:space="preserve"><value>sous-commande seule, p. ex.  f   m   t   l STRENGTH   — une ligne de commande complète collée est raccourcie pour vous</value></data>
 </root>

@@ -296,12 +296,21 @@
                     <Button DockPanel.Dock="Right" Content="{loc:Str Main_Send}"
                             Command="{Binding SendRawCommandCommand}"
                             Style="{StaticResource PrimaryButtonStyle}" Margin="0,0,4,0" />
-                    <TextBox x:Name="ConsoleInput"
-                             Text="{Binding RawConsole.InputText, UpdateSourceTrigger=PropertyChanged}"
-                             Style="{StaticResource ConsoleInputStyle}"
-                             FontFamily="Consolas"
-                             KeyDown="ConsoleInput_KeyDown"
-                             ToolTip="{loc:Str Main_ConsoleTip}" />
+                    <Grid>
+                        <TextBox x:Name="ConsoleInput"
+                                 Text="{Binding RawConsole.InputText, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource ConsoleInputStyle}"
+                                 FontFamily="Consolas"
+                                 KeyDown="ConsoleInput_KeyDown"
+                                 ToolTip="{loc:Str Main_ConsoleTip}" />
+                        <!-- Placeholder: what goes here is the subcommand only; a pasted full line is trimmed -->
+                        <TextBlock Text="{loc:Str Main_ConsolePlaceholder}"
+                                   Margin="8,0,12,0" VerticalAlignment="Center"
+                                   FontFamily="Consolas" FontSize="12"
+                                   Foreground="{StaticResource BrushMuted}"
+                                   IsHitTestVisible="False"
+                                   Visibility="{Binding Text, ElementName=ConsoleInput, Converter={StaticResource EmptyToVisible}}" />
+                    </Grid>
                 </DockPanel>
             </Grid>
         </Expander>
