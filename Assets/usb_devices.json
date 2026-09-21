@@ -1,0 +1,86 @@
+[
+  {
+    "_comment": "RigCheck by ShackDesk — USB serial device database. VID/PID identify the USB-to-serial chip in a cable or radio, not usually the radio itself; entries hint at what the chip is commonly found in and suggest presets to try. CableHint may be plain text or a Strings.resx key. Validate JSON at jsonlint.com before submitting. Community entries welcome — see CONTRIBUTING.md."
+  },
+  {
+    "Vid": "10C4",
+    "Pid": "EA60",
+    "Manufacturer": "Silicon Labs",
+    "Chip": "CP2102 / CP2102N",
+    "CableHint": "Silicon Labs CP210x — built into many Icom radios (IC-7300, IC-705) and used by DigiRig",
+    "RadioFamily": null,
+    "SuggestedPresets": ["Icom IC-7300", "Icom IC-705"]
+  },
+  {
+    "Vid": "10C4",
+    "Pid": "EA70",
+    "Manufacturer": "Silicon Labs",
+    "Chip": "CP2105 (dual port)",
+    "CableHint": "Silicon Labs CP2105 dual serial — built into Icom radios with two virtual COM ports (IC-7610, IC-9700)",
+    "RadioFamily": null,
+    "SuggestedPresets": ["Icom IC-7610", "Icom IC-9700"]
+  },
+  {
+    "Vid": "10C4",
+    "Pid": "EA71",
+    "Manufacturer": "Silicon Labs",
+    "Chip": "CP2108 (quad port)",
+    "CableHint": "Silicon Labs CP2108 quad serial — multi-port radio interfaces",
+    "RadioFamily": null,
+    "SuggestedPresets": []
+  },
+  {
+    "Vid": "0403",
+    "Pid": "6001",
+    "Manufacturer": "FTDI",
+    "Chip": "FT232R",
+    "CableHint": "FTDI FT232R — very common in CAT and PTT cables for all radio brands",
+    "RadioFamily": null,
+    "SuggestedPresets": []
+  },
+  {
+    "Vid": "0403",
+    "Pid": "6015",
+    "Manufacturer": "FTDI",
+    "Chip": "FT231X",
+    "CableHint": "FTDI FT231X — newer FTDI serial chip, common in CAT cables",
+    "RadioFamily": null,
+    "SuggestedPresets": []
+  },
+  {
+    "Vid": "1A86",
+    "Pid": "7523",
+    "Manufacturer": "QinHeng",
+    "Chip": "CH340",
+    "CableHint": "CH340 — inexpensive USB serial, common in low-cost CAT cables; needs the CH340 driver",
+    "RadioFamily": null,
+    "SuggestedPresets": []
+  },
+  {
+    "Vid": "1A86",
+    "Pid": "55D4",
+    "Manufacturer": "QinHeng",
+    "Chip": "CH9102",
+    "CableHint": "CH9102 — newer QinHeng serial chip",
+    "RadioFamily": null,
+    "SuggestedPresets": []
+  },
+  {
+    "Vid": "067B",
+    "Pid": "2303",
+    "Manufacturer": "Prolific",
+    "Chip": "PL2303",
+    "CableHint": "Prolific PL2303 — generic USB serial adapter; older chips need a legacy driver on Windows 10/11",
+    "RadioFamily": null,
+    "SuggestedPresets": []
+  },
+  {
+    "Vid": "0839",
+    "Pid": "000A",
+    "Manufacturer": "Yaesu",
+    "Chip": "SCU-17",
+    "CableHint": "Yaesu SCU-17 USB interface — CAT and audio for Yaesu radios",
+    "RadioFamily": "Yaesu",
+    "SuggestedPresets": ["Yaesu FT-991A", "Yaesu FT-DX10"]
+  }
+]

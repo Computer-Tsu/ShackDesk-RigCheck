@@ -35,9 +35,9 @@
     <RootNamespace>RigCheck</RootNamespace>
     <ApplicationIcon>Assets\rigcheck.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <Version>0.6.3</Version>
-    <AssemblyVersion>0.6.3.0</AssemblyVersion>
-    <FileVersion>0.6.3.0</FileVersion>
+    <Version>0.6.4</Version>
+    <AssemblyVersion>0.6.4.0</AssemblyVersion>
+    <FileVersion>0.6.4.0</FileVersion>
     <Company>My Computer Guru LLC</Company>
     <Copyright>Copyright © 2025-2026 My Computer Guru LLC</Copyright>
     <Product>RigCheck by ShackDesk</Product>
@@ -105,16 +105,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!-- Embedded assets -->
-    <Resource Include="Assets\**" />
+    <!-- Images: WPF resources, addressed by pack URI -->
+    <Resource Include="Assets\*.ico;Assets\*.png" />
 
-    <!-- Data files copied to output -->
-    <None Update="Assets\usb_devices.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\radio_presets.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <!--
+      Data files: embedded so the single-file exe is self-sufficient.
+      DataFileLocator prefers an external copy beside the exe or in the
+      shared ShackDesk folder, so these can be updated without a rebuild.
+    -->
+    <EmbeddedResource Include="Assets\*.json" />
   </ItemGroup>
 
 </Project>

@@ -21,6 +21,17 @@ public static class Strings
     public static string Get(string key) =>
         Manager.GetString(key, CultureInfo.CurrentUICulture) ?? $"!{key}!";
 
+    /// <summary>
+    /// Text for <paramref name="key"/> if it exists. Lets data files carry
+    /// either a resource key (translated) or literal text (passed through).
+    /// </summary>
+    public static bool TryGet(string key, out string text)
+    {
+        var found = string.IsNullOrEmpty(key) ? null : Manager.GetString(key, CultureInfo.CurrentUICulture);
+        text = found ?? string.Empty;
+        return found is not null;
+    }
+
     /// <summary>Text for <paramref name="key"/> with {0}, {1}… placeholders filled.</summary>
     public static string Format(string key, params object[] args) =>
         string.Format(CultureInfo.CurrentCulture, Get(key), args);

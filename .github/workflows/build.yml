@@ -22,7 +22,8 @@
 #            assembly; BuildInfo.cs reads them at runtime.
 #
 # Artifact : RigCheck-{version}-{channel}-{yyyyMMdd}-{sha7}.exe plus .sha256
-# Release  : tag alpha/{yyyyMMdd}-{sha7}, marked pre-release. Alpha releases
+# Release  : tag alpha/{yyyyMMdd}-{sha7} (same stamp as the filename), marked
+#            pre-release. Alpha releases
 #            older than 30 days are deleted after each new one is published,
 #            since their builds have expired anyway.
 #
@@ -82,6 +83,7 @@ jobs:
       channel: ${{ steps.meta.outputs.channel }}
       version: ${{ steps.meta.outputs.version }}
       date:    ${{ steps.meta.outputs.date }}
+      stamp:   ${{ steps.meta.outputs.stamp }}
       name:    ${{ steps.meta.outputs.name }}
       sha:     ${{ steps.meta.outputs.sha }}
       sha7:    ${{ steps.meta.outputs.sha7 }}
@@ -123,6 +125,7 @@ jobs:
           "channel=$channel" >> $env:GITHUB_OUTPUT
           "version=$version" >> $env:GITHUB_OUTPUT
           "date=$date"       >> $env:GITHUB_OUTPUT
+          "stamp=$stamp"     >> $env:GITHUB_OUTPUT
           "name=$name"       >> $env:GITHUB_OUTPUT
           "sha=$sha"         >> $env:GITHUB_OUTPUT
           "sha7=$sha7"       >> $env:GITHUB_OUTPUT
@@ -241,7 +244,7 @@ jobs:
       - name: Create pre-release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: alpha/${{ needs.build.outputs.date }}-${{ needs.build.outputs.sha7 }}
+          tag_name: alpha/${{ needs.build.outputs.stamp }}-${{ needs.build.outputs.sha7 }}
           target_commitish: ${{ needs.build.outputs.sha }}
           name: RigCheck ${{ needs.build.outputs.version }}-alpha (${{ needs.build.outputs.date }})
           body_path: ./release_notes.md

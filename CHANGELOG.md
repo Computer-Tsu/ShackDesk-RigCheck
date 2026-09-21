@@ -5,6 +5,31 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
+## [0.6.4] - 2026-09-21
+
+Radio and cable databases as data files.
+
+### Added
+- `Assets/radio_presets.json` (13 rigs, ordered by popularity) and `Assets/usb_devices.json`
+  (9 USB-serial chips with cable hints and suggested presets), embedded in the exe
+- Data files can be overridden without a rebuild: a copy next to the exe, in `Assets\` beside it,
+  or in `%LOCALAPPDATA%\ShackDesk\Data\` takes precedence over the embedded one
+- Presets for Yaesu FT-891 and Elecraft KX2
+- A cable hint in the USB database may be a translation key or plain text
+
+### Changed
+- Presets are no longer compiled into the program
+- Alpha release tags use the same `yyyyMMdd` stamp as the filename
+
+### Removed
+- The "Flex 6300" preset, which pointed at Hamlib model 1 — the dummy rig — and would have
+  reported every test as passing without touching a radio
+
+### Fixed
+- Five presets had the wrong Hamlib model number and would have driven the wrong radio protocol:
+  FT-DX10 (1053 → 1042), FT-DX101D (1049 → 1040), TS-590SG (2031 → 2037),
+  TS-890S (2047 → 2041), KX3 (2030 → 2045). All 13 now verified against Hamlib's `riglist.h`.
+
 ## [0.6.3] - 2026-09-21
 
 Expiry, diagnostics, settings, and automated alpha releases.

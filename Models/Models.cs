@@ -124,6 +124,7 @@ public record RadioPreset
     public string FlowControl  { get; init; } = "None";
     public string PttMethod    { get; init; } = "CAT";
     public string Notes        { get; init; } = string.Empty;  // e.g. "CI-V address default 94"
+    public int    Popularity   { get; init; } = 0;             // higher sorts first in the list
 }
 
 // ── COM port info ─────────────────────────────────────────────────────────
