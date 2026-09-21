@@ -48,6 +48,9 @@
                         </StackPanel>
                     </MenuItem.Header>
                 </MenuItem>
+                <MenuItem Header="{loc:Str Menu_HelpViewData}"
+                          Style="{StaticResource SubMenuItemStyle}"
+                          Click="ViewData_Click" />
                 <Separator />
                 <MenuItem x:Name="AboutMenuItem"
                           Style="{StaticResource SubMenuItemStyle}"

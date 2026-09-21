@@ -11,9 +11,14 @@ namespace RigCheck.Views;
 /// </summary>
 public partial class AboutDialog : Window
 {
-    public AboutDialog()
+    private readonly string _installId;
+
+    public AboutDialog(string installId)
     {
+        _installId = installId;
         InitializeComponent();
+
+        SupportIdText.Text = Strings.Format("About_SupportId", installId);
 
         Title              = Strings.Format("About_Title", BrandingInfo.AppName);
         VersionText.Text   = Strings.Format("About_Version", BuildInfo.VersionLabel);
@@ -28,6 +33,9 @@ public partial class AboutDialog : Window
             ExpiryText.Visibility = Visibility.Visible;
         }
     }
+
+    private void CopyId_Click(object sender, RoutedEventArgs e) =>
+        Clipboard.SetText(_installId);
 
     // Each link button carries its URL in Tag so one handler serves them all.
     private void Link_Click(object sender, RoutedEventArgs e)

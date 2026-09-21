@@ -61,6 +61,29 @@ The window title shows the version, channel, and
 expiry date, for example
 `RigCheck by ShackDesk 0.6.2-alpha — expires 2026-10-21`.
 
+### Anonymous diagnostics
+
+On first launch RigCheck asks whether it may send
+anonymous diagnostic reports. Nothing is sent
+unless you say yes, and you can change the choice
+in Settings at any time. Every report is also
+stored locally and can be inspected under
+Help > View collected data.
+
+What is sent: the RigCheck and Windows versions,
+whether Hamlib was found, and after each test run
+the radio model, serial settings, USB cable
+identifiers, and which tests passed or failed.
+This is what improves the radio and cable
+database for everyone.
+
+Never sent: callsign, computer name, file paths,
+serial numbers, or IP address. The only identifier
+is a random ID created on first run, shown in
+Help > About as a Support ID. Reports go to the
+shared ShackDesk endpoint; see
+shackdesk.com/privacy for the full policy.
+
 ### Hamlib
 
 RigCheck does not include Hamlib. It finds the

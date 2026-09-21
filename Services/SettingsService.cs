@@ -46,6 +46,12 @@ public class RigCheckSettings
 
     // Command history for raw console (most recent first)
     public List<string> CommandHistory { get; set; } = [];
+
+    // Telemetry. InstallId is a random GUID created once per install; it is the
+    // only identifier ever sent and lets a support request be matched to reports.
+    public string InstallId         { get; set; } = Guid.NewGuid().ToString("D");
+    public bool   TelemetryEnabled  { get; set; } = false;
+    public bool   TelemetryPrompted { get; set; } = false;
 }
 
 // ── Settings service ──────────────────────────────────────────────────────

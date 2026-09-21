@@ -1,0 +1,47 @@
+<Window x:Class="RigCheck.Views.FirstRunDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:loc="clr-namespace:RigCheck.Localization"
+        Width="480" SizeToContent="Height"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource BrushBackground}"
+        Foreground="{StaticResource BrushForeground}">
+
+    <!--
+        Shown once, before the main window, on the first launch. Its only
+        job is an informed choice about anonymous diagnostics. The checkbox
+        starts checked on alpha and beta builds, unchecked on stable — but
+        nothing is sent until the operator clicks Continue.
+    -->
+
+    <StackPanel Margin="24,20,24,16">
+        <TextBlock x:Name="IntroText" TextWrapping="Wrap" Margin="0,0,0,14" />
+
+        <CheckBox x:Name="EnableCheckBox"
+                  Content="{loc:Str Telemetry_Checkbox}"
+                  Foreground="{StaticResource BrushForeground}"
+                  FontWeight="SemiBold" FontSize="13"
+                  Margin="0,0,0,12" />
+
+        <TextBlock x:Name="WhatIsSentText" TextWrapping="Wrap"
+                   Foreground="{StaticResource BrushMuted}" FontSize="12" Margin="0,0,0,8" />
+        <TextBlock Text="{loc:Str Telemetry_WhatIsNotSent}" TextWrapping="Wrap"
+                   Foreground="{StaticResource BrushMuted}" FontSize="12" Margin="0,0,0,8" />
+        <TextBlock Text="{loc:Str Telemetry_ChangeLater}" TextWrapping="Wrap"
+                   Foreground="{StaticResource BrushMuted}" FontSize="12" Margin="0,0,0,16" />
+
+        <DockPanel>
+            <Button DockPanel.Dock="Left" Style="{StaticResource LinkButtonStyle}" Padding="0" Click="Privacy_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{loc:Str Telemetry_PrivacyLink}" />
+                    <TextBlock Style="{StaticResource ExternalLinkIconStyle}" />
+                </StackPanel>
+            </Button>
+            <Button Content="{loc:Str Common_Continue}"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    HorizontalAlignment="Right" MinWidth="100"
+                    IsDefault="True" Click="Continue_Click" />
+        </DockPanel>
+    </StackPanel>
+</Window>

@@ -1,4 +1,5 @@
 using RigCheck.Localization;
+using RigCheck.Services;
 using RigCheck.ViewModels;
 using System.ComponentModel;
 using System.Windows;
@@ -13,11 +14,15 @@ namespace RigCheck.Views;
 /// </summary>
 public partial class MainWindow : Window
 {
-    private readonly MainViewModel _vm;
+    private readonly MainViewModel    _vm;
+    private readonly SettingsService  _settings;
+    private readonly TelemetryService _telemetry;
 
-    public MainWindow(MainViewModel vm)
+    public MainWindow(MainViewModel vm, SettingsService settings, TelemetryService telemetry)
     {
-        _vm = vm;
+        _vm        = vm;
+        _settings  = settings;
+        _telemetry = telemetry;
         // Set DataContext before InitializeComponent so bindings resolve on first layout
         DataContext = vm;
         InitializeComponent();
@@ -31,10 +36,13 @@ public partial class MainWindow : Window
     // window is a view concern; the ViewModel never references a Window.
 
     private void Settings_Click(object sender, RoutedEventArgs e) =>
-        new SettingsDialog { Owner = this }.ShowDialog();
+        new SettingsDialog(_settings, _telemetry) { Owner = this }.ShowDialog();
+
+    private void ViewData_Click(object sender, RoutedEventArgs e) =>
+        new TelemetryDataViewer(_telemetry) { Owner = this }.ShowDialog();
 
     private void About_Click(object sender, RoutedEventArgs e) =>
-        new AboutDialog { Owner = this }.ShowDialog();
+        new AboutDialog(_settings.Current.InstallId) { Owner = this }.ShowDialog();
 
     // ── Window placement ──────────────────────────────────────────────────
     // Width and height are bound directly to settings in XAML. Left/Top are
@@ -42,7 +50,7 @@ public partial class MainWindow : Window
 
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
-        var s = ((Services.SettingsService)Application.Current.Resources["Settings"]).Current;
+        var s = _settings.Current;
         if (!double.IsNaN(s.WindowLeft) && !double.IsNaN(s.WindowTop))
         {
             Left = s.WindowLeft;

@@ -30,6 +30,11 @@ public static class BrandingInfo
     public const string GitHubRepo  = "https://github.com/Computer-Tsu/ShackDesk-RigCheck";
     public const string ReleasesUrl = "https://github.com/Computer-Tsu/ShackDesk-RigCheck/releases";
     public const string IssueUrl    = "https://github.com/Computer-Tsu/ShackDesk-RigCheck/issues";
+    public const string PrivacyUrl  = "https://shackdesk.com/privacy/";
+
+    // ── Telemetry ─────────────────────────────────────────────────
+    // Shared ShackDesk endpoint; see ShackDesk-Backend for the schema.
+    public const string TelemetryEndpoint = "https://telemetry.shackdesk.com/report";
 
     // ── Build channels and expiry ─────────────────────────────────
     // Alpha builds stop running after AlphaExpiryDays so testers stay on

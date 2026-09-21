@@ -43,6 +43,16 @@
 
         <TextBlock x:Name="LicenseText" Foreground="{StaticResource BrushMuted}" Margin="0,0,0,12" />
 
+        <!-- Random install ID — the only identifier telemetry ever sends -->
+        <DockPanel Margin="0,0,0,2">
+            <Button DockPanel.Dock="Right" Content="{loc:Str Common_Copy}"
+                    Style="{StaticResource CopyButtonStyle}" Click="CopyId_Click" />
+            <TextBlock x:Name="SupportIdText" FontFamily="Consolas" FontSize="12"
+                       Foreground="{StaticResource BrushMuted}" VerticalAlignment="Center" />
+        </DockPanel>
+        <TextBlock Text="{loc:Str About_SupportIdHint}" TextWrapping="Wrap"
+                   Foreground="{StaticResource BrushMuted}" FontSize="11" Margin="0,0,0,12" />
+
         <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
             <Button Style="{StaticResource LinkButtonStyle}" Padding="0,0,16,0"
                     Tag="{x:Static app:BrandingInfo.AppUrl}" Click="Link_Click">

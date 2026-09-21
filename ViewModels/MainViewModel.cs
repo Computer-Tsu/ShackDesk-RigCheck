@@ -20,6 +20,7 @@ public partial class MainViewModel : ObservableObject
     private readonly LogExportService    _logExport;
     private readonly HamlibLocatorService _hamlib;
     private readonly SettingsService     _settings;
+    private readonly TelemetryService    _telemetry;
 
     public ConnectionViewModel  Connection  { get; }
     public TestResultsViewModel Results     { get; }
@@ -54,7 +55,8 @@ public partial class MainViewModel : ObservableObject
         TestRunnerService    testRunner,
         LogExportService     logExport,
         HamlibLocatorService hamlib,
-        SettingsService      settings)
+        SettingsService      settings,
+        TelemetryService     telemetry)
     {
         Connection  = connection;
         Results     = results;
@@ -63,6 +65,7 @@ public partial class MainViewModel : ObservableObject
         _logExport  = logExport;
         _hamlib     = hamlib;
         _settings   = settings;
+        _telemetry  = telemetry;
 
         LoadSettings();
         CheckHamlib();
@@ -119,6 +122,9 @@ public partial class MainViewModel : ObservableObject
 
             Log.Information("Test suite complete: {Pass} pass, {Fail} fail, {Warn} warn",
                 suite.PassCount, suite.FailCount, suite.WarningCount);
+
+            // Fire-and-forget; the report must never delay showing results.
+            _ = _telemetry.ReportTestRunAsync(suite, Connection.SelectedPort);
         }
         catch (Exception ex)
         {

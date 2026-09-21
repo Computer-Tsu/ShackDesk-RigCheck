@@ -126,6 +126,86 @@ Alpha builds stop running after {2} days so that testers always use current code
     <comment>Help menu item. Opens the releases page in a web browser.</comment>
   </data>
 
+  <!-- ── Telemetry ────────────────────────────────────────────────── -->
+  <data name="FirstRun_Title" xml:space="preserve">
+    <value>Welcome to {0}</value>
+    <comment>Window title of the first-run dialog. {0} is the app name.</comment>
+  </data>
+  <data name="FirstRun_Intro" xml:space="preserve">
+    <value>{0} can send anonymous diagnostic reports that help improve the radio and cable database for everyone.</value>
+    <comment>{0} is the app name.</comment>
+  </data>
+  <data name="Telemetry_Checkbox" xml:space="preserve">
+    <value>Send anonymous diagnostic reports</value>
+    <comment>Checkbox label in the first-run dialog and in Settings.</comment>
+  </data>
+  <data name="Telemetry_WhatIsSent" xml:space="preserve">
+    <value>What is sent: the {0} version and Windows version, whether Hamlib was found, and after each test run the radio model, serial settings, USB cable identifiers, and which tests passed or failed.</value>
+    <comment>{0} is the app name.</comment>
+  </data>
+  <data name="Telemetry_WhatIsNotSent" xml:space="preserve">
+    <value>Never sent: your callsign, computer name, file paths, serial numbers, or IP address. The only identifier is a random ID created when you first ran the program.</value>
+  </data>
+  <data name="Telemetry_ChangeLater" xml:space="preserve">
+    <value>You can change this at any time in Settings, and see every report under Help.</value>
+  </data>
+  <data name="Telemetry_PrivacyLink" xml:space="preserve">
+    <value>Privacy policy</value>
+    <comment>Link that opens the privacy policy in a web browser.</comment>
+  </data>
+  <data name="Common_Continue" xml:space="preserve">
+    <value>Continue</value>
+    <comment>Button that closes the first-run dialog.</comment>
+  </data>
+  <data name="Settings_TelemetryHeading" xml:space="preserve">
+    <value>Anonymous diagnostics</value>
+    <comment>Section heading in Settings.</comment>
+  </data>
+  <data name="Settings_ViewData" xml:space="preserve">
+    <value>View collected data…</value>
+    <comment>Button in Settings that opens the telemetry data viewer.</comment>
+  </data>
+  <data name="Menu_HelpViewData" xml:space="preserve">
+    <value>_View collected data</value>
+    <comment>Help menu item. Opens the telemetry data viewer.</comment>
+  </data>
+  <data name="DataViewer_Title" xml:space="preserve">
+    <value>Collected data</value>
+    <comment>Window title.</comment>
+  </data>
+  <data name="DataViewer_Intro" xml:space="preserve">
+    <value>Every diagnostic report this copy of {0} has sent or queued, newest first. Reports marked "pending" could not be sent yet and will be retried at the next start.</value>
+    <comment>{0} is the app name.</comment>
+  </data>
+  <data name="DataViewer_Empty" xml:space="preserve">
+    <value>No reports have been created yet.</value>
+  </data>
+  <data name="DataViewer_Clear" xml:space="preserve">
+    <value>Delete local copies</value>
+    <comment>Button. Deletes the locally stored report copies (does not affect what was already sent).</comment>
+  </data>
+  <data name="About_SupportId" xml:space="preserve">
+    <value>Support ID: {0}</value>
+    <comment>{0} is a random identifier. Users can quote it in support requests.</comment>
+  </data>
+  <data name="About_SupportIdHint" xml:space="preserve">
+    <value>Quote this ID in a support request to match it with your diagnostic reports, if you have enabled them.</value>
+  </data>
+  <data name="Common_Copy" xml:space="preserve">
+    <value>Copy</value>
+    <comment>Button that copies text to the clipboard.</comment>
+  </data>
+  <data name="Crash_Title" xml:space="preserve">
+    <value>{0} needs to close</value>
+    <comment>{0} is the app name.</comment>
+  </data>
+  <data name="Crash_Message" xml:space="preserve">
+    <value>{0} ran into an unexpected error and needs to close.
+
+Details have been written to the log. If this keeps happening, please report it with the exported log attached.</value>
+    <comment>{0} is the app name.</comment>
+  </data>
+
   <!-- ── Connection readiness ─────────────────────────────────────── -->
   <data name="Ready_ChooseRadio" xml:space="preserve">
     <value>Choose your radio from the Quick preset list.</value>

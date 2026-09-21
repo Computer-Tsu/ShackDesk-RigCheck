@@ -15,6 +15,13 @@ Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for 
   the final nine days
 - Help > Download latest build (opens the releases page)
 - Alpha/beta/stable channels and expiry documented in the README
+- Anonymous diagnostics, opt-in via a first-run prompt or Settings, sent to the shared ShackDesk
+  telemetry endpoint: a startup report and a per-test-run report with radio model, serial settings,
+  USB cable identifiers, and test outcomes. Every report is stored locally and viewable under
+  Help > View collected data. Support ID shown in Help > About.
+- Settings window now has content: the diagnostics toggle, data viewer, and privacy link
+- Unhandled exceptions are logged, reported if diagnostics are on, and shown to the operator
+  before the app closes
 
 ### Changed
 - Help > Contents opens the RigCheck product page instead of the site's general FAQ

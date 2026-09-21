@@ -1,12 +1,15 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using RigCheck.Localization;
 using RigCheck.Logging;
 using RigCheck.Services;
 using RigCheck.ViewModels;
 using RigCheck.Views;
 using Serilog;
 using System.IO;
+using System.Net.Http;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace RigCheck;
 
@@ -40,10 +43,38 @@ public partial class App : Application
             return;
         }
 
-        Resources["Settings"] = _host.Services.GetRequiredService<SettingsService>();
+        var settings  = _host.Services.GetRequiredService<SettingsService>();
+        var telemetry = _host.Services.GetRequiredService<TelemetryService>();
+        Resources["Settings"] = settings;
+
+        // Ask once about anonymous diagnostics before anything is sent.
+        if (!settings.Current.TelemetryPrompted)
+            new FirstRunDialog(settings).ShowDialog();
+
+        DispatcherUnhandledException += (_, e) => OnUnhandledException(e, telemetry);
 
         var mainWindow = _host.Services.GetRequiredService<MainWindow>();
         mainWindow.Show();
+
+        // Fire-and-forget: neither call may delay the window or fail loudly.
+        _ = telemetry.FlushPendingAsync();
+        _ = telemetry.ReportStartupAsync(_host.Services.GetRequiredService<HamlibLocatorService>());
+    }
+
+    // Log, report if allowed, tell the operator, and exit. Swallowing the
+    // exception would leave the app in an unknown state.
+    private void OnUnhandledException(DispatcherUnhandledExceptionEventArgs e, TelemetryService telemetry)
+    {
+        Log.Fatal(e.Exception, "Unhandled exception");
+        try { telemetry.ReportCrashAsync(e.Exception).Wait(TimeSpan.FromSeconds(3)); } catch { /* best effort */ }
+
+        MessageBox.Show(
+            Strings.Format("Crash_Message", BrandingInfo.AppName),
+            Strings.Format("Crash_Title", BrandingInfo.AppName),
+            MessageBoxButton.OK, MessageBoxImage.Error);
+
+        e.Handled = true;
+        Shutdown(1);
     }
 
     protected override async void OnExit(ExitEventArgs e)
@@ -67,6 +98,8 @@ public partial class App : Application
         // Infrastructure
         services.AddSingleton<AppLogger>();
         services.AddSingleton<SettingsService>();
+        services.AddSingleton(new HttpClient { Timeout = TimeSpan.FromSeconds(5) });
+        services.AddSingleton<TelemetryService>();
 
         // Hamlib / rig control
         services.AddSingleton<HamlibLocatorService>();

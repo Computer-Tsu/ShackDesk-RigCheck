@@ -53,18 +53,19 @@ public enum TestStatus
 /// DisplayCommand is the rigctl command the user can copy and run themselves.
 /// </summary>
 public record TestResult(
-    TestId          Id,
-    TestStatus      Status,
-    string          Message,
-    string          DisplayCommand,
-    DiagnosticResult? Diagnosis = null)
+    TestId            Id,
+    TestStatus        Status,
+    string            Message,
+    string            DisplayCommand,
+    DiagnosticResult? Diagnosis = null,
+    Services.RigctlError? Error = null)
 {
     public static TestResult Pass(TestId id, string message, string displayCommand) =>
         new(id, TestStatus.Pass, message, displayCommand);
 
     public static TestResult Fail(TestId id, string message, string displayCommand,
-                                   DiagnosticResult diagnosis) =>
-        new(id, TestStatus.Fail, message, displayCommand, diagnosis);
+                                   DiagnosticResult diagnosis, Services.RigctlError? error = null) =>
+        new(id, TestStatus.Fail, message, displayCommand, diagnosis, error);
 
     public static TestResult Warning(TestId id, string message, string displayCommand) =>
         new(id, TestStatus.Warning, message, displayCommand);

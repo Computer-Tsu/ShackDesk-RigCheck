@@ -3,19 +3,40 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:loc="clr-namespace:RigCheck.Localization"
         Title="{loc:Str Settings_Title}"
-        Width="420" SizeToContent="Height"
+        Width="480" SizeToContent="Height"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False"
         Background="{StaticResource BrushBackground}"
         Foreground="{StaticResource BrushForeground}">
 
-    <!-- Placeholder until there are settings to show. -->
-
     <StackPanel Margin="24,20,24,16">
-        <TextBlock Text="{loc:Str Settings_ComingSoon}"
-                   Foreground="{StaticResource BrushMuted}"
-                   TextWrapping="Wrap" Margin="0,0,0,20" />
+
+        <!-- ── Anonymous diagnostics ── -->
+        <TextBlock Text="{loc:Str Settings_TelemetryHeading}"
+                   FontWeight="SemiBold" FontSize="14" Margin="0,0,0,8" />
+
+        <CheckBox x:Name="TelemetryCheckBox"
+                  Content="{loc:Str Telemetry_Checkbox}"
+                  Foreground="{StaticResource BrushForeground}" FontSize="13"
+                  Margin="0,0,0,8"
+                  Checked="Telemetry_Changed" Unchecked="Telemetry_Changed" />
+
+        <TextBlock x:Name="WhatIsSentText" TextWrapping="Wrap"
+                   Foreground="{StaticResource BrushMuted}" FontSize="12" Margin="0,0,0,6" />
+        <TextBlock Text="{loc:Str Telemetry_WhatIsNotSent}" TextWrapping="Wrap"
+                   Foreground="{StaticResource BrushMuted}" FontSize="12" Margin="0,0,0,12" />
+
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+            <Button Content="{loc:Str Settings_ViewData}"
+                    Style="{StaticResource SecondaryButtonStyle}" Click="ViewData_Click" Margin="0,0,12,0" />
+            <Button Style="{StaticResource LinkButtonStyle}" Padding="0" Click="Privacy_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{loc:Str Telemetry_PrivacyLink}" />
+                    <TextBlock Style="{StaticResource ExternalLinkIconStyle}" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
 
         <Button Content="{loc:Str Common_Close}"
                 Style="{StaticResource PrimaryButtonStyle}"
