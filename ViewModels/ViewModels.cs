@@ -220,6 +220,11 @@ public partial class ConnectionViewModel : ObservableObject
 
         var saved = AvailablePorts.FirstOrDefault(p => p.PortName == s.ComPort);
         if (saved is not null) SelectedPort = saved;
+
+        // Show the matching preset in the picker without re-applying its
+        // defaults — the saved baud and serial settings must win.
+        _selectedPreset = AvailablePresets.FirstOrDefault(p => p.HamlibModelId == s.RadioModelId);
+        OnPropertyChanged(nameof(SelectedPreset));
     }
 
     public void SaveTo(RigCheckSettings s)
@@ -401,6 +406,13 @@ public partial class RawConsoleViewModel : ObservableObject
 
         var cmd = RigctlCommandBuilder.RawCommand(cfg, input);
         AddEntry(ConsoleEntryKind.Command, cmd.DisplayCommand);
+
+        // The test suite refuses model 1, but the console lets an operator
+        // type anything. Model 1 is Hamlib's dummy rig: every reply is
+        // simulated, so say so beside each command rather than let a
+        // convincing-looking answer stand.
+        if (cfg.ModelId == 1 && !cfg.UseRigctld)
+            AddEntry(ConsoleEntryKind.Error, Strings.Get("Console_DummyRig"));
 
         IsRunning = true;
         try

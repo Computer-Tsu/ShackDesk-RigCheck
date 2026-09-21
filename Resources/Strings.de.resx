@@ -127,7 +127,7 @@ Details wurden in das Protokoll geschrieben. Falls dies wiederholt auftritt, mel
 
   <data name="Status_HamlibFound" xml:space="preserve"><value>Hamlib gefunden über {0}</value></data>
   <data name="Status_HamlibMissing" xml:space="preserve"><value>Hamlib nicht gefunden — WSJT-X installieren oder Hamlib herunterladen</value></data>
-  <data name="Status_HamlibMissingLong" xml:space="preserve"><value>Hamlib nicht gefunden. „Tests starten“ ist erst verfügbar, wenn Hamlib installiert ist.</value></data>
+  <data name="Status_HamlibMissingLong" xml:space="preserve"><value>Hamlib nicht gefunden — „Tests starten“ braucht es (die Tests sind Hamlib-Befehle). „Mein Funkgerät finden“ und „PC prüfen“ funktionieren auch ohne.</value></data>
   <data name="Status_Running" xml:space="preserve"><value>Tests laufen…</value></data>
   <data name="Status_AllPassed" xml:space="preserve"><value>Alle {0} Tests bestanden.</value></data>
   <data name="Status_SomeFailed" xml:space="preserve"><value>{0} Test(s) fehlgeschlagen — Details in den Ergebnissen.</value></data>
@@ -287,7 +287,7 @@ Fortfahren?</value></data>
   <data name="Env_Windows" xml:space="preserve"><value>{0} {1} (Build {2}, {3})</value></data>
   <data name="Env_HamlibNone" xml:space="preserve"><value>Nicht gefunden</value></data>
   <data name="Env_HamlibNone_Summary" xml:space="preserve"><value>Hamlib ist nicht installiert oder nicht dort, wo RigCheck sucht.</value></data>
-  <data name="Env_HamlibNone_1" xml:space="preserve"><value>Installieren Sie WSJT-X, Fldigi oder das eigenständige Hamlib für Windows — jedes enthält rigctl.exe</value></data>
+  <data name="Env_HamlibNone_1" xml:space="preserve"><value>Installieren Sie WSJT-X, Fldigi oder das eigenständige Hamlib für Windows — jedes enthält rigctl.exe. Der Befehl unten installiert WSJT-X mit winget</value></data>
   <data name="Env_HamlibNone_2" xml:space="preserve"><value>RigCheck sucht in den Installationsordnern von WSJT-X, Fldigi und Hamlib sowie im PATH</value></data>
   <data name="Env_HamlibOne" xml:space="preserve"><value>Verwendet {0}: {1}</value></data>
   <data name="Env_HamlibMany" xml:space="preserve"><value>{0} Kopien gefunden — verwendet {1}: {2}. Außerdem: {3}</value></data>
@@ -378,4 +378,34 @@ Fortfahren?</value></data>
   <data name="Disc_VerifyFailed" xml:space="preserve"><value>{0} an {1}: {2} Test(s) fehlgeschlagen</value></data>
   <data name="Disc_Applied" xml:space="preserve"><value>Verbindungseinstellungen auf {0} (Modell {1}), {2}, {3} Baud gesetzt — Tests ausführen verwendet diese jetzt</value></data>
   <data name="Export_Transcript" xml:space="preserve"><value>PROTOKOLL „MEIN FUNKGERÄT FINDEN“</value></data>
+  <data name="Console_DummyRig" xml:space="preserve"><value>Modell 1 ist das Dummy-Gerät von Hamlib — jede Antwort unten ist simuliert, nicht von einem Funkgerät</value></data>
+  <data name="Handoff_Heading" xml:space="preserve"><value>Einzugebende Einstellungen — Zeile für Ihr Programm kopieren</value></data>
+  <data name="Handoff_WsjtxPath" xml:space="preserve"><value>WSJT-X und JS8Call: File › Settings › Radio</value></data>
+  <data name="Handoff_Wsjtx" xml:space="preserve"><value>Rig: {0} · Serial Port: {1} · Baud Rate: {2} · Data Bits: Eight · Stop Bits: {3} · Handshake: None · PTT Method: {4}</value></data>
+  <data name="Handoff_WsjtxNet" xml:space="preserve"><value>Rig: Hamlib NET rigctl · Network Server: {0}</value></data>
+  <data name="Handoff_FldigiPath" xml:space="preserve"><value>Fldigi: Configure › Rig Control › Hamlib</value></data>
+  <data name="Handoff_Fldigi" xml:space="preserve"><value>Rig: {0} · Device: {1} · Baud rate: {2} · Stopbits: {3} · PTT via Hamlib command</value></data>
+  <data name="Handoff_FldigiNet" xml:space="preserve"><value>Rig: Hamlib NET rigctl · Device: {0}</value></data>
+  <data name="Handoff_WinlinkPath" xml:space="preserve"><value>Winlink Express: Session › Radio Setup (eigene Geräteliste — das nächstliegende Modell wählen)</value></data>
+  <data name="Handoff_Winlink" xml:space="preserve"><value>Radio: {0} · Serial Port: {1} · Baud: {2} · PTT: {3}</value></data>
+  <data name="Handoff_Clue" xml:space="preserve"><value>{0} ist für {1} an {2} mit {3} Baud konfiguriert</value></data>
+  <data name="Handoff_ClueRigctl" xml:space="preserve"><value>{0} ist auf rigctl unter {1} konfiguriert</value></data>
+  <data name="Handoff_DiffMatch" xml:space="preserve"><value>{0} hat diese Einstellungen bereits</value></data>
+  <data name="Handoff_DiffChange" xml:space="preserve"><value>{0} ist auf {1} an {2} mit {3} Baud eingestellt — ändern Sie {4}</value></data>
+  <data name="Handoff_DiffRig" xml:space="preserve"><value>Rig auf {0}</value></data>
+  <data name="Handoff_DiffPort" xml:space="preserve"><value>Serial Port auf {0}</value></data>
+  <data name="Handoff_DiffBaud" xml:space="preserve"><value>Baud Rate auf {0}</value></data>
+  <data name="Handoff_DiffRigctl" xml:space="preserve"><value>{0} verwendet rigctl ({1}) — das funktioniert, solange rigctld läuft</value></data>
+  <data name="Handoff_DiffSerialVsRigctld" xml:space="preserve"><value>{0} ist auf {1} an {2} mit {3} Baud eingestellt — so lassen oder auf Hamlib NET rigctl umstellen, um das Funkgerät über rigctld zu teilen</value></data>
+  <data name="Disc_NoHamlibVerify" xml:space="preserve"><value>Hamlib ist nicht installiert, daher können die vollständigen rigctl-Tests nicht laufen — ein Funkgerät, das sich über die serielle Schnittstelle identifiziert hat, gilt als geprüft. Installieren Sie WSJT-X oder Hamlib, um die Tests auszuführen.</value></data>
+  <data name="Disc_VerifiedByProbe" xml:space="preserve"><value>{0} an {1} durch direkte Abfrage geprüft</value></data>
+  <data name="Disc_Echo" xml:space="preserve"><value>unser eigener Rahmen kam zurück — ein CI-V-Funkgerät mit eingeschaltetem Echo Back hört mit {0} Baud zu; jede bekannte CI-V-Adresse wird nun der Reihe nach abgefragt</value></data>
+  <data name="Disc_Summary" xml:space="preserve"><value>Ihr Funkgerät: {0} an {1} — {2} Baud, 8N{3} (8 Datenbits, keine Parität, {3} Stopp)</value></data>
+  <data name="Disc_SummaryRigctld" xml:space="preserve"><value>Ihr Funkgerät ist über rigctld unter {0} erreichbar</value></data>
+  <data name="Diag_PortInUse_Running" xml:space="preserve"><value>Läuft gerade: {0} — mit großer Wahrscheinlichkeit das Programm, das die Schnittstelle belegt. Beenden Sie es (oder trennen Sie dort die Gerätesteuerung) und versuchen Sie es erneut</value></data>
+  <data name="Msg_VfoNotSupported" xml:space="preserve"><value>Dieses Funkgerät meldet sein aktives VFO nicht über Hamlib (normal für {0} und die meisten Icoms) — kein Problem</value></data>
+  <data name="Msg_SmeterNotSupported" xml:space="preserve"><value>Dieses Funkgerät meldet die Signalstärke nicht über Hamlib ({0}) — kein Problem</value></data>
+  <data name="Diag_NotSupported_Summary" xml:space="preserve"><value>Der Hamlib-Treiber für das {0} implementiert diese Abfrage nicht.</value></data>
+  <data name="Diag_NotSupported_1" xml:space="preserve"><value>Das Funkgerät antwortet; nur dieser eine Befehl existiert für es nicht. WSJT-X und die anderen Programme brauchen ihn nicht.</value></data>
+  <data name="Main_ConsolePlaceholder" xml:space="preserve"><value>nur der Unterbefehl, z. B.  f   m   t   l STRENGTH   — eine eingefügte vollständige Befehlszeile wird für Sie gekürzt</value></data>
 </root>

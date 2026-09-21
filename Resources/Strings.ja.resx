@@ -127,7 +127,7 @@
 
   <data name="Status_HamlibFound" xml:space="preserve"><value>Hamlib を {0} 経由で検出</value></data>
   <data name="Status_HamlibMissing" xml:space="preserve"><value>Hamlib が見つかりません — WSJT-X をインストールするか Hamlib をダウンロードしてください</value></data>
-  <data name="Status_HamlibMissingLong" xml:space="preserve"><value>Hamlib が見つかりません。Hamlib をインストールするまで「テストを実行」は使用できません。</value></data>
+  <data name="Status_HamlibMissingLong" xml:space="preserve"><value>Hamlib が見つかりません — 「テストを実行」には必要です（テストは Hamlib のコマンドです）。「無線機を探す」と「PC をスキャン」は Hamlib なしで動作します。</value></data>
   <data name="Status_Running" xml:space="preserve"><value>テストを実行中…</value></data>
   <data name="Status_AllPassed" xml:space="preserve"><value>{0} 件のテストがすべて合格しました。</value></data>
   <data name="Status_SomeFailed" xml:space="preserve"><value>{0} 件のテストが失敗しました — 詳細は結果を確認してください。</value></data>
@@ -287,7 +287,7 @@
   <data name="Env_Windows" xml:space="preserve"><value>{0} {1} (ビルド {2}、{3})</value></data>
   <data name="Env_HamlibNone" xml:space="preserve"><value>見つかりません</value></data>
   <data name="Env_HamlibNone_Summary" xml:space="preserve"><value>Hamlib がインストールされていないか、RigCheck が探す場所にありません。</value></data>
-  <data name="Env_HamlibNone_1" xml:space="preserve"><value>WSJT-X、Fldigi、または Windows 用の単体 Hamlib をインストールしてください — いずれにも rigctl.exe が含まれています</value></data>
+  <data name="Env_HamlibNone_1" xml:space="preserve"><value>WSJT-X、Fldigi、または Windows 用の単体 Hamlib をインストールしてください — いずれにも rigctl.exe が含まれています。下のコマンドは winget で WSJT-X をインストールします</value></data>
   <data name="Env_HamlibNone_2" xml:space="preserve"><value>RigCheck は WSJT-X、Fldigi、Hamlib のインストールフォルダーと PATH を探します</value></data>
   <data name="Env_HamlibOne" xml:space="preserve"><value>使用中: {0}: {1}</value></data>
   <data name="Env_HamlibMany" xml:space="preserve"><value>{0} 個見つかりました — 使用中: {1}: {2}。その他: {3}</value></data>
@@ -378,4 +378,34 @@
   <data name="Disc_VerifyFailed" xml:space="preserve"><value>{1} の {0}: {2} 件のテストが失敗</value></data>
   <data name="Disc_Applied" xml:space="preserve"><value>「接続」パネルを {0}（モデル {1}）、{2}、{3} ボーに設定しました — 「テストを実行」はこの設定を使います</value></data>
   <data name="Export_Transcript" xml:space="preserve"><value>「無線機を探す」の記録</value></data>
+  <data name="Console_DummyRig" xml:space="preserve"><value>モデル 1 は Hamlib のダミーリグです — 以下の応答はすべてシミュレーションで、無線機からのものではありません</value></data>
+  <data name="Handoff_Heading" xml:space="preserve"><value>入力する設定 — お使いのプログラムの行をコピーしてください</value></data>
+  <data name="Handoff_WsjtxPath" xml:space="preserve"><value>WSJT-X と JS8Call: File › Settings › Radio</value></data>
+  <data name="Handoff_Wsjtx" xml:space="preserve"><value>Rig: {0} · Serial Port: {1} · Baud Rate: {2} · Data Bits: Eight · Stop Bits: {3} · Handshake: None · PTT Method: {4}</value></data>
+  <data name="Handoff_WsjtxNet" xml:space="preserve"><value>Rig: Hamlib NET rigctl · Network Server: {0}</value></data>
+  <data name="Handoff_FldigiPath" xml:space="preserve"><value>Fldigi: Configure › Rig Control › Hamlib</value></data>
+  <data name="Handoff_Fldigi" xml:space="preserve"><value>Rig: {0} · Device: {1} · Baud rate: {2} · Stopbits: {3} · PTT via Hamlib command</value></data>
+  <data name="Handoff_FldigiNet" xml:space="preserve"><value>Rig: Hamlib NET rigctl · Device: {0}</value></data>
+  <data name="Handoff_WinlinkPath" xml:space="preserve"><value>Winlink Express: Session › Radio Setup（独自の無線機一覧 — 最も近い機種を選択）</value></data>
+  <data name="Handoff_Winlink" xml:space="preserve"><value>Radio: {0} · Serial Port: {1} · Baud: {2} · PTT: {3}</value></data>
+  <data name="Handoff_Clue" xml:space="preserve"><value>{0} は {2} の {1}（{3} ボー）に設定されています</value></data>
+  <data name="Handoff_ClueRigctl" xml:space="preserve"><value>{0} は {1} の rigctl を使う設定です</value></data>
+  <data name="Handoff_DiffMatch" xml:space="preserve"><value>{0} はすでにこの設定です</value></data>
+  <data name="Handoff_DiffChange" xml:space="preserve"><value>{0} は {2} の {1}（{3} ボー）に設定されています — {4} に変更してください</value></data>
+  <data name="Handoff_DiffRig" xml:space="preserve"><value>Rig を {0}</value></data>
+  <data name="Handoff_DiffPort" xml:space="preserve"><value>Serial Port を {0}</value></data>
+  <data name="Handoff_DiffBaud" xml:space="preserve"><value>Baud Rate を {0}</value></data>
+  <data name="Handoff_DiffRigctl" xml:space="preserve"><value>{0} は rigctl（{1}）を使用します — rigctld が動作していれば動きます</value></data>
+  <data name="Handoff_DiffSerialVsRigctld" xml:space="preserve"><value>{0} は {2} の {1}（{3} ボー）に設定されています — そのままにするか、rigctld 経由で無線機を共有するために Hamlib NET rigctl に切り替えてください</value></data>
+  <data name="Disc_NoHamlibVerify" xml:space="preserve"><value>Hamlib がインストールされていないため、rigctl の完全なテストは実行できません — シリアルポートで自ら名乗った無線機は検証済みとみなします。テストを実行するには WSJT-X または Hamlib をインストールしてください。</value></data>
+  <data name="Disc_VerifiedByProbe" xml:space="preserve"><value>{1} の {0} は直接問い合わせで検証済み</value></data>
+  <data name="Disc_Echo" xml:space="preserve"><value>自分のフレームがそのまま返ってきました — Echo Back が有効な CI-V 無線機が {0} ボーで受信しています。既知の CI-V アドレスを順に問い合わせます</value></data>
+  <data name="Disc_Summary" xml:space="preserve"><value>あなたの無線機: {1} の {0} — {2} ボー、8N{3}（データ 8 ビット、パリティなし、ストップ {3} ビット）</value></data>
+  <data name="Disc_SummaryRigctld" xml:space="preserve"><value>あなたの無線機は {0} の rigctld 経由で利用できます</value></data>
+  <data name="Diag_PortInUse_Running" xml:space="preserve"><value>現在実行中: {0} — ほぼ確実にポートを占有しているプログラムです。終了する（またはそのリグ制御を切断する）してから、もう一度お試しください</value></data>
+  <data name="Msg_VfoNotSupported" xml:space="preserve"><value>この無線機は Hamlib 経由でアクティブ VFO を報告しません（{0} や多くの Icom 機では正常）— 問題ありません</value></data>
+  <data name="Msg_SmeterNotSupported" xml:space="preserve"><value>この無線機は Hamlib 経由で信号強度を報告しません（{0}）— 問題ありません</value></data>
+  <data name="Diag_NotSupported_Summary" xml:space="preserve"><value>{0} 用の Hamlib ドライバーはこの問い合わせを実装していません。</value></data>
+  <data name="Diag_NotSupported_1" xml:space="preserve"><value>無線機は応答しています。このコマンドがこの機種に存在しないだけです。WSJT-X などのプログラムには不要です。</value></data>
+  <data name="Main_ConsolePlaceholder" xml:space="preserve"><value>サブコマンドのみ（例: f  m  t  l STRENGTH）— 完全なコマンド行を貼り付けても自動的に短縮されます</value></data>
 </root>

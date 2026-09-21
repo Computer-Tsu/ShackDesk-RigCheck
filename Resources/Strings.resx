@@ -429,7 +429,7 @@ Details have been written to the log. If this keeps happening, please report it 
     <value>Hamlib not found — install WSJT-X or download Hamlib</value>
   </data>
   <data name="Status_HamlibMissingLong" xml:space="preserve">
-    <value>Hamlib not found. Run Tests will be unavailable until Hamlib is installed.</value>
+    <value>Hamlib not found — Run Tests needs it (the tests are Hamlib commands). Find my radio and Scan PC work without it.</value>
   </data>
   <data name="Status_Running" xml:space="preserve">
     <value>Running tests…</value>
@@ -932,7 +932,7 @@ Continue?</value>
     <value>Hamlib is not installed, or not where RigCheck looks.</value>
   </data>
   <data name="Env_HamlibNone_1" xml:space="preserve">
-    <value>Install WSJT-X, Fldigi, or the standalone Hamlib for Windows — each includes rigctl.exe</value>
+    <value>Install WSJT-X, Fldigi, or the standalone Hamlib for Windows — each includes rigctl.exe. The command below installs WSJT-X with winget</value>
   </data>
   <data name="Env_HamlibNone_2" xml:space="preserve">
     <value>RigCheck looks in the WSJT-X, Fldigi, and Hamlib install folders and on PATH</value>
@@ -1212,5 +1212,99 @@ Continue?</value>
   </data>
   <data name="Export_Transcript" xml:space="preserve">
     <value>FIND MY RADIO TRANSCRIPT</value>
+  </data>
+  <data name="Console_DummyRig" xml:space="preserve">
+    <value>Model 1 is Hamlib's dummy rig — every reply below is simulated, not from a radio</value>
+    <comment>Shown in the raw console whenever a command is sent with Hamlib model 1.</comment>
+  </data>
+  <data name="Handoff_Heading" xml:space="preserve">
+    <value>Settings to enter — copy the line for your program</value>
+  </data>
+  <data name="Handoff_WsjtxPath" xml:space="preserve">
+    <value>WSJT-X and JS8Call: File › Settings › Radio</value>
+  </data>
+  <data name="Handoff_Wsjtx" xml:space="preserve">
+    <value>Rig: {0} · Serial Port: {1} · Baud Rate: {2} · Data Bits: Eight · Stop Bits: {3} · Handshake: None · PTT Method: {4}</value>
+    <comment>Field labels as they appear in WSJT-X. Translate only if WSJT-X is translated in your language. {0} rig name, {1} port, {2} baud, {3} stop bits, {4} PTT method.</comment>
+  </data>
+  <data name="Handoff_WsjtxNet" xml:space="preserve">
+    <value>Rig: Hamlib NET rigctl · Network Server: {0}</value>
+  </data>
+  <data name="Handoff_FldigiPath" xml:space="preserve">
+    <value>Fldigi: Configure › Rig Control › Hamlib</value>
+  </data>
+  <data name="Handoff_Fldigi" xml:space="preserve">
+    <value>Rig: {0} · Device: {1} · Baud rate: {2} · Stopbits: {3} · PTT via Hamlib command</value>
+    <comment>Field labels as they appear in Fldigi. {0} rig, {1} device, {2} baud, {3} stop bits.</comment>
+  </data>
+  <data name="Handoff_FldigiNet" xml:space="preserve">
+    <value>Rig: Hamlib NET rigctl · Device: {0}</value>
+  </data>
+  <data name="Handoff_WinlinkPath" xml:space="preserve">
+    <value>Winlink Express: Session › Radio Setup (its own radio list — pick the nearest model)</value>
+  </data>
+  <data name="Handoff_Winlink" xml:space="preserve">
+    <value>Radio: {0} · Serial Port: {1} · Baud: {2} · PTT: {3}</value>
+  </data>
+  <data name="Handoff_Clue" xml:space="preserve">
+    <value>{0} is configured for {1} on {2} at {3} baud</value>
+  </data>
+  <data name="Handoff_ClueRigctl" xml:space="preserve">
+    <value>{0} is configured to use rigctl at {1}</value>
+  </data>
+  <data name="Handoff_DiffMatch" xml:space="preserve">
+    <value>{0} already has these settings</value>
+  </data>
+  <data name="Handoff_DiffChange" xml:space="preserve">
+    <value>{0} is set to {1} on {2} at {3} baud — change {4}</value>
+    <comment>{0} program, {1} its configured rig, {2} its port, {3} its baud, {4} comma list built from Handoff_DiffRig/Port/Baud.</comment>
+  </data>
+  <data name="Handoff_DiffRig" xml:space="preserve">
+    <value>Rig to {0}</value>
+  </data>
+  <data name="Handoff_DiffPort" xml:space="preserve">
+    <value>Serial Port to {0}</value>
+  </data>
+  <data name="Handoff_DiffBaud" xml:space="preserve">
+    <value>Baud Rate to {0}</value>
+  </data>
+  <data name="Handoff_DiffRigctl" xml:space="preserve">
+    <value>{0} uses rigctl ({1}) — that works whenever rigctld is running</value>
+  </data>
+  <data name="Handoff_DiffSerialVsRigctld" xml:space="preserve">
+    <value>{0} is set to {1} on {2} at {3} baud — keep that, or switch it to Hamlib NET rigctl to share the radio through rigctld</value>
+  </data>
+  <data name="Disc_NoHamlibVerify" xml:space="preserve">
+    <value>Hamlib is not installed, so the full rigctl tests cannot run — a radio that named itself over the serial port counts as verified. Install WSJT-X or Hamlib to run the tests.</value>
+  </data>
+  <data name="Disc_VerifiedByProbe" xml:space="preserve">
+    <value>{0} on {1} verified by direct query</value>
+  </data>
+  <data name="Disc_Echo" xml:space="preserve">
+    <value>our own frame came back — a CI-V radio with Echo Back on is listening at {0} baud; asking each known CI-V address in turn</value>
+  </data>
+  <data name="Disc_Summary" xml:space="preserve">
+    <value>Your radio: {0} on {1} — {2} baud, 8N{3} (8 data bits, no parity, {3} stop)</value>
+  </data>
+  <data name="Disc_SummaryRigctld" xml:space="preserve">
+    <value>Your radio is reachable through rigctld at {0}</value>
+  </data>
+  <data name="Diag_PortInUse_Running" xml:space="preserve">
+    <value>Running right now: {0} — almost certainly the program holding the port. Close it (or disconnect its rig control) and try again</value>
+  </data>
+  <data name="Msg_VfoNotSupported" xml:space="preserve">
+    <value>This radio does not report its active VFO through Hamlib (normal for {0} and most Icoms) — not a problem</value>
+  </data>
+  <data name="Msg_SmeterNotSupported" xml:space="preserve">
+    <value>This radio does not report signal strength through Hamlib ({0}) — not a problem</value>
+  </data>
+  <data name="Diag_NotSupported_Summary" xml:space="preserve">
+    <value>Hamlib's driver for the {0} does not implement this query.</value>
+  </data>
+  <data name="Diag_NotSupported_1" xml:space="preserve">
+    <value>The radio is answering; this one command simply does not exist for it. WSJT-X and the other programs do not need it.</value>
+  </data>
+  <data name="Main_ConsolePlaceholder" xml:space="preserve">
+    <value>subcommand only, e.g.  f   m   t   l STRENGTH   — a pasted full command line is trimmed for you</value>
   </data>
 </root>

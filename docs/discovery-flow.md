@@ -118,8 +118,8 @@ The data file chooses among these by name. Nothing else can be sent.
 | Name | Family | Bytes sent | Expected reply | Notes |
 |---|---|---|---|---|
 | `KenwoodId` | Kenwood, Elecraft, Yaesu CAT | `ID;` | `IDnnn;` | One exchange identifies the model. Elecraft K3 and KX3 both answer `ID017;`; `OM;` tells them apart. |
-| `IcomReadId` | Icom CI-V | `FE FE 00 E0 19 00 FD` | `FE FE E0 aa 19 00 aa FD` | `00` is the broadcast address, so the rig's own CI-V address `aa` comes back. Skip the echo frame — CI-V transceive echoes our bytes first. |
-| `IcomReadFreq` | Icom CI-V | `FE FE 00 E0 03 FD` | `FE FE E0 aa 03 <BCD freq> FD` | Fallback for older rigs that do not answer `19 00`. |
+| `IcomReadId` | Icom CI-V | `FE FE aa E0 19 00 FD` | `FE FE E0 aa 19 00 aa FD` | First sent to `00` (broadcast). Rigs act on broadcast but **never answer it**, so if only our own echo comes back (Echo Back on — the IC-7300 default) or nothing at all, the frame is re-sent to each CI-V address in `rig_ids.json`, the selected radio's first. The echo frame is skipped. Learned on a real IC-7300, 2026-09-21. |
+| `IcomReadFreq` | Icom CI-V | `FE FE aa E0 03 FD` | `FE FE E0 aa 03 <BCD freq> FD` | Fallback for older rigs that do not answer `19 00`. |
 | `YaesuLegacyReadFreq` | Yaesu FT-817/857/897 | `00 00 00 00 03` | 5 bytes: BCD freq + mode | Fixed 5-byte protocol, 4800/9600/38400 only. |
 | `TenTecReadFreq` | Ten-Tec | `?A` + CR | `A` + 4 bytes | Rare; last in the order. |
 
@@ -182,6 +182,8 @@ reproduce it with a terminal program.
 ## Not in scope for the first version
 
 - OmniRig and LAN-connected rigs (inventory only — no probe).
+- Fldigi's own configuration as a clue (it stores baud as a list index and
+  models in its own numbering); WSJT-X and JS8Call are read.
 - Telemetry-weighted priors (needs volume first).
 - Aggressive probing (see below).
 

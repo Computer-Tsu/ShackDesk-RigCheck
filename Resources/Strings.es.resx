@@ -127,7 +127,7 @@ Los detalles se han guardado en el registro. Si esto sigue ocurriendo, infórmel
 
   <data name="Status_HamlibFound" xml:space="preserve"><value>Hamlib encontrado mediante {0}</value></data>
   <data name="Status_HamlibMissing" xml:space="preserve"><value>Hamlib no encontrado — instale WSJT-X o descargue Hamlib</value></data>
-  <data name="Status_HamlibMissingLong" xml:space="preserve"><value>Hamlib no encontrado. «Ejecutar pruebas» no estará disponible hasta que Hamlib esté instalado.</value></data>
+  <data name="Status_HamlibMissingLong" xml:space="preserve"><value>Hamlib no encontrado — «Ejecutar pruebas» lo necesita (las pruebas son comandos de Hamlib). «Buscar mi radio» y «Analizar PC» funcionan sin él.</value></data>
   <data name="Status_Running" xml:space="preserve"><value>Ejecutando pruebas…</value></data>
   <data name="Status_AllPassed" xml:space="preserve"><value>Las {0} pruebas se superaron.</value></data>
   <data name="Status_SomeFailed" xml:space="preserve"><value>{0} prueba(s) fallaron — vea los resultados para más detalles.</value></data>
@@ -287,7 +287,7 @@ Los detalles se han guardado en el registro. Si esto sigue ocurriendo, infórmel
   <data name="Env_Windows" xml:space="preserve"><value>{0} {1} (compilación {2}, {3})</value></data>
   <data name="Env_HamlibNone" xml:space="preserve"><value>No encontrado</value></data>
   <data name="Env_HamlibNone_Summary" xml:space="preserve"><value>Hamlib no está instalado, o no está donde RigCheck lo busca.</value></data>
-  <data name="Env_HamlibNone_1" xml:space="preserve"><value>Instale WSJT-X, Fldigi o el Hamlib independiente para Windows — cada uno incluye rigctl.exe</value></data>
+  <data name="Env_HamlibNone_1" xml:space="preserve"><value>Instale WSJT-X, Fldigi o el Hamlib independiente para Windows — cada uno incluye rigctl.exe. El comando de abajo instala WSJT-X con winget</value></data>
   <data name="Env_HamlibNone_2" xml:space="preserve"><value>RigCheck busca en las carpetas de instalación de WSJT-X, Fldigi y Hamlib y en PATH</value></data>
   <data name="Env_HamlibOne" xml:space="preserve"><value>Usando {0}: {1}</value></data>
   <data name="Env_HamlibMany" xml:space="preserve"><value>{0} copias encontradas — usando {1}: {2}. También: {3}</value></data>
@@ -378,4 +378,34 @@ Los detalles se han guardado en el registro. Si esto sigue ocurriendo, infórmel
   <data name="Disc_VerifyFailed" xml:space="preserve"><value>{0} en {1}: {2} prueba(s) fallaron</value></data>
   <data name="Disc_Applied" xml:space="preserve"><value>Panel de Conexión establecido en {0} (modelo {1}), {2}, {3} baudios — Ejecutar pruebas usa estos valores ahora</value></data>
   <data name="Export_Transcript" xml:space="preserve"><value>TRANSCRIPCIÓN DE BUSCAR MI RADIO</value></data>
+  <data name="Console_DummyRig" xml:space="preserve"><value>El modelo 1 es la radio ficticia de Hamlib — todas las respuestas de abajo son simuladas, no de una radio</value></data>
+  <data name="Handoff_Heading" xml:space="preserve"><value>Ajustes que debe introducir — copie la línea de su programa</value></data>
+  <data name="Handoff_WsjtxPath" xml:space="preserve"><value>WSJT-X y JS8Call: File › Settings › Radio</value></data>
+  <data name="Handoff_Wsjtx" xml:space="preserve"><value>Rig: {0} · Serial Port: {1} · Baud Rate: {2} · Data Bits: Eight · Stop Bits: {3} · Handshake: None · PTT Method: {4}</value></data>
+  <data name="Handoff_WsjtxNet" xml:space="preserve"><value>Rig: Hamlib NET rigctl · Network Server: {0}</value></data>
+  <data name="Handoff_FldigiPath" xml:space="preserve"><value>Fldigi: Configure › Rig Control › Hamlib</value></data>
+  <data name="Handoff_Fldigi" xml:space="preserve"><value>Rig: {0} · Device: {1} · Baud rate: {2} · Stopbits: {3} · PTT via Hamlib command</value></data>
+  <data name="Handoff_FldigiNet" xml:space="preserve"><value>Rig: Hamlib NET rigctl · Device: {0}</value></data>
+  <data name="Handoff_WinlinkPath" xml:space="preserve"><value>Winlink Express: Session › Radio Setup (tiene su propia lista de radios — elija el modelo más cercano)</value></data>
+  <data name="Handoff_Winlink" xml:space="preserve"><value>Radio: {0} · Serial Port: {1} · Baud: {2} · PTT: {3}</value></data>
+  <data name="Handoff_Clue" xml:space="preserve"><value>{0} está configurado para {1} en {2} a {3} baudios</value></data>
+  <data name="Handoff_ClueRigctl" xml:space="preserve"><value>{0} está configurado para usar rigctl en {1}</value></data>
+  <data name="Handoff_DiffMatch" xml:space="preserve"><value>{0} ya tiene estos ajustes</value></data>
+  <data name="Handoff_DiffChange" xml:space="preserve"><value>{0} está configurado con {1} en {2} a {3} baudios — cambie {4}</value></data>
+  <data name="Handoff_DiffRig" xml:space="preserve"><value>Rig a {0}</value></data>
+  <data name="Handoff_DiffPort" xml:space="preserve"><value>Serial Port a {0}</value></data>
+  <data name="Handoff_DiffBaud" xml:space="preserve"><value>Baud Rate a {0}</value></data>
+  <data name="Handoff_DiffRigctl" xml:space="preserve"><value>{0} usa rigctl ({1}) — eso funciona siempre que rigctld esté en ejecución</value></data>
+  <data name="Handoff_DiffSerialVsRigctld" xml:space="preserve"><value>{0} está configurado con {1} en {2} a {3} baudios — déjelo así, o cámbielo a Hamlib NET rigctl para compartir la radio a través de rigctld</value></data>
+  <data name="Disc_NoHamlibVerify" xml:space="preserve"><value>Hamlib no está instalado, así que las pruebas completas de rigctl no pueden ejecutarse — una radio que se identificó por el puerto serie cuenta como verificada. Instale WSJT-X o Hamlib para ejecutar las pruebas.</value></data>
+  <data name="Disc_VerifiedByProbe" xml:space="preserve"><value>{0} en {1} verificada por consulta directa</value></data>
+  <data name="Disc_Echo" xml:space="preserve"><value>volvió nuestra propia trama — una radio CI-V con Echo Back activado está escuchando a {0} baudios; preguntando a cada dirección CI-V conocida por turno</value></data>
+  <data name="Disc_Summary" xml:space="preserve"><value>Su radio: {0} en {1} — {2} baudios, 8N{3} (8 bits de datos, sin paridad, {3} de parada)</value></data>
+  <data name="Disc_SummaryRigctld" xml:space="preserve"><value>Su radio es accesible a través de rigctld en {0}</value></data>
+  <data name="Diag_PortInUse_Running" xml:space="preserve"><value>En ejecución ahora mismo: {0} — casi con seguridad el programa que retiene el puerto. Ciérrelo (o desconecte su control de radio) y vuelva a intentarlo</value></data>
+  <data name="Msg_VfoNotSupported" xml:space="preserve"><value>Esta radio no informa su VFO activo a través de Hamlib (normal para {0} y la mayoría de Icom) — no es un problema</value></data>
+  <data name="Msg_SmeterNotSupported" xml:space="preserve"><value>Esta radio no informa la intensidad de señal a través de Hamlib ({0}) — no es un problema</value></data>
+  <data name="Diag_NotSupported_Summary" xml:space="preserve"><value>El controlador de Hamlib para {0} no implementa esta consulta.</value></data>
+  <data name="Diag_NotSupported_1" xml:space="preserve"><value>La radio responde; simplemente este comando no existe para ella. WSJT-X y los demás programas no lo necesitan.</value></data>
+  <data name="Main_ConsolePlaceholder" xml:space="preserve"><value>solo el subcomando, p. ej.  f   m   t   l STRENGTH   — una línea de comando completa pegada se recorta automáticamente</value></data>
 </root>

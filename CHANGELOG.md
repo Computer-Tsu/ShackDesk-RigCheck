@@ -5,6 +5,130 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
+## [0.7.0] - 2026-09-21
+
+**Milestone: environment checks and Find my radio, proven on a real Icom IC-7300.**
+
+Scan PC, Find my radio, and Run Tests all did their job on real hardware today. Everything the
+bench found — CI-V broadcast never answers, WSJT-X names its Hamlib `rigctl-wsjtx.exe`, the
+connection test hung in rigctl's interactive mode, Hamlib says nothing on failure without `-vv`,
+`get_vfo` is not a fault on Icoms — is fixed in 0.6.10 through 0.6.17 below. This is the version
+the first beta will be cut from.
+
+## [0.6.17] - 2026-09-21
+
+### Fixed
+- Pasting a full command line from the results (`rigctl-wsjtx -m 3073 -r COM3 -s 115200 f`) into
+  the raw console sent the connection options twice; the exe name and connection options are now
+  stripped so only the subcommand runs, and the box shows a placeholder saying so
+
+### Added
+- Screenshots from the first IC-7300 run in the README
+
+## [0.6.16] - 2026-09-21
+
+First all-green run on an IC-7300; one false pass corrected.
+
+### Fixed
+- "Get VFO" reported a pass with a page of Hamlib trace as the VFO name. The IC-7300 (like most
+  Icoms) has no get_vfo in Hamlib; rigctl printed "Feature not available" but still exited 0.
+  Hamlib's own error line is now recognised whatever the exit code, and an unsupported query is a
+  warning that says so — the radio is fine, the command just does not exist for it
+- Result messages show only the first line of rigctl's output, never a trace
+
+## [0.6.15] - 2026-09-21
+
+Failures now say why.
+
+### Fixed
+- Hamlib 4.7.1 prints nothing when rigctl fails at its default verbosity, so a port held by
+  WSJT-X, a missing rigctld, and a radio that is off all came out as "an unexpected error".
+  rigctl now runs with `-vv`, its banner line is stripped from the output, and its actual
+  messages ("serial port COM3 is already open", "does not exist", "failed to connect") drive the
+  diagnosis
+- The "port in use" diagnosis names the program that is running right now (WSJT-X, Fldigi,
+  JS8Call, Flrig, rigctld, Winlink Express, VARA) — checked only when that failure occurs
+- The suggested rigctld command uses the name that exists on the PC (`rigctld-wsjtx`) and omits
+  `-s` when the baud is Radio default
+- The Quick preset picker shows the saved radio on startup instead of "Choose your radio…"
+
+## [0.6.14] - 2026-09-21
+
+Run Tests works against a real radio.
+
+### Fixed
+- The "Open connection" test ran rigctl with no command, which does not connect-and-exit — it
+  enters rigctl's interactive mode and waits for keyboard input until RigCheck's timeout, so
+  every run reported "the radio did not respond" and skipped the other six tests, even though
+  Hamlib could talk to the radio in 7 ms. The test now reads the frequency, which proves the
+  round trip; rigctl's input is also closed at launch so it can never wait on a keyboard again
+- WSJT-X stores several settings as Qt variant blobs (`(...PTT_method_VOX...)`); the
+  configuration reader now decodes them instead of passing the blob through to the handoff
+
+## [0.6.13] - 2026-09-21
+
+WSJT-X's Hamlib is found.
+
+### Fixed
+- Hamlib was reported missing on a PC with WSJT-X installed: WSJT-X ships its copy as
+  `rigctl-wsjtx.exe` (and `rigctld-wsjtx.exe`), not `rigctl.exe`. Both names are now tried, the
+  install folder is also read from the Uninstall registry key, and either name is accepted on PATH
+- Copyable commands start with the name that exists on the PC (`rigctl-wsjtx …` for WSJT-X users)
+- Scan PC re-searches for Hamlib, so installing WSJT-X while RigCheck is open updates the banner
+  and enables Run Tests without a restart
+
+## [0.6.12] - 2026-09-21
+
+### Added
+- When Scan PC finds no Hamlib, the diagnosis shows the one-line winget command that installs
+  WSJT-X (`winget install JoeTaylor.WSJT-x`) as a copyable fix — RigCheck never runs it
+
+### Fixed
+- Summary line reads "115200 baud, 8N1 (8 data bits, no parity, 1 stop)" instead of "1 stop bit(s)"
+- Text copied from the results panel no longer carries a trailing space where a Copy button sat
+
+## [0.6.11] - 2026-09-21
+
+### Added
+- Find my radio ends with the sentence the operator came for — "Your radio: Icom IC-7300 on COM3
+  — 115200 baud, 8 data bits, no parity, 1 stop bit" — in the results and in the status bar
+
+## [0.6.10] - 2026-09-21
+
+First lessons from a real IC-7300.
+
+### Fixed
+- Find my radio never got an answer from an Icom: the read-ID was sent to CI-V address 00
+  (broadcast), which rigs act on but by design never answer. When only our own echo comes
+  back (Echo Back is on by default on the IC-7300) or nothing at all, RigCheck now addresses
+  each CI-V address in `rig_ids.json` in turn, the selected radio's first
+- Our own frame echoed back is now reported as what it is — a CI-V radio listening at that
+  speed — instead of "nothing recognisable"
+- Without Hamlib installed, Find my radio reported a found radio as unverified because the
+  rigctl tests could not run. A radio that named itself over the serial port now counts as
+  verified, the Connection panel is filled in, and the handoff is shown; the note says to
+  install WSJT-X or Hamlib for the full tests
+- The status bar now explains that Run Tests needs Hamlib because the tests are Hamlib
+  commands, and that Find my radio and Scan PC work without it
+
+### Changed
+- Icom baud order is now 115200 first (the IC-7300's USB default), then 19200, 9600, 4800; the
+  IC-7300 preset uses 115200
+- The reply window waits a little longer for silence so an echo and the answer behind it are
+  read as one exchange
+
+## [0.6.9] - 2026-09-21
+
+Find my radio hands you the settings; Hamlib's dummy rig can no longer pass unnoticed.
+
+### Added
+- Settings handoff after a verified find: the exact fields for WSJT-X / JS8Call (File › Settings ›
+  Radio), Fldigi (Rig Control › Hamlib), and Winlink Express, each as one copyable line
+- RigCheck reads what WSJT-X and JS8Call are configured to use (`WSJT-X.ini`, `JS8Call.ini`):
+  their port is probed first, their radio stands in when none is chosen, and after the sweep
+  each program gets a one-line verdict — already matches, or exactly which fields to change
+- The raw console warns beside every command sent to Hamlib model 1, the dummy rig
+
 ## [0.6.8] - 2026-09-21
 
 Find my radio — the second half of the 0.7.0 milestone, first cut.

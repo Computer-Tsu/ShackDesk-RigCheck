@@ -121,6 +121,8 @@ public partial class App : Application
         services.AddTransient<EnvironmentCheckService>();
         services.AddSingleton<DiscoveryDataService>();
         services.AddTransient<DiscoveryEngine>();
+        services.AddTransient<ConfigClueService>();
+        services.AddTransient<HandoffBuilder>();
         services.AddTransient<LogExportService>();
 
         // ViewModels

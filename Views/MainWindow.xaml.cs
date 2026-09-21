@@ -57,7 +57,12 @@ public partial class MainWindow : Window
     {
         var text = ResultsViewer.Selection?.Text;
         if (!string.IsNullOrEmpty(text))
-            Clipboard.SetText(text);
+        {
+            // The inline Copy buttons come through as a space at the end of
+            // their line; trim so pasted command lines are exact.
+            var lines = text.Split('\n').Select(l => l.TrimEnd(' ', '\r'));
+            Clipboard.SetText(string.Join(Environment.NewLine, lines));
+        }
         e.Handled = true;
     }
 

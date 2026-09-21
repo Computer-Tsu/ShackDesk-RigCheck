@@ -17,6 +17,14 @@ namespace RigCheck.Services;
 /// </summary>
 public class RigctlCommandBuilder
 {
+    /// <summary>
+    /// The name the copyable commands start with. "rigctl" for standalone
+    /// Hamlib; WSJT-X ships its copy as "rigctl-wsjtx", and a command the
+    /// operator pastes must use the name that actually exists on their PC.
+    /// Set by HamlibLocatorService when it finds the exe.
+    /// </summary>
+    public static string ExeName { get; set; } = "rigctl";
+
     // ── Connection argument builders ─────────────────────────────────────
 
     /// <summary>
@@ -49,11 +57,21 @@ public class RigctlCommandBuilder
 
     // ── Test commands ────────────────────────────────────────────────────
 
-    /// <summary>Test 1: Open connection — just connect and disconnect (no subcommand).</summary>
+    /// <summary>
+    /// Test 1: Open connection. Asks for the frequency: rigctl with no
+    /// subcommand does not "just connect", it enters interactive mode and
+    /// waits on stdin forever — which read as a radio timeout on a working
+    /// IC-7300. Hamlib's open already exchanges with the rig; the reply to
+    /// "f" proves the round trip.
+    /// </summary>
     public static RigctlCommand TestConnection(ConnectionConfig cfg)
     {
         var conn = ConnArgs(cfg);
-        return conn with { DisplayCommand = $"rigctl {conn.ConnectionLabel}" };
+        return conn with
+        {
+            Args           = [..conn.Args, "f"],
+            DisplayCommand = $"{ExeName} {conn.ConnectionLabel} f",
+        };
     }
 
     /// <summary>Test 2: Get frequency — 'f' subcommand.</summary>
@@ -63,7 +81,7 @@ public class RigctlCommandBuilder
         return conn with
         {
             Args        = [..conn.Args, "f"],
-            DisplayCommand = $"rigctl {conn.ConnectionLabel} f"
+            DisplayCommand = $"{ExeName} {conn.ConnectionLabel} f"
         };
     }
 
@@ -74,7 +92,7 @@ public class RigctlCommandBuilder
         return conn with
         {
             Args        = [..conn.Args, "m"],
-            DisplayCommand = $"rigctl {conn.ConnectionLabel} m"
+            DisplayCommand = $"{ExeName} {conn.ConnectionLabel} m"
         };
     }
 
@@ -85,7 +103,7 @@ public class RigctlCommandBuilder
         return conn with
         {
             Args        = [..conn.Args, "t"],
-            DisplayCommand = $"rigctl {conn.ConnectionLabel} t"
+            DisplayCommand = $"{ExeName} {conn.ConnectionLabel} t"
         };
     }
 
@@ -96,7 +114,7 @@ public class RigctlCommandBuilder
         return conn with
         {
             Args        = [..conn.Args, "l", "STRENGTH"],
-            DisplayCommand = $"rigctl {conn.ConnectionLabel} l STRENGTH"
+            DisplayCommand = $"{ExeName} {conn.ConnectionLabel} l STRENGTH"
         };
     }
 
@@ -107,7 +125,7 @@ public class RigctlCommandBuilder
         return conn with
         {
             Args        = [..conn.Args, "v"],
-            DisplayCommand = $"rigctl {conn.ConnectionLabel} v"
+            DisplayCommand = $"{ExeName} {conn.ConnectionLabel} v"
         };
     }
 
@@ -118,7 +136,7 @@ public class RigctlCommandBuilder
         return conn with
         {
             Args        = [..conn.Args, "F", frequencyHz.ToString()],
-            DisplayCommand = $"rigctl {conn.ConnectionLabel} F {frequencyHz}"
+            DisplayCommand = $"{ExeName} {conn.ConnectionLabel} F {frequencyHz}"
         };
     }
 
@@ -130,14 +148,36 @@ public class RigctlCommandBuilder
     /// </summary>
     public static RigctlCommand RawCommand(ConnectionConfig cfg, string rawInput)
     {
-        var tokens = rawInput.Trim().Split(' ',
-            StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        var tokens = StripConnectionPrefix(rawInput.Trim().Split(' ',
+            StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries));
         var conn = ConnArgs(cfg);
         return conn with
         {
             Args        = [..conn.Args, ..tokens],
-            DisplayCommand = $"rigctl {conn.ConnectionLabel} {rawInput.Trim()}"
+            DisplayCommand = $"{ExeName} {conn.ConnectionLabel} {string.Join(' ', tokens)}"
         };
+    }
+
+    // Operators paste the whole line the results panel shows them —
+    // "rigctl-wsjtx -m 3073 -r COM3 -s 115200 f" — into a console that only
+    // wants "f". Drop the exe name and the connection options so the panel's
+    // settings apply once, not twice.
+    private static readonly HashSet<string> ConnectionOptions =
+        ["-m", "-r", "-s", "-t", "-C", "-p", "-P", "-c", "--model", "--rig-file", "--serial-speed"];
+
+    private static string[] StripConnectionPrefix(string[] tokens)
+    {
+        if (tokens.Length == 0 || !tokens[0].StartsWith("rigctl", StringComparison.OrdinalIgnoreCase))
+            return tokens;
+
+        var rest = new List<string>();
+        for (int i = 1; i < tokens.Length; i++)
+        {
+            if (ConnectionOptions.Contains(tokens[i]) && i + 1 < tokens.Length) { i++; continue; }
+            if (tokens[i].StartsWith("-v", StringComparison.Ordinal)) continue;
+            rest.Add(tokens[i]);
+        }
+        return rest.ToArray();
     }
 
     // ── Private helpers ──────────────────────────────────────────────────

@@ -107,11 +107,14 @@ public class EnvironmentCheckService
 
     private TestResult CheckHamlib()
     {
+        // Re-run the search: the operator may have installed WSJT-X since
+        // RigCheck started, and the cached answer must not stay stale.
+        _locator.Find();
         var copies = _locator.FindAll();
         if (copies.Count == 0)
         {
             return TestResult.Fail(TestId.EnvHamlib, Strings.Get("Env_HamlibNone"), string.Empty,
-                Diag("Env_HamlibNone", 2, learnMore: BrandingInfo.HamlibDownloadUrl));
+                Diag("Env_HamlibNone", 2, fixCommand: BrandingInfo.WsjtxWingetCommand, learnMore: BrandingInfo.HamlibDownloadUrl));
         }
 
         var (path, via) = copies[0];

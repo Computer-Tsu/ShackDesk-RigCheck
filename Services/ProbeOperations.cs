@@ -29,6 +29,8 @@ public enum ProbeReplyKind
     None,
     /// <summary>Bytes came back but nothing recognisable — often the wrong baud rate.</summary>
     Garbage,
+    /// <summary>Only our own frame came back: a CI-V rig with Echo Back on is listening at this speed but was not addressed.</summary>
+    Echo,
     /// <summary>The rig answered in the family's protocol but did not name itself (e.g. Kenwood "?;", CI-V NG).</summary>
     Acknowledged,
     /// <summary>The rig named itself; Id holds the identity string as it appears in rig_ids.json.</summary>
@@ -48,12 +50,17 @@ public static class ProbeOperations
     public static bool TryParse(string name, out ProbeOperation op) =>
         Enum.TryParse(name, ignoreCase: true, out op);
 
-    /// <summary>The exact bytes sent for an operation.</summary>
-    public static byte[] Bytes(ProbeOperation op) => op switch
+    /// <summary>
+    /// The exact bytes sent for an operation. For CI-V, <paramref name="civAddress"/>
+    /// is the rig address the frame is sent to. 00 is broadcast: rigs act on
+    /// it but by design never answer, so identification has to address the
+    /// rig directly — the addresses come from rig_ids.json.
+    /// </summary>
+    public static byte[] Bytes(ProbeOperation op, byte civAddress = CivBroadcast) => op switch
     {
         ProbeOperation.KenwoodId           => "ID;"u8.ToArray(),
-        ProbeOperation.IcomReadId          => [0xFE, 0xFE, CivBroadcast, CivController, 0x19, 0x00, 0xFD],
-        ProbeOperation.IcomReadFreq        => [0xFE, 0xFE, CivBroadcast, CivController, 0x03, 0xFD],
+        ProbeOperation.IcomReadId          => [0xFE, 0xFE, civAddress, CivController, 0x19, 0x00, 0xFD],
+        ProbeOperation.IcomReadFreq        => [0xFE, 0xFE, civAddress, CivController, 0x03, 0xFD],
         ProbeOperation.YaesuLegacyReadFreq => [0x00, 0x00, 0x00, 0x00, 0x03],
         _ => throw new ArgumentOutOfRangeException(nameof(op)),
     };
@@ -119,10 +126,13 @@ public static class ProbeOperations
                 return new(ProbeReplyKind.Frequency, FrequencyHz: BcdLittleEndian(frame, 5, 5));
         }
 
-        // Any well-formed frame from a non-controller address means CI-V at this baud.
-        return CivFrames(reply).Any(f => f.Length >= 5 && f[3] != CivController)
-            ? new(ProbeReplyKind.Acknowledged)
-            : new(ProbeReplyKind.Garbage);
+        // Any well-formed frame from a non-controller address means CI-V at
+        // this baud. Only our own frame back means Echo Back is on and the rig
+        // is listening at this speed — it just was not addressed.
+        var frames = CivFrames(reply).Where(f => f.Length >= 5).ToList();
+        if (frames.Any(f => f[3] != CivController)) return new(ProbeReplyKind.Acknowledged);
+        if (frames.Count > 0)                        return new(ProbeReplyKind.Echo);
+        return new(ProbeReplyKind.Garbage);
     }
 
     private static IEnumerable<byte[]> CivFrames(byte[] buf)

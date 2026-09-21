@@ -12,7 +12,7 @@ public static class BrandingInfo
     public const string AppName    = "RigCheck";
     public const string SuiteName  = "ShackDesk";
     public const string FullName   = "RigCheck by ShackDesk";
-    public const string Version    = "0.6.8";
+    public const string Version    = "0.7.0";
     public const string Tagline    = "Know your rig is ready";
 
     // ── Developer / publisher ────────────────────────────────────
@@ -48,6 +48,13 @@ public static class BrandingInfo
 
     // ── Hamlib / rigctl resources ─────────────────────────────────
     public const string HamlibDownloadUrl  = "https://github.com/Hamlib/Hamlib/releases";
+
+    /// <summary>
+    /// winget command that installs WSJT-X, which bundles Hamlib. Shown to the
+    /// operator as a copyable line; RigCheck never runs it. Package ID
+    /// verified 2026-09-21 (installs WSJT-X 3.0.2).
+    /// </summary>
+    public const string WsjtxWingetCommand = "winget install JoeTaylor.WSJT-x";
     public const string WsjtxDownloadUrl   = "https://wsjt.sourceforge.io/wsjtx.html";
     public const string HamlibDocsUrl      = "https://hamlib.github.io";
 
