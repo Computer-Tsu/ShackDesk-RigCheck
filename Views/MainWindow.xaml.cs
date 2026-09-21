@@ -9,14 +9,16 @@ namespace RigCheck.Views;
 
 /// <summary>
 /// Code-behind for the main window. Kept to view-only concerns:
-/// window placement persistence and keyboard routing for the raw console.
+/// window placement persistence, rendering results into the document
+/// viewer, and keyboard routing for the raw console.
 /// All application logic lives in MainViewModel.
 /// </summary>
 public partial class MainWindow : Window
 {
-    private readonly MainViewModel    _vm;
-    private readonly SettingsService  _settings;
-    private readonly TelemetryService _telemetry;
+    private readonly MainViewModel          _vm;
+    private readonly SettingsService        _settings;
+    private readonly TelemetryService       _telemetry;
+    private readonly ResultsDocumentBuilder _resultsDoc = new();
 
     public MainWindow(MainViewModel vm, SettingsService settings, TelemetryService telemetry)
     {
@@ -29,6 +31,31 @@ public partial class MainWindow : Window
 
         // Brand name is injected here so it can never end up in a translation file.
         AboutMenuItem.Header = Strings.Format("Menu_HelpAbout", BrandingInfo.AppName);
+
+        // Results are rendered as a FlowDocument (selectable, copyable text).
+        // The ViewModel only knows about result items; the document is a
+        // view concern, so it is rebuilt here whenever the items change.
+        ResultsViewer.Document = _resultsDoc.Document;
+        _vm.Results.Items.CollectionChanged += (_, _) => _resultsDoc.Rebuild(_vm.Results.Items);
+        _resultsDoc.Rebuild(_vm.Results.Items);
+
+        _vm.TaskCompleted += success => CompletionNotifier.Notify(this, _settings.Current, success);
+    }
+
+    // ── Results copy ──────────────────────────────────────────────────────
+    // The viewer's built-in Copy puts RTF and XAML on the clipboard alongside
+    // the text, which drags fonts and colors into email clients. Operators
+    // paste results into forum posts and emails, so plain text only.
+
+    private void ResultsCopy_CanExecute(object sender, CanExecuteRoutedEventArgs e) =>
+        e.CanExecute = ResultsViewer.Selection is { IsEmpty: false };
+
+    private void ResultsCopy_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        var text = ResultsViewer.Selection?.Text;
+        if (!string.IsNullOrEmpty(text))
+            Clipboard.SetText(text);
+        e.Handled = true;
     }
 
     // ── Menu ──────────────────────────────────────────────────────────────

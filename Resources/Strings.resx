@@ -286,6 +286,541 @@ Details have been written to the log. If this keeps happening, please report it 
     <comment>Grey placeholder text inside the empty COM port dropdown.</comment>
   </data>
 
+  <!-- ── Translation metadata (fill these in each Strings.xx.resx) ─── -->
+  <data name="Meta_Status" xml:space="preserve">
+    <value>source</value>
+    <comment>In a translation file: "machine-translated" or "reviewed". Leave "source" here.</comment>
+  </data>
+  <data name="Meta_Translator" xml:space="preserve">
+    <value></value>
+    <comment>In a translation file: your name and callsign, e.g. "Hans Mueller, DL1ABC". Shown in Help > About.</comment>
+  </data>
+  <data name="About_Translation" xml:space="preserve">
+    <value>{0} translation: {1}</value>
+    <comment>Shown in About when a translation is active. {0} language name, {1} translator credit.</comment>
+  </data>
+
+  <!-- ── Main window ──────────────────────────────────────────────── -->
+  <data name="Main_Connection" xml:space="preserve">
+    <value>Connection</value>
+    <comment>Group box heading.</comment>
+  </data>
+  <data name="Main_QuickPreset" xml:space="preserve">
+    <value>Quick preset:</value>
+  </data>
+  <data name="Main_DirectSerial" xml:space="preserve">
+    <value>Direct serial (COM port)</value>
+    <comment>Radio button.</comment>
+  </data>
+  <data name="Main_Rigctld" xml:space="preserve">
+    <value>rigctld (network)</value>
+    <comment>Radio button. rigctld is a program name.</comment>
+  </data>
+  <data name="Main_Port" xml:space="preserve">
+    <value>Port:</value>
+  </data>
+  <data name="Main_Baud" xml:space="preserve">
+    <value>Baud:</value>
+  </data>
+  <data name="Main_Host" xml:space="preserve">
+    <value>Host:</value>
+  </data>
+  <data name="Main_RefreshPorts" xml:space="preserve">
+    <value>Refresh ports</value>
+    <comment>Tooltip on the refresh button.</comment>
+  </data>
+  <data name="Main_AdvancedSerial" xml:space="preserve">
+    <value>Advanced serial settings</value>
+    <comment>Expander heading.</comment>
+  </data>
+  <data name="Main_Ptt" xml:space="preserve">
+    <value>PTT:</value>
+  </data>
+  <data name="Main_DataBits" xml:space="preserve">
+    <value>Data:</value>
+    <comment>Serial data bits.</comment>
+  </data>
+  <data name="Main_Parity" xml:space="preserve">
+    <value>Parity:</value>
+  </data>
+  <data name="Main_StopBits" xml:space="preserve">
+    <value>Stop:</value>
+    <comment>Serial stop bits.</comment>
+  </data>
+  <data name="Main_FlowControl" xml:space="preserve">
+    <value>Flow:</value>
+    <comment>Serial flow control.</comment>
+  </data>
+  <data name="Main_Results" xml:space="preserve">
+    <value>Diagnostic results</value>
+    <comment>Group box heading.</comment>
+  </data>
+  <data name="Main_CopyCommand" xml:space="preserve">
+    <value>Copy</value>
+    <comment>Small button beside each test's rigctl command.</comment>
+  </data>
+  <data name="Main_CopyCommandTip" xml:space="preserve">
+    <value>Copy command to clipboard — paste into a command window to run it yourself</value>
+  </data>
+  <data name="Main_CommandTip" xml:space="preserve">
+    <value>The rigctl command used for this test</value>
+  </data>
+  <data name="Main_RawConsole" xml:space="preserve">
+    <value>Advanced — raw Hamlib commands</value>
+    <comment>Expander heading.</comment>
+  </data>
+  <data name="Main_ConsoleTip" xml:space="preserve">
+    <value>Enter a rigctl subcommand (e.g. f, m, t, v, l STRENGTH)</value>
+  </data>
+  <data name="Main_Clear" xml:space="preserve">
+    <value>Clear</value>
+    <comment>Button. Clears the raw console.</comment>
+  </data>
+  <data name="Main_Send" xml:space="preserve">
+    <value>Send</value>
+    <comment>Button. Sends the raw console command.</comment>
+  </data>
+  <data name="Main_RunTests" xml:space="preserve">
+    <value>▶  Run Tests</value>
+    <comment>Main action button.</comment>
+  </data>
+  <data name="Main_Advanced" xml:space="preserve">
+    <value>Advanced ▾</value>
+    <comment>Button that opens the raw console.</comment>
+  </data>
+  <data name="Main_ExportLog" xml:space="preserve">
+    <value>Export Log</value>
+    <comment>Button.</comment>
+  </data>
+  <data name="Main_ExportLogTip" xml:space="preserve">
+    <value>Save results to a text file to email or post for help</value>
+  </data>
+  <data name="Main_CopyResults" xml:space="preserve">
+    <value>Copy Results</value>
+    <comment>Button. Copies the full results report as plain text.</comment>
+  </data>
+  <data name="Main_CopyResultsTip" xml:space="preserve">
+    <value>Copy all results to the clipboard as plain text</value>
+  </data>
+  <data name="Main_HowToInstall" xml:space="preserve">
+    <value>How to install</value>
+    <comment>Link shown when Hamlib is missing.</comment>
+  </data>
+  <data name="Main_ScaleDown" xml:space="preserve">
+    <value>Scale down</value>
+  </data>
+  <data name="Main_ScaleUp" xml:space="preserve">
+    <value>Scale up</value>
+  </data>
+  <data name="Main_ScaleReset" xml:space="preserve">
+    <value>Reset scale</value>
+  </data>
+  <data name="Main_OnTop" xml:space="preserve">
+    <value>On top</value>
+    <comment>Checkbox: keep window above others.</comment>
+  </data>
+
+  <!-- ── Status strip and messages ────────────────────────────────── -->
+  <data name="Status_HamlibFound" xml:space="preserve">
+    <value>Hamlib found via {0}</value>
+    <comment>{0} is where it was found: WSJT-X, Fldigi, Hamlib standalone, or PATH.</comment>
+  </data>
+  <data name="Status_HamlibMissing" xml:space="preserve">
+    <value>Hamlib not found — install WSJT-X or download Hamlib</value>
+  </data>
+  <data name="Status_HamlibMissingLong" xml:space="preserve">
+    <value>Hamlib not found. Run Tests will be unavailable until Hamlib is installed.</value>
+  </data>
+  <data name="Status_Running" xml:space="preserve">
+    <value>Running tests…</value>
+  </data>
+  <data name="Status_AllPassed" xml:space="preserve">
+    <value>All {0} tests passed.</value>
+  </data>
+  <data name="Status_SomeFailed" xml:space="preserve">
+    <value>{0} test(s) failed — see results for details.</value>
+  </data>
+  <data name="Status_RunFailed" xml:space="preserve">
+    <value>Test run failed unexpectedly.</value>
+  </data>
+  <data name="Status_LogSaved" xml:space="preserve">
+    <value>Log saved to {0}</value>
+  </data>
+  <data name="Status_LogFailed" xml:space="preserve">
+    <value>Log export failed — check the application log for details.</value>
+  </data>
+  <data name="Status_Copied" xml:space="preserve">
+    <value>Results copied to the clipboard.</value>
+  </data>
+  <data name="Confirm_SetFreq_Title" xml:space="preserve">
+    <value>Confirm frequency test</value>
+  </data>
+  <data name="Confirm_SetFreq_Message" xml:space="preserve">
+    <value>The Set Frequency test will briefly change your radio's VFO frequency by 1 kHz, then restore it.
+
+Continue?</value>
+  </data>
+  <data name="Export_NoResults_Title" xml:space="preserve">
+    <value>No results</value>
+  </data>
+  <data name="Export_NoResults_Message" xml:space="preserve">
+    <value>Run the tests first before exporting.</value>
+  </data>
+  <data name="Export_DialogTitle" xml:space="preserve">
+    <value>Export {0} log</value>
+    <comment>{0} is the app name.</comment>
+  </data>
+  <data name="Export_Filter" xml:space="preserve">
+    <value>Text files (*.txt)|*.txt|All files (*.*)|*.*</value>
+    <comment>File dialog filter. Translate only "Text files" and "All files"; keep the | and *.txt parts exactly.</comment>
+  </data>
+  <data name="Summary_AllPassed" xml:space="preserve">
+    <value>✓ All {0} tests passed</value>
+  </data>
+  <data name="Summary_Mixed" xml:space="preserve">
+    <value>{0} failed · {1} passed · {2} warnings</value>
+  </data>
+  <data name="Cable_Detected" xml:space="preserve">
+    <value>Detected: {0}</value>
+    <comment>{0} is a cable description from the USB database.</comment>
+  </data>
+
+  <!-- ── Test names ───────────────────────────────────────────────── -->
+  <data name="Test_OpenConnection" xml:space="preserve">
+    <value>Open connection</value>
+  </data>
+  <data name="Test_GetFrequency" xml:space="preserve">
+    <value>Get frequency</value>
+  </data>
+  <data name="Test_GetMode" xml:space="preserve">
+    <value>Get mode</value>
+  </data>
+  <data name="Test_GetPtt" xml:space="preserve">
+    <value>Get PTT state</value>
+  </data>
+  <data name="Test_GetSmeter" xml:space="preserve">
+    <value>Get signal meter</value>
+  </data>
+  <data name="Test_GetVfo" xml:space="preserve">
+    <value>Get VFO</value>
+  </data>
+  <data name="Test_SetFrequency" xml:space="preserve">
+    <value>Set and verify frequency</value>
+  </data>
+  <data name="Test_Cancelled" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="Test_SkippedNoConnection" xml:space="preserve">
+    <value>Skipped — connection could not be established</value>
+  </data>
+
+  <!-- ── Test result messages ─────────────────────────────────────── -->
+  <data name="Msg_Connected" xml:space="preserve">
+    <value>Connected to {0} on {1}</value>
+    <comment>{0} radio model, {1} COM port.</comment>
+  </data>
+  <data name="Msg_ConnectFailed" xml:space="preserve">
+    <value>Could not connect to radio</value>
+  </data>
+  <data name="Msg_Frequency" xml:space="preserve">
+    <value>VFO A frequency: {0} MHz</value>
+  </data>
+  <data name="Msg_FrequencyUnparsed" xml:space="preserve">
+    <value>Radio responded but frequency could not be parsed: {0}</value>
+  </data>
+  <data name="Msg_FrequencyNoResponse" xml:space="preserve">
+    <value>Radio did not respond to frequency query</value>
+  </data>
+  <data name="Msg_Mode" xml:space="preserve">
+    <value>Current mode: {0}, passband: {1} Hz</value>
+  </data>
+  <data name="Msg_ModeNoResponse" xml:space="preserve">
+    <value>Radio did not respond to mode query</value>
+  </data>
+  <data name="Msg_PttOn" xml:space="preserve">
+    <value>PTT is ON — transmitter is KEYED</value>
+  </data>
+  <data name="Msg_PttOff" xml:space="preserve">
+    <value>PTT is off (transmitter not keyed)</value>
+  </data>
+  <data name="Msg_PttNoResponse" xml:space="preserve">
+    <value>Radio did not respond to PTT query</value>
+  </data>
+  <data name="Msg_Smeter" xml:space="preserve">
+    <value>Signal strength: {0} ({1} dBm)</value>
+    <comment>{0} is an S-unit reading such as S7 or S9+20.</comment>
+  </data>
+  <data name="Msg_SmeterUnparsed" xml:space="preserve">
+    <value>S-meter responded but value could not be parsed: {0}</value>
+  </data>
+  <data name="Msg_SmeterNoResponse" xml:space="preserve">
+    <value>Radio did not respond to S-meter query (some radios don't support this)</value>
+  </data>
+  <data name="Msg_Vfo" xml:space="preserve">
+    <value>Active VFO: {0}</value>
+  </data>
+  <data name="Msg_VfoNoResponse" xml:space="preserve">
+    <value>Radio did not respond to VFO query</value>
+  </data>
+  <data name="Msg_SetFreqReadFailed" xml:space="preserve">
+    <value>Could not read current frequency before set test</value>
+  </data>
+  <data name="Msg_SetFreqFailed" xml:space="preserve">
+    <value>Failed to set frequency</value>
+  </data>
+  <data name="Msg_SetFreqVerified" xml:space="preserve">
+    <value>Set frequency verified — set {0} MHz, read back {1} MHz. Original frequency restored.</value>
+  </data>
+  <data name="Msg_SetFreqMismatch" xml:space="preserve">
+    <value>Frequency was set but readback did not match exactly</value>
+  </data>
+
+  <!-- ── Diagnosis: what happened and what to check ───────────────── -->
+  <data name="Diag_BaudDefault" xml:space="preserve">
+    <value>the radio's default</value>
+    <comment>Used in place of a number when no baud rate was chosen.</comment>
+  </data>
+  <data name="Diag_HamlibNotFound_Summary" xml:space="preserve">
+    <value>Hamlib (rigctl.exe) is not installed or could not be found.</value>
+  </data>
+  <data name="Diag_HamlibNotFound_1" xml:space="preserve">
+    <value>Install WSJT-X — it includes Hamlib automatically.</value>
+  </data>
+  <data name="Diag_HamlibNotFound_2" xml:space="preserve">
+    <value>Or download Hamlib for Windows from hamlib.github.io.</value>
+  </data>
+  <data name="Diag_HamlibNotFound_3" xml:space="preserve">
+    <value>After installing, restart {0} so it can find the new files.</value>
+    <comment>{0} is the app name.</comment>
+  </data>
+  <data name="Diag_PortInUse_Summary" xml:space="preserve">
+    <value>{0} is already open by another program.</value>
+    <comment>{0} is a COM port name.</comment>
+  </data>
+  <data name="Diag_PortInUse_1" xml:space="preserve">
+    <value>Is WSJT-X, Fldigi, JS8Call, or Winlink currently running?</value>
+  </data>
+  <data name="Diag_PortInUse_2" xml:space="preserve">
+    <value>Close the other program and try again.</value>
+  </data>
+  <data name="Diag_PortInUse_3" xml:space="preserve">
+    <value>Some programs hold the port open even when not actively transmitting.</value>
+  </data>
+  <data name="Diag_PortInUse_4" xml:space="preserve">
+    <value>In WSJT-X: File → Settings → Radio — disconnect rig control before testing here.</value>
+  </data>
+  <data name="Diag_PortNotFound_Summary" xml:space="preserve">
+    <value>{0} was not found on this computer.</value>
+    <comment>{0} is a COM port name.</comment>
+  </data>
+  <data name="Diag_PortNotFound_1" xml:space="preserve">
+    <value>Is the USB-to-serial cable plugged in?</value>
+  </data>
+  <data name="Diag_PortNotFound_2" xml:space="preserve">
+    <value>Check Device Manager to see which COM port Windows assigned.</value>
+  </data>
+  <data name="Diag_PortNotFound_3" xml:space="preserve">
+    <value>The port may have changed — try a different COM port number.</value>
+  </data>
+  <data name="Diag_PortNotFound_4" xml:space="preserve">
+    <value>Some radios need a driver installed (e.g., Icom IC-7300 uses Silicon Labs CP210x).</value>
+  </data>
+  <data name="Diag_Timeout_Summary" xml:space="preserve">
+    <value>The radio did not respond within the time limit.</value>
+  </data>
+  <data name="Diag_Timeout_1" xml:space="preserve">
+    <value>Is the radio powered on?</value>
+  </data>
+  <data name="Diag_Timeout_2" xml:space="preserve">
+    <value>Is the baud rate correct? Your radio manual lists the CAT baud rate. Currently set to {0}.</value>
+    <comment>{0} is a baud rate number, or the Diag_BaudDefault text.</comment>
+  </data>
+  <data name="Diag_Timeout_3" xml:space="preserve">
+    <value>Is the CAT / CI-V / RS-232 cable connected to the correct port on the radio?</value>
+  </data>
+  <data name="Diag_Timeout_4" xml:space="preserve">
+    <value>Does your radio need CAT control enabled in its menu? Check the manual for "CAT", "CI-V", or "RS-232" settings.</value>
+  </data>
+  <data name="Diag_Timeout_5" xml:space="preserve">
+    <value>Some radios use a different data bits / parity / stop bits setting. Check the radio manual.</value>
+  </data>
+  <data name="Diag_NoResponse_Summary" xml:space="preserve">
+    <value>Connected to the port, but the radio returned no data.</value>
+  </data>
+  <data name="Diag_NoResponse_1" xml:space="preserve">
+    <value>Verify the selected radio model matches your actual radio. Currently: {0}.</value>
+    <comment>{0} is the radio model name.</comment>
+  </data>
+  <data name="Diag_NoResponse_2" xml:space="preserve">
+    <value>Try a lower baud rate — many radios default to 9600 baud.</value>
+  </data>
+  <data name="Diag_NoResponse_3" xml:space="preserve">
+    <value>Check the radio's CAT/CI-V baud rate setting matches {0}.</value>
+    <comment>{0} is the app name.</comment>
+  </data>
+  <data name="Diag_NoResponse_4" xml:space="preserve">
+    <value>Is a straight-through or null-modem cable needed? Some radios need one vs. the other.</value>
+  </data>
+  <data name="Diag_WrongModel_Summary" xml:space="preserve">
+    <value>The radio responded, but the data didn't match the expected radio model.</value>
+  </data>
+  <data name="Diag_WrongModel_1" xml:space="preserve">
+    <value>The selected model is "{0}" — does this match your actual radio?</value>
+    <comment>{0} is the radio model name.</comment>
+  </data>
+  <data name="Diag_WrongModel_2" xml:space="preserve">
+    <value>Search for your exact model number in the radio selector.</value>
+  </data>
+  <data name="Diag_WrongModel_3" xml:space="preserve">
+    <value>Some radios have multiple Hamlib entries — try nearby entries in the list.</value>
+  </data>
+  <data name="Diag_WrongModel_4" xml:space="preserve">
+    <value>For Icom radios, verify the CI-V address in both the radio menu and {0}.</value>
+    <comment>{0} is the app name.</comment>
+  </data>
+  <data name="Diag_Rigctld_Summary" xml:space="preserve">
+    <value>Could not connect to rigctld at {0}:{1}.</value>
+    <comment>{0} host, {1} port.</comment>
+  </data>
+  <data name="Diag_Rigctld_1" xml:space="preserve">
+    <value>Is rigctld running? It must be started separately before {0} can connect.</value>
+    <comment>{0} is the app name.</comment>
+  </data>
+  <data name="Diag_Rigctld_2" xml:space="preserve">
+    <value>Verify the host is correct — currently set to "{0}".</value>
+  </data>
+  <data name="Diag_Rigctld_3" xml:space="preserve">
+    <value>Verify the port is correct — currently set to {0} (default is 4532).</value>
+  </data>
+  <data name="Diag_Rigctld_4" xml:space="preserve">
+    <value>Check your firewall is not blocking rigctld.</value>
+  </data>
+  <data name="Diag_Cancelled_Summary" xml:space="preserve">
+    <value>The operation was cancelled.</value>
+  </data>
+  <data name="Diag_Unknown_Summary" xml:space="preserve">
+    <value>An unexpected error occurred.</value>
+  </data>
+  <data name="Diag_Unknown_1" xml:space="preserve">
+    <value>Check the raw error message below for clues.</value>
+  </data>
+  <data name="Diag_Unknown_2" xml:space="preserve">
+    <value>Try running the shown command manually in a command window to see the full output.</value>
+  </data>
+  <data name="Diag_Unknown_3" xml:space="preserve">
+    <value>Export the log and ask for help in your club or post to a support forum.</value>
+  </data>
+
+  <!-- ── Help topics ──────────────────────────────────────────────── -->
+  <data name="Help_EnableCat_Title" xml:space="preserve">
+    <value>Enabling CAT control on your radio</value>
+  </data>
+  <data name="Help_EnableCat_Body" xml:space="preserve">
+    <value>Most radios ship with CAT control disabled or set to a default speed. Look in the radio's menu for a setting named CAT, CI-V, RS-232, or PC control and make sure it is turned on. Icom radios call this CI-V; Yaesu and Kenwood call it CAT. The exact menu number is in your radio's manual under "remote control".</value>
+  </data>
+  <data name="Help_Baud_Title" xml:space="preserve">
+    <value>Matching the baud rate</value>
+  </data>
+  <data name="Help_Baud_Body" xml:space="preserve">
+    <value>The baud rate set in {0} must match the rate set inside the radio. Common defaults: Icom IC-7300 and IC-705 use 19200 or 115200; Yaesu FT-991A and FT-DX10 use 38400; Kenwood TS-590SG uses 115200; Elecraft K3 uses 38400. If unsure, try 9600 first — nearly every radio supports it.</value>
+    <comment>{0} is the app name.</comment>
+  </data>
+  <data name="Help_CivAddress_Title" xml:space="preserve">
+    <value>Icom CI-V address</value>
+  </data>
+  <data name="Help_CivAddress_Body" xml:space="preserve">
+    <value>Icom radios each answer to a CI-V address, shown in the radio's menu as a hex number such as 94h. Hamlib uses the default address for the selected model. If the address has been changed in the radio, either reset it to the default or add the matching address in the advanced serial settings.</value>
+  </data>
+
+  <!-- ── Exported log ─────────────────────────────────────────────── -->
+  <data name="Export_ReportGenerated" xml:space="preserve">
+    <value>Report generated</value>
+  </data>
+  <data name="Export_Computer" xml:space="preserve">
+    <value>Computer</value>
+  </data>
+  <data name="Export_ConnectionSettings" xml:space="preserve">
+    <value>CONNECTION SETTINGS</value>
+  </data>
+  <data name="Export_Mode" xml:space="preserve">
+    <value>Mode</value>
+  </data>
+  <data name="Export_ModeRigctld" xml:space="preserve">
+    <value>rigctld network</value>
+  </data>
+  <data name="Export_ModeSerial" xml:space="preserve">
+    <value>Direct serial</value>
+  </data>
+  <data name="Export_Host" xml:space="preserve">
+    <value>Host</value>
+  </data>
+  <data name="Export_Port" xml:space="preserve">
+    <value>Port</value>
+  </data>
+  <data name="Export_ComPort" xml:space="preserve">
+    <value>COM port</value>
+  </data>
+  <data name="Export_BaudRate" xml:space="preserve">
+    <value>Baud rate</value>
+  </data>
+  <data name="Export_DataBits" xml:space="preserve">
+    <value>Data bits</value>
+  </data>
+  <data name="Export_Parity" xml:space="preserve">
+    <value>Parity</value>
+  </data>
+  <data name="Export_StopBits" xml:space="preserve">
+    <value>Stop bits</value>
+  </data>
+  <data name="Export_FlowCtrl" xml:space="preserve">
+    <value>Flow ctrl</value>
+  </data>
+  <data name="Export_PttMethod" xml:space="preserve">
+    <value>PTT method</value>
+  </data>
+  <data name="Export_Radio" xml:space="preserve">
+    <value>Radio</value>
+  </data>
+  <data name="Export_HamlibId" xml:space="preserve">
+    <value>{0} (Hamlib ID {1})</value>
+  </data>
+  <data name="Export_RadioDefault" xml:space="preserve">
+    <value>radio default</value>
+  </data>
+  <data name="Export_TestResults" xml:space="preserve">
+    <value>TEST RESULTS</value>
+  </data>
+  <data name="Export_Command" xml:space="preserve">
+    <value>Command: {0}</value>
+  </data>
+  <data name="Export_Diagnosis" xml:space="preserve">
+    <value>DIAGNOSIS: {0}</value>
+  </data>
+  <data name="Export_Try" xml:space="preserve">
+    <value>Try: {0}</value>
+  </data>
+  <data name="Export_Summary" xml:space="preserve">
+    <value>SUMMARY</value>
+  </data>
+  <data name="Export_Passed" xml:space="preserve">
+    <value>Passed</value>
+  </data>
+  <data name="Export_Failed" xml:space="preserve">
+    <value>Failed</value>
+  </data>
+  <data name="Export_Warnings" xml:space="preserve">
+    <value>Warnings</value>
+  </data>
+  <data name="Export_AllPassed" xml:space="preserve">
+    <value>All tests passed. Your rig control connection looks good!</value>
+  </data>
+  <data name="Export_SomeFailed" xml:space="preserve">
+    <value>One or more tests failed. See the FAIL entries above for diagnosis.</value>
+  </data>
+  <data name="Export_Issues" xml:space="preserve">
+    <value>Issues / feedback: {0}</value>
+  </data>
+
   <!-- ── Serial setting choices ───────────────────────────────────── -->
   <!-- "Radio default" means the setting is left to Hamlib's model database. -->
   <data name="Option_RadioDefault" xml:space="preserve">
@@ -334,5 +869,23 @@ Details have been written to the log. If this keeps happening, please report it 
   <data name="Option_VOX" xml:space="preserve">
     <value>VOX</value>
     <comment>PTT method. Amateur radio term, usually left untranslated.</comment>
+  </data>
+  <data name="Results_Try" xml:space="preserve">
+    <value>Try:</value>
+    <comment>Label before the suggested fix command in a failed test's diagnosis. Keep the colon.</comment>
+  </data>
+  <data name="Results_LearnMore" xml:space="preserve">
+    <value>Learn more</value>
+    <comment>Link text below a diagnosis that opens a help page in the browser.</comment>
+  </data>
+  <data name="Settings_NotifyHeading" xml:space="preserve">
+    <value>When a run finishes</value>
+    <comment>Section heading in Settings.</comment>
+  </data>
+  <data name="Settings_NotifyFlash" xml:space="preserve">
+    <value>Flash the taskbar button if the window is in the background</value>
+  </data>
+  <data name="Settings_NotifySound" xml:space="preserve">
+    <value>Play a sound</value>
   </data>
 </root>

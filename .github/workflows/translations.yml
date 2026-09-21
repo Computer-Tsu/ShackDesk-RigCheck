@@ -1,0 +1,137 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# RigCheck by ShackDesk
+# Project : https://github.com/Computer-Tsu/ShackDesk-RigCheck
+# Author  : Mark McDow (N4TEK) — My Computer Guru LLC
+# License : GPLv3 (see LICENSE)
+#
+# Workflow : Translation coverage
+# Purpose  : Keeps the language table in TRANSLATING.md and the credits in
+#            TRANSLATORS.md correct without anyone editing them by hand.
+#            Compares each Resources/Strings.<tag>.resx against the English
+#            Strings.resx, computes coverage, reads the Meta_Status and
+#            Meta_Translator entries, and rewrites the tables between the
+#            <!-- coverage:start/end --> and <!-- translators:start/end -->
+#            markers. Commits the result back to the branch if it changed.
+#
+# Triggers :
+#   - push to develop touching Resources/*.resx
+#   - workflow_dispatch
+#
+# The commit it makes touches only .md files, which the Build workflow
+# ignores, so this cannot start a build loop.
+# ──────────────────────────────────────────────────────────────────────────────
+name: Translation coverage
+
+on:
+  push:
+    branches: [ develop ]
+    paths:
+      - 'Resources/*.resx'
+      - '.github/workflows/translations.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  coverage:
+    name: Update coverage tables
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Compute coverage and rewrite tables
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+
+          function Read-Resx([string]$path) {
+            [xml]$xml = Get-Content -Raw -Encoding UTF8 $path
+            $map = @{}
+            foreach ($d in $xml.root.data) {
+              if ($d.name -and -not $d.name.StartsWith('Meta_')) {
+                $map[$d.name] = [string]$d.value
+              }
+            }
+            return $map
+          }
+
+          function Read-Meta([string]$path, [string]$key) {
+            [xml]$xml = Get-Content -Raw -Encoding UTF8 $path
+            $node = $xml.root.data | Where-Object { $_.name -eq $key } | Select-Object -First 1
+            if ($node) { return ([string]$node.value).Trim() } else { return '' }
+          }
+
+          $source     = Read-Resx 'Resources/Strings.resx'
+          $sourceKeys = $source.Keys | Sort-Object
+          $total      = $sourceKeys.Count
+
+          $rows        = @()
+          $translators = @()
+
+          foreach ($file in Get-ChildItem 'Resources' -Filter 'Strings.*.resx' | Sort-Object Name) {
+            $tag = $file.Name -replace '^Strings\.(.+)\.resx$', '$1'
+            try { $culture = [System.Globalization.CultureInfo]::GetCultureInfo($tag) } catch { $culture = $null }
+            $name = if ($culture) { $culture.EnglishName } else { $tag }
+
+            $t = Read-Resx $file.FullName
+            $translated = 0
+            foreach ($k in $sourceKeys) {
+              # Present and non-empty counts; some terms (CAT, PTT, OK) are correctly identical to English
+              if ($t.ContainsKey($k) -and $t[$k].Trim() -ne '') { $translated++ }
+            }
+            $pct        = if ($total -gt 0) { [math]::Round(100.0 * $translated / $total) } else { 0 }
+            $status     = Read-Meta $file.FullName 'Meta_Status'
+            $translator = Read-Meta $file.FullName 'Meta_Translator'
+
+            $statusText = switch ($status) {
+              'reviewed'           { 'Reviewed' }
+              'machine-translated' { 'Machine translated — review wanted' }
+              default              { 'In progress' }
+            }
+            if ($pct -lt 100 -and $status -eq 'reviewed') { $statusText = 'Reviewed — new strings need translating' }
+
+            $rows += "| $name (``$tag``) | ``$($file.Name)`` | $pct% ($translated of $total) | $statusText |"
+            if ($translator) { $translators += "| $name | $translator |" }
+          }
+
+          $coverage = @(
+            '| Language | File | Coverage | Status |',
+            '| --- | --- | --- | --- |',
+            "| English (source) | ``Strings.resx`` | 100% ($total of $total) | Source |"
+          ) + $rows
+
+          $credits = if ($translators.Count -gt 0) {
+            @('| Language | Translator |', '| --- | --- |') + $translators
+          } else {
+            @('_No community translations yet — yours could be the first. See [TRANSLATING.md](TRANSLATING.md)._')
+          }
+
+          function Replace-Between([string]$path, [string]$startMarker, [string]$endMarker, [string[]]$lines) {
+            $text = Get-Content -Raw -Encoding UTF8 $path
+            $pattern = "(?s)(" + [regex]::Escape($startMarker) + ")\r?\n.*?\r?\n(" + [regex]::Escape($endMarker) + ")"
+            $replacement = '$1' + "`n" + ($lines -join "`n") + "`n" + '$2'
+            $new = [regex]::Replace($text, $pattern, $replacement)
+            if ($new -ne $text) { Set-Content -Path $path -Value $new -Encoding UTF8 -NoNewline }
+          }
+
+          Replace-Between 'TRANSLATING.md'  '<!-- coverage:start -->'    '<!-- coverage:end -->'    $coverage
+          Replace-Between 'TRANSLATORS.md'  '<!-- translators:start -->' '<!-- translators:end -->' $credits
+
+          Write-Host "Source keys: $total"
+          $rows | ForEach-Object { Write-Host $_ }
+
+      - name: Commit if changed
+        shell: bash
+        run: |
+          if git diff --quiet -- TRANSLATING.md TRANSLATORS.md; then
+            echo "Tables already current."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add TRANSLATING.md TRANSLATORS.md
+          git commit -m "docs: update translation coverage"
+          git push

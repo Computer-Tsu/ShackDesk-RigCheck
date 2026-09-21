@@ -1,3 +1,4 @@
+using RigCheck.Localization;
 using RigCheck.Models;
 using Serilog;
 using System.IO;
@@ -43,46 +44,50 @@ public class LogExportService
         var sb = new StringBuilder();
         var cfg = suite.Config;
         var now = DateTime.Now;
+        var radioDefault = Strings.Get("Export_RadioDefault");
+
+        // Labels are padded to a fixed width so translated labels still line up
+        static string Row(string label, object? value) => $"  {label + ":",-14}{value}";
 
         // ── Header ────────────────────────────────────────────────────────
         sb.AppendLine("==========================================================");
-        sb.AppendLine($"  {BrandingInfo.FullName}  {BrandingInfo.Version}");
+        sb.AppendLine($"  {BrandingInfo.FullName}  {BuildInfo.VersionLabel}");
         sb.AppendLine($"  {BrandingInfo.Tagline}");
         sb.AppendLine("==========================================================");
         sb.AppendLine();
-        sb.AppendLine($"Report generated: {now:yyyy-MM-dd HH:mm:ss}");
-        sb.AppendLine($"Computer:         {Environment.MachineName}");
+        sb.AppendLine(Row(Strings.Get("Export_ReportGenerated"), now.ToString("yyyy-MM-dd HH:mm:ss")));
+        sb.AppendLine(Row(Strings.Get("Export_Computer"), Environment.MachineName));
         sb.AppendLine();
 
         // ── Connection settings ───────────────────────────────────────────
         sb.AppendLine("----------------------------------------------------------");
-        sb.AppendLine("CONNECTION SETTINGS");
+        sb.AppendLine(Strings.Get("Export_ConnectionSettings"));
         sb.AppendLine("----------------------------------------------------------");
 
         if (cfg.UseRigctld)
         {
-            sb.AppendLine($"  Mode:       rigctld network");
-            sb.AppendLine($"  Host:       {cfg.RigctldHost}");
-            sb.AppendLine($"  Port:       {cfg.RigctldPort}");
+            sb.AppendLine(Row(Strings.Get("Export_Mode"), Strings.Get("Export_ModeRigctld")));
+            sb.AppendLine(Row(Strings.Get("Export_Host"), cfg.RigctldHost));
+            sb.AppendLine(Row(Strings.Get("Export_Port"), cfg.RigctldPort));
         }
         else
         {
-            sb.AppendLine($"  Mode:       Direct serial");
-            sb.AppendLine($"  COM port:   {cfg.ComPort}");
-            sb.AppendLine($"  Baud rate:  {(cfg.BaudRate > 0 ? cfg.BaudRate.ToString() : "radio default")}");
-            sb.AppendLine($"  Data bits:  {(cfg.DataBits > 0 ? cfg.DataBits.ToString() : "radio default")}");
-            sb.AppendLine($"  Parity:     {cfg.Parity}");
-            sb.AppendLine($"  Stop bits:  {cfg.StopBits}");
-            sb.AppendLine($"  Flow ctrl:  {cfg.FlowControl}");
-            sb.AppendLine($"  PTT method: {cfg.PttMethod}");
+            sb.AppendLine(Row(Strings.Get("Export_Mode"), Strings.Get("Export_ModeSerial")));
+            sb.AppendLine(Row(Strings.Get("Export_ComPort"), cfg.ComPort));
+            sb.AppendLine(Row(Strings.Get("Export_BaudRate"), cfg.BaudRate > 0 ? cfg.BaudRate.ToString() : radioDefault));
+            sb.AppendLine(Row(Strings.Get("Export_DataBits"), cfg.DataBits > 0 ? cfg.DataBits.ToString() : radioDefault));
+            sb.AppendLine(Row(Strings.Get("Export_Parity"), cfg.Parity));
+            sb.AppendLine(Row(Strings.Get("Export_StopBits"), cfg.StopBits));
+            sb.AppendLine(Row(Strings.Get("Export_FlowCtrl"), cfg.FlowControl));
+            sb.AppendLine(Row(Strings.Get("Export_PttMethod"), cfg.PttMethod));
         }
 
-        sb.AppendLine($"  Radio:      {cfg.RadioModelName} (Hamlib ID {cfg.ModelId})");
+        sb.AppendLine(Row(Strings.Get("Export_Radio"), Strings.Format("Export_HamlibId", cfg.RadioModelName, cfg.ModelId)));
         sb.AppendLine();
 
         // ── Test results ──────────────────────────────────────────────────
         sb.AppendLine("----------------------------------------------------------");
-        sb.AppendLine("TEST RESULTS");
+        sb.AppendLine(Strings.Get("Export_TestResults"));
         sb.AppendLine("----------------------------------------------------------");
         sb.AppendLine();
 
@@ -103,17 +108,17 @@ public class LogExportService
 
             // Show the rigctl command so the reader can reproduce it
             if (!string.IsNullOrEmpty(result.DisplayCommand))
-                sb.AppendLine($"         Command: {result.DisplayCommand}");
+                sb.AppendLine($"         {Strings.Format("Export_Command", result.DisplayCommand)}");
 
             // Show diagnostic detail on failures
             if (result.HasDiagnosis && result.Diagnosis is not null)
             {
                 sb.AppendLine();
-                sb.AppendLine($"         DIAGNOSIS: {result.Diagnosis.Summary}");
+                sb.AppendLine($"         {Strings.Format("Export_Diagnosis", result.Diagnosis.Summary)}");
                 foreach (var check in result.Diagnosis.Checks)
                     sb.AppendLine($"           • {check}");
                 if (result.Diagnosis.HasFixCommand)
-                    sb.AppendLine($"           Try: {result.Diagnosis.FixCommand}");
+                    sb.AppendLine($"           {Strings.Format("Export_Try", result.Diagnosis.FixCommand!)}");
             }
 
             sb.AppendLine();
@@ -121,24 +126,20 @@ public class LogExportService
 
         // ── Summary ───────────────────────────────────────────────────────
         sb.AppendLine("----------------------------------------------------------");
-        sb.AppendLine("SUMMARY");
+        sb.AppendLine(Strings.Get("Export_Summary"));
         sb.AppendLine("----------------------------------------------------------");
-        sb.AppendLine($"  Passed:   {suite.PassCount}");
-        sb.AppendLine($"  Failed:   {suite.FailCount}");
-        sb.AppendLine($"  Warnings: {suite.WarningCount}");
+        sb.AppendLine(Row(Strings.Get("Export_Passed"), suite.PassCount));
+        sb.AppendLine(Row(Strings.Get("Export_Failed"), suite.FailCount));
+        sb.AppendLine(Row(Strings.Get("Export_Warnings"), suite.WarningCount));
         sb.AppendLine();
 
-        if (suite.AllPassed)
-            sb.AppendLine("  All tests passed. Your rig control connection looks good!");
-        else
-            sb.AppendLine("  One or more tests failed. See the FAIL entries above for diagnosis.");
-
+        sb.AppendLine($"  {Strings.Get(suite.AllPassed ? "Export_AllPassed" : "Export_SomeFailed")}");
         sb.AppendLine();
 
         // ── Footer ────────────────────────────────────────────────────────
         sb.AppendLine("----------------------------------------------------------");
         sb.AppendLine($"  {BrandingInfo.AppUrl}");
-        sb.AppendLine($"  Issues / feedback: {BrandingInfo.IssueUrl}");
+        sb.AppendLine($"  {Strings.Format("Export_Issues", BrandingInfo.IssueUrl)}");
         sb.AppendLine("----------------------------------------------------------");
 
         return sb.ToString();

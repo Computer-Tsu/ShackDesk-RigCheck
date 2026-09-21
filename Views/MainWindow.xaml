@@ -79,12 +79,12 @@
                            Style="{StaticResource ChromeTitleStyle}" />
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
                     <Button Content="–" Style="{StaticResource ChromeButtonStyle}"
-                            Command="{Binding ScaleDownCommand}" ToolTip="Scale down" />
+                            Command="{Binding ScaleDownCommand}" ToolTip="{loc:Str Main_ScaleDown}" />
                     <Button Content="+" Style="{StaticResource ChromeButtonStyle}"
-                            Command="{Binding ScaleUpCommand}"   ToolTip="Scale up" />
+                            Command="{Binding ScaleUpCommand}"   ToolTip="{loc:Str Main_ScaleUp}" />
                     <Button Content="⊡" Style="{StaticResource ChromeButtonStyle}"
-                            Command="{Binding ScaleResetCommand}" ToolTip="Reset scale" />
-                    <CheckBox Content="On top" IsChecked="{Binding AlwaysOnTop}"
+                            Command="{Binding ScaleResetCommand}" ToolTip="{loc:Str Main_ScaleReset}" />
+                    <CheckBox Content="{loc:Str Main_OnTop}" IsChecked="{Binding AlwaysOnTop}"
                               Style="{StaticResource ChromeCheckStyle}" />
                 </StackPanel>
             </DockPanel>
@@ -102,7 +102,7 @@
                         Visibility="{Binding IsHamlibMissing, Converter={StaticResource BoolToVisibility}}"
                         Command="{Binding OpenHamlibDownloadCommand}">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="How to install" />
+                        <TextBlock Text="{loc:Str Main_HowToInstall}" />
                         <TextBlock Style="{StaticResource ExternalLinkIconStyle}" />
                     </StackPanel>
                 </Button>
@@ -110,7 +110,7 @@
         </Border>
 
         <!-- ── Connection configuration ── -->
-        <GroupBox Grid.Row="2" Header="Connection" Style="{StaticResource GroupBoxStyle}">
+        <GroupBox Grid.Row="2" Header="{loc:Str Main_Connection}" Style="{StaticResource GroupBoxStyle}">
             <Grid Margin="8">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />   <!-- preset selector -->
@@ -121,7 +121,7 @@
 
                 <!-- Preset selector -->
                 <DockPanel Grid.Row="0" Margin="0,0,0,6">
-                    <Label Content="Quick preset:" Style="{StaticResource FieldLabelStyle}" />
+                    <Label Content="{loc:Str Main_QuickPreset}" Style="{StaticResource FieldLabelStyle}" />
                     <ComboBox ItemsSource="{Binding Connection.AvailablePresets}"
                               SelectedItem="{Binding Connection.SelectedPreset}"
                               DisplayMemberPath="Name"
@@ -132,10 +132,10 @@
 
                 <!-- Serial / rigctld toggle -->
                 <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,6">
-                    <RadioButton Content="Direct serial (COM port)"
+                    <RadioButton Content="{loc:Str Main_DirectSerial}"
                                  IsChecked="{Binding Connection.UseRigctld, Converter={StaticResource InverseBool}}"
                                  Style="{StaticResource RadioStyle}" Margin="0,0,16,0" />
-                    <RadioButton Content="rigctld (network)"
+                    <RadioButton Content="{loc:Str Main_Rigctld}"
                                  IsChecked="{Binding Connection.UseRigctld}"
                                  Style="{StaticResource RadioStyle}" />
                 </StackPanel>
@@ -152,19 +152,19 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- COM port -->
-                    <Label Grid.Column="0" Content="Port:" Style="{StaticResource FieldLabelStyle}" />
+                    <Label Grid.Column="0" Content="{loc:Str Main_Port}" Style="{StaticResource FieldLabelStyle}" />
                     <ComboBox Grid.Column="1"
                               ItemsSource="{Binding Connection.AvailablePorts}"
                               SelectedItem="{Binding Connection.SelectedPort}"
                               DisplayMemberPath="DisplayName"
                               Tag="{loc:Str Placeholder_SelectPort}"
                               Style="{StaticResource ComboBoxStyle}" MinWidth="160" />
-                    <Button Grid.Column="2" Content="↻" ToolTip="Refresh ports"
+                    <Button Grid.Column="2" Content="↻" ToolTip="{loc:Str Main_RefreshPorts}"
                             Command="{Binding Connection.RefreshPortsCommand}"
                             Style="{StaticResource IconButtonStyle}" Margin="4,0,16,0" />
 
                     <!-- Baud rate -->
-                    <Label Grid.Column="3" Content="Baud:" Style="{StaticResource FieldLabelStyle}" />
+                    <Label Grid.Column="3" Content="{loc:Str Main_Baud}" Style="{StaticResource FieldLabelStyle}" />
                     <ComboBox Grid.Column="4"
                               ItemsSource="{Binding Connection.BaudRates}"
                               SelectedValuePath="Value" DisplayMemberPath="Label"
@@ -181,51 +181,51 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="80" />
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Content="Host:" Style="{StaticResource FieldLabelStyle}" />
+                    <Label Grid.Column="0" Content="{loc:Str Main_Host}" Style="{StaticResource FieldLabelStyle}" />
                     <TextBox Grid.Column="1" Text="{Binding Connection.RigctldHost}"
                              Style="{StaticResource TextBoxStyle}" />
-                    <Label Grid.Column="2" Content="Port:" Style="{StaticResource FieldLabelStyle}" Margin="8,0,0,0" />
+                    <Label Grid.Column="2" Content="{loc:Str Main_Port}" Style="{StaticResource FieldLabelStyle}" Margin="8,0,0,0" />
                     <TextBox Grid.Column="3" Text="{Binding Connection.RigctldPort}"
                              Style="{StaticResource TextBoxStyle}" />
                 </Grid>
 
                 <!-- Advanced serial row (PTT, data bits, etc.) — collapsed by default -->
-                <Expander Grid.Row="3" Header="Advanced serial settings"
+                <Expander Grid.Row="3" Header="{loc:Str Main_AdvancedSerial}"
                           Foreground="{StaticResource BrushMuted}" FontSize="11"
                           Visibility="{Binding Connection.UseRigctld, Converter={StaticResource InverseBoolToVisibility}}"
                           Margin="0,4,0,0">
                     <WrapPanel Margin="4,4,0,0">
                         <!-- Widths are minimums so translated labels can grow. -->
                         <StackPanel Orientation="Horizontal" Margin="0,0,16,0">
-                            <Label Content="PTT:" Style="{StaticResource FieldLabelStyle}" />
+                            <Label Content="{loc:Str Main_Ptt}" Style="{StaticResource FieldLabelStyle}" />
                             <ComboBox ItemsSource="{Binding Connection.PttMethods}"
                                       SelectedValuePath="Value" DisplayMemberPath="Label"
                                       SelectedValue="{Binding Connection.PttMethod}"
                                       Style="{StaticResource ComboBoxStyle}" MinWidth="120" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,16,0">
-                            <Label Content="Data:" Style="{StaticResource FieldLabelStyle}" />
+                            <Label Content="{loc:Str Main_DataBits}" Style="{StaticResource FieldLabelStyle}" />
                             <ComboBox ItemsSource="{Binding Connection.DataBitsOptions}"
                                       SelectedValuePath="Value" DisplayMemberPath="Label"
                                       SelectedValue="{Binding Connection.DataBits}"
                                       Style="{StaticResource ComboBoxStyle}" MinWidth="120" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,16,0">
-                            <Label Content="Parity:" Style="{StaticResource FieldLabelStyle}" />
+                            <Label Content="{loc:Str Main_Parity}" Style="{StaticResource FieldLabelStyle}" />
                             <ComboBox ItemsSource="{Binding Connection.ParityOptions}"
                                       SelectedValuePath="Value" DisplayMemberPath="Label"
                                       SelectedValue="{Binding Connection.Parity}"
                                       Style="{StaticResource ComboBoxStyle}" MinWidth="120" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,16,0">
-                            <Label Content="Stop:" Style="{StaticResource FieldLabelStyle}" />
+                            <Label Content="{loc:Str Main_StopBits}" Style="{StaticResource FieldLabelStyle}" />
                             <ComboBox ItemsSource="{Binding Connection.StopBitsOptions}"
                                       SelectedValuePath="Value" DisplayMemberPath="Label"
                                       SelectedValue="{Binding Connection.StopBits}"
                                       Style="{StaticResource ComboBoxStyle}" MinWidth="120" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="Flow:" Style="{StaticResource FieldLabelStyle}" />
+                            <Label Content="{loc:Str Main_FlowControl}" Style="{StaticResource FieldLabelStyle}" />
                             <ComboBox ItemsSource="{Binding Connection.FlowCtrlOptions}"
                                       SelectedValuePath="Value" DisplayMemberPath="Label"
                                       SelectedValue="{Binding Connection.FlowControl}"
@@ -237,7 +237,7 @@
         </GroupBox>
 
         <!-- ── Test results ── -->
-        <GroupBox Grid.Row="3" Header="Diagnostic results" Style="{StaticResource GroupBoxStyle}">
+        <GroupBox Grid.Row="3" Header="{loc:Str Main_Results}" Style="{StaticResource GroupBoxStyle}">
             <DockPanel>
                 <!-- Summary bar -->
                 <Border DockPanel.Dock="Bottom" Style="{StaticResource SummaryBarStyle}"
@@ -246,84 +246,26 @@
                                Style="{StaticResource SummaryTextStyle}" />
                 </Border>
 
-                <!-- Results list -->
-                <ListBox ItemsSource="{Binding Results.Items}"
-                         Style="{StaticResource ResultsListStyle}"
-                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate DataType="{x:Type vm:TestResultItemViewModel}">
-                            <Border Style="{StaticResource ResultItemBorderStyle}">
-                                <StackPanel>
-                                    <!-- Main result row -->
-                                    <DockPanel>
-                                        <!-- Status icon -->
-                                        <TextBlock Text="{Binding StatusIcon}"
-                                                   Style="{StaticResource StatusIconStyle}"
-                                                   Foreground="{Binding Status, Converter={StaticResource StatusToColor}}" />
-
-                                        <!-- Test name -->
-                                        <TextBlock Text="{Binding Name}"
-                                                   Style="{StaticResource TestNameStyle}" />
-
-                                        <!-- Message -->
-                                        <TextBlock Text="{Binding Message}"
-                                                   Style="{StaticResource TestMessageStyle}" />
-
-                                        <!-- Expand button (if has diagnosis) -->
-                                        <Button DockPanel.Dock="Right"
-                                                Content="{Binding IsExpanded, Converter={StaticResource ExpandIcon}}"
-                                                Command="{Binding ToggleExpandedCommand}"
-                                                Style="{StaticResource ExpandButtonStyle}"
-                                                Visibility="{Binding HasDiagnosis, Converter={StaticResource BoolToVisibility}}" />
-                                    </DockPanel>
-
-                                    <!-- Command row — always visible when command available -->
-                                    <DockPanel Margin="24,2,0,0"
-                                               Visibility="{Binding DisplayCommand, Converter={StaticResource NullOrEmptyToCollapsed}}">
-                                        <Button DockPanel.Dock="Right"
-                                                Content="Copy"
-                                                Command="{Binding CopyCommandCommand}"
-                                                Style="{StaticResource CopyButtonStyle}"
-                                                ToolTip="Copy command to clipboard — paste into CMD to run yourself" />
-                                        <TextBlock Text="{Binding DisplayCommand}"
-                                                   Style="{StaticResource CommandTextStyle}"
-                                                   ToolTip="The rigctl command used for this test" />
-                                    </DockPanel>
-
-                                    <!-- Expanded diagnosis panel -->
-                                    <Border Margin="24,4,0,4"
-                                            Style="{StaticResource DiagnosisPanelStyle}"
-                                            Visibility="{Binding IsExpanded, Converter={StaticResource BoolToVisibility}}">
-                                        <StackPanel>
-                                            <TextBlock Text="{Binding Diagnosis.Summary}"
-                                                       Style="{StaticResource DiagnosisSummaryStyle}" />
-                                            <ItemsControl ItemsSource="{Binding Diagnosis.Checks}"
-                                                          Margin="0,4,0,0">
-                                                <ItemsControl.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <DockPanel>
-                                                            <TextBlock Text="•" Margin="0,0,6,0"
-                                                                       Foreground="{StaticResource BrushAccent}" />
-                                                            <TextBlock Text="{Binding}"
-                                                                       Style="{StaticResource DiagnosisCheckStyle}"
-                                                                       TextWrapping="Wrap" />
-                                                        </DockPanel>
-                                                    </DataTemplate>
-                                                </ItemsControl.ItemTemplate>
-                                            </ItemsControl>
-                                        </StackPanel>
-                                    </Border>
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                <!-- Results document: read-only, selectable, Ctrl+A / Ctrl+C copy as
+                     plain text. Built by ResultsDocumentBuilder in code-behind. -->
+                <FlowDocumentScrollViewer x:Name="ResultsViewer"
+                                          Style="{StaticResource ResultsViewerStyle}"
+                                          IsSelectionEnabled="True"
+                                          IsToolBarVisible="False"
+                                          VerticalScrollBarVisibility="Auto"
+                                          HorizontalScrollBarVisibility="Disabled">
+                    <FlowDocumentScrollViewer.CommandBindings>
+                        <CommandBinding Command="ApplicationCommands.Copy"
+                                        CanExecute="ResultsCopy_CanExecute"
+                                        Executed="ResultsCopy_Executed" />
+                    </FlowDocumentScrollViewer.CommandBindings>
+                </FlowDocumentScrollViewer>
             </DockPanel>
         </GroupBox>
 
         <!-- ── Raw console (collapsible advanced panel) ── -->
         <Expander Grid.Row="4"
-                  Header="Advanced — raw Hamlib commands"
+                  Header="{loc:Str Main_RawConsole}"
                   IsExpanded="{Binding RawConsoleVisible}"
                   Style="{StaticResource RawConsoleExpanderStyle}">
             <Grid Height="160">
@@ -348,10 +290,10 @@
 
                 <!-- Input row -->
                 <DockPanel Grid.Row="1" Margin="4,4,4,4">
-                    <Button DockPanel.Dock="Right" Content="Clear"
+                    <Button DockPanel.Dock="Right" Content="{loc:Str Main_Clear}"
                             Command="{Binding RawConsole.ClearConsoleCommand}"
                             Style="{StaticResource SecondaryButtonStyle}" />
-                    <Button DockPanel.Dock="Right" Content="Send"
+                    <Button DockPanel.Dock="Right" Content="{loc:Str Main_Send}"
                             Command="{Binding SendRawCommandCommand}"
                             Style="{StaticResource PrimaryButtonStyle}" Margin="0,0,4,0" />
                     <TextBox x:Name="ConsoleInput"
@@ -359,7 +301,7 @@
                              Style="{StaticResource ConsoleInputStyle}"
                              FontFamily="Consolas"
                              KeyDown="ConsoleInput_KeyDown"
-                             ToolTip="Enter a rigctl subcommand (e.g. f, m, t, v, l STRENGTH)" />
+                             ToolTip="{loc:Str Main_ConsoleTip}" />
                 </DockPanel>
             </Grid>
         </Expander>
@@ -368,20 +310,27 @@
         <Border Grid.Row="5" Style="{StaticResource ActionBarStyle}">
             <DockPanel Margin="8,6,8,6">
                 <Button DockPanel.Dock="Right"
-                        Content="Export Log"
+                        Content="{loc:Str Main_ExportLog}"
                         Command="{Binding ExportLogCommand}"
                         Style="{StaticResource SecondaryButtonStyle}"
                         Margin="8,0,0,0"
-                        ToolTip="Save results to a text file to email or post for help" />
+                        ToolTip="{loc:Str Main_ExportLogTip}" />
 
                 <Button DockPanel.Dock="Right"
-                        Content="Advanced ▾"
+                        Content="{loc:Str Main_CopyResults}"
+                        Command="{Binding CopyResultsCommand}"
+                        Style="{StaticResource SecondaryButtonStyle}"
+                        Margin="8,0,0,0"
+                        ToolTip="{loc:Str Main_CopyResultsTip}" />
+
+                <Button DockPanel.Dock="Right"
+                        Content="{loc:Str Main_Advanced}"
                         Command="{Binding ToggleRawConsoleCommand}"
                         Style="{StaticResource SecondaryButtonStyle}"
                         Margin="8,0,0,0" />
 
                 <!-- Run Tests — large, prominent -->
-                <Button Content="▶  Run Tests"
+                <Button Content="{loc:Str Main_RunTests}"
                         Command="{Binding RunTestsCommand}"
                         Style="{StaticResource RunButtonStyle}"
                         IsEnabled="{Binding IsRunning, Converter={StaticResource InverseBool}}" />

@@ -4,28 +4,44 @@ Translations are community-contributed and always welcome. **Any language is
 accepted** — there is no predefined list. You do not need to be a programmer:
 the work is copying one file and translating the text in it.
 
-**Status:** the translation mechanism is in place and working. RigCheck's text
-is being moved into the string file in stages; the file grows with each build.
-A translation made today stays valid — new keys simply fall back to English
-until you add them.
+---
+
+## Current languages
+
+This table is updated automatically whenever a string file changes.
+"Machine translated" files were produced by translation software and need a
+native-speaking ham to read them through — correcting one is faster than
+starting from nothing, and it is the most useful thing you can do.
+
+<!-- coverage:start -->
+| Language | File | Coverage | Status |
+| --- | --- | --- | --- |
+| English (source) | `Strings.resx` | 100% (238 of 238) | Source |
+| German (`de`) | `Strings.de.resx` | 100% (238 of 238) | Machine translated — review wanted |
+| Spanish (`es`) | `Strings.es.resx` | 100% (238 of 238) | Machine translated — review wanted |
+| French (`fr`) | `Strings.fr.resx` | 100% (238 of 238) | Machine translated — review wanted |
+| Japanese (`ja`) | `Strings.ja.resx` | 100% (238 of 238) | Machine translated — review wanted |
+<!-- coverage:end -->
 
 ---
 
 ## How it works
 
 All user-visible text lives in `Resources/Strings.resx` (English). A
-translation is a copy of that file named for its language:
-
-| Language | File |
-| --- | --- |
-| English (source) | `Resources/Strings.resx` |
-| German | `Resources/Strings.de.resx` |
-| Japanese | `Resources/Strings.ja.resx` |
-| Brazilian Portuguese | `Resources/Strings.pt-BR.resx` |
+translation is a copy of that file named for its language, for example
+`Resources/Strings.de.resx` for German or `Resources/Strings.pt-BR.resx` for
+Brazilian Portuguese.
 
 RigCheck picks the file matching the Windows display language. Any key missing
 from a translation falls back to English, so a partial translation is still
-useful.
+useful, and a translation made today stays valid as new strings are added.
+
+Two special entries at the top of every translation file:
+
+| Entry | Put here |
+| --- | --- |
+| `Meta_Translator` | Your name and callsign, e.g. `Hans Mueller, DL1ABC`. Shown in Help › About and in [TRANSLATORS.md](TRANSLATORS.md). |
+| `Meta_Status` | `machine-translated` until a native speaker has reviewed the whole file, then `reviewed`. |
 
 ## Steps
 
@@ -36,8 +52,9 @@ useful.
 2. **Claim it.** Open an issue titled "Translation: <language>" so others know.
 3. **Copy** `Resources/Strings.resx` to `Resources/Strings.<tag>.resx`, using the
    IETF language tag (`de`, `fr`, `ja`, `es`, `pt-BR`, `zh-Hans`, …).
-4. **Add a header comment** at the top of your file with the language, your
-   name and callsign, and the date. This is how you are credited.
+4. **Fill in `Meta_Translator`** with your name and callsign, and set
+   `Meta_Status` to `machine-translated` or `reviewed`. This is how you are
+   credited, automatically, in the app and in this repository.
 5. **Translate only the text inside `<value>` tags.** Do not change the
    `name="…"` keys — the app uses them to find each string. The `<comment>`
    on each entry explains where the text appears and what any placeholders mean.

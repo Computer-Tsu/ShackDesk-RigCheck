@@ -41,7 +41,9 @@
         <TextBlock Text="{x:Static app:BrandingInfo.Copyright}"
                    Foreground="{StaticResource BrushMuted}" Margin="0,0,0,12" />
 
-        <TextBlock x:Name="LicenseText" Foreground="{StaticResource BrushMuted}" Margin="0,0,0,12" />
+        <TextBlock x:Name="LicenseText" Foreground="{StaticResource BrushMuted}" Margin="0,0,0,4" />
+        <TextBlock x:Name="TranslationText" Foreground="{StaticResource BrushMuted}"
+                   TextWrapping="Wrap" Margin="0,0,0,12" Visibility="Collapsed" />
 
         <!-- Random install ID — the only identifier telemetry ever sends -->
         <DockPanel Margin="0,0,0,2">

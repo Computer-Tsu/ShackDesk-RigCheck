@@ -3,6 +3,9 @@ RigCheck is the second ShackDesk suite application.
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 
 "Know your rig is ready."<br>
+
+![RigCheck main window](docs/screenshots/Screenshot_RigCheck-0.6.4-Main.png)
+
 Serial CAT communication diagnostics using Hamlib. Verify your radio connection before it matters.
 
 ## Suite Context
@@ -244,9 +247,12 @@ each test result, any error messages.
 
 ## Contributing
 
-Radio and cable database entries, bug reports with
-an exported log, and code are all welcome. See
-[CONTRIBUTING.md](CONTRIBUTING.md).
+Radio and cable database entries, translations,
+bug reports with an exported log, and code are all
+welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) and
+[TRANSLATING.md](TRANSLATING.md). Translators are
+credited in Help > About and in
+[TRANSLATORS.md](TRANSLATORS.md).
 
 ## License
 

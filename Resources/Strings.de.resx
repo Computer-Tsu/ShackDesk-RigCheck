@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    RigCheck — Deutsch (de)
+    Maschinell übersetzt. Bitte von einem deutschsprachigen Funkamateur prüfen:
+    Meta_Translator ausfüllen und Meta_Status auf "reviewed" setzen. Siehe TRANSLATING.md.
+    Nur den Text zwischen <value> und </value> ändern. {0}, {1} unverändert lassen.
+  -->
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+
+  <data name="Meta_Status" xml:space="preserve"><value>machine-translated</value></data>
+  <data name="Meta_Translator" xml:space="preserve"><value></value></data>
+  <data name="About_Translation" xml:space="preserve"><value>{0}-Übersetzung: {1}</value></data>
+
+  <data name="Menu_Settings" xml:space="preserve"><value>_Einstellungen</value></data>
+  <data name="Menu_Help" xml:space="preserve"><value>_Hilfe</value></data>
+  <data name="Menu_HelpContents" xml:space="preserve"><value>_Inhalt</value></data>
+  <data name="Menu_HelpAbout" xml:space="preserve"><value>_Über {0}</value></data>
+  <data name="Menu_HelpDownload" xml:space="preserve"><value>_Neueste Version herunterladen</value></data>
+  <data name="Menu_HelpViewData" xml:space="preserve"><value>_Gesammelte Daten anzeigen</value></data>
+  <data name="Common_Close" xml:space="preserve"><value>Schließen</value></data>
+  <data name="Common_Continue" xml:space="preserve"><value>Weiter</value></data>
+  <data name="Common_OK" xml:space="preserve"><value>OK</value></data>
+  <data name="Common_Cancel" xml:space="preserve"><value>Abbrechen</value></data>
+  <data name="Common_Copy" xml:space="preserve"><value>Kopieren</value></data>
+
+  <data name="Settings_Title" xml:space="preserve"><value>Einstellungen</value></data>
+  <data name="Settings_ComingSoon" xml:space="preserve"><value>Einstellungen erscheinen hier in einer zukünftigen Version.</value></data>
+  <data name="Settings_TelemetryHeading" xml:space="preserve"><value>Anonyme Diagnosedaten</value></data>
+  <data name="Settings_ViewData" xml:space="preserve"><value>Gesammelte Daten anzeigen…</value></data>
+  <data name="Settings_LoggingHeading" xml:space="preserve"><value>Protokollierung</value></data>
+  <data name="Settings_LogLevel" xml:space="preserve"><value>In Protokolldateien schreiben:</value></data>
+  <data name="LogLevel_Off" xml:space="preserve"><value>Aus</value></data>
+  <data name="LogLevel_Error" xml:space="preserve"><value>Nur Fehler</value></data>
+  <data name="LogLevel_Information" xml:space="preserve"><value>Normal</value></data>
+  <data name="LogLevel_Debug" xml:space="preserve"><value>Ausführlich (empfohlen für Testversionen)</value></data>
+  <data name="Settings_LogPath" xml:space="preserve"><value>Protokolldateien werden gespeichert in:</value></data>
+  <data name="Settings_OpenLogFolder" xml:space="preserve"><value>Protokollordner öffnen</value></data>
+  <data name="Settings_DeleteLogs" xml:space="preserve"><value>Protokolldateien löschen</value></data>
+  <data name="Settings_DeleteLogsConfirm" xml:space="preserve"><value>Alle Protokolldateien von {0} löschen? Dies kann nicht rückgängig gemacht werden.</value></data>
+  <data name="Settings_DeleteLogsDone" xml:space="preserve"><value>{0} Protokolldatei(en) gelöscht.</value></data>
+  <data name="Settings_SupportIdHeading" xml:space="preserve"><value>Support-ID</value></data>
+  <data name="Settings_SupportIdHint" xml:space="preserve"><value>Eine zufällige Kennung, die beim ersten Start des Programms erzeugt wurde. Sie ist die einzige Kennung, die je in Diagnoseberichten gesendet wird, und ermöglicht es, eine Supportanfrage diesen Berichten zuzuordnen. Ein Zurücksetzen trennt diese Verbindung für alle bisherigen Berichte und löscht deren lokale Kopien.</value></data>
+  <data name="Settings_ResetId" xml:space="preserve"><value>Support-ID zurücksetzen…</value></data>
+  <data name="Settings_ResetIdConfirm" xml:space="preserve"><value>Neue Support-ID erzeugen? Bisherige Diagnoseberichte können dieser Installation nicht mehr zugeordnet werden, und ihre lokalen Kopien werden gelöscht.</value></data>
+
+  <data name="About_Title" xml:space="preserve"><value>Über {0}</value></data>
+  <data name="About_Version" xml:space="preserve"><value>Version {0}</value></data>
+  <data name="About_DevelopedBy" xml:space="preserve"><value>Entwickelt von {0}</value></data>
+  <data name="About_License" xml:space="preserve"><value>Lizenziert unter {0}</value></data>
+  <data name="About_Website" xml:space="preserve"><value>Webseite</value></data>
+  <data name="About_SourceCode" xml:space="preserve"><value>Quellcode</value></data>
+  <data name="About_Channel" xml:space="preserve"><value>{0}-Version, erstellt am {1}</value></data>
+  <data name="About_Expires" xml:space="preserve"><value>Diese {0}-Version läuft am {1} ab.</value></data>
+  <data name="About_SupportId" xml:space="preserve"><value>Support-ID: {0}</value></data>
+  <data name="About_SupportIdHint" xml:space="preserve"><value>Geben Sie diese ID in einer Supportanfrage an, um sie Ihren Diagnoseberichten zuzuordnen, falls Sie diese aktiviert haben.</value></data>
+
+  <data name="Expiry_TitleBar" xml:space="preserve"><value>läuft ab am {0}</value></data>
+  <data name="Expiry_Warning" xml:space="preserve"><value>Diese {0}-Version läuft in {1} Tag(en) ab, am {2}. Laden Sie die aktuelle Version über das Hilfe-Menü herunter.</value></data>
+  <data name="Expiry_WarningToday" xml:space="preserve"><value>Diese {0}-Version läuft heute ab. Laden Sie die aktuelle Version über das Hilfe-Menü herunter.</value></data>
+  <data name="Expiry_BetaExpired" xml:space="preserve"><value>Diese Beta-Version ist am {0} abgelaufen. Sie läuft weiterhin, aber eine neuere Version ist verfügbar.</value></data>
+  <data name="Expired_Title" xml:space="preserve"><value>{0}-Version abgelaufen</value></data>
+  <data name="Expired_Message" xml:space="preserve"><value>Diese Alpha-Version von {0} ist am {1} abgelaufen.
+
+Alpha-Versionen laufen nach {2} Tagen ab, damit Tester immer mit aktuellem Code arbeiten. Bitte laden Sie die neueste Version herunter.</value></data>
+  <data name="Expired_Download" xml:space="preserve"><value>Neueste Version herunterladen</value></data>
+
+  <data name="FirstRun_Title" xml:space="preserve"><value>Willkommen bei {0}</value></data>
+  <data name="FirstRun_Intro" xml:space="preserve"><value>{0} kann anonyme Diagnoseberichte senden, die helfen, die Funkgeräte- und Kabeldatenbank für alle zu verbessern.</value></data>
+  <data name="Telemetry_Checkbox" xml:space="preserve"><value>Anonyme Diagnoseberichte senden</value></data>
+  <data name="Telemetry_WhatIsSent" xml:space="preserve"><value>Was gesendet wird: die {0}-Version und Windows-Version, ob Hamlib gefunden wurde, und nach jedem Testlauf das Funkgerätemodell, die seriellen Einstellungen, die USB-Kabelkennungen und welche Tests bestanden oder fehlgeschlagen sind.</value></data>
+  <data name="Telemetry_WhatIsNotSent" xml:space="preserve"><value>Niemals gesendet: Ihr Rufzeichen, Computername, Dateipfade, Seriennummern oder IP-Adresse. Die einzige Kennung ist eine zufällige ID, die beim ersten Programmstart erzeugt wurde.</value></data>
+  <data name="Telemetry_ChangeLater" xml:space="preserve"><value>Sie können dies jederzeit in den Einstellungen ändern und jeden Bericht unter Hilfe einsehen.</value></data>
+  <data name="Telemetry_PrivacyLink" xml:space="preserve"><value>Datenschutzerklärung</value></data>
+
+  <data name="DataViewer_Title" xml:space="preserve"><value>Gesammelte Daten</value></data>
+  <data name="DataViewer_Intro" xml:space="preserve"><value>Jeder Diagnosebericht, den diese Kopie von {0} gesendet oder zwischengespeichert hat, neueste zuerst. Berichte mit der Markierung „pending“ konnten noch nicht gesendet werden und werden beim nächsten Start erneut versucht.</value></data>
+  <data name="DataViewer_Empty" xml:space="preserve"><value>Es wurden noch keine Berichte erstellt.</value></data>
+  <data name="DataViewer_Clear" xml:space="preserve"><value>Lokale Kopien löschen</value></data>
+
+  <data name="Crash_Title" xml:space="preserve"><value>{0} muss beendet werden</value></data>
+  <data name="Crash_Message" xml:space="preserve"><value>{0} ist auf einen unerwarteten Fehler gestoßen und muss beendet werden.
+
+Details wurden in das Protokoll geschrieben. Falls dies wiederholt auftritt, melden Sie es bitte mit dem exportierten Protokoll als Anhang.</value></data>
+
+  <data name="Ready_ChooseRadio" xml:space="preserve"><value>Wählen Sie Ihr Funkgerät aus der Schnellauswahl.</value></data>
+  <data name="Ready_SelectPort" xml:space="preserve"><value>Wählen Sie den COM-Port, an dem Ihr Funkgerät angeschlossen ist.</value></data>
+  <data name="Placeholder_ChooseRadio" xml:space="preserve"><value>Funkgerät wählen…</value></data>
+  <data name="Placeholder_SelectPort" xml:space="preserve"><value>Port wählen…</value></data>
+
+  <data name="Main_Connection" xml:space="preserve"><value>Verbindung</value></data>
+  <data name="Main_QuickPreset" xml:space="preserve"><value>Schnellauswahl:</value></data>
+  <data name="Main_DirectSerial" xml:space="preserve"><value>Direkt seriell (COM-Port)</value></data>
+  <data name="Main_Rigctld" xml:space="preserve"><value>rigctld (Netzwerk)</value></data>
+  <data name="Main_Port" xml:space="preserve"><value>Port:</value></data>
+  <data name="Main_Baud" xml:space="preserve"><value>Baud:</value></data>
+  <data name="Main_Host" xml:space="preserve"><value>Host:</value></data>
+  <data name="Main_RefreshPorts" xml:space="preserve"><value>Ports aktualisieren</value></data>
+  <data name="Main_AdvancedSerial" xml:space="preserve"><value>Erweiterte serielle Einstellungen</value></data>
+  <data name="Main_Ptt" xml:space="preserve"><value>PTT:</value></data>
+  <data name="Main_DataBits" xml:space="preserve"><value>Daten:</value></data>
+  <data name="Main_Parity" xml:space="preserve"><value>Parität:</value></data>
+  <data name="Main_StopBits" xml:space="preserve"><value>Stopp:</value></data>
+  <data name="Main_FlowControl" xml:space="preserve"><value>Fluss:</value></data>
+  <data name="Main_Results" xml:space="preserve"><value>Diagnoseergebnisse</value></data>
+  <data name="Main_CopyCommand" xml:space="preserve"><value>Kopieren</value></data>
+  <data name="Main_CopyCommandTip" xml:space="preserve"><value>Befehl in die Zwischenablage kopieren — in ein Eingabeaufforderungsfenster einfügen, um ihn selbst auszuführen</value></data>
+  <data name="Main_CommandTip" xml:space="preserve"><value>Der für diesen Test verwendete rigctl-Befehl</value></data>
+  <data name="Main_RawConsole" xml:space="preserve"><value>Erweitert — direkte Hamlib-Befehle</value></data>
+  <data name="Main_ConsoleTip" xml:space="preserve"><value>Einen rigctl-Unterbefehl eingeben (z. B. f, m, t, v, l STRENGTH)</value></data>
+  <data name="Main_Clear" xml:space="preserve"><value>Leeren</value></data>
+  <data name="Main_Send" xml:space="preserve"><value>Senden</value></data>
+  <data name="Main_RunTests" xml:space="preserve"><value>▶  Tests starten</value></data>
+  <data name="Main_Advanced" xml:space="preserve"><value>Erweitert ▾</value></data>
+  <data name="Main_ExportLog" xml:space="preserve"><value>Protokoll exportieren</value></data>
+  <data name="Main_ExportLogTip" xml:space="preserve"><value>Ergebnisse in eine Textdatei speichern, um sie per E-Mail zu senden oder um Hilfe zu bitten</value></data>
+  <data name="Main_CopyResults" xml:space="preserve"><value>Ergebnisse kopieren</value></data>
+  <data name="Main_CopyResultsTip" xml:space="preserve"><value>Alle Ergebnisse als Text in die Zwischenablage kopieren</value></data>
+  <data name="Main_HowToInstall" xml:space="preserve"><value>Installationsanleitung</value></data>
+  <data name="Main_ScaleDown" xml:space="preserve"><value>Verkleinern</value></data>
+  <data name="Main_ScaleUp" xml:space="preserve"><value>Vergrößern</value></data>
+  <data name="Main_ScaleReset" xml:space="preserve"><value>Größe zurücksetzen</value></data>
+  <data name="Main_OnTop" xml:space="preserve"><value>Im Vordergrund</value></data>
+
+  <data name="Status_HamlibFound" xml:space="preserve"><value>Hamlib gefunden über {0}</value></data>
+  <data name="Status_HamlibMissing" xml:space="preserve"><value>Hamlib nicht gefunden — WSJT-X installieren oder Hamlib herunterladen</value></data>
+  <data name="Status_HamlibMissingLong" xml:space="preserve"><value>Hamlib nicht gefunden. „Tests starten“ ist erst verfügbar, wenn Hamlib installiert ist.</value></data>
+  <data name="Status_Running" xml:space="preserve"><value>Tests laufen…</value></data>
+  <data name="Status_AllPassed" xml:space="preserve"><value>Alle {0} Tests bestanden.</value></data>
+  <data name="Status_SomeFailed" xml:space="preserve"><value>{0} Test(s) fehlgeschlagen — Details in den Ergebnissen.</value></data>
+  <data name="Status_RunFailed" xml:space="preserve"><value>Testlauf unerwartet fehlgeschlagen.</value></data>
+  <data name="Status_LogSaved" xml:space="preserve"><value>Protokoll gespeichert unter {0}</value></data>
+  <data name="Status_LogFailed" xml:space="preserve"><value>Protokollexport fehlgeschlagen — Details im Anwendungsprotokoll.</value></data>
+  <data name="Status_Copied" xml:space="preserve"><value>Ergebnisse in die Zwischenablage kopiert.</value></data>
+  <data name="Confirm_SetFreq_Title" xml:space="preserve"><value>Frequenztest bestätigen</value></data>
+  <data name="Confirm_SetFreq_Message" xml:space="preserve"><value>Der Test „Frequenz setzen“ ändert die VFO-Frequenz Ihres Funkgeräts kurz um 1 kHz und stellt sie dann wieder her.
+
+Fortfahren?</value></data>
+  <data name="Export_NoResults_Title" xml:space="preserve"><value>Keine Ergebnisse</value></data>
+  <data name="Export_NoResults_Message" xml:space="preserve"><value>Führen Sie zuerst die Tests aus, bevor Sie exportieren.</value></data>
+  <data name="Export_DialogTitle" xml:space="preserve"><value>{0}-Protokoll exportieren</value></data>
+  <data name="Export_Filter" xml:space="preserve"><value>Textdateien (*.txt)|*.txt|Alle Dateien (*.*)|*.*</value></data>
+  <data name="Summary_AllPassed" xml:space="preserve"><value>✓ Alle {0} Tests bestanden</value></data>
+  <data name="Summary_Mixed" xml:space="preserve"><value>{0} fehlgeschlagen · {1} bestanden · {2} Warnungen</value></data>
+  <data name="Cable_Detected" xml:space="preserve"><value>Erkannt: {0}</value></data>
+
+  <data name="Test_OpenConnection" xml:space="preserve"><value>Verbindung öffnen</value></data>
+  <data name="Test_GetFrequency" xml:space="preserve"><value>Frequenz abfragen</value></data>
+  <data name="Test_GetMode" xml:space="preserve"><value>Betriebsart abfragen</value></data>
+  <data name="Test_GetPtt" xml:space="preserve"><value>PTT-Status abfragen</value></data>
+  <data name="Test_GetSmeter" xml:space="preserve"><value>S-Meter abfragen</value></data>
+  <data name="Test_GetVfo" xml:space="preserve"><value>VFO abfragen</value></data>
+  <data name="Test_SetFrequency" xml:space="preserve"><value>Frequenz setzen und prüfen</value></data>
+  <data name="Test_Cancelled" xml:space="preserve"><value>Abgebrochen</value></data>
+  <data name="Test_SkippedNoConnection" xml:space="preserve"><value>Übersprungen — Verbindung konnte nicht hergestellt werden</value></data>
+
+  <data name="Msg_Connected" xml:space="preserve"><value>Verbunden mit {0} an {1}</value></data>
+  <data name="Msg_ConnectFailed" xml:space="preserve"><value>Verbindung zum Funkgerät nicht möglich</value></data>
+  <data name="Msg_Frequency" xml:space="preserve"><value>VFO-A-Frequenz: {0} MHz</value></data>
+  <data name="Msg_FrequencyUnparsed" xml:space="preserve"><value>Funkgerät hat geantwortet, aber die Frequenz konnte nicht gelesen werden: {0}</value></data>
+  <data name="Msg_FrequencyNoResponse" xml:space="preserve"><value>Funkgerät hat auf die Frequenzabfrage nicht geantwortet</value></data>
+  <data name="Msg_Mode" xml:space="preserve"><value>Aktuelle Betriebsart: {0}, Bandbreite: {1} Hz</value></data>
+  <data name="Msg_ModeNoResponse" xml:space="preserve"><value>Funkgerät hat auf die Betriebsartabfrage nicht geantwortet</value></data>
+  <data name="Msg_PttOn" xml:space="preserve"><value>PTT ist AN — Sender ist GETASTET</value></data>
+  <data name="Msg_PttOff" xml:space="preserve"><value>PTT ist aus (Sender nicht getastet)</value></data>
+  <data name="Msg_PttNoResponse" xml:space="preserve"><value>Funkgerät hat auf die PTT-Abfrage nicht geantwortet</value></data>
+  <data name="Msg_Smeter" xml:space="preserve"><value>Signalstärke: {0} ({1} dBm)</value></data>
+  <data name="Msg_SmeterUnparsed" xml:space="preserve"><value>S-Meter hat geantwortet, aber der Wert konnte nicht gelesen werden: {0}</value></data>
+  <data name="Msg_SmeterNoResponse" xml:space="preserve"><value>Funkgerät hat auf die S-Meter-Abfrage nicht geantwortet (manche Geräte unterstützen dies nicht)</value></data>
+  <data name="Msg_Vfo" xml:space="preserve"><value>Aktiver VFO: {0}</value></data>
+  <data name="Msg_VfoNoResponse" xml:space="preserve"><value>Funkgerät hat auf die VFO-Abfrage nicht geantwortet</value></data>
+  <data name="Msg_SetFreqReadFailed" xml:space="preserve"><value>Aktuelle Frequenz konnte vor dem Setztest nicht gelesen werden</value></data>
+  <data name="Msg_SetFreqFailed" xml:space="preserve"><value>Frequenz konnte nicht gesetzt werden</value></data>
+  <data name="Msg_SetFreqVerified" xml:space="preserve"><value>Frequenz setzen geprüft — {0} MHz gesetzt, {1} MHz zurückgelesen. Ursprüngliche Frequenz wiederhergestellt.</value></data>
+  <data name="Msg_SetFreqMismatch" xml:space="preserve"><value>Frequenz wurde gesetzt, aber der zurückgelesene Wert stimmte nicht genau überein</value></data>
+
+  <data name="Diag_BaudDefault" xml:space="preserve"><value>Standard des Funkgeräts</value></data>
+  <data name="Diag_HamlibNotFound_Summary" xml:space="preserve"><value>Hamlib (rigctl.exe) ist nicht installiert oder wurde nicht gefunden.</value></data>
+  <data name="Diag_HamlibNotFound_1" xml:space="preserve"><value>Installieren Sie WSJT-X — es enthält Hamlib automatisch.</value></data>
+  <data name="Diag_HamlibNotFound_2" xml:space="preserve"><value>Oder laden Sie Hamlib für Windows von hamlib.github.io herunter.</value></data>
+  <data name="Diag_HamlibNotFound_3" xml:space="preserve"><value>Starten Sie {0} nach der Installation neu, damit die neuen Dateien gefunden werden.</value></data>
+  <data name="Diag_PortInUse_Summary" xml:space="preserve"><value>{0} ist bereits von einem anderen Programm geöffnet.</value></data>
+  <data name="Diag_PortInUse_1" xml:space="preserve"><value>Läuft gerade WSJT-X, Fldigi, JS8Call oder Winlink?</value></data>
+  <data name="Diag_PortInUse_2" xml:space="preserve"><value>Schließen Sie das andere Programm und versuchen Sie es erneut.</value></data>
+  <data name="Diag_PortInUse_3" xml:space="preserve"><value>Manche Programme halten den Port geöffnet, auch wenn sie nicht aktiv senden.</value></data>
+  <data name="Diag_PortInUse_4" xml:space="preserve"><value>In WSJT-X: Datei → Einstellungen → Funkgerät — CAT-Steuerung trennen, bevor Sie hier testen.</value></data>
+  <data name="Diag_PortNotFound_Summary" xml:space="preserve"><value>{0} wurde auf diesem Computer nicht gefunden.</value></data>
+  <data name="Diag_PortNotFound_1" xml:space="preserve"><value>Ist das USB-Seriell-Kabel eingesteckt?</value></data>
+  <data name="Diag_PortNotFound_2" xml:space="preserve"><value>Prüfen Sie im Geräte-Manager, welchen COM-Port Windows zugewiesen hat.</value></data>
+  <data name="Diag_PortNotFound_3" xml:space="preserve"><value>Der Port könnte sich geändert haben — versuchen Sie eine andere COM-Port-Nummer.</value></data>
+  <data name="Diag_PortNotFound_4" xml:space="preserve"><value>Manche Funkgeräte benötigen einen Treiber (z. B. Icom IC-7300 verwendet Silicon Labs CP210x).</value></data>
+  <data name="Diag_Timeout_Summary" xml:space="preserve"><value>Das Funkgerät hat nicht innerhalb der Zeitgrenze geantwortet.</value></data>
+  <data name="Diag_Timeout_1" xml:space="preserve"><value>Ist das Funkgerät eingeschaltet?</value></data>
+  <data name="Diag_Timeout_2" xml:space="preserve"><value>Stimmt die Baudrate? Das Handbuch Ihres Funkgeräts nennt die CAT-Baudrate. Aktuell eingestellt: {0}.</value></data>
+  <data name="Diag_Timeout_3" xml:space="preserve"><value>Ist das CAT-/CI-V-/RS-232-Kabel am richtigen Anschluss des Funkgeräts angeschlossen?</value></data>
+  <data name="Diag_Timeout_4" xml:space="preserve"><value>Muss die CAT-Steuerung im Menü Ihres Funkgeräts aktiviert werden? Suchen Sie im Handbuch nach „CAT“, „CI-V“ oder „RS-232“.</value></data>
+  <data name="Diag_Timeout_5" xml:space="preserve"><value>Manche Funkgeräte verwenden andere Einstellungen für Datenbits, Parität oder Stoppbits. Prüfen Sie das Handbuch.</value></data>
+  <data name="Diag_NoResponse_Summary" xml:space="preserve"><value>Mit dem Port verbunden, aber das Funkgerät hat keine Daten gesendet.</value></data>
+  <data name="Diag_NoResponse_1" xml:space="preserve"><value>Prüfen Sie, ob das gewählte Modell zu Ihrem tatsächlichen Funkgerät passt. Aktuell: {0}.</value></data>
+  <data name="Diag_NoResponse_2" xml:space="preserve"><value>Versuchen Sie eine niedrigere Baudrate — viele Funkgeräte verwenden standardmäßig 9600 Baud.</value></data>
+  <data name="Diag_NoResponse_3" xml:space="preserve"><value>Prüfen Sie, ob die CAT-/CI-V-Baudrate des Funkgeräts mit {0} übereinstimmt.</value></data>
+  <data name="Diag_NoResponse_4" xml:space="preserve"><value>Wird ein 1:1-Kabel oder ein Nullmodemkabel benötigt? Manche Funkgeräte brauchen das eine, manche das andere.</value></data>
+  <data name="Diag_WrongModel_Summary" xml:space="preserve"><value>Das Funkgerät hat geantwortet, aber die Daten passten nicht zum erwarteten Modell.</value></data>
+  <data name="Diag_WrongModel_1" xml:space="preserve"><value>Das gewählte Modell ist „{0}“ — entspricht das Ihrem tatsächlichen Funkgerät?</value></data>
+  <data name="Diag_WrongModel_2" xml:space="preserve"><value>Suchen Sie in der Geräteauswahl nach Ihrer genauen Modellnummer.</value></data>
+  <data name="Diag_WrongModel_3" xml:space="preserve"><value>Manche Funkgeräte haben mehrere Hamlib-Einträge — probieren Sie benachbarte Einträge in der Liste.</value></data>
+  <data name="Diag_WrongModel_4" xml:space="preserve"><value>Bei Icom-Geräten prüfen Sie die CI-V-Adresse sowohl im Gerätemenü als auch in {0}.</value></data>
+  <data name="Diag_Rigctld_Summary" xml:space="preserve"><value>Verbindung zu rigctld unter {0}:{1} nicht möglich.</value></data>
+  <data name="Diag_Rigctld_1" xml:space="preserve"><value>Läuft rigctld? Es muss separat gestartet werden, bevor {0} sich verbinden kann.</value></data>
+  <data name="Diag_Rigctld_2" xml:space="preserve"><value>Prüfen Sie den Host — aktuell eingestellt auf „{0}“.</value></data>
+  <data name="Diag_Rigctld_3" xml:space="preserve"><value>Prüfen Sie den Port — aktuell eingestellt auf {0} (Standard ist 4532).</value></data>
+  <data name="Diag_Rigctld_4" xml:space="preserve"><value>Prüfen Sie, ob Ihre Firewall rigctld blockiert.</value></data>
+  <data name="Diag_Cancelled_Summary" xml:space="preserve"><value>Der Vorgang wurde abgebrochen.</value></data>
+  <data name="Diag_Unknown_Summary" xml:space="preserve"><value>Ein unerwarteter Fehler ist aufgetreten.</value></data>
+  <data name="Diag_Unknown_1" xml:space="preserve"><value>Suchen Sie in der unten stehenden Fehlermeldung nach Hinweisen.</value></data>
+  <data name="Diag_Unknown_2" xml:space="preserve"><value>Führen Sie den angezeigten Befehl manuell in einem Eingabeaufforderungsfenster aus, um die vollständige Ausgabe zu sehen.</value></data>
+  <data name="Diag_Unknown_3" xml:space="preserve"><value>Exportieren Sie das Protokoll und bitten Sie in Ihrem Ortsverband oder in einem Forum um Hilfe.</value></data>
+
+  <data name="Help_EnableCat_Title" xml:space="preserve"><value>CAT-Steuerung am Funkgerät aktivieren</value></data>
+  <data name="Help_EnableCat_Body" xml:space="preserve"><value>Bei den meisten Funkgeräten ist die CAT-Steuerung ab Werk deaktiviert oder auf eine Standardgeschwindigkeit eingestellt. Suchen Sie im Menü des Funkgeräts nach einer Einstellung namens CAT, CI-V, RS-232 oder PC-Steuerung und stellen Sie sicher, dass sie eingeschaltet ist. Icom nennt es CI-V; Yaesu und Kenwood nennen es CAT. Die genaue Menünummer steht im Handbuch Ihres Funkgeräts unter „Fernsteuerung“.</value></data>
+  <data name="Help_Baud_Title" xml:space="preserve"><value>Baudrate abstimmen</value></data>
+  <data name="Help_Baud_Body" xml:space="preserve"><value>Die in {0} eingestellte Baudrate muss mit der im Funkgerät eingestellten übereinstimmen. Übliche Standardwerte: Icom IC-7300 und IC-705 verwenden 19200 oder 115200; Yaesu FT-991A und FT-DX10 verwenden 38400; Kenwood TS-590SG verwendet 115200; Elecraft K3 verwendet 38400. Im Zweifel zuerst 9600 versuchen — fast jedes Funkgerät unterstützt das.</value></data>
+  <data name="Help_CivAddress_Title" xml:space="preserve"><value>Icom CI-V-Adresse</value></data>
+  <data name="Help_CivAddress_Body" xml:space="preserve"><value>Jedes Icom-Funkgerät antwortet auf eine CI-V-Adresse, die im Gerätemenü als Hexadezimalzahl wie 94h angezeigt wird. Hamlib verwendet die Standardadresse des gewählten Modells. Wurde die Adresse im Funkgerät geändert, setzen Sie sie entweder auf den Standard zurück oder tragen Sie die passende Adresse in den erweiterten seriellen Einstellungen ein.</value></data>
+
+  <data name="Export_ReportGenerated" xml:space="preserve"><value>Bericht erstellt</value></data>
+  <data name="Export_Computer" xml:space="preserve"><value>Computer</value></data>
+  <data name="Export_ConnectionSettings" xml:space="preserve"><value>VERBINDUNGSEINSTELLUNGEN</value></data>
+  <data name="Export_Mode" xml:space="preserve"><value>Modus</value></data>
+  <data name="Export_ModeRigctld" xml:space="preserve"><value>rigctld-Netzwerk</value></data>
+  <data name="Export_ModeSerial" xml:space="preserve"><value>Direkt seriell</value></data>
+  <data name="Export_Host" xml:space="preserve"><value>Host</value></data>
+  <data name="Export_Port" xml:space="preserve"><value>Port</value></data>
+  <data name="Export_ComPort" xml:space="preserve"><value>COM-Port</value></data>
+  <data name="Export_BaudRate" xml:space="preserve"><value>Baudrate</value></data>
+  <data name="Export_DataBits" xml:space="preserve"><value>Datenbits</value></data>
+  <data name="Export_Parity" xml:space="preserve"><value>Parität</value></data>
+  <data name="Export_StopBits" xml:space="preserve"><value>Stoppbits</value></data>
+  <data name="Export_FlowCtrl" xml:space="preserve"><value>Flusssteuerung</value></data>
+  <data name="Export_PttMethod" xml:space="preserve"><value>PTT-Methode</value></data>
+  <data name="Export_Radio" xml:space="preserve"><value>Funkgerät</value></data>
+  <data name="Export_HamlibId" xml:space="preserve"><value>{0} (Hamlib-ID {1})</value></data>
+  <data name="Export_RadioDefault" xml:space="preserve"><value>Gerätestandard</value></data>
+  <data name="Export_TestResults" xml:space="preserve"><value>TESTERGEBNISSE</value></data>
+  <data name="Export_Command" xml:space="preserve"><value>Befehl: {0}</value></data>
+  <data name="Export_Diagnosis" xml:space="preserve"><value>DIAGNOSE: {0}</value></data>
+  <data name="Export_Try" xml:space="preserve"><value>Versuchen Sie: {0}</value></data>
+  <data name="Export_Summary" xml:space="preserve"><value>ZUSAMMENFASSUNG</value></data>
+  <data name="Export_Passed" xml:space="preserve"><value>Bestanden</value></data>
+  <data name="Export_Failed" xml:space="preserve"><value>Fehlgeschlagen</value></data>
+  <data name="Export_Warnings" xml:space="preserve"><value>Warnungen</value></data>
+  <data name="Export_AllPassed" xml:space="preserve"><value>Alle Tests bestanden. Ihre CAT-Verbindung sieht gut aus!</value></data>
+  <data name="Export_SomeFailed" xml:space="preserve"><value>Ein oder mehrere Tests sind fehlgeschlagen. Siehe die FAIL-Einträge oben zur Diagnose.</value></data>
+  <data name="Export_Issues" xml:space="preserve"><value>Probleme / Rückmeldungen: {0}</value></data>
+
+  <data name="Option_RadioDefault" xml:space="preserve"><value>Gerätestandard</value></data>
+  <data name="Option_None" xml:space="preserve"><value>Keine</value></data>
+  <data name="Option_Even" xml:space="preserve"><value>Gerade</value></data>
+  <data name="Option_Odd" xml:space="preserve"><value>Ungerade</value></data>
+  <data name="Option_Mark" xml:space="preserve"><value>Mark</value></data>
+  <data name="Option_Space" xml:space="preserve"><value>Space</value></data>
+  <data name="Option_Hardware" xml:space="preserve"><value>Hardware</value></data>
+  <data name="Option_Software" xml:space="preserve"><value>Software</value></data>
+  <data name="Option_CAT" xml:space="preserve"><value>CAT</value></data>
+  <data name="Option_RTS" xml:space="preserve"><value>RTS</value></data>
+  <data name="Option_DTR" xml:space="preserve"><value>DTR</value></data>
+  <data name="Option_VOX" xml:space="preserve"><value>VOX</value></data>
+  <data name="Results_Try" xml:space="preserve"><value>Versuchen:</value></data>
+  <data name="Results_LearnMore" xml:space="preserve"><value>Mehr erfahren</value></data>
+  <data name="Settings_NotifyHeading" xml:space="preserve"><value>Wenn ein Durchlauf beendet ist</value></data>
+  <data name="Settings_NotifyFlash" xml:space="preserve"><value>Taskleistenschaltfläche blinken lassen, wenn das Fenster im Hintergrund ist</value></data>
+  <data name="Settings_NotifySound" xml:space="preserve"><value>Einen Ton abspielen</value></data>
+</root>
