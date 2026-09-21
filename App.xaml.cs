@@ -27,6 +27,8 @@ public partial class App : Application
 
         await _host.StartAsync();
 
+        Resources["Settings"] = _host.Services.GetRequiredService<SettingsService>();
+
         var mainWindow = _host.Services.GetRequiredService<MainWindow>();
         mainWindow.Show();
 
@@ -59,7 +61,6 @@ public partial class App : Application
         services.AddSingleton<HamlibLocatorService>();
         services.AddSingleton<RigctlCommandBuilder>();
         services.AddTransient<HamlibRunnerService>();
-        services.AddTransient<AutoDetectService>();
 
         // Domain
         services.AddSingleton<ComPortService>();
@@ -73,9 +74,6 @@ public partial class App : Application
         services.AddTransient<ConnectionViewModel>();
         services.AddTransient<TestResultsViewModel>();
         services.AddTransient<RawConsoleViewModel>();
-        services.AddTransient<AutoDetectViewModel>();
-        services.AddSingleton<HelpPanelViewModel>();
-        services.AddSingleton<AboutViewModel>();
 
         // Views
         services.AddTransient<MainWindow>();

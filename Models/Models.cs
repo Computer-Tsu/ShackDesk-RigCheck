@@ -155,11 +155,35 @@ public record ComPortInfo(
     public bool HasRadioHint => RadioFamily is not null;
 }
 
-// ── Diagnostic result (referenced by TestResult) ──────────────────────────
-// Defined in DiagnosisEngine.cs — declared here for the record type reference
-// to avoid circular namespace issues. The concrete record is in Services.
-// Re-exported here so Models namespace is self-contained for consumers.
+// ── Diagnosis ─────────────────────────────────────────────────────────────
 
-// NOTE: DiagnosticResult is defined in RigCheck.Services to keep service
-// logic together. TestResult holds a nullable reference to it.
-// No re-export needed — consumers reference RigCheck.Services directly.
+/// <summary>
+/// A short help article surfaced alongside a failed test.
+/// </summary>
+public record HelpTopic(string Title, string Body);
+
+/// <summary>
+/// Plain-English explanation of a failed test: what happened, what to check,
+/// and an optional command or link that may fix it.
+/// </summary>
+public record DiagnosticResult(
+    string      Summary,
+    string[]    Checks,
+    string?     FixCommand,
+    string?     LearnMoreUrl,
+    string?     RawError    = null,
+    HelpTopic[] HelpTopics  = null!)
+{
+    public HelpTopic[] HelpTopics { get; init; } = HelpTopics ?? [];
+
+    public static readonly DiagnosticResult Ok = new(
+        Summary:    string.Empty,
+        Checks:     [],
+        FixCommand: null,
+        LearnMoreUrl: null);
+
+    public bool HasChecks     => Checks.Length > 0;
+    public bool HasFixCommand => FixCommand is not null;
+    public bool HasHelpTopics => HelpTopics.Length > 0;
+    public bool IsOk          => string.IsNullOrEmpty(Summary);
+}

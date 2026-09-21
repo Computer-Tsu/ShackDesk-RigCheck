@@ -5,6 +5,23 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
+## [Unreleased]
+
+### Added
+- CI build workflow producing the self-contained exe and its SHA-256 as an artifact
+- `app.manifest` — runs as standard user, per-monitor DPI aware
+- Placeholder application icon (to be replaced with final artwork)
+- Help topics shown alongside timeout and no-response failures
+- Main window code-behind: window position persistence, console Enter/Up/Down key handling
+- Raw console command history persists across sessions
+
+### Changed
+- `DiagnosticResult` and `HelpTopic` moved to the Models namespace
+- Zoom buttons bind to ViewModel commands instead of code-behind handlers
+
+### Removed
+- Dependency-injection registrations for services and ViewModels not yet implemented
+
 ## [0.6.0] - 2026-09-20
 
 Project structure and licensing milestone. No functional changes to the application.

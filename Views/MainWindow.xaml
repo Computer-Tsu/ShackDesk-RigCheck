@@ -38,11 +38,11 @@
                            Style="{StaticResource ChromeTitleStyle}" />
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
                     <Button Content="–" Style="{StaticResource ChromeButtonStyle}"
-                            Click="ScaleDown_Click" ToolTip="Scale down" />
+                            Command="{Binding ScaleDownCommand}" ToolTip="Scale down" />
                     <Button Content="+" Style="{StaticResource ChromeButtonStyle}"
-                            Click="ScaleUp_Click"   ToolTip="Scale up" />
+                            Command="{Binding ScaleUpCommand}"   ToolTip="Scale up" />
                     <Button Content="⊡" Style="{StaticResource ChromeButtonStyle}"
-                            Click="ScaleReset_Click" ToolTip="Reset scale" />
+                            Command="{Binding ScaleResetCommand}" ToolTip="Reset scale" />
                     <CheckBox Content="On top" IsChecked="{Binding AlwaysOnTop}"
                               Style="{StaticResource ChromeCheckStyle}" />
                 </StackPanel>
@@ -297,7 +297,7 @@
                             Command="{Binding RawConsole.ClearConsoleCommand}"
                             Style="{StaticResource SecondaryButtonStyle}" />
                     <Button DockPanel.Dock="Right" Content="Send"
-                            Command="{Binding RawConsole.SendCommandCommand}"
+                            Command="{Binding SendRawCommandCommand}"
                             Style="{StaticResource PrimaryButtonStyle}" Margin="0,0,4,0" />
                     <TextBox x:Name="ConsoleInput"
                              Text="{Binding RawConsole.InputText, UpdateSourceTrigger=PropertyChanged}"

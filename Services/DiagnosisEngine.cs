@@ -137,28 +137,3 @@ public class DiagnosisEngine
         LearnMoreUrl: BrandingInfo.IssueUrl,
         RawError: rawMessage);
 }
-
-// ── Result type ───────────────────────────────────────────────────────────
-
-public record DiagnosticResult(
-    string      Summary,
-    string[]    Checks,
-    string?     FixCommand,
-    string?     LearnMoreUrl,
-    string?     RawError    = null,
-    HelpTopic[] HelpTopics  = null!)
-{
-    // Ensure HelpTopics is never null
-    public HelpTopic[] HelpTopics { get; init; } = HelpTopics ?? [];
-
-    public static readonly DiagnosticResult Ok = new(
-        Summary:    string.Empty,
-        Checks:     [],
-        FixCommand: null,
-        LearnMoreUrl: null);
-
-    public bool HasChecks     => Checks.Length > 0;
-    public bool HasFixCommand => FixCommand is not null;
-    public bool HasHelpTopics => HelpTopics.Length > 0;
-    public bool IsOk          => string.IsNullOrEmpty(Summary);
-}

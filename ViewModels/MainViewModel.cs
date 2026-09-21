@@ -28,10 +28,14 @@ public partial class MainViewModel : ObservableObject
 
     [ObservableProperty] private bool   _isRunning;
     [ObservableProperty] private bool   _rawConsoleVisible;
+    [ObservableProperty] private bool   _chromeVisible;
     [ObservableProperty] private bool   _alwaysOnTop;
     [ObservableProperty] private double _scaleFactor = 1.0;
     [ObservableProperty] private string _statusMessage = string.Empty;
     [ObservableProperty] private string _hamlibStatus  = string.Empty;
+
+    public bool IsHamlibAvailable => _hamlib.IsAvailable;
+    public bool IsHamlibMissing   => !_hamlib.IsAvailable;
 
     // Title shown in window chrome
     public string WindowTitle =>
@@ -141,8 +145,24 @@ public partial class MainViewModel : ObservableObject
     }
 
     [RelayCommand]
+    private Task SendRawCommandAsync() =>
+        RawConsole.SendCommandCommand.ExecuteAsync(Connection.BuildConfig());
+
+    [RelayCommand]
+    private void OpenHamlibDownload() =>
+        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+        {
+            FileName        = BrandingInfo.HamlibDownloadUrl,
+            UseShellExecute = true,
+        });
+
+    [RelayCommand]
     private void ToggleRawConsole() =>
         RawConsoleVisible = !RawConsoleVisible;
+
+    [RelayCommand]
+    private void ToggleChrome() =>
+        ChromeVisible = !ChromeVisible;
 
     [RelayCommand]
     private void ScaleUp()   => ScaleFactor = Math.Min(ScaleFactor + 0.1, 2.0);
@@ -155,13 +175,16 @@ public partial class MainViewModel : ObservableObject
 
     // ── Window lifecycle ──────────────────────────────────────────────────
 
-    public void OnWindowClosing()
+    public void OnWindowClosing(double windowLeft, double windowTop)
     {
         _settings.Update(s =>
         {
             s.RawConsoleOpen = RawConsoleVisible;
             s.ScaleFactor    = ScaleFactor;
             s.AlwaysOnTop    = AlwaysOnTop;
+            s.WindowLeft     = windowLeft;
+            s.WindowTop      = windowTop;
+            s.CommandHistory = RawConsole.GetHistory();
             Connection.SaveTo(s);
         });
     }
@@ -174,6 +197,7 @@ public partial class MainViewModel : ObservableObject
         RawConsoleVisible = s.RawConsoleOpen;
         ScaleFactor       = s.ScaleFactor;
         AlwaysOnTop       = s.AlwaysOnTop;
+        RawConsole.LoadHistory(s.CommandHistory);
         Connection.LoadFrom(s);
     }
 
