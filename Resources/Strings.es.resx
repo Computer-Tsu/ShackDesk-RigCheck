@@ -338,4 +338,44 @@ Los detalles se han guardado en el registro. Si esto sigue ocurriendo, infórmel
   <data name="Status_ScanDone" xml:space="preserve"><value>Análisis completado — {0} elemento(s) requieren atención</value></data>
   <data name="Main_Scan" xml:space="preserve"><value>Analizar PC</value></data>
   <data name="Main_ScanTip" xml:space="preserve"><value>Comprueba Hamlib, controladores, rigctld y el firewall en este PC — no se necesita radio. Solo se ejecuta al hacer clic.</value></data>
+  <data name="Main_FindRadio" xml:space="preserve"><value>Buscar mi radio</value></data>
+  <data name="Main_FindRadioTip" xml:space="preserve"><value>Recorre los puertos COM marcados con consultas de solo lectura hasta que una radio responda, la verifica y rellena el panel de Conexión. Nunca activa el transmisor.</value></data>
+  <data name="Discovery_Title" xml:space="preserve"><value>Buscar mi radio</value></data>
+  <data name="Discovery_Intro" xml:space="preserve"><value>Marque los puertos que RigCheck puede abrir. Solo envía comandos de lectura (identificar, leer frecuencia) a unas pocas velocidades y se detiene en la primera radio que responde en cada puerto.</value></data>
+  <data name="Discovery_NoPorts" xml:space="preserve"><value>No se encontraron puertos COM. Conecte el cable USB o serie de la radio y vuelva a intentarlo.</value></data>
+  <data name="Discovery_Safety" xml:space="preserve"><value>RTS y DTR nunca se activan — en muchas interfaces son la línea de PTT. Los puertos que parecen un rotor, un amplificador, un GPS o un enlace Bluetooth empiezan desmarcados.</value></data>
+  <data name="Discovery_SkipReason" xml:space="preserve"><value>Parece {0} — desmarcado; márquelo solo si está seguro</value></data>
+  <data name="Discovery_Start" xml:space="preserve"><value>Iniciar</value></data>
+  <data name="DeviceClass_rotator" xml:space="preserve"><value>un controlador de rotor</value></data>
+  <data name="DeviceClass_amplifier" xml:space="preserve"><value>un amplificador</value></data>
+  <data name="DeviceClass_antenna" xml:space="preserve"><value>un controlador de antena</value></data>
+  <data name="DeviceClass_gps" xml:space="preserve"><value>un receptor GPS</value></data>
+  <data name="DeviceClass_bluetooth" xml:space="preserve"><value>un enlace Bluetooth</value></data>
+  <data name="Status_Discovering" xml:space="preserve"><value>Buscando su radio…</value></data>
+  <data name="Status_DiscoveredOne" xml:space="preserve"><value>Encontrada y verificada: {0} en {1} — panel de Conexión rellenado</value></data>
+  <data name="Status_DiscoveredMany" xml:space="preserve"><value>{0} conexiones funcionales encontradas — usando {1} en {2}</value></data>
+  <data name="Status_DiscoveredUnverified" xml:space="preserve"><value>Una radio respondió, pero las pruebas de Hamlib no pasaron — vea los resultados</value></data>
+  <data name="Status_DiscoveredNone" xml:space="preserve"><value>Ninguna radio respondió en los puertos marcados</value></data>
+  <data name="Status_DiscoveryTimeout" xml:space="preserve"><value>Buscar mi radio se detuvo — tardó demasiado</value></data>
+  <data name="Disc_Start" xml:space="preserve"><value>Recorriendo {0} puerto(s)</value></data>
+  <data name="Disc_SkippedClass" xml:space="preserve"><value>{0}: omitido — parece {1}</value></data>
+  <data name="Disc_InUse" xml:space="preserve"><value>{0}: en uso por otro programa (WSJT-X, Fldigi o rigctld ya lo tiene — esa es la vía que funciona)</value></data>
+  <data name="Disc_OpenFailed" xml:space="preserve"><value>{0}: no se pudo abrir — {1}</value></data>
+  <data name="Disc_Trying" xml:space="preserve"><value>{0} a {1} baudios — {2}</value></data>
+  <data name="Disc_NoReply" xml:space="preserve"><value>sin respuesta</value></data>
+  <data name="Disc_Garbage" xml:space="preserve"><value>llegaron bytes pero nada reconocible — probablemente la velocidad equivocada</value></data>
+  <data name="Disc_Acknowledged" xml:space="preserve"><value>una radio {0} respondió a {1} baudios pero no se identificó</value></data>
+  <data name="Disc_FrequencyReply" xml:space="preserve"><value>respuesta de frecuencia: {0} MHz{1}</value></data>
+  <data name="Disc_InBand" xml:space="preserve"><value>(dentro de una banda de aficionados)</value></data>
+  <data name="Disc_SharedId" xml:space="preserve"><value>{0} es compartido por {1} — usando {2}</value></data>
+  <data name="Disc_UnknownId" xml:space="preserve"><value>{0} aún no está en la lista de RigCheck para {1} — usando el valor por defecto de la familia; por favor infórmelo</value></data>
+  <data name="Disc_Found" xml:space="preserve"><value>Encontrada {0} (modelo Hamlib {1}) en {2} a {3} baudios</value></data>
+  <data name="Disc_FoundRigctld" xml:space="preserve"><value>rigctld ya se está ejecutando en el puerto {0} — esa es una conexión que funciona</value></data>
+  <data name="Disc_FlrigSeen" xml:space="preserve"><value>Flrig se está ejecutando en el puerto 12345 (use el modelo Hamlib 4 para conectar a través de él)</value></data>
+  <data name="Disc_NoAnswer" xml:space="preserve"><value>{0}: ninguna radio respondió</value></data>
+  <data name="Disc_Verifying" xml:space="preserve"><value>Verificando {0} en {1} a {2} baudios con rigctl</value></data>
+  <data name="Disc_Verified" xml:space="preserve"><value>{0} en {1} pasó las pruebas de Hamlib</value></data>
+  <data name="Disc_VerifyFailed" xml:space="preserve"><value>{0} en {1}: {2} prueba(s) fallaron</value></data>
+  <data name="Disc_Applied" xml:space="preserve"><value>Panel de Conexión establecido en {0} (modelo {1}), {2}, {3} baudios — Ejecutar pruebas usa estos valores ahora</value></data>
+  <data name="Export_Transcript" xml:space="preserve"><value>TRANSCRIPCIÓN DE BUSCAR MI RADIO</value></data>
 </root>

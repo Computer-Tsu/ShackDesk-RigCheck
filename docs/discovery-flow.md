@@ -205,3 +205,14 @@ damage a radio or change its state; the trade is a longer, noisier sweep
 for a better chance of a match on rare or older rigs. Off by default, and
 still query-only: the aggressive set is a larger allowlist, never a
 different kind of command.
+
+## Other devices (future)
+
+The same engine shape — inventory, classify, rank, query-only probe, verify,
+handoff — applies to the other serial devices in a shack: rotators (GS-232
+and the Yaesu/Hy-Gain/Green Heron dialects), GPS receivers (NMEA arrives
+unprompted, so the probe is listen-only), amplifiers, and logging or
+contest software links. `port_skip_patterns.json` already classifies ports
+by `DeviceClass`; a "Find my rotator" or "Find my GPS" mode would probe
+exactly the ports Find my radio refuses to touch, with its own family and
+identity tables. Not scheduled yet.

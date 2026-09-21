@@ -119,6 +119,8 @@ public partial class App : Application
         services.AddSingleton<DiagnosisEngine>();
         services.AddTransient<TestRunnerService>();
         services.AddTransient<EnvironmentCheckService>();
+        services.AddSingleton<DiscoveryDataService>();
+        services.AddTransient<DiscoveryEngine>();
         services.AddTransient<LogExportService>();
 
         // ViewModels

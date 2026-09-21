@@ -1088,4 +1088,129 @@ Continue?</value>
   <data name="Main_ScanTip" xml:space="preserve">
     <value>Check Hamlib, drivers, rigctld, and the firewall on this PC — no radio needed. Runs only when you click it.</value>
   </data>
+  <data name="Main_FindRadio" xml:space="preserve">
+    <value>Find my radio</value>
+    <comment>Button. Starts the port sweep. Keep short.</comment>
+  </data>
+  <data name="Main_FindRadioTip" xml:space="preserve">
+    <value>Sweep the COM ports you tick with read-only queries until a radio answers, then verify it and fill in the Connection panel. Never keys the transmitter.</value>
+  </data>
+  <data name="Discovery_Title" xml:space="preserve">
+    <value>Find my radio</value>
+  </data>
+  <data name="Discovery_Intro" xml:space="preserve">
+    <value>Tick the ports RigCheck may open. It sends only read commands (identify, read frequency) at a few speeds and stops on the first radio that answers on each port.</value>
+  </data>
+  <data name="Discovery_NoPorts" xml:space="preserve">
+    <value>No COM ports were found. Plug in the radio's USB or serial cable, then try again.</value>
+  </data>
+  <data name="Discovery_Safety" xml:space="preserve">
+    <value>RTS and DTR are never raised — on many interfaces they are the PTT line. Ports that look like a rotator, amplifier, GPS, or Bluetooth link start unticked.</value>
+  </data>
+  <data name="Discovery_SkipReason" xml:space="preserve">
+    <value>Looks like a {0} — unticked; tick it only if you are sure</value>
+    <comment>Placeholder {0} is a device class such as "rotator controller" (DeviceClass_* keys).</comment>
+  </data>
+  <data name="Discovery_Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="DeviceClass_rotator" xml:space="preserve">
+    <value>rotator controller</value>
+  </data>
+  <data name="DeviceClass_amplifier" xml:space="preserve">
+    <value>amplifier</value>
+  </data>
+  <data name="DeviceClass_antenna" xml:space="preserve">
+    <value>antenna controller</value>
+  </data>
+  <data name="DeviceClass_gps" xml:space="preserve">
+    <value>GPS receiver</value>
+  </data>
+  <data name="DeviceClass_bluetooth" xml:space="preserve">
+    <value>Bluetooth link</value>
+  </data>
+  <data name="Status_Discovering" xml:space="preserve">
+    <value>Looking for your radio…</value>
+  </data>
+  <data name="Status_DiscoveredOne" xml:space="preserve">
+    <value>Found and verified: {0} on {1} — Connection panel filled in</value>
+  </data>
+  <data name="Status_DiscoveredMany" xml:space="preserve">
+    <value>{0} working connections found — using {1} on {2}</value>
+  </data>
+  <data name="Status_DiscoveredUnverified" xml:space="preserve">
+    <value>A radio answered, but the Hamlib tests did not pass — see the results</value>
+  </data>
+  <data name="Status_DiscoveredNone" xml:space="preserve">
+    <value>No radio answered on the ticked ports</value>
+  </data>
+  <data name="Status_DiscoveryTimeout" xml:space="preserve">
+    <value>Find my radio stopped — it took too long</value>
+  </data>
+  <data name="Disc_Start" xml:space="preserve">
+    <value>Sweeping {0} port(s)</value>
+  </data>
+  <data name="Disc_SkippedClass" xml:space="preserve">
+    <value>{0}: skipped — looks like a {1}</value>
+  </data>
+  <data name="Disc_InUse" xml:space="preserve">
+    <value>{0}: in use by another program (WSJT-X, Fldigi, or rigctld already has it — that is the working path)</value>
+  </data>
+  <data name="Disc_OpenFailed" xml:space="preserve">
+    <value>{0}: could not open — {1}</value>
+  </data>
+  <data name="Disc_Trying" xml:space="preserve">
+    <value>{0} at {1} baud — {2}</value>
+    <comment>Placeholders: {0} port name, {1} baud rate, {2} protocol family name.</comment>
+  </data>
+  <data name="Disc_NoReply" xml:space="preserve">
+    <value>no reply</value>
+  </data>
+  <data name="Disc_Garbage" xml:space="preserve">
+    <value>bytes came back but nothing recognisable — probably the wrong speed</value>
+  </data>
+  <data name="Disc_Acknowledged" xml:space="preserve">
+    <value>a {0} rig answered at {1} baud but did not name itself</value>
+  </data>
+  <data name="Disc_FrequencyReply" xml:space="preserve">
+    <value>frequency reply: {0} MHz{1}</value>
+  </data>
+  <data name="Disc_InBand" xml:space="preserve">
+    <value>(inside an amateur band)</value>
+    <comment>Suffix appended to the frequency reply line, e.g. "14.074 MHz (inside an amateur band)".</comment>
+  </data>
+  <data name="Disc_SharedId" xml:space="preserve">
+    <value>{0} is shared by {1} — using {2}</value>
+  </data>
+  <data name="Disc_UnknownId" xml:space="preserve">
+    <value>{0} is not in RigCheck's list yet for {1} — using the family default; please report it</value>
+  </data>
+  <data name="Disc_Found" xml:space="preserve">
+    <value>Found {0} (Hamlib model {1}) on {2} at {3} baud</value>
+    <comment>Placeholders: {0} radio name, {1} Hamlib model number, {2} port, {3} baud.</comment>
+  </data>
+  <data name="Disc_FoundRigctld" xml:space="preserve">
+    <value>rigctld is already running on port {0} — that is a working connection</value>
+  </data>
+  <data name="Disc_FlrigSeen" xml:space="preserve">
+    <value>Flrig is running on port 12345 (use Hamlib model 4 to connect through it)</value>
+  </data>
+  <data name="Disc_NoAnswer" xml:space="preserve">
+    <value>{0}: no radio answered</value>
+  </data>
+  <data name="Disc_Verifying" xml:space="preserve">
+    <value>Verifying {0} on {1} at {2} baud with rigctl</value>
+  </data>
+  <data name="Disc_Verified" xml:space="preserve">
+    <value>{0} on {1} passed the Hamlib tests</value>
+  </data>
+  <data name="Disc_VerifyFailed" xml:space="preserve">
+    <value>{0} on {1}: {2} test(s) failed</value>
+  </data>
+  <data name="Disc_Applied" xml:space="preserve">
+    <value>Connection panel set to {0} (model {1}), {2}, {3} baud — Run Tests uses these now</value>
+  </data>
+  <data name="Export_Transcript" xml:space="preserve">
+    <value>FIND MY RADIO TRANSCRIPT</value>
+  </data>
 </root>

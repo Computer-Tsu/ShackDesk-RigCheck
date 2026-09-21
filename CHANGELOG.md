@@ -5,6 +5,30 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
+## [0.6.8] - 2026-09-21
+
+Find my radio — the second half of the 0.7.0 milestone, first cut.
+
+### Added
+- **Find my radio** button: tick the COM ports it may open, and it sweeps each with read-only
+  identify and read-frequency queries (Kenwood/Elecraft/Yaesu `ID;`, Icom CI-V, Yaesu 5-byte)
+  across the likely baud rates, stops on the first radio that answers, verifies it with the
+  normal Hamlib test suite, and fills in the Connection panel. rigctld already listening is
+  reported as a working connection; Flrig is noted
+- Every byte sent and received is shown in the results panel with a Copy button, and goes into
+  Copy Results and Export Log under a "Find my radio transcript" heading, so the exchange can be
+  replayed in a terminal program
+- Data files anyone can extend by pull request: `rig_families.json` (which built-in query and
+  which baud rates per protocol family), `rig_ids.json` (how each radio names itself → Hamlib
+  model), `port_skip_patterns.json` (ports classed as rotator, amplifier, GPS, or Bluetooth start
+  unticked). Data files choose a query by name; they can never contain command bytes
+- Design document: `docs/discovery-flow.md` (with the diagram) and `docs/discovery-flow.drawio`
+- Telemetry event `discovery` (ports swept, families/models/bauds that answered, verified count)
+
+### Safety
+- RTS and DTR are never asserted during discovery — on many interfaces they are the PTT line
+- The sweep only runs from the button, only on ticked ports, and sends read commands only
+
 ## [0.6.7] - 2026-09-21
 
 First half of the 0.7.0 milestone: the PC-side checks.

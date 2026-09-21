@@ -24,23 +24,6 @@ namespace RigCheck.Views;
 // Colors are resource references (not captured brushes) so a theme swap
 // re-colors the document without rebuilding it.
 
-/// <summary>Kind of a transcript line; decides its color and prefix.</summary>
-public enum TranscriptKind
-{
-    /// <summary>A rigctl / Hamlib command line as it would be typed.</summary>
-    Command,
-    /// <summary>Bytes written to the serial port (shown as hex + ASCII).</summary>
-    SerialTx,
-    /// <summary>Bytes read back from the serial port.</summary>
-    SerialRx,
-    /// <summary>A reply from rigctl / the radio, already decoded.</summary>
-    Response,
-    /// <summary>Progress line while probing ("Trying COM3 at 9600…").</summary>
-    Trying,
-    /// <summary>Anything else worth showing in muted text.</summary>
-    Note,
-}
-
 /// <summary>Builds and owns the FlowDocument shown in the results panel.</summary>
 public sealed class ResultsDocumentBuilder
 {
@@ -67,12 +50,22 @@ public sealed class ResultsDocumentBuilder
 
     // ── Test results ─────────────────────────────────────────────────────
 
-    /// <summary>Replace the whole document with the given results, in order.</summary>
-    public void Rebuild(IEnumerable<TestResultItemViewModel> items)
+    /// <summary>
+    /// Replace the whole document with the results panel's items, in order.
+    /// Items are TestResultItemViewModel or TranscriptLine; anything else
+    /// is ignored.
+    /// </summary>
+    public void Rebuild(IEnumerable<object> items)
     {
         Document.Blocks.Clear();
         foreach (var item in items)
-            Document.Blocks.Add(BuildResultSection(item));
+        {
+            switch (item)
+            {
+                case TestResultItemViewModel result: Document.Blocks.Add(BuildResultSection(result)); break;
+                case TranscriptLine line:            Document.Blocks.Add(TranscriptParagraph(line)); break;
+            }
+        }
     }
 
     private static Section BuildResultSection(TestResultItemViewModel item)
@@ -168,36 +161,33 @@ public sealed class ResultsDocumentBuilder
 
     // ── Transcript lines (discovery engine) ───────────────────────────────
 
-    /// <summary>
-    /// Append one transcript line. Command and serial lines get a Copy
-    /// button so they can be pasted into a terminal unchanged.
-    /// </summary>
-    public void AddTranscriptLine(TranscriptKind kind, string text)
+    // One line of a discovery run. Command and serial lines are monospace
+    // with a Copy button so they can be pasted into a terminal unchanged.
+    private static Paragraph TranscriptParagraph(TranscriptLine line)
     {
-        var (prefix, brushKey, mono, italic) = kind switch
+        var (prefix, brushKey, mono, italic, bold) = line.Kind switch
         {
-            TranscriptKind.Command  => ("$ ", "BrushAccent", true,  false),
-            TranscriptKind.SerialTx => ("→ ", "BrushAccent", true,  false),
-            TranscriptKind.SerialRx => ("← ", "BrushPass",   true,  false),
-            TranscriptKind.Response => ("  ", "BrushPass",   true,  false),
-            TranscriptKind.Trying   => ("  ", "BrushMuted",  false, true),
-            _                       => ("  ", "BrushMuted",  false, false),
+            TranscriptKind.Command  => ("$ ", "BrushAccent", true,  false, false),
+            TranscriptKind.SerialTx => ("→ ", "BrushAccent", true,  false, false),
+            TranscriptKind.SerialRx => ("← ", "BrushPass",   true,  false, false),
+            TranscriptKind.Response => ("  ", "BrushPass",   true,  false, false),
+            TranscriptKind.Found    => ("✓ ", "BrushPass",   false, false, true),
+            TranscriptKind.Trying   => ("  ", "BrushMuted",  false, true,  false),
+            _                       => ("  ", "BrushMuted",  false, false, false),
         };
 
         var p = new Paragraph { Margin = new Thickness(8, 1, 8, 1) };
-        var run = new Run(prefix + text);
+        var run = new Run(prefix + line.Text);
         if (mono)   { run.FontFamily = new FontFamily(MonoFont); run.FontSize = 12; }
-        if (italic) run.FontStyle = FontStyles.Italic;
+        if (italic) run.FontStyle  = FontStyles.Italic;
+        if (bold)   run.FontWeight = FontWeights.SemiBold;
         p.Inlines.Add(Colored(run, brushKey));
 
         if (mono)
-            p.Inlines.Add(CopyButton(text));
+            p.Inlines.Add(CopyButton(line.Text));
 
-        Document.Blocks.Add(p);
+        return p;
     }
-
-    /// <summary>Remove everything (used when a new run or scan starts).</summary>
-    public void Clear() => Document.Blocks.Clear();
 
     // ── Helpers ───────────────────────────────────────────────────────────
 

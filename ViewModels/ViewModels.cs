@@ -160,6 +160,34 @@ public partial class ConnectionViewModel : ObservableObject
         PttMethod = preset.PttMethod;
     }
 
+    /// <summary>
+    /// Fill the panel from a rig Find my radio verified, so Run Tests and
+    /// the exported log use exactly what worked. Serial parameters other
+    /// than baud stay "Radio default" — the probe used 8N1 and Hamlib knows
+    /// the rest; the stop bits the operator should enter in WSJT-X are in
+    /// the handoff text, not forced here.
+    /// </summary>
+    public void ApplyDiscovered(DiscoveredRig rig)
+    {
+        if (rig.UseRigctld)
+        {
+            UseRigctld = true;
+            var parts = rig.Port.Split(':');
+            RigctldHost = parts[0];
+            if (parts.Length > 1 && int.TryParse(parts[1], out var p)) RigctldPort = p;
+            return;
+        }
+
+        UseRigctld = false;
+        // Preset first: selecting one applies its defaults, and the values
+        // that were actually verified must win over them.
+        SelectedPreset = AvailablePresets.FirstOrDefault(x => x.HamlibModelId == rig.HamlibModelId);
+        ModelId      = rig.HamlibModelId;
+        ModelName    = rig.ModelName;
+        BaudRate     = rig.Baud;
+        SelectedPort = AvailablePorts.FirstOrDefault(x => x.PortName == rig.Port);
+    }
+
     public ConnectionConfig BuildConfig() => new()
     {
         ModelId        = ModelId,
@@ -240,7 +268,15 @@ public record Choice(string Value, string Label)
 /// </summary>
 public partial class TestResultsViewModel : ObservableObject
 {
-    public ObservableCollection<TestResultItemViewModel> Items { get; } = [];
+    /// <summary>
+    /// What the results panel shows, in order: TestResultItemViewModel for
+    /// test results and TranscriptLine for the free-form lines of a
+    /// discovery run. Mixed on purpose so a run reads as it happened.
+    /// </summary>
+    public ObservableCollection<object> Items { get; } = [];
+
+    /// <summary>The transcript lines only, for the exported log.</summary>
+    public IReadOnlyList<TranscriptLine> Transcript => Items.OfType<TranscriptLine>().ToList();
 
     [ObservableProperty] private string _summaryText = string.Empty;
     [ObservableProperty] private bool   _hasResults;
@@ -265,24 +301,33 @@ public partial class TestResultsViewModel : ObservableObject
 
     public void AddResult(TestResult result)
     {
-        // Replace the pending placeholder for this test
-        var existing = Items.FirstOrDefault(i => i.TestId == result.Id);
-        if (existing is not null)
-        {
-            var idx = Items.IndexOf(existing);
-            Items[idx] = new TestResultItemViewModel(result);
-        }
+        // Replace this test's pending placeholder if there is one; otherwise
+        // append. Discovery verifies several rigs in one run, so a result
+        // for a test that already has a real result is a new row, not a
+        // replacement.
+        var pending = Items.OfType<TestResultItemViewModel>()
+                           .FirstOrDefault(i => i.TestId == result.Id && i.Status == TestStatus.Pending);
+        if (pending is not null)
+            Items[Items.IndexOf(pending)] = new TestResultItemViewModel(result);
         else
-        {
             Items.Add(new TestResultItemViewModel(result));
-        }
 
+        HasResults = true;
+    }
+
+    /// <summary>Append a transcript line (discovery progress, bytes sent and received).</summary>
+    public void AddTranscript(TranscriptKind kind, string text)
+    {
+        Items.Add(new TranscriptLine(kind, text));
         HasResults = true;
     }
 
     public void SetSuiteResult(TestSuiteResult suite)
     {
         SuiteResult = suite;
+        // A discovery run that verified nothing still has a transcript worth
+        // copying, so it gets an empty suite — but no "all 0 passed" banner.
+        if (suite.Results.Count == 0) { SummaryText = string.Empty; return; }
         SummaryText = suite.AllPassed
             ? Strings.Format("Summary_AllPassed", suite.PassCount)
             : Strings.Format("Summary_Mixed", suite.FailCount, suite.PassCount, suite.WarningCount);

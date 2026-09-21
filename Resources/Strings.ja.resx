@@ -338,4 +338,44 @@
   <data name="Status_ScanDone" xml:space="preserve"><value>スキャン完了 — 要確認の項目: {0} 件</value></data>
   <data name="Main_Scan" xml:space="preserve"><value>PC をスキャン</value></data>
   <data name="Main_ScanTip" xml:space="preserve"><value>この PC の Hamlib、ドライバー、rigctld、ファイアウォールを確認します — 無線機は不要です。クリックしたときだけ実行されます。</value></data>
+  <data name="Main_FindRadio" xml:space="preserve"><value>無線機を探す</value></data>
+  <data name="Main_FindRadioTip" xml:space="preserve"><value>チェックした COM ポートを読み取り専用の問い合わせで走査し、無線機が応答したら検証して「接続」パネルに設定を入れます。送信機を送信状態にすることはありません。</value></data>
+  <data name="Discovery_Title" xml:space="preserve"><value>無線機を探す</value></data>
+  <data name="Discovery_Intro" xml:space="preserve"><value>RigCheck が開いてよいポートにチェックを入れてください。送るのは読み取りコマンド（識別、周波数の読み取り）だけで、数種類の速度を試し、各ポートで最初に応答した無線機で止まります。</value></data>
+  <data name="Discovery_NoPorts" xml:space="preserve"><value>COM ポートが見つかりません。無線機の USB または シリアルケーブルを接続して、もう一度お試しください。</value></data>
+  <data name="Discovery_Safety" xml:space="preserve"><value>RTS と DTR は決して有効にしません — 多くのインターフェースではこれが PTT の線だからです。ローテーター、アンプ、GPS、Bluetooth に見えるポートは最初はチェックが外れています。</value></data>
+  <data name="Discovery_SkipReason" xml:space="preserve"><value>{0}のようです — チェック解除中。確実な場合だけチェックしてください</value></data>
+  <data name="Discovery_Start" xml:space="preserve"><value>開始</value></data>
+  <data name="DeviceClass_rotator" xml:space="preserve"><value>ローテーターコントローラー</value></data>
+  <data name="DeviceClass_amplifier" xml:space="preserve"><value>アンプ</value></data>
+  <data name="DeviceClass_antenna" xml:space="preserve"><value>アンテナコントローラー</value></data>
+  <data name="DeviceClass_gps" xml:space="preserve"><value>GPS 受信機</value></data>
+  <data name="DeviceClass_bluetooth" xml:space="preserve"><value>Bluetooth 接続</value></data>
+  <data name="Status_Discovering" xml:space="preserve"><value>無線機を探しています…</value></data>
+  <data name="Status_DiscoveredOne" xml:space="preserve"><value>発見・検証済み: {1} の {0} — 「接続」パネルに設定しました</value></data>
+  <data name="Status_DiscoveredMany" xml:space="preserve"><value>動作する接続が {0} 件見つかりました — {2} の {1} を使用します</value></data>
+  <data name="Status_DiscoveredUnverified" xml:space="preserve"><value>無線機は応答しましたが、Hamlib のテストに合格しませんでした — 結果をご覧ください</value></data>
+  <data name="Status_DiscoveredNone" xml:space="preserve"><value>チェックしたポートでは無線機が応答しませんでした</value></data>
+  <data name="Status_DiscoveryTimeout" xml:space="preserve"><value>無線機の検索を中止しました — 時間がかかりすぎました</value></data>
+  <data name="Disc_Start" xml:space="preserve"><value>{0} 個のポートを走査中</value></data>
+  <data name="Disc_SkippedClass" xml:space="preserve"><value>{0}: スキップ — {1}のようです</value></data>
+  <data name="Disc_InUse" xml:space="preserve"><value>{0}: 他のプログラムが使用中です（WSJT-X、Fldigi、rigctld がすでに使っています — それが動作している経路です）</value></data>
+  <data name="Disc_OpenFailed" xml:space="preserve"><value>{0}: 開けませんでした — {1}</value></data>
+  <data name="Disc_Trying" xml:space="preserve"><value>{0}、{1} ボー — {2}</value></data>
+  <data name="Disc_NoReply" xml:space="preserve"><value>応答なし</value></data>
+  <data name="Disc_Garbage" xml:space="preserve"><value>バイトは返ってきましたが認識できません — おそらく速度が違います</value></data>
+  <data name="Disc_Acknowledged" xml:space="preserve"><value>{0} の無線機が {1} ボーで応答しましたが、機種名は返しませんでした</value></data>
+  <data name="Disc_FrequencyReply" xml:space="preserve"><value>周波数の応答: {0} MHz{1}</value></data>
+  <data name="Disc_InBand" xml:space="preserve"><value>（アマチュアバンド内）</value></data>
+  <data name="Disc_SharedId" xml:space="preserve"><value>{0} は {1} で共通です — {2} を使用します</value></data>
+  <data name="Disc_UnknownId" xml:space="preserve"><value>{0} は {1} の RigCheck の一覧にまだありません — ファミリーの既定値を使用します。報告をお願いします</value></data>
+  <data name="Disc_Found" xml:space="preserve"><value>{2} の {3} ボーで {0}（Hamlib モデル {1}）を発見</value></data>
+  <data name="Disc_FoundRigctld" xml:space="preserve"><value>rigctld がすでにポート {0} で動作しています — これは動作する接続です</value></data>
+  <data name="Disc_FlrigSeen" xml:space="preserve"><value>Flrig がポート 12345 で動作しています（経由するには Hamlib モデル 4 を使用）</value></data>
+  <data name="Disc_NoAnswer" xml:space="preserve"><value>{0}: 無線機の応答なし</value></data>
+  <data name="Disc_Verifying" xml:space="preserve"><value>rigctl で {1} の {0}（{2} ボー）を検証中</value></data>
+  <data name="Disc_Verified" xml:space="preserve"><value>{1} の {0} は Hamlib のテストに合格しました</value></data>
+  <data name="Disc_VerifyFailed" xml:space="preserve"><value>{1} の {0}: {2} 件のテストが失敗</value></data>
+  <data name="Disc_Applied" xml:space="preserve"><value>「接続」パネルを {0}（モデル {1}）、{2}、{3} ボーに設定しました — 「テストを実行」はこの設定を使います</value></data>
+  <data name="Export_Transcript" xml:space="preserve"><value>「無線機を探す」の記録</value></data>
 </root>

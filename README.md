@@ -176,6 +176,32 @@ Everything is read-only. RigCheck never changes PATH, firewall rules, drivers, o
 entries — it shows the command or the setting and leaves the change to you. The scan runs only
 when you click it; nothing enumerates processes or ports at startup.
 
+### Find my radio
+When the operator does not know the port, the speed, or even which Hamlib
+model to pick, **Find my radio** works it out:
+
+1. The operator ticks the COM ports RigCheck may open (ports that look like a rotator,
+   amplifier, GPS, or Bluetooth link start unticked).
+2. Each port is swept with read-only queries — `ID;` for Kenwood, Elecraft, and Yaesu CAT
+   rigs, CI-V read-ID and read-frequency for Icom, the five-byte read-frequency for the
+   FT-817 family — at the baud rates that family is likely to use, most likely first. The
+   radio already chosen in the Connection panel and the cable's USB chip move their family
+   to the front of the queue.
+3. A rig that names itself is looked up in `Assets/rig_ids.json`. One that only reports a
+   frequency inside an amateur band is taken as its family's most likely model.
+4. Every find is verified with the same Hamlib test suite as **Run Tests**, and the best
+   verified one is written into the Connection panel.
+5. A rigctld already listening on 4532 is reported as a working connection; Flrig on 12345
+   is noted.
+
+Everything sent and received is shown in the results panel, with a Copy button per line, and
+goes into the exported log so the exchange can be replayed with a terminal program.
+
+Safety rules that do not have a setting: RTS and DTR are never asserted (on many interfaces they
+are PTT); only read commands are ever sent; the sweep runs only from the button and only on
+ticked ports. The data files (`rig_families.json`, `rig_ids.json`, `port_skip_patterns.json`)
+choose a built-in query by name and cannot contain command bytes. Design: `docs/discovery-flow.md`.
+
 ### Diagnostic Test Suite
 Run a sequence of standard Hamlib queries and 
 display pass/fail results in plain English:

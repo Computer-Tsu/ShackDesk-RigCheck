@@ -338,4 +338,44 @@ Continuer ?</value></data>
   <data name="Status_ScanDone" xml:space="preserve"><value>Analyse terminée — {0} élément(s) demandent votre attention</value></data>
   <data name="Main_Scan" xml:space="preserve"><value>Analyser le PC</value></data>
   <data name="Main_ScanTip" xml:space="preserve"><value>Vérifie Hamlib, les pilotes, rigctld et le pare-feu sur ce PC — aucune radio nécessaire. Ne s'exécute que lorsque vous cliquez.</value></data>
+  <data name="Main_FindRadio" xml:space="preserve"><value>Trouver ma radio</value></data>
+  <data name="Main_FindRadioTip" xml:space="preserve"><value>Balaie les ports COM cochés avec des requêtes en lecture seule jusqu'à ce qu'une radio réponde, la vérifie et remplit le panneau Connexion. N'active jamais l'émetteur.</value></data>
+  <data name="Discovery_Title" xml:space="preserve"><value>Trouver ma radio</value></data>
+  <data name="Discovery_Intro" xml:space="preserve"><value>Cochez les ports que RigCheck peut ouvrir. Il n'envoie que des commandes de lecture (identification, lecture de fréquence) à quelques vitesses et s'arrête à la première radio qui répond sur chaque port.</value></data>
+  <data name="Discovery_NoPorts" xml:space="preserve"><value>Aucun port COM trouvé. Branchez le câble USB ou série de la radio, puis réessayez.</value></data>
+  <data name="Discovery_Safety" xml:space="preserve"><value>RTS et DTR ne sont jamais activés — sur beaucoup d'interfaces, c'est la ligne PTT. Les ports qui ressemblent à un rotor, un amplificateur, un GPS ou une liaison Bluetooth sont décochés au départ.</value></data>
+  <data name="Discovery_SkipReason" xml:space="preserve"><value>Ressemble à {0} — décoché ; ne le cochez que si vous êtes sûr</value></data>
+  <data name="Discovery_Start" xml:space="preserve"><value>Démarrer</value></data>
+  <data name="DeviceClass_rotator" xml:space="preserve"><value>un contrôleur de rotor</value></data>
+  <data name="DeviceClass_amplifier" xml:space="preserve"><value>un amplificateur</value></data>
+  <data name="DeviceClass_antenna" xml:space="preserve"><value>un contrôleur d'antenne</value></data>
+  <data name="DeviceClass_gps" xml:space="preserve"><value>un récepteur GPS</value></data>
+  <data name="DeviceClass_bluetooth" xml:space="preserve"><value>une liaison Bluetooth</value></data>
+  <data name="Status_Discovering" xml:space="preserve"><value>Recherche de votre radio…</value></data>
+  <data name="Status_DiscoveredOne" xml:space="preserve"><value>Trouvée et vérifiée : {0} sur {1} — panneau Connexion rempli</value></data>
+  <data name="Status_DiscoveredMany" xml:space="preserve"><value>{0} connexions fonctionnelles trouvées — utilisation de {1} sur {2}</value></data>
+  <data name="Status_DiscoveredUnverified" xml:space="preserve"><value>Une radio a répondu, mais les tests Hamlib n'ont pas réussi — voir les résultats</value></data>
+  <data name="Status_DiscoveredNone" xml:space="preserve"><value>Aucune radio n'a répondu sur les ports cochés</value></data>
+  <data name="Status_DiscoveryTimeout" xml:space="preserve"><value>Trouver ma radio s'est arrêté — cela a pris trop de temps</value></data>
+  <data name="Disc_Start" xml:space="preserve"><value>Balayage de {0} port(s)</value></data>
+  <data name="Disc_SkippedClass" xml:space="preserve"><value>{0} : ignoré — ressemble à {1}</value></data>
+  <data name="Disc_InUse" xml:space="preserve"><value>{0} : utilisé par un autre programme (WSJT-X, Fldigi ou rigctld l'a déjà — c'est la voie qui fonctionne)</value></data>
+  <data name="Disc_OpenFailed" xml:space="preserve"><value>{0} : impossible à ouvrir — {1}</value></data>
+  <data name="Disc_Trying" xml:space="preserve"><value>{0} à {1} bauds — {2}</value></data>
+  <data name="Disc_NoReply" xml:space="preserve"><value>pas de réponse</value></data>
+  <data name="Disc_Garbage" xml:space="preserve"><value>des octets sont revenus mais rien de reconnaissable — probablement la mauvaise vitesse</value></data>
+  <data name="Disc_Acknowledged" xml:space="preserve"><value>une radio {0} a répondu à {1} bauds mais ne s'est pas identifiée</value></data>
+  <data name="Disc_FrequencyReply" xml:space="preserve"><value>réponse de fréquence : {0} MHz{1}</value></data>
+  <data name="Disc_InBand" xml:space="preserve"><value>(dans une bande amateur)</value></data>
+  <data name="Disc_SharedId" xml:space="preserve"><value>{0} est partagé par {1} — utilisation de {2}</value></data>
+  <data name="Disc_UnknownId" xml:space="preserve"><value>{0} n'est pas encore dans la liste de RigCheck pour {1} — utilisation de la valeur par défaut de la famille ; merci de le signaler</value></data>
+  <data name="Disc_Found" xml:space="preserve"><value>{0} (modèle Hamlib {1}) trouvée sur {2} à {3} bauds</value></data>
+  <data name="Disc_FoundRigctld" xml:space="preserve"><value>rigctld tourne déjà sur le port {0} — c'est une connexion qui fonctionne</value></data>
+  <data name="Disc_FlrigSeen" xml:space="preserve"><value>Flrig tourne sur le port 12345 (utilisez le modèle Hamlib 4 pour passer par lui)</value></data>
+  <data name="Disc_NoAnswer" xml:space="preserve"><value>{0} : aucune radio n'a répondu</value></data>
+  <data name="Disc_Verifying" xml:space="preserve"><value>Vérification de {0} sur {1} à {2} bauds avec rigctl</value></data>
+  <data name="Disc_Verified" xml:space="preserve"><value>{0} sur {1} a réussi les tests Hamlib</value></data>
+  <data name="Disc_VerifyFailed" xml:space="preserve"><value>{0} sur {1} : {2} test(s) échoué(s)</value></data>
+  <data name="Disc_Applied" xml:space="preserve"><value>Panneau Connexion réglé sur {0} (modèle {1}), {2}, {3} bauds — Lancer les tests utilise ces réglages maintenant</value></data>
+  <data name="Export_Transcript" xml:space="preserve"><value>TRANSCRIPTION DE TROUVER MA RADIO</value></data>
 </root>

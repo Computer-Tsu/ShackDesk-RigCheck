@@ -338,4 +338,44 @@ Fortfahren?</value></data>
   <data name="Status_ScanDone" xml:space="preserve"><value>Prüfung abgeschlossen — {0} Punkt(e) brauchen Aufmerksamkeit</value></data>
   <data name="Main_Scan" xml:space="preserve"><value>PC prüfen</value></data>
   <data name="Main_ScanTip" xml:space="preserve"><value>Hamlib, Treiber, rigctld und die Firewall auf diesem PC prüfen — kein Funkgerät nötig. Läuft nur, wenn Sie darauf klicken.</value></data>
+  <data name="Main_FindRadio" xml:space="preserve"><value>Mein Funkgerät finden</value></data>
+  <data name="Main_FindRadioTip" xml:space="preserve"><value>Durchsucht die angehakten COM-Schnittstellen mit reinen Leseabfragen, bis ein Funkgerät antwortet, prüft es und füllt die Verbindungseinstellungen aus. Tastet nie den Sender.</value></data>
+  <data name="Discovery_Title" xml:space="preserve"><value>Mein Funkgerät finden</value></data>
+  <data name="Discovery_Intro" xml:space="preserve"><value>Haken Sie die Schnittstellen an, die RigCheck öffnen darf. Es sendet nur Lesebefehle (Identifizieren, Frequenz lesen) mit einigen Geschwindigkeiten und hört pro Schnittstelle beim ersten antwortenden Funkgerät auf.</value></data>
+  <data name="Discovery_NoPorts" xml:space="preserve"><value>Keine COM-Schnittstellen gefunden. Stecken Sie das USB- oder serielle Kabel des Funkgeräts ein und versuchen Sie es erneut.</value></data>
+  <data name="Discovery_Safety" xml:space="preserve"><value>RTS und DTR werden nie gesetzt — bei vielen Interfaces sind sie die PTT-Leitung. Schnittstellen, die nach Rotor, Endstufe, GPS oder Bluetooth aussehen, sind zunächst nicht angehakt.</value></data>
+  <data name="Discovery_SkipReason" xml:space="preserve"><value>Sieht aus wie {0} — nicht angehakt; nur anhaken, wenn Sie sicher sind</value></data>
+  <data name="Discovery_Start" xml:space="preserve"><value>Starten</value></data>
+  <data name="DeviceClass_rotator" xml:space="preserve"><value>eine Rotorsteuerung</value></data>
+  <data name="DeviceClass_amplifier" xml:space="preserve"><value>eine Endstufe</value></data>
+  <data name="DeviceClass_antenna" xml:space="preserve"><value>eine Antennensteuerung</value></data>
+  <data name="DeviceClass_gps" xml:space="preserve"><value>ein GPS-Empfänger</value></data>
+  <data name="DeviceClass_bluetooth" xml:space="preserve"><value>eine Bluetooth-Verbindung</value></data>
+  <data name="Status_Discovering" xml:space="preserve"><value>Suche nach Ihrem Funkgerät…</value></data>
+  <data name="Status_DiscoveredOne" xml:space="preserve"><value>Gefunden und geprüft: {0} an {1} — Verbindungseinstellungen ausgefüllt</value></data>
+  <data name="Status_DiscoveredMany" xml:space="preserve"><value>{0} funktionierende Verbindungen gefunden — verwendet {1} an {2}</value></data>
+  <data name="Status_DiscoveredUnverified" xml:space="preserve"><value>Ein Funkgerät hat geantwortet, aber die Hamlib-Tests sind nicht bestanden — siehe Ergebnisse</value></data>
+  <data name="Status_DiscoveredNone" xml:space="preserve"><value>An den angehakten Schnittstellen hat kein Funkgerät geantwortet</value></data>
+  <data name="Status_DiscoveryTimeout" xml:space="preserve"><value>Suche abgebrochen — sie hat zu lange gedauert</value></data>
+  <data name="Disc_Start" xml:space="preserve"><value>Durchsuche {0} Schnittstelle(n)</value></data>
+  <data name="Disc_SkippedClass" xml:space="preserve"><value>{0}: übersprungen — sieht aus wie {1}</value></data>
+  <data name="Disc_InUse" xml:space="preserve"><value>{0}: von einem anderen Programm belegt (WSJT-X, Fldigi oder rigctld hat sie bereits — das ist der funktionierende Weg)</value></data>
+  <data name="Disc_OpenFailed" xml:space="preserve"><value>{0}: konnte nicht geöffnet werden — {1}</value></data>
+  <data name="Disc_Trying" xml:space="preserve"><value>{0} mit {1} Baud — {2}</value></data>
+  <data name="Disc_NoReply" xml:space="preserve"><value>keine Antwort</value></data>
+  <data name="Disc_Garbage" xml:space="preserve"><value>es kamen Bytes zurück, aber nichts Erkennbares — vermutlich die falsche Geschwindigkeit</value></data>
+  <data name="Disc_Acknowledged" xml:space="preserve"><value>ein {0}-Gerät hat mit {1} Baud geantwortet, sich aber nicht identifiziert</value></data>
+  <data name="Disc_FrequencyReply" xml:space="preserve"><value>Frequenzantwort: {0} MHz{1}</value></data>
+  <data name="Disc_InBand" xml:space="preserve"><value>(innerhalb eines Amateurfunkbands)</value></data>
+  <data name="Disc_SharedId" xml:space="preserve"><value>{0} wird von {1} geteilt — verwendet {2}</value></data>
+  <data name="Disc_UnknownId" xml:space="preserve"><value>{0} steht für {1} noch nicht in der Liste von RigCheck — verwendet die Familienvorgabe; bitte melden</value></data>
+  <data name="Disc_Found" xml:space="preserve"><value>{0} (Hamlib-Modell {1}) an {2} mit {3} Baud gefunden</value></data>
+  <data name="Disc_FoundRigctld" xml:space="preserve"><value>rigctld läuft bereits auf Port {0} — das ist eine funktionierende Verbindung</value></data>
+  <data name="Disc_FlrigSeen" xml:space="preserve"><value>Flrig läuft auf Port 12345 (Hamlib-Modell 4 verbindet darüber)</value></data>
+  <data name="Disc_NoAnswer" xml:space="preserve"><value>{0}: kein Funkgerät hat geantwortet</value></data>
+  <data name="Disc_Verifying" xml:space="preserve"><value>Prüfe {0} an {1} mit {2} Baud über rigctl</value></data>
+  <data name="Disc_Verified" xml:space="preserve"><value>{0} an {1} hat die Hamlib-Tests bestanden</value></data>
+  <data name="Disc_VerifyFailed" xml:space="preserve"><value>{0} an {1}: {2} Test(s) fehlgeschlagen</value></data>
+  <data name="Disc_Applied" xml:space="preserve"><value>Verbindungseinstellungen auf {0} (Modell {1}), {2}, {3} Baud gesetzt — Tests ausführen verwendet diese jetzt</value></data>
+  <data name="Export_Transcript" xml:space="preserve"><value>PROTOKOLL „MEIN FUNKGERÄT FINDEN“</value></data>
 </root>

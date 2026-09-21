@@ -20,11 +20,12 @@ public class LogExportService
     /// Write a test suite result to a file chosen by the user.
     /// Returns the path written, or null on failure.
     /// </summary>
-    public async Task<string?> ExportAsync(TestSuiteResult suite, string outputPath)
+    public async Task<string?> ExportAsync(TestSuiteResult suite, string outputPath,
+                                           IReadOnlyList<TranscriptLine>? transcript = null)
     {
         try
         {
-            var text = BuildReport(suite);
+            var text = BuildReport(suite, transcript);
             await File.WriteAllTextAsync(outputPath, text, Encoding.UTF8);
             Log.Information("Log exported to {Path}", outputPath);
             return outputPath;
@@ -37,9 +38,11 @@ public class LogExportService
     }
 
     /// <summary>
-    /// Build the report as a string (also used for clipboard copy).
+    /// Build the report as a string (also used for clipboard copy). The
+    /// transcript, when given, is the Find my radio sweep — every byte sent
+    /// and received — so a helper can replay it with a terminal program.
     /// </summary>
-    public string BuildReport(TestSuiteResult suite)
+    public string BuildReport(TestSuiteResult suite, IReadOnlyList<TranscriptLine>? transcript = null)
     {
         var sb = new StringBuilder();
         var cfg = suite.Config;
@@ -84,6 +87,30 @@ public class LogExportService
 
         sb.AppendLine(Row(Strings.Get("Export_Radio"), Strings.Format("Export_HamlibId", cfg.RadioModelName, cfg.ModelId)));
         sb.AppendLine();
+
+        // ── Discovery transcript ──────────────────────────────────────────
+        // Prefixes mirror the results panel: "$" a command, ">" bytes sent,
+        // "<" bytes received, "*" something found.
+        if (transcript is { Count: > 0 })
+        {
+            sb.AppendLine("----------------------------------------------------------");
+            sb.AppendLine(Strings.Get("Export_Transcript"));
+            sb.AppendLine("----------------------------------------------------------");
+            sb.AppendLine();
+            foreach (var line in transcript)
+            {
+                var prefix = line.Kind switch
+                {
+                    TranscriptKind.Command  => "$ ",
+                    TranscriptKind.SerialTx => "> ",
+                    TranscriptKind.SerialRx => "< ",
+                    TranscriptKind.Found    => "* ",
+                    _                       => "  ",
+                };
+                sb.AppendLine($"  {prefix}{line.Text}");
+            }
+            sb.AppendLine();
+        }
 
         // ── Test results ──────────────────────────────────────────────────
         sb.AppendLine("----------------------------------------------------------");
