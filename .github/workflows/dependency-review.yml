@@ -28,7 +28,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Dependency review
-        uses: actions/dependency-review-action@v4
+        uses: actions/dependency-review-action@v5
         with:
           fail-on-severity: moderate
           # GPLv3 project: block source-available licenses that cannot be combined with it
