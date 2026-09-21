@@ -323,8 +323,7 @@ public class TestRunnerService
 
     /// <summary>The first non-empty line of rigctl output — the value, never a trace.</summary>
     private static string FirstLine(string output) =>
-        output.Split('
-', StringSplitOptions.RemoveEmptyEntries).FirstOrDefault()?.Trim() ?? string.Empty;
+        output.Split('\n', StringSplitOptions.RemoveEmptyEntries).FirstOrDefault()?.Trim() ?? string.Empty;
 
     private static IEnumerable<TestId> RemainingTests() =>
     [
