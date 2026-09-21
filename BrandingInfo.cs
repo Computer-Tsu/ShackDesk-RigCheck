@@ -12,17 +12,19 @@ public static class BrandingInfo
     public const string AppName    = "RigCheck";
     public const string SuiteName  = "ShackDesk";
     public const string FullName   = "RigCheck by ShackDesk";
-    public const string Version    = "0.6.1";
+    public const string Version    = "0.6.2";
     public const string Tagline    = "Know your rig is ready";
 
     // ── Developer / publisher ────────────────────────────────────
     public const string Developer  = "Mark McDow N4TEK";
     public const string Company    = "My Computer Guru LLC";
     public const string Callsign   = "N4TEK";
+    public const string Copyright  = "© 2025–2026 My Computer Guru LLC";
 
     // ── URLs ─────────────────────────────────────────────────────
     public const string SuiteUrl   = "https://shackdesk.com";
     public const string AppUrl     = "https://shackdesk.com/rigcheck";
+    public const string HelpUrl    = "https://shackdesk.com/faq";
     public const string GitHubOrg  = "https://github.com/Computer-Tsu";
     public const string GitHubRepo = "https://github.com/Computer-Tsu/ShackDesk-RigCheck";
     public const string IssueUrl   = "https://github.com/Computer-Tsu/ShackDesk-RigCheck/issues";
@@ -33,14 +35,19 @@ public static class BrandingInfo
     public const string HamlibDocsUrl      = "https://hamlib.github.io";
 
     // ── Defaults ──────────────────────────────────────────────────
+    // Serial settings default to "let Hamlib use the radio model's own
+    // defaults" — most operators don't know these values, and the model
+    // database usually does. 0 / RadioDefault means the flag is omitted
+    // from the rigctl command.
     public const string DefaultRigctldHost = "localhost";
     public const int    DefaultRigctldPort = 4532;
-    public const int    DefaultBaudRate    = 9600;
-    public const string DefaultDataBits    = "8";
-    public const string DefaultParity      = "None";
-    public const string DefaultStopBits    = "1";
-    public const string DefaultFlowCtrl    = "None";
-    public const string DefaultPttMethod   = "CAT";
+    public const int    DefaultBaudRate    = 0;
+    public const string RadioDefault       = "Default";
+    public const string DefaultDataBits    = RadioDefault;
+    public const string DefaultParity      = RadioDefault;
+    public const string DefaultStopBits    = RadioDefault;
+    public const string DefaultFlowCtrl    = RadioDefault;
+    public const string DefaultPttMethod   = RadioDefault;
 
     // ── Window / layout ───────────────────────────────────────────
     public const double DefaultWindowWidth  = 720;

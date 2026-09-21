@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    RigCheck user-visible text — English source.
+    Translations live beside this file as Strings.{ietf-tag}.resx and contain
+    only the <data> entries; untranslated keys fall back to this file.
+
+    Translators: change only the text inside <value>. Keep {0}, {1} placeholders.
+    Keep "_" before the letter that should be the keyboard shortcut in menus.
+    Brand and product names are never in this file by design.
+  -->
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- ── Menu ─────────────────────────────────────────────────────── -->
+  <data name="Menu_Settings" xml:space="preserve">
+    <value>_Settings</value>
+    <comment>Top-level menu item. Opens the settings window.</comment>
+  </data>
+  <data name="Menu_Help" xml:space="preserve">
+    <value>_Help</value>
+    <comment>Top-level menu item.</comment>
+  </data>
+  <data name="Menu_HelpContents" xml:space="preserve">
+    <value>_Contents</value>
+    <comment>Help menu item. Opens the online help page in a web browser.</comment>
+  </data>
+  <data name="Menu_HelpAbout" xml:space="preserve">
+    <value>_About {0}</value>
+    <comment>Help menu item. {0} is the application name.</comment>
+  </data>
+
+  <!-- ── Common ───────────────────────────────────────────────────── -->
+  <data name="Common_Close" xml:space="preserve">
+    <value>Close</value>
+    <comment>Button that closes a dialog window.</comment>
+  </data>
+
+  <!-- ── Settings window ──────────────────────────────────────────── -->
+  <data name="Settings_Title" xml:space="preserve">
+    <value>Settings</value>
+    <comment>Window title.</comment>
+  </data>
+  <data name="Settings_ComingSoon" xml:space="preserve">
+    <value>Settings will appear here in a future release.</value>
+  </data>
+
+  <!-- ── About window ─────────────────────────────────────────────── -->
+  <data name="About_Title" xml:space="preserve">
+    <value>About {0}</value>
+    <comment>Window title. {0} is the application name.</comment>
+  </data>
+  <data name="About_Version" xml:space="preserve">
+    <value>Version {0}</value>
+    <comment>{0} is a version number such as 0.6.2.</comment>
+  </data>
+  <data name="About_DevelopedBy" xml:space="preserve">
+    <value>Developed by {0}</value>
+    <comment>{0} is the developer's name and callsign.</comment>
+  </data>
+  <data name="About_License" xml:space="preserve">
+    <value>Licensed under {0}</value>
+    <comment>{0} is the license name, e.g. GPL v3.</comment>
+  </data>
+  <data name="About_Website" xml:space="preserve">
+    <value>Website</value>
+    <comment>Link that opens the product web page in a browser.</comment>
+  </data>
+  <data name="About_SourceCode" xml:space="preserve">
+    <value>Source code</value>
+    <comment>Link that opens the GitHub repository in a browser.</comment>
+  </data>
+
+  <!-- ── Connection readiness ─────────────────────────────────────── -->
+  <data name="Ready_ChooseRadio" xml:space="preserve">
+    <value>Choose your radio from the Quick preset list.</value>
+    <comment>Shown in the status strip until a radio is selected.</comment>
+  </data>
+  <data name="Ready_SelectPort" xml:space="preserve">
+    <value>Select the COM port your radio is connected to.</value>
+    <comment>Shown in the status strip until a port is selected.</comment>
+  </data>
+  <data name="Placeholder_ChooseRadio" xml:space="preserve">
+    <value>Choose your radio…</value>
+    <comment>Grey placeholder text inside the empty preset dropdown.</comment>
+  </data>
+  <data name="Placeholder_SelectPort" xml:space="preserve">
+    <value>Select a port…</value>
+    <comment>Grey placeholder text inside the empty COM port dropdown.</comment>
+  </data>
+
+  <!-- ── Serial setting choices ───────────────────────────────────── -->
+  <!-- "Radio default" means the setting is left to Hamlib's model database. -->
+  <data name="Option_RadioDefault" xml:space="preserve">
+    <value>Radio default</value>
+    <comment>First choice in every serial setting dropdown. Means: let Hamlib decide.</comment>
+  </data>
+  <data name="Option_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="Option_Even" xml:space="preserve">
+    <value>Even</value>
+    <comment>Serial parity.</comment>
+  </data>
+  <data name="Option_Odd" xml:space="preserve">
+    <value>Odd</value>
+    <comment>Serial parity.</comment>
+  </data>
+  <data name="Option_Mark" xml:space="preserve">
+    <value>Mark</value>
+    <comment>Serial parity.</comment>
+  </data>
+  <data name="Option_Space" xml:space="preserve">
+    <value>Space</value>
+    <comment>Serial parity.</comment>
+  </data>
+  <data name="Option_Hardware" xml:space="preserve">
+    <value>Hardware</value>
+    <comment>Serial flow control (RTS/CTS).</comment>
+  </data>
+  <data name="Option_Software" xml:space="preserve">
+    <value>Software</value>
+    <comment>Serial flow control (XON/XOFF).</comment>
+  </data>
+  <data name="Option_CAT" xml:space="preserve">
+    <value>CAT</value>
+    <comment>PTT method. Amateur radio term, usually left untranslated.</comment>
+  </data>
+  <data name="Option_RTS" xml:space="preserve">
+    <value>RTS</value>
+    <comment>PTT method via serial RTS line. Usually left untranslated.</comment>
+  </data>
+  <data name="Option_DTR" xml:space="preserve">
+    <value>DTR</value>
+    <comment>PTT method via serial DTR line. Usually left untranslated.</comment>
+  </data>
+  <data name="Option_VOX" xml:space="preserve">
+    <value>VOX</value>
+    <comment>PTT method. Amateur radio term, usually left untranslated.</comment>
+  </data>
+</root>

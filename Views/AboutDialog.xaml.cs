@@ -1,0 +1,30 @@
+using RigCheck.Localization;
+using System.Diagnostics;
+using System.Windows;
+using System.Windows.Controls;
+
+namespace RigCheck.Views;
+
+/// <summary>
+/// About box. Text with placeholders is composed here rather than bound,
+/// because the values come from constants and never change at runtime.
+/// </summary>
+public partial class AboutDialog : Window
+{
+    public AboutDialog()
+    {
+        InitializeComponent();
+
+        Title              = Strings.Format("About_Title", BrandingInfo.AppName);
+        VersionText.Text   = Strings.Format("About_Version", BrandingInfo.Version);
+        DeveloperText.Text = Strings.Format("About_DevelopedBy", BrandingInfo.Developer);
+        LicenseText.Text   = Strings.Format("About_License", BrandingInfo.License);
+    }
+
+    // Each link button carries its URL in Tag so one handler serves them all.
+    private void Link_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is Button { Tag: string url } && !string.IsNullOrEmpty(url))
+            Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });
+    }
+}

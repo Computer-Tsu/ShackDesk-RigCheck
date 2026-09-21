@@ -1,3 +1,4 @@
+using RigCheck.Localization;
 using RigCheck.ViewModels;
 using System.ComponentModel;
 using System.Windows;
@@ -20,7 +21,20 @@ public partial class MainWindow : Window
         // Set DataContext before InitializeComponent so bindings resolve on first layout
         DataContext = vm;
         InitializeComponent();
+
+        // Brand name is injected here so it can never end up in a translation file.
+        AboutMenuItem.Header = Strings.Format("Menu_HelpAbout", BrandingInfo.AppName);
     }
+
+    // ── Menu ──────────────────────────────────────────────────────────────
+    // Dialogs are opened from code-behind because owning and showing a
+    // window is a view concern; the ViewModel never references a Window.
+
+    private void Settings_Click(object sender, RoutedEventArgs e) =>
+        new SettingsDialog { Owner = this }.ShowDialog();
+
+    private void About_Click(object sender, RoutedEventArgs e) =>
+        new AboutDialog { Owner = this }.ShowDialog();
 
     // ── Window placement ──────────────────────────────────────────────────
     // Width and height are bound directly to settings in XAML. Left/Top are

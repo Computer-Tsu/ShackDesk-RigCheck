@@ -69,6 +69,18 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
+    <!--
+        External-link marker for any control that opens a web browser.
+        Segoe MDL2 Assets ships with Windows 10 and 11; E8A7 is "OpenInNewWindow".
+    -->
+    <Style x:Key="ExternalLinkIconStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily"        Value="Segoe MDL2 Assets" />
+        <Setter Property="Text"              Value="&#xE8A7;" />
+        <Setter Property="FontSize"          Value="11" />
+        <Setter Property="Margin"            Value="5,1,0,0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
     <!-- ── Buttons ────────────────────────────────────────────────────── -->
 
     <Style x:Key="PrimaryButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonBase}">
@@ -179,13 +191,149 @@
         <Setter Property="Padding"           Value="0,0,6,0" />
     </Style>
 
+    <!--
+        ComboBox is fully templated because the default template draws its
+        popup with system colors, which made items unreadable on the dark
+        theme. Tag carries optional placeholder text shown when nothing is
+        selected, so required-but-unset fields can say so.
+    -->
+    <ControlTemplate x:Key="ComboBoxToggleTemplate" TargetType="ToggleButton">
+        <Border x:Name="Bd"
+                Background="{StaticResource BrushSurfaceRaised}"
+                BorderBrush="{StaticResource BrushBorder}"
+                BorderThickness="1"
+                CornerRadius="3"
+                SnapsToDevicePixels="True">
+            <Path HorizontalAlignment="Right" VerticalAlignment="Center"
+                  Margin="0,0,8,0"
+                  Data="M 0 0 L 4 4 L 8 0 Z"
+                  Fill="{StaticResource BrushMuted}" />
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource BrushAccent}" />
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource BrushAccent}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="ComboBoxItemStyle" TargetType="ComboBoxItem">
+        <Setter Property="Foreground" Value="{StaticResource BrushForeground}" />
+        <Setter Property="Padding"    Value="8,4" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBoxItem">
+                    <Border x:Name="Bd" Background="Transparent" Padding="{TemplateBinding Padding}">
+                        <ContentPresenter />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsHighlighted" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource BrushAccent}" />
+                            <Setter Property="Foreground" Value="{StaticResource BrushBackground}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource BrushMuted}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
-        <Setter Property="Foreground"        Value="{StaticResource BrushForeground}" />
-        <Setter Property="Background"        Value="{StaticResource BrushSurfaceRaised}" />
-        <Setter Property="BorderBrush"       Value="{StaticResource BrushBorder}" />
-        <Setter Property="FontSize"          Value="13" />
-        <Setter Property="Padding"           Value="6,3" />
-        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Foreground"         Value="{StaticResource BrushForeground}" />
+        <Setter Property="FontSize"           Value="13" />
+        <Setter Property="Padding"            Value="8,3,24,3" />
+        <Setter Property="VerticalAlignment"  Value="Center" />
+        <Setter Property="MinHeight"          Value="26" />
+        <Setter Property="ItemContainerStyle" Value="{StaticResource ComboBoxItemStyle}" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBox">
+                    <Grid>
+                        <ToggleButton x:Name="Toggle"
+                                      Template="{StaticResource ComboBoxToggleTemplate}"
+                                      Focusable="False"
+                                      ClickMode="Press"
+                                      IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+
+                        <ContentPresenter x:Name="Selected"
+                                          Content="{TemplateBinding SelectionBoxItem}"
+                                          ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                          ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                          Margin="{TemplateBinding Padding}"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Left"
+                                          IsHitTestVisible="False" />
+
+                        <TextBlock x:Name="Placeholder"
+                                   Text="{TemplateBinding Tag}"
+                                   Foreground="{StaticResource BrushMuted}"
+                                   FontStyle="Italic"
+                                   Margin="{TemplateBinding Padding}"
+                                   VerticalAlignment="Center"
+                                   IsHitTestVisible="False"
+                                   Visibility="Collapsed" />
+
+                        <Popup x:Name="PART_Popup"
+                               IsOpen="{TemplateBinding IsDropDownOpen}"
+                               Placement="Bottom"
+                               AllowsTransparency="True"
+                               Focusable="False"
+                               PopupAnimation="Fade">
+                            <Border Background="{StaticResource BrushSurfaceRaised}"
+                                    BorderBrush="{StaticResource BrushBorder}"
+                                    BorderThickness="1"
+                                    CornerRadius="3"
+                                    MinWidth="{TemplateBinding ActualWidth}"
+                                    MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                                    SnapsToDevicePixels="True">
+                                <ScrollViewer Margin="2" VerticalScrollBarVisibility="Auto">
+                                    <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained" />
+                                </ScrollViewer>
+                            </Border>
+                        </Popup>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="SelectedIndex" Value="-1">
+                            <Setter TargetName="Placeholder" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ── Menu bar ───────────────────────────────────────────────────── -->
+    <!--
+        Property-level theming only. Submenu items set a dark foreground
+        explicitly because the default popup is drawn light and would
+        otherwise inherit the light text from the menu bar.
+    -->
+
+    <Style x:Key="MenuBarStyle" TargetType="Menu">
+        <Setter Property="Background"      Value="{StaticResource BrushSurface}" />
+        <Setter Property="Foreground"      Value="{StaticResource BrushForeground}" />
+        <Setter Property="BorderBrush"     Value="{StaticResource BrushBorder}" />
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
+        <Setter Property="FontSize"        Value="13" />
+        <Setter Property="Padding"         Value="4,2" />
+    </Style>
+
+    <Style x:Key="TopMenuItemStyle" TargetType="MenuItem">
+        <Setter Property="Foreground" Value="{StaticResource BrushForeground}" />
+        <Setter Property="Padding"    Value="10,4" />
+    </Style>
+
+    <Style x:Key="SubMenuItemStyle" TargetType="MenuItem">
+        <Setter Property="Foreground" Value="{StaticResource BrushBackground}" />
+        <Setter Property="Padding"    Value="8,4" />
     </Style>
 
     <Style x:Key="TextBoxStyle" TargetType="TextBox">

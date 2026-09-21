@@ -73,7 +73,7 @@ public class DiagnosisEngine
         Checks:
         [
             "Is the radio powered on?",
-            $"Is the baud rate correct? Your radio manual lists the CAT baud rate. Currently set to {cfg.BaudRate}.",
+            $"Is the baud rate correct? Your radio manual lists the CAT baud rate. Currently set to {(cfg.BaudRate > 0 ? cfg.BaudRate.ToString() : "the radio's default")}.",
             "Is the CAT / CI-V / RS-232 cable connected to the correct port on the radio?",
             "Does your radio need CAT control enabled in its menu? Check the manual for \"CAT\", \"CI-V\", or \"RS-232\" settings.",
             "Some radios use a different data bits / parity / stop bits setting. Check the radio manual.",

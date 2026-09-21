@@ -62,6 +62,19 @@ public partial class MainViewModel : ObservableObject
 
         LoadSettings();
         CheckHamlib();
+
+        // Run Tests stays disabled until a radio and port are chosen; the
+        // status strip explains what is still missing.
+        Connection.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName is nameof(ConnectionViewModel.IsReady)
+                               or nameof(ConnectionViewModel.ReadinessHint))
+            {
+                RunTestsCommand.NotifyCanExecuteChanged();
+                UpdateReadinessStatus();
+            }
+        };
+        UpdateReadinessStatus();
     }
 
     // ── Commands ──────────────────────────────────────────────────────────
@@ -114,7 +127,7 @@ public partial class MainViewModel : ObservableObject
         }
     }
 
-    private bool CanRunTests() => !IsRunning && _hamlib.IsAvailable;
+    private bool CanRunTests() => !IsRunning && _hamlib.IsAvailable && Connection.IsReady;
 
     [RelayCommand]
     private async Task ExportLogAsync()
@@ -149,10 +162,15 @@ public partial class MainViewModel : ObservableObject
         RawConsole.SendCommandCommand.ExecuteAsync(Connection.BuildConfig());
 
     [RelayCommand]
-    private void OpenHamlibDownload() =>
+    private void OpenHamlibDownload() => OpenUrl(BrandingInfo.HamlibDownloadUrl);
+
+    [RelayCommand]
+    private void OpenHelp() => OpenUrl(BrandingInfo.HelpUrl);
+
+    private static void OpenUrl(string url) =>
         System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
         {
-            FileName        = BrandingInfo.HamlibDownloadUrl,
+            FileName        = url,
             UseShellExecute = true,
         });
 
@@ -211,10 +229,19 @@ public partial class MainViewModel : ObservableObject
         else
         {
             HamlibStatus = "Hamlib not found — install WSJT-X or download Hamlib";
-            StatusMessage = "Hamlib not found. Run Tests will be unavailable until Hamlib is installed.";
             Log.Warning("Hamlib not available");
         }
 
         RunTestsCommand.NotifyCanExecuteChanged();
+    }
+
+    // Status strip shows the single most important thing blocking a test run.
+    private void UpdateReadinessStatus()
+    {
+        if (IsRunning) return;
+
+        StatusMessage = !_hamlib.IsAvailable
+            ? "Hamlib not found. Run Tests will be unavailable until Hamlib is installed."
+            : Connection.ReadinessHint;
     }
 }

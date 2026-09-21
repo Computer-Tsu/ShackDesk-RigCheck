@@ -21,14 +21,22 @@ public class RigctlCommandBuilder
 
     /// <summary>
     /// Build the connection arguments common to every rigctl command
-    /// for a direct serial connection.
+    /// for a direct serial connection. A baud rate of 0 omits -s so
+    /// rigctl falls back to the model's default serial speed.
     /// </summary>
-    public static RigctlCommand SerialArgs(ConnectionConfig cfg) =>
-        new(
-            Args: ["-m", cfg.ModelId.ToString(),
-                   "-r", cfg.ComPort,
-                   "-s", cfg.BaudRate.ToString()],
-            ConnectionLabel: $"-m {cfg.ModelId} -r {cfg.ComPort} -s {cfg.BaudRate}");
+    public static RigctlCommand SerialArgs(ConnectionConfig cfg)
+    {
+        string[] args = ["-m", cfg.ModelId.ToString(), "-r", cfg.ComPort];
+        var label = $"-m {cfg.ModelId} -r {cfg.ComPort}";
+
+        if (cfg.BaudRate > 0)
+        {
+            args  = [..args, "-s", cfg.BaudRate.ToString()];
+            label = $"{label} -s {cfg.BaudRate}";
+        }
+
+        return new(Args: args, ConnectionLabel: label);
+    }
 
     /// <summary>
     /// Build connection args for a rigctld network connection.

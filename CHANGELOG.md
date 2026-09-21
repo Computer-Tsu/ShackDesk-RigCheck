@@ -5,16 +5,30 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
-## [Unreleased]
+## [0.6.2] - 2026-09-21
+
+First launch feedback and the move to .NET 10.
+
+### Added
+- Menu bar: Settings (placeholder) and Help with Contents (F1, opens the online FAQ) and About
+- About window showing branding, version, developer, license, and links
+- Localization foundation: `Strings.resx` with a `Strings` accessor and `{loc:Str}` XAML markup extension. New UI text is in the resource file; existing text migrates next.
+- External-link glyph on every control that opens a web browser
+- Placeholder text in the radio and COM port dropdowns when nothing is selected
+- Status strip tells the operator what still needs choosing before tests can run
+- Dependabot, CodeQL analysis, and dependency review workflows
 
 ### Changed
 - Target runtime moved from .NET 8 to .NET 10 (LTS, supported through 2028-11-14).
   No change to supported Windows versions; see the Platform section of the README.
 - Microsoft.Extensions, System.Management, System.IO.Ports, and Serilog.Extensions.Hosting
   packages updated to their 10.x releases
-
-### Added
-- Dependabot, CodeQL analysis, and dependency review workflows
+- Radio and COM port start unselected instead of defaulting to Hamlib's dummy rig and the first port.
+  Run Tests is disabled until both are chosen.
+- Baud rate, PTT, data bits, parity, stop bits, and flow control default to "Radio default",
+  which omits the setting so Hamlib uses the model's own defaults
+- Dropdowns use a dark-themed template; items and the selected value are readable
+- Serial-setting dropdowns use minimum widths so translated labels fit
 
 ### Fixed
 - S-meter reading interpreted Hamlib's dB-relative-to-S9 value as dBm, so an S9 signal displayed as "S9+73"

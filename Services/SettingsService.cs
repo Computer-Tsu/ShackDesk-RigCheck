@@ -20,7 +20,7 @@ public class RigCheckSettings
     public string  StopBits        { get; set; } = BrandingInfo.DefaultStopBits;
     public string  FlowControl     { get; set; } = BrandingInfo.DefaultFlowCtrl;
     public string  PttMethod       { get; set; } = BrandingInfo.DefaultPttMethod;
-    public int     RadioModelId    { get; set; } = 1;   // Hamlib rig ID
+    public int     RadioModelId    { get; set; } = 0;   // Hamlib rig ID; 0 = none chosen
     public string  RadioModelName  { get; set; } = string.Empty;
 
     // Network / rigctld
