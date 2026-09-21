@@ -246,78 +246,20 @@
                                Style="{StaticResource SummaryTextStyle}" />
                 </Border>
 
-                <!-- Results list -->
-                <ListBox ItemsSource="{Binding Results.Items}"
-                         Style="{StaticResource ResultsListStyle}"
-                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate DataType="{x:Type vm:TestResultItemViewModel}">
-                            <Border Style="{StaticResource ResultItemBorderStyle}">
-                                <StackPanel>
-                                    <!-- Main result row -->
-                                    <DockPanel>
-                                        <!-- Status icon -->
-                                        <TextBlock Text="{Binding StatusIcon}"
-                                                   Style="{StaticResource StatusIconStyle}"
-                                                   Foreground="{Binding Status, Converter={StaticResource StatusToColor}}" />
-
-                                        <!-- Test name -->
-                                        <TextBlock Text="{Binding Name}"
-                                                   Style="{StaticResource TestNameStyle}" />
-
-                                        <!-- Message -->
-                                        <TextBlock Text="{Binding Message}"
-                                                   Style="{StaticResource TestMessageStyle}" />
-
-                                        <!-- Expand button (if has diagnosis) -->
-                                        <Button DockPanel.Dock="Right"
-                                                Content="{Binding IsExpanded, Converter={StaticResource ExpandIcon}}"
-                                                Command="{Binding ToggleExpandedCommand}"
-                                                Style="{StaticResource ExpandButtonStyle}"
-                                                Visibility="{Binding HasDiagnosis, Converter={StaticResource BoolToVisibility}}" />
-                                    </DockPanel>
-
-                                    <!-- Command row — always visible when command available -->
-                                    <DockPanel Margin="24,2,0,0"
-                                               Visibility="{Binding DisplayCommand, Converter={StaticResource NullOrEmptyToCollapsed}}">
-                                        <Button DockPanel.Dock="Right"
-                                                Content="{loc:Str Main_CopyCommand}"
-                                                Command="{Binding CopyCommandCommand}"
-                                                Style="{StaticResource CopyButtonStyle}"
-                                                ToolTip="{loc:Str Main_CopyCommandTip}" />
-                                        <TextBlock Text="{Binding DisplayCommand}"
-                                                   Style="{StaticResource CommandTextStyle}"
-                                                   ToolTip="{loc:Str Main_CommandTip}" />
-                                    </DockPanel>
-
-                                    <!-- Expanded diagnosis panel -->
-                                    <Border Margin="24,4,0,4"
-                                            Style="{StaticResource DiagnosisPanelStyle}"
-                                            Visibility="{Binding IsExpanded, Converter={StaticResource BoolToVisibility}}">
-                                        <StackPanel>
-                                            <TextBlock Text="{Binding Diagnosis.Summary}"
-                                                       Style="{StaticResource DiagnosisSummaryStyle}" />
-                                            <ItemsControl ItemsSource="{Binding Diagnosis.Checks}"
-                                                          Margin="0,4,0,0">
-                                                <ItemsControl.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <DockPanel>
-                                                            <TextBlock Text="•" Margin="0,0,6,0"
-                                                                       Foreground="{StaticResource BrushAccent}" />
-                                                            <TextBlock Text="{Binding}"
-                                                                       Style="{StaticResource DiagnosisCheckStyle}"
-                                                                       TextWrapping="Wrap" />
-                                                        </DockPanel>
-                                                    </DataTemplate>
-                                                </ItemsControl.ItemTemplate>
-                                            </ItemsControl>
-                                        </StackPanel>
-                                    </Border>
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                <!-- Results document: read-only, selectable, Ctrl+A / Ctrl+C copy as
+                     plain text. Built by ResultsDocumentBuilder in code-behind. -->
+                <FlowDocumentScrollViewer x:Name="ResultsViewer"
+                                          Style="{StaticResource ResultsViewerStyle}"
+                                          IsSelectionEnabled="True"
+                                          IsToolBarVisible="False"
+                                          VerticalScrollBarVisibility="Auto"
+                                          HorizontalScrollBarVisibility="Disabled">
+                    <FlowDocumentScrollViewer.CommandBindings>
+                        <CommandBinding Command="ApplicationCommands.Copy"
+                                        CanExecute="ResultsCopy_CanExecute"
+                                        Executed="ResultsCopy_Executed" />
+                    </FlowDocumentScrollViewer.CommandBindings>
+                </FlowDocumentScrollViewer>
             </DockPanel>
         </GroupBox>
 

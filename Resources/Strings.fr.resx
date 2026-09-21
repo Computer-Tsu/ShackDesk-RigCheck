@@ -268,4 +268,9 @@ Continuer ?</value></data>
   <data name="Option_RTS" xml:space="preserve"><value>RTS</value></data>
   <data name="Option_DTR" xml:space="preserve"><value>DTR</value></data>
   <data name="Option_VOX" xml:space="preserve"><value>VOX</value></data>
+  <data name="Results_Try" xml:space="preserve"><value>Essayez :</value></data>
+  <data name="Results_LearnMore" xml:space="preserve"><value>En savoir plus</value></data>
+  <data name="Settings_NotifyHeading" xml:space="preserve"><value>Quand une exécution se termine</value></data>
+  <data name="Settings_NotifyFlash" xml:space="preserve"><value>Faire clignoter le bouton de la barre des tâches si la fenêtre est en arrière-plan</value></data>
+  <data name="Settings_NotifySound" xml:space="preserve"><value>Jouer un son</value></data>
 </root>

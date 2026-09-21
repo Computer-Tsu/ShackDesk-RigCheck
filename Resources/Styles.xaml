@@ -19,9 +19,7 @@
     <views:InverseBoolConverter                x:Key="InverseBool" />
     <views:InverseBoolToVisibilityConverter    x:Key="InverseBoolToVisibility" />
     <views:NullOrEmptyToCollapsedConverter     x:Key="NullOrEmptyToCollapsed" />
-    <views:ExpandIconConverter                 x:Key="ExpandIcon" />
     <views:BoolToStatusColorConverter          x:Key="BoolToStatusColor" />
-    <views:StatusToColorConverter              x:Key="StatusToColor" />
     <views:ConsoleKindToColorConverter         x:Key="ConsoleKindToColor" />
 
     <!-- ── Shared templates ───────────────────────────────────────────── -->
@@ -110,14 +108,6 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{StaticResource BrushMuted}" />
         <Setter Property="Margin"     Value="8,0,0,0" />
-    </Style>
-
-    <Style x:Key="ExpandButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonBase}">
-        <Setter Property="Padding"         Value="6,0" />
-        <Setter Property="FontSize"        Value="14" />
-        <Setter Property="Background"      Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Foreground"      Value="{StaticResource BrushMuted}" />
     </Style>
 
     <Style x:Key="LinkButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonBase}">
@@ -352,78 +342,14 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
-    <!-- ── Results list ───────────────────────────────────────────────── -->
+    <!-- ── Results document ──────────────────────────────────────────── -->
 
-    <Style x:Key="ResultsListStyle" TargetType="ListBox">
-        <Setter Property="Background"      Value="Transparent" />
+    <Style x:Key="ResultsViewerStyle" TargetType="FlowDocumentScrollViewer">
+        <Setter Property="Background"      Value="{StaticResource BrushSurface}" />
+        <Setter Property="Foreground"      Value="{StaticResource BrushForeground}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Padding"         Value="0" />
-        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-        <Setter Property="ItemContainerStyle">
-            <Setter.Value>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="Focusable"  Value="False" />
-                    <Setter Property="Padding"    Value="0" />
-                    <Setter Property="Margin"     Value="0" />
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="ListBoxItem">
-                                <ContentPresenter />
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="ResultItemBorderStyle" TargetType="Border">
-        <Setter Property="Background"      Value="{StaticResource BrushSurface}" />
-        <Setter Property="BorderBrush"     Value="{StaticResource BrushBorder}" />
-        <Setter Property="BorderThickness" Value="0,0,0,1" />
-        <Setter Property="Padding"         Value="8,6" />
-    </Style>
-
-    <Style x:Key="StatusIconStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBase}">
-        <Setter Property="FontSize"   Value="15" />
-        <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="Width"      Value="24" />
-        <Setter Property="TextAlignment" Value="Center" />
-    </Style>
-
-    <Style x:Key="TestNameStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBase}">
-        <Setter Property="FontWeight" Value="SemiBold" />
-        <Setter Property="Margin"     Value="0,0,10,0" />
-    </Style>
-
-    <Style x:Key="TestMessageStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBase}">
-        <Setter Property="Foreground"   Value="{StaticResource BrushMuted}" />
-        <Setter Property="TextWrapping" Value="Wrap" />
-    </Style>
-
-    <Style x:Key="CommandTextStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBase}">
-        <Setter Property="FontFamily"   Value="Consolas" />
-        <Setter Property="FontSize"     Value="12" />
-        <Setter Property="Foreground"   Value="{StaticResource BrushAccent}" />
-        <Setter Property="TextWrapping" Value="Wrap" />
-    </Style>
-
-    <Style x:Key="DiagnosisPanelStyle" TargetType="Border">
-        <Setter Property="Background"      Value="{StaticResource BrushBackground}" />
-        <Setter Property="BorderBrush"     Value="{StaticResource BrushBorder}" />
-        <Setter Property="BorderThickness" Value="2,0,0,0" />
-        <Setter Property="Padding"         Value="10,6" />
-    </Style>
-
-    <Style x:Key="DiagnosisSummaryStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBase}">
-        <Setter Property="FontWeight"   Value="SemiBold" />
-        <Setter Property="TextWrapping" Value="Wrap" />
-    </Style>
-
-    <Style x:Key="DiagnosisCheckStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBase}">
-        <Setter Property="FontSize"     Value="12" />
-        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
     </Style>
 
     <Style x:Key="SummaryBarStyle" TargetType="Border">

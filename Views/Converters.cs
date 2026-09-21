@@ -1,4 +1,3 @@
-using RigCheck.Models;
 using RigCheck.ViewModels;
 using System.Globalization;
 using System.Windows;
@@ -37,39 +36,11 @@ public sealed class NullOrEmptyToCollapsedConverter : IValueConverter
         throw new NotSupportedException();
 }
 
-/// <summary>Expand/collapse glyph for the per-result diagnosis toggle.</summary>
-public sealed class ExpandIconConverter : IValueConverter
-{
-    public object Convert(object value, Type t, object p, CultureInfo c) =>
-        value is true ? "▾" : "▸";
-    public object ConvertBack(object value, Type t, object p, CultureInfo c) =>
-        throw new NotSupportedException();
-}
-
 /// <summary>Pass/fail brush for the Hamlib status indicator dot.</summary>
 public sealed class BoolToStatusColorConverter : IValueConverter
 {
     public object Convert(object value, Type t, object p, CultureInfo c) =>
         Application.Current.Resources[value is true ? "BrushPass" : "BrushFail"];
-    public object ConvertBack(object value, Type t, object p, CultureInfo c) =>
-        throw new NotSupportedException();
-}
-
-/// <summary>Maps a test status to the brush used for its icon.</summary>
-public sealed class StatusToColorConverter : IValueConverter
-{
-    public object Convert(object value, Type t, object p, CultureInfo c)
-    {
-        var key = value switch
-        {
-            TestStatus.Pass    => "BrushPass",
-            TestStatus.Fail    => "BrushFail",
-            TestStatus.Warning => "BrushWarn",
-            TestStatus.Running => "BrushAccent",
-            _                  => "BrushMuted",
-        };
-        return Application.Current.Resources[key];
-    }
     public object ConvertBack(object value, Type t, object p, CultureInfo c) =>
         throw new NotSupportedException();
 }

@@ -4,7 +4,6 @@ using RigCheck.Localization;
 using RigCheck.Models;
 using RigCheck.Services;
 using System.Collections.ObjectModel;
-using System.Windows;
 
 namespace RigCheck.ViewModels;
 
@@ -286,7 +285,7 @@ public partial class TestResultsViewModel : ObservableObject
     }
 }
 
-/// <summary>Single test result row in the results list.</summary>
+/// <summary>Single test result as rendered by ResultsDocumentBuilder.</summary>
 public partial class TestResultItemViewModel : ObservableObject
 {
     private readonly TestResult _result;
@@ -313,18 +312,6 @@ public partial class TestResultItemViewModel : ObservableObject
         TestStatus.Running => "…",
         _                  => "○",
     };
-
-    [ObservableProperty] private bool _isExpanded;
-
-    [RelayCommand]
-    private void CopyCommand()
-    {
-        if (!string.IsNullOrEmpty(DisplayCommand))
-            Clipboard.SetText(DisplayCommand);
-    }
-
-    [RelayCommand]
-    private void ToggleExpanded() => IsExpanded = !IsExpanded;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════

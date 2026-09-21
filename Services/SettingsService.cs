@@ -40,6 +40,12 @@ public class RigCheckSettings
     public bool   AlwaysOnTop     { get; set; } = false;
     public double ScaleFactor     { get; set; } = 1.0;
 
+    // Notifications when a run or scan finishes. Flash only matters when the
+    // window is in the background; sound is off by default because a shack
+    // PC often shares speakers with the radio audio.
+    public bool   NotifyFlash     { get; set; } = true;
+    public bool   NotifySound     { get; set; } = false;
+
     // UI state
     public bool   RawConsoleOpen  { get; set; } = false;
     public string LastPresetName  { get; set; } = string.Empty;

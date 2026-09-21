@@ -36,6 +36,8 @@ public partial class SettingsDialog : Window
 
         // Load current values into the pending controls
         TelemetryCheckBox.IsChecked = _settings.Current.TelemetryEnabled;
+        NotifyFlashCheckBox.IsChecked = _settings.Current.NotifyFlash;
+        NotifySoundCheckBox.IsChecked = _settings.Current.NotifySound;
         LogLevelCombo.SelectedValue = AppLogger.ResolveLevel(_settings.Current.LogLevel);
     }
 
@@ -48,6 +50,8 @@ public partial class SettingsDialog : Window
         _settings.Update(s =>
         {
             s.TelemetryEnabled = TelemetryCheckBox.IsChecked == true;
+            s.NotifyFlash      = NotifyFlashCheckBox.IsChecked == true;
+            s.NotifySound      = NotifySoundCheckBox.IsChecked == true;
             s.LogLevel         = level;
         });
 

@@ -39,6 +39,13 @@ public partial class MainViewModel : ObservableObject
     public bool IsHamlibAvailable => _hamlib.IsAvailable;
     public bool IsHamlibMissing   => !_hamlib.IsAvailable;
 
+    /// <summary>
+    /// Raised when a test run (later: a scan) has finished, with true when
+    /// nothing failed. The window uses it to flash the taskbar button or play
+    /// a sound — view concerns the ViewModel stays out of.
+    /// </summary>
+    public event Action<bool>? TaskCompleted;
+
     // Title shown in window chrome. Alpha and beta builds always show the
     // expiry date here so it is visible without opening any dialog.
     public string WindowTitle =>
@@ -116,6 +123,7 @@ public partial class MainViewModel : ObservableObject
             var suite = await _testRunner.RunAllAsync(cfg, runSetFreq, progress, cts.Token);
 
             Results.SetSuiteResult(suite);
+            TaskCompleted?.Invoke(suite.AllPassed);
             StatusMessage = suite.AllPassed
                 ? Strings.Format("Status_AllPassed", suite.PassCount)
                 : Strings.Format("Status_SomeFailed", suite.FailCount);

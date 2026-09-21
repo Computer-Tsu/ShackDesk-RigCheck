@@ -268,4 +268,9 @@ Los detalles se han guardado en el registro. Si esto sigue ocurriendo, infórmel
   <data name="Option_RTS" xml:space="preserve"><value>RTS</value></data>
   <data name="Option_DTR" xml:space="preserve"><value>DTR</value></data>
   <data name="Option_VOX" xml:space="preserve"><value>VOX</value></data>
+  <data name="Results_Try" xml:space="preserve"><value>Pruebe:</value></data>
+  <data name="Results_LearnMore" xml:space="preserve"><value>Más información</value></data>
+  <data name="Settings_NotifyHeading" xml:space="preserve"><value>Cuando termina una ejecución</value></data>
+  <data name="Settings_NotifyFlash" xml:space="preserve"><value>Hacer parpadear el botón de la barra de tareas si la ventana está en segundo plano</value></data>
+  <data name="Settings_NotifySound" xml:space="preserve"><value>Reproducir un sonido</value></data>
 </root>

@@ -870,4 +870,22 @@ Continue?</value>
     <value>VOX</value>
     <comment>PTT method. Amateur radio term, usually left untranslated.</comment>
   </data>
+  <data name="Results_Try" xml:space="preserve">
+    <value>Try:</value>
+    <comment>Label before the suggested fix command in a failed test's diagnosis. Keep the colon.</comment>
+  </data>
+  <data name="Results_LearnMore" xml:space="preserve">
+    <value>Learn more</value>
+    <comment>Link text below a diagnosis that opens a help page in the browser.</comment>
+  </data>
+  <data name="Settings_NotifyHeading" xml:space="preserve">
+    <value>When a run finishes</value>
+    <comment>Section heading in Settings.</comment>
+  </data>
+  <data name="Settings_NotifyFlash" xml:space="preserve">
+    <value>Flash the taskbar button if the window is in the background</value>
+  </data>
+  <data name="Settings_NotifySound" xml:space="preserve">
+    <value>Play a sound</value>
+  </data>
 </root>

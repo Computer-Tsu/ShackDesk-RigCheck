@@ -268,4 +268,9 @@ Fortfahren?</value></data>
   <data name="Option_RTS" xml:space="preserve"><value>RTS</value></data>
   <data name="Option_DTR" xml:space="preserve"><value>DTR</value></data>
   <data name="Option_VOX" xml:space="preserve"><value>VOX</value></data>
+  <data name="Results_Try" xml:space="preserve"><value>Versuchen:</value></data>
+  <data name="Results_LearnMore" xml:space="preserve"><value>Mehr erfahren</value></data>
+  <data name="Settings_NotifyHeading" xml:space="preserve"><value>Wenn ein Durchlauf beendet ist</value></data>
+  <data name="Settings_NotifyFlash" xml:space="preserve"><value>Taskleistenschaltfläche blinken lassen, wenn das Fenster im Hintergrund ist</value></data>
+  <data name="Settings_NotifySound" xml:space="preserve"><value>Einen Ton abspielen</value></data>
 </root>

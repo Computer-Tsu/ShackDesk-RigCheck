@@ -268,4 +268,9 @@
   <data name="Option_RTS" xml:space="preserve"><value>RTS</value></data>
   <data name="Option_DTR" xml:space="preserve"><value>DTR</value></data>
   <data name="Option_VOX" xml:space="preserve"><value>VOX</value></data>
+  <data name="Results_Try" xml:space="preserve"><value>お試しください：</value></data>
+  <data name="Results_LearnMore" xml:space="preserve"><value>詳細を見る</value></data>
+  <data name="Settings_NotifyHeading" xml:space="preserve"><value>実行が終了したとき</value></data>
+  <data name="Settings_NotifyFlash" xml:space="preserve"><value>ウィンドウが背面にある場合、タスクバーのボタンを点滅させる</value></data>
+  <data name="Settings_NotifySound" xml:space="preserve"><value>サウンドを再生する</value></data>
 </root>
