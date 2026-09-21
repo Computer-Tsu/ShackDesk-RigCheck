@@ -13,8 +13,8 @@ namespace RigCheck;
 /// </summary>
 public static class BuildInfo
 {
-    public static string    Channel   { get; }
-    public static DateOnly? BuildDate { get; }
+    public static string    Channel    { get; }
+    public static DateOnly? BuildDate  { get; }
 
     static BuildInfo()
     {
@@ -33,7 +33,11 @@ public static class BuildInfo
     public static bool IsBeta   => Channel == BrandingInfo.ChannelBeta;
     public static bool IsStable => Channel == BrandingInfo.ChannelStable;
 
-    /// <summary>Version with channel suffix for display, e.g. "0.6.2-alpha". Stable shows the bare version.</summary>
+    /// <summary>
+    /// Version for display: "0.7.5" on stable, "0.7.4-beta" on a beta,
+    /// "0.7.3-alpha" on a develop build. Promotion model: the same number
+    /// moves alpha → beta → stable; only the channel suffix changes.
+    /// </summary>
     public static string VersionLabel =>
         IsStable ? BrandingInfo.Version : $"{BrandingInfo.Version}-{Channel}";
 

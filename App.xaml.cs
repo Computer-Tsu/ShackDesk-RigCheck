@@ -17,9 +17,31 @@ public partial class App : Application
 {
     private IHost? _host;
 
+    // ── Single instance ───────────────────────────────────────────────────
+    // One RigCheck at a time. Two windows would contend for the same COM
+    // port (the second reports "in use" and blames another program) and
+    // overwrite each other's settings file. A second launch signals the
+    // running instance to come to the front, then exits.
+    //
+    // RigCheck allowed multiple instances through 0.7.0; this was changed in
+    // 0.7.1 — see issue #10 for the reasoning. To allow several instances
+    // again, delete this block, the two fields, and ActivateOnSignal below.
+    private const string InstanceName = @"Local\ShackDesk.RigCheck";
+    private static Mutex? _instanceMutex;
+
     protected override async void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
+
+        _instanceMutex = new Mutex(initiallyOwned: true, InstanceName, out var isFirstInstance);
+        if (!isFirstInstance)
+        {
+            using var signal = new EventWaitHandle(false, EventResetMode.AutoReset, InstanceName + ".Activate");
+            signal.Set();
+            Shutdown(0);
+            return;
+        }
+        ActivateOnSignal();
 
         // Settings are read before the host exists because the log level lives there.
         var earlySettings = new SettingsService();
@@ -84,8 +106,29 @@ public partial class App : Application
         Shutdown(1);
     }
 
+    /// <summary>
+    /// Wait (off the UI thread) for a second launch's signal and bring the
+    /// main window forward. Part of the single-instance block above.
+    /// </summary>
+    private void ActivateOnSignal()
+    {
+        var activate = new EventWaitHandle(false, EventResetMode.AutoReset, InstanceName + ".Activate");
+        ThreadPool.RegisterWaitForSingleObject(activate, (_, _) => Dispatcher.BeginInvoke(() =>
+        {
+            if (MainWindow is not { } w) return;
+            if (w.WindowState == WindowState.Minimized) w.WindowState = WindowState.Normal;
+            w.Show();
+            w.Activate();
+            // Windows only lets a background process steal focus reluctantly;
+            // a Topmost flick is the reliable way to surface the window.
+            w.Topmost = true;
+            w.Topmost = w.DataContext is MainViewModel { AlwaysOnTop: true };
+        }), null, Timeout.Infinite, executeOnlyOnce: false);
+    }
+
     protected override async void OnExit(ExitEventArgs e)
     {
+        _instanceMutex?.Dispose();
         Log.Information("{App} shutting down", BrandingInfo.AppName);
         Log.CloseAndFlush();
 

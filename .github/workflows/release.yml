@@ -1,0 +1,210 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# RigCheck by ShackDesk
+# Project : https://github.com/Computer-Tsu/ShackDesk-RigCheck
+# Author  : Mark McDow (N4TEK) — My Computer Guru LLC
+# License : GPLv3 (see LICENSE)
+#
+# Workflow : Release
+# Purpose  : Builds and publishes a beta or stable release from a version tag.
+#            Alphas come from build.yml on every develop push; this workflow
+#            never runs for them.
+#
+# Trigger  : push of a tag matching v*
+#              v0.7.4-beta   → channel beta,   pre-release, RigCheck-0.7.4-beta.exe
+#              v0.7.5        → channel stable, release,     RigCheck-0.7.5.exe
+#
+# Model    : promotion. The version names the CODE; the channel names how far
+#            it has been trusted. An alpha that is working and feature-complete
+#            is tagged as a beta with the SAME number; develop moves on to the
+#            next minor. A fix on the beta line is a patch bump (0.7.5-beta),
+#            and the stable is simply the last beta re-tagged without -beta.
+#            Every build in every channel is a new patch number — one rule.
+#            The beta line lives on main: promote by tagging main, fix a beta
+#            by committing to main (patch bump, cherry-pick to develop), and
+#            tag again. develop is always the next minor's alpha.
+#
+# Checks   : the tag's version must equal <Version> in RigCheck.csproj, or
+#            the build fails before anything is published.
+#
+# Channel  : passed to MSBuild with the UTC build date; BuildInfo.cs shows it
+#            in the title bar (0.7.4-beta). Beta builds warn 90 days after the build date but keep
+#            running; stable builds never expire. No hash in the filename or
+#            the tag: these are the builds people keep.
+#
+# Signing  : not yet. A signing step belongs between publish and rename once
+#            a certificate exists; SmartScreen guidance is in the notes until then.
+# ──────────────────────────────────────────────────────────────────────────────
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+env:
+  DOTNET_VERSION: '10.0.x'
+  PROJECT:        'RigCheck.csproj'
+  RID:            'win-x64'
+  APP_EXE:        'RigCheck.exe'
+
+jobs:
+  build:
+    name: Build ${{ github.ref_name }}
+    runs-on: windows-latest
+
+    outputs:
+      channel:    ${{ steps.meta.outputs.channel }}
+      version:    ${{ steps.meta.outputs.version }}
+      label:      ${{ steps.meta.outputs.label }}
+      name:       ${{ steps.meta.outputs.name }}
+      date:       ${{ steps.meta.outputs.date }}
+
+    steps:
+      - name: Checkout tag
+        uses: actions/checkout@v7
+
+      - name: Setup .NET ${{ env.DOTNET_VERSION }}
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Read the tag and check it against the project version
+        id: meta
+        shell: pwsh
+        run: |
+          $tag = '${{ github.ref_name }}'                       # v0.7.4-beta or v0.7.5
+          if ($tag -notmatch '^v(\d+\.\d+\.\d+)(-beta)?$') {
+            Write-Error "Tag '$tag' must look like v1.2.3 (stable) or v1.2.3-beta (beta)"
+          }
+          $version    = $Matches[1]
+          $channel    = if ($Matches[2]) { 'beta' } else { 'stable' }
+          $label      = if ($channel -eq 'beta') { "$version-beta" } else { $version }
+          $name       = "RigCheck-$label"
+          $date       = [DateTime]::UtcNow.ToString('yyyy-MM-dd')
+
+          $projectVersion = (Select-String -Path '${{ env.PROJECT }}' -Pattern '<Version>([^<]+)</Version>').Matches[0].Groups[1].Value
+          if ($projectVersion -ne $version) {
+            Write-Error "Tag version $version does not match <Version>$projectVersion</Version> in ${{ env.PROJECT }} — bump the project first"
+          }
+
+          "channel=$channel"       >> $env:GITHUB_OUTPUT
+          "version=$version"       >> $env:GITHUB_OUTPUT
+          "label=$label"           >> $env:GITHUB_OUTPUT
+          "name=$name"             >> $env:GITHUB_OUTPUT
+          "date=$date"             >> $env:GITHUB_OUTPUT
+          Write-Host "Tag: $tag  Channel: $channel  Version: $label  Built: $date  Artifact: $name.exe"
+
+      - name: Restore NuGet packages
+        run: dotnet restore ${{ env.PROJECT }}
+
+      - name: Publish — single self-contained exe
+        run: >
+          dotnet publish ${{ env.PROJECT }}
+          --configuration Release
+          --runtime ${{ env.RID }}
+          --self-contained true
+          --no-restore
+          -p:PublishSingleFile=true
+          -p:IncludeNativeLibrariesForSelfExtract=true
+          -p:Channel=${{ steps.meta.outputs.channel }}
+          -p:BuildDateUtc=${{ steps.meta.outputs.date }}
+          --output ./publish
+
+      - name: Verify single-file output
+        shell: pwsh
+        run: |
+          Get-ChildItem ./publish -Recurse | ForEach-Object { "  $($_.FullName.Substring((Resolve-Path ./publish).Path.Length))  $($_.Length)" }
+          $extra = Get-ChildItem ./publish -Recurse -File | Where-Object { $_.Name -ne '${{ env.APP_EXE }}' -and $_.Name -notlike '*.pdb' }
+          if ($extra) { Write-Error "publish/ contains files besides the exe — single-file bundling is incomplete: $($extra.Name -join ', ')" }
+
+      - name: Name the exe and compute SHA-256
+        shell: pwsh
+        run: |
+          $name = '${{ steps.meta.outputs.name }}'
+          Rename-Item './publish/${{ env.APP_EXE }}' "$name.exe"
+          $hash = (Get-FileHash -Algorithm SHA256 "./publish/$name.exe").Hash.ToLower()
+          "$hash  $name.exe" | Out-File -FilePath "./publish/$name.exe.sha256" -NoNewline
+          Write-Host "SHA-256: $hash"
+
+      - name: Upload exe artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ steps.meta.outputs.name }}
+          path: |
+            ./publish/${{ steps.meta.outputs.name }}.exe
+            ./publish/${{ steps.meta.outputs.name }}.exe.sha256
+
+  # ─────────────────────────────────────────────────────────────────────
+  release:
+    name: Publish ${{ needs.build.outputs.channel }} release
+    runs-on: ubuntu-latest
+    needs: build
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout tag
+        uses: actions/checkout@v7
+
+      - name: Download exe artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: ${{ needs.build.outputs.name }}
+          path: ./release
+
+      - name: Compose release notes
+        shell: bash
+        run: |
+          NAME='${{ needs.build.outputs.name }}'
+          LABEL='${{ needs.build.outputs.label }}'
+          CHANNEL='${{ needs.build.outputs.channel }}'
+          DATE='${{ needs.build.outputs.date }}'
+          HASH=$(cut -d' ' -f1 "./release/$NAME.exe.sha256")
+
+          # Top section of CHANGELOG.md: from the first "## [" to the next one
+          CHANGES=$(awk '/^## \[/{n++} n==1' CHANGELOG.md | tail -n +2)
+
+          {
+            if [ "$CHANNEL" = "beta" ]; then
+              WARN=$(date -u -d "$DATE + 90 days" +%Y-%m-%d)
+              echo "**Beta $LABEL.** Feature-complete for this version and tested on real radios; looking for reports from more rigs and cables before the stable release."
+              echo
+              echo "Beta builds keep running indefinitely but start showing a reminder in the status bar from $WARN, 90 days after they were built, so nobody stays on an old beta by accident. The version is shown in the window title and in Help › About."
+            else
+              echo "**RigCheck $LABEL.** Stable release — never expires."
+            fi
+            echo
+            echo "## What's in it"
+            echo
+            echo "$CHANGES"
+            echo
+            echo "## Requirements"
+            echo
+            echo "- Windows 10 (21H2 or later) or Windows 11, 64-bit. Nothing else to install — the .NET runtime is inside the exe."
+            echo "- Hamlib, from WSJT-X (\`winget install JoeTaylor.WSJT-x\`), Fldigi, or the standalone Windows build. RigCheck finds it automatically; Find my radio and Scan PC work without it."
+            echo
+            echo "## This build is unsigned"
+            echo
+            echo "Windows SmartScreen and your browser may warn about it. Verify the download instead:"
+            echo
+            echo '```'
+            echo "Get-FileHash $NAME.exe -Algorithm SHA256"
+            echo '```'
+            echo
+            echo "Expected: \`$HASH\`"
+            echo
+            echo "Download help: https://shackdesk.com/rigcheck/download/ · Problems: [Issues](${{ github.server_url }}/${{ github.repository }}/issues) · Questions: [Discussions](${{ github.server_url }}/${{ github.repository }}/discussions)"
+          } > ./release_notes.md
+
+      - name: Create release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: RigCheck ${{ needs.build.outputs.label }}
+          body_path: ./release_notes.md
+          prerelease: ${{ needs.build.outputs.channel == 'beta' }}
+          make_latest: ${{ needs.build.outputs.channel == 'stable' }}
+          files: |
+            ./release/${{ needs.build.outputs.name }}.exe
+            ./release/${{ needs.build.outputs.name }}.exe.sha256

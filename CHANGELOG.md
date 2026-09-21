@@ -5,6 +5,30 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
+## [0.7.2] - 2026-09-21
+
+### Changed
+- Alpha tags and filenames carry the UTC time as well as the date
+  (`alpha/20260921-2332-4d0ef55`): GitHub sorts the release list by tag name, so several alphas
+  on one day were listed in hash order
+- Beta and stable numbering switched to the promotion model before any beta was cut: a beta
+  keeps its alpha's number (`0.7.4-beta`), a fix during the beta is the next patch
+  (`0.7.5-beta`), and the stable is the last beta without the suffix (`0.7.5`). The `beta.N`
+  counter from 0.7.1 is gone; the title bar shows version and channel only
+
+## [0.7.1] - 2026-09-21
+
+### Added
+- Beta and stable releases are built from version tags by promotion: an alpha that is working
+  and feature-complete is tagged `v0.7.4-beta` and published as `RigCheck-0.7.4-beta.exe`
+  (pre-release, 90-day reminder); the last beta is tagged `v0.7.5` and published as
+  `RigCheck-0.7.5.exe` (stable). Same number, different channel. The tag must match the project
+  version
+
+### Changed
+- RigCheck runs as a single instance: starting it again brings the open window to the front.
+  Two instances contended for the same COM port and overwrote each other's settings (#10)
+
 ## [0.7.0] - 2026-09-21
 
 **Milestone: environment checks and Find my radio, proven on a real Icom IC-7300.**
