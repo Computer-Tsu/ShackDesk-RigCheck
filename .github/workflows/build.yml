@@ -5,20 +5,29 @@
 # License : GPLv3 (see LICENSE)
 #
 # Workflow : Build
-# Purpose  : Compiles RigCheck and publishes the self-contained Windows
-#            executable as a workflow artifact. This is the project's only
-#            build path — there is no local toolchain.
+# Purpose  : Compiles RigCheck, publishes the self-contained Windows exe, and
+#            on the develop branch publishes it as an alpha pre-release.
+#            This is the project's only build path — there is no local toolchain.
 #
 # Triggers :
-#   - push to develop or main      — build and publish exe artifact
+#   - push to develop              — build, publish artifact, publish alpha release
+#   - push to main                 — build, publish artifact (stable releases are tag-driven)
 #   - pull_request                 — build only
-#   - workflow_dispatch (manual)   — build; optionally publish the exe artifact
+#   - schedule (weekly, Monday)    — rebuild develop so a fresh alpha exists
+#                                    before the previous one expires (30 days)
+#   - workflow_dispatch (manual)   — build; optionally publish artifact and release
 #
 # Channel  : develop → alpha (30-day expiry), main → stable. The channel and
 #            the UTC build date are passed to MSBuild and stamped into the
 #            assembly; BuildInfo.cs reads them at runtime.
 #
 # Artifact : RigCheck-{version}-{channel}-{yyyyMMdd}-{sha7}.exe plus .sha256
+# Release  : tag alpha/{yyyyMMdd}-{sha7}, marked pre-release. Alpha releases
+#            older than 30 days are deleted after each new one is published,
+#            since their builds have expired anyway.
+#
+# Scheduled runs always execute from the default branch's copy of this file,
+# so the checkout step selects develop explicitly for them.
 #
 # Manual trigger : Actions tab → "Build" → "Run workflow" → select branch
 # ──────────────────────────────────────────────────────────────────────────────
@@ -33,6 +42,7 @@ on:
       - '.github/ISSUE_TEMPLATE/**'
       - '.github/PULL_REQUEST_TEMPLATE.md'
       - '.github/SECURITY.md'
+      - '.github/dependabot.yml'
   pull_request:
     branches: [ develop, main ]
     paths-ignore:
@@ -41,12 +51,20 @@ on:
       - '.github/ISSUE_TEMPLATE/**'
       - '.github/PULL_REQUEST_TEMPLATE.md'
       - '.github/SECURITY.md'
+      - '.github/dependabot.yml'
+  schedule:
+    - cron: '0 6 * * 1'
   workflow_dispatch:
     inputs:
       publish_artifact:
-        description: 'Publish and upload RigCheck.exe artifact'
+        description: 'Publish and upload the exe artifact'
         required: false
         default: true
+        type: boolean
+      publish_release:
+        description: 'Also publish an alpha release (develop only)'
+        required: false
+        default: false
         type: boolean
 
 env:
@@ -60,10 +78,22 @@ jobs:
     name: Build
     runs-on: windows-latest
 
+    outputs:
+      channel: ${{ steps.meta.outputs.channel }}
+      version: ${{ steps.meta.outputs.version }}
+      date:    ${{ steps.meta.outputs.date }}
+      name:    ${{ steps.meta.outputs.name }}
+      sha:     ${{ steps.meta.outputs.sha }}
+      sha7:    ${{ steps.meta.outputs.sha7 }}
+      publish: ${{ steps.meta.outputs.publish }}
+      release: ${{ steps.meta.outputs.release }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v6
         with:
+          # Scheduled runs come from main's workflow file but must build develop
+          ref: ${{ github.event_name == 'schedule' && 'develop' || github.ref }}
           fetch-depth: 0
 
       - name: Setup .NET ${{ env.DOTNET_VERSION }}
@@ -71,21 +101,34 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Determine channel, version, and build date
+      - name: Determine channel, version, build date, and what to publish
         id: meta
         shell: pwsh
         run: |
-          $channel = if ('${{ github.ref }}' -eq 'refs/heads/main') { 'stable' } else { 'alpha' }
+          $branch  = (git rev-parse --abbrev-ref HEAD)
+          $sha     = (git rev-parse HEAD)
+          $sha7    = $sha.Substring(0, 7)
+          $channel = if ($branch -eq 'main') { 'stable' } else { 'alpha' }
           $version = (Select-String -Path '${{ env.PROJECT }}' -Pattern '<Version>([^<]+)</Version>').Matches[0].Groups[1].Value
           $date    = [DateTime]::UtcNow.ToString('yyyy-MM-dd')
           $stamp   = [DateTime]::UtcNow.ToString('yyyyMMdd')
-          $sha     = '${{ github.sha }}'.Substring(0, 7)
-          $name    = if ($channel -eq 'stable') { "RigCheck-$version" } else { "RigCheck-$version-$channel-$stamp-$sha" }
-          "channel=$channel"   >> $env:GITHUB_OUTPUT
-          "version=$version"   >> $env:GITHUB_OUTPUT
-          "date=$date"         >> $env:GITHUB_OUTPUT
-          "name=$name"         >> $env:GITHUB_OUTPUT
-          Write-Host "Channel: $channel  Version: $version  Built: $date  Artifact: $name"
+          $name    = if ($channel -eq 'stable') { "RigCheck-$version" } else { "RigCheck-$version-$channel-$stamp-$sha7" }
+
+          $event   = '${{ github.event_name }}'
+          $publish = $event -ne 'pull_request' -and ($event -ne 'workflow_dispatch' -or '${{ inputs.publish_artifact }}' -eq 'true')
+          $release = $branch -eq 'develop' -and (
+                       $event -eq 'push' -or $event -eq 'schedule' -or
+                       ($event -eq 'workflow_dispatch' -and '${{ inputs.publish_release }}' -eq 'true'))
+
+          "channel=$channel" >> $env:GITHUB_OUTPUT
+          "version=$version" >> $env:GITHUB_OUTPUT
+          "date=$date"       >> $env:GITHUB_OUTPUT
+          "name=$name"       >> $env:GITHUB_OUTPUT
+          "sha=$sha"         >> $env:GITHUB_OUTPUT
+          "sha7=$sha7"       >> $env:GITHUB_OUTPUT
+          "publish=$($publish.ToString().ToLower())" >> $env:GITHUB_OUTPUT
+          "release=$($release.ToString().ToLower())" >> $env:GITHUB_OUTPUT
+          Write-Host "Branch: $branch  Channel: $channel  Version: $version  Built: $date  Artifact: $name  Publish: $publish  Release: $release"
 
       - name: Restore NuGet packages
         run: dotnet restore ${{ env.PROJECT }}
@@ -99,7 +142,7 @@ jobs:
           -p:BuildDateUtc=${{ steps.meta.outputs.date }}
 
       - name: Publish — single self-contained exe
-        if: ${{ github.event_name != 'pull_request' && (github.event_name != 'workflow_dispatch' || inputs.publish_artifact) }}
+        if: steps.meta.outputs.publish == 'true'
         run: >
           dotnet publish ${{ env.PROJECT }}
           --configuration Release
@@ -113,7 +156,7 @@ jobs:
           --output ./publish
 
       - name: Name the exe and compute SHA-256
-        if: ${{ github.event_name != 'pull_request' && (github.event_name != 'workflow_dispatch' || inputs.publish_artifact) }}
+        if: steps.meta.outputs.publish == 'true'
         shell: pwsh
         run: |
           $name = '${{ steps.meta.outputs.name }}'
@@ -123,10 +166,99 @@ jobs:
           Write-Host "SHA-256: $hash"
 
       - name: Upload exe artifact
-        if: ${{ github.event_name != 'pull_request' && (github.event_name != 'workflow_dispatch' || inputs.publish_artifact) }}
+        if: steps.meta.outputs.publish == 'true'
         uses: actions/upload-artifact@v7
         with:
           name: ${{ steps.meta.outputs.name }}
           path: |
             ./publish/${{ steps.meta.outputs.name }}.exe
             ./publish/${{ steps.meta.outputs.name }}.exe.sha256
+
+  # ─────────────────────────────────────────────────────────────────────
+  release:
+    name: Publish alpha release
+    runs-on: ubuntu-latest
+    needs: build
+    if: needs.build.outputs.release == 'true'
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.build.outputs.sha }}
+
+      - name: Download exe artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: ${{ needs.build.outputs.name }}
+          path: ./release
+
+      - name: Compose release notes
+        id: notes
+        shell: bash
+        run: |
+          NAME='${{ needs.build.outputs.name }}'
+          VERSION='${{ needs.build.outputs.version }}'
+          DATE='${{ needs.build.outputs.date }}'
+          EXPIRES=$(date -u -d "$DATE + 30 days" +%Y-%m-%d)
+          HASH=$(cut -d' ' -f1 "./release/$NAME.exe.sha256")
+
+          # Top section of CHANGELOG.md: from the first "## [" to the next one
+          CHANGES=$(awk '/^## \[/{n++} n==1' CHANGELOG.md | tail -n +2)
+
+          {
+            echo "Alpha build from the \`develop\` branch. For testing — not for everyday use."
+            echo
+            echo "**This build expires on $EXPIRES.** Alpha builds stop running 30 days after they are built so testers stay on current code. The expiry date is shown in the window title and in Help > About. Download a newer alpha from the [releases page](${{ github.server_url }}/${{ github.repository }}/releases) before then."
+            echo
+            echo "## What's in it"
+            echo
+            echo "$CHANGES"
+            echo
+            echo "## Requirements"
+            echo
+            echo "- Windows 10 (21H2 or later) or Windows 11, 64-bit. Nothing else to install — the .NET runtime is inside the exe."
+            echo "- Hamlib, from WSJT-X, Fldigi, or the standalone Windows build. RigCheck finds it automatically."
+            echo
+            echo "## This build is unsigned"
+            echo
+            echo "Windows SmartScreen and your browser may warn about it. Verify the download instead:"
+            echo
+            echo '```'
+            echo "Get-FileHash $NAME.exe -Algorithm SHA256"
+            echo '```'
+            echo
+            echo "Expected: \`$HASH\`"
+            echo
+            echo "Download help: https://shackdesk.com/rigcheck/download/ · Problems: [Issues](${{ github.server_url }}/${{ github.repository }}/issues) · Questions: [Discussions](${{ github.server_url }}/${{ github.repository }}/discussions)"
+          } > ./release_notes.md
+
+          echo "expires=$EXPIRES" >> "$GITHUB_OUTPUT"
+
+      - name: Create pre-release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: alpha/${{ needs.build.outputs.date }}-${{ needs.build.outputs.sha7 }}
+          target_commitish: ${{ needs.build.outputs.sha }}
+          name: RigCheck ${{ needs.build.outputs.version }}-alpha (${{ needs.build.outputs.date }})
+          body_path: ./release_notes.md
+          prerelease: true
+          files: |
+            ./release/${{ needs.build.outputs.name }}.exe
+            ./release/${{ needs.build.outputs.name }}.exe.sha256
+
+      - name: Delete alpha releases older than 30 days
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          CUTOFF=$(date -u -d '30 days ago' +%Y-%m-%d)
+          gh release list --repo "${{ github.repository }}" --limit 200 --json tagName,createdAt,isPrerelease \
+            --jq ".[] | select(.isPrerelease and (.tagName | startswith(\"alpha/\")) and (.createdAt < \"${CUTOFF}T00:00:00Z\")) | .tagName" |
+          while read -r TAG; do
+            echo "Deleting expired alpha: $TAG"
+            gh release delete "$TAG" --repo "${{ github.repository }}" --cleanup-tag --yes
+          done

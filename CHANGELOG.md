@@ -5,9 +5,13 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
-## [Unreleased]
+## [0.6.3] - 2026-09-21
+
+Expiry, diagnostics, settings, and automated alpha releases.
 
 ### Added
+- Every push to `develop` is published automatically as a dated alpha pre-release; alpha releases
+  older than 30 days are removed. A weekly scheduled build keeps a current alpha available.
 - Build channel and date stamped into the assembly at compile time; alpha builds expire
   30 days after they are built and refuse to start afterwards, beta builds warn after 90 days,
   stable builds never expire
