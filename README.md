@@ -139,20 +139,16 @@ Target users:
 ## Core Features
 
 ### Connection Configuration
-- Radio model selector (searchable dropdown 
-  populated from Hamlib rig database)
-- COM port selector (populated from system, 
-  inherits detection logic from PortPane if installed)
-- Baud rate selector: 4800/9600/19200/38400/
-  57600/115200
-- Data bits, parity, stop bits (default 8N1)
-- Flow control: None/Hardware/Software
-- PTT method: CAT/RTS/DTR/VOX/None
-- Network mode: rigctld host:port (default 
-  localhost:4532)
-- Connection type toggle: Direct serial vs 
-  rigctld network
-- Detect and test GPS (USB serial receivers, puck)
+- Quick-start preset picker for popular radios (`Assets/radio_presets.json`), which fills
+  the Hamlib model and serial defaults; every field can be overridden afterwards
+- COM port list from Plug and Play, with the USB chip identified by VID/PID and a cable hint
+  when it is a known radio interface (`Assets/usb_devices.json`)
+- Baud rate: Radio default, or 1200 through 115200
+- Data bits, parity, stop bits, flow control, and PTT method, each defaulting to
+  "Radio default" so Hamlib's own model database decides
+- Direct serial or rigctld network mode (host:port, default localhost:4532)
+- Nothing is chosen for you: no port is auto-selected and the Hamlib dummy rig (model 1)
+  is never a valid selection, so a passing result always means a real radio answered
 
 ### PC Scan (no radio needed)
 The **Scan PC** button checks the computer side before any radio is

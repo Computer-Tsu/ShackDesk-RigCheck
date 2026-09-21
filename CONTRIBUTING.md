@@ -16,9 +16,34 @@ Thank you for your interest in contributing to RigCheck by ShackDesk.
 | ------ | ----- |
 | Bug report | Open an issue with your exported RigCheck log attached |
 | Feature request | Open an issue describing the problem you are trying to solve |
-| Radio or cable database entry | Open an issue or submit a PR editing the data files under `Assets/` |
+| Radio, cable, or protocol data | Edit a JSON file under `Assets/` and submit a PR — see [Data files](#data-files); no compiler needed |
 | Translation | See [TRANSLATING.md](TRANSLATING.md) — no programming needed |
 | Code | Fork, branch, and submit a pull request (see below) |
+
+## Data files
+
+Most of what RigCheck knows about radios lives in JSON, not code, so anyone can
+add a rig by pull request. Validate at jsonlint.com before submitting; each file
+starts with a `_comment` entry that explains its fields.
+
+| File | What it holds |
+| ------ | ----- |
+| `Assets/radio_presets.json` | Quick-start presets: Hamlib model, default serial settings, popularity (sort order) |
+| `Assets/usb_devices.json` | USB VID/PID → serial chip, cable hint, radio family, suggested presets |
+| `Assets/rig_families.json` | Protocol families for Find my radio: which built-in query to send, baud rates to sweep (most likely first), default model |
+| `Assets/rig_ids.json` | How a radio names itself (`ID023;`, CI-V address `94`) → Hamlib model number |
+| `Assets/port_skip_patterns.json` | Port-name patterns classed as rotator, amplifier, antenna, GPS, or Bluetooth — never opened by Find my radio |
+
+Hamlib model numbers follow `riglist.h` in the Hamlib source: the thousands
+digit is the backend (1 Yaesu, 2 Kenwood and Elecraft, 3 Icom). Please say
+where a value came from (the radio's manual, `rigctl -l`, a real exchange) in
+the PR.
+
+**One rule that will not bend:** data files select a probe operation by name
+from the fixed set compiled into RigCheck. A PR that adds command bytes, a new
+field carrying bytes, or a "custom command" mechanism to any data file will be
+declined. A data file that could make RigCheck send arbitrary bytes at a
+transmitter is a safety problem, not a feature.
 
 ## CLA
 
