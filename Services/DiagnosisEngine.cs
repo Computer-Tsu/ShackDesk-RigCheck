@@ -1,3 +1,4 @@
+using RigCheck.Localization;
 using RigCheck.Models;
 
 namespace RigCheck.Services;
@@ -9,6 +10,9 @@ namespace RigCheck.Services;
 /// Every message follows the pattern:
 ///   What happened (one sentence)
 ///   Check: bulleted list of likely causes in order of probability
+///
+/// All text comes from Strings.resx; each bullet is its own key so
+/// translators can work one sentence at a time.
 /// </summary>
 public class DiagnosisEngine
 {
@@ -34,104 +38,104 @@ public class DiagnosisEngine
     // ── Diagnosis messages ────────────────────────────────────────────────
 
     private static DiagnosticResult HamlibNotFound() => new(
-        Summary: "Hamlib (rigctl.exe) is not installed or could not be found.",
+        Summary: Strings.Get("Diag_HamlibNotFound_Summary"),
         Checks:
         [
-            "Install WSJT-X — it includes Hamlib automatically.",
-            "Or download Hamlib for Windows from hamlib.github.io.",
-            "After installing, restart RigCheck so it can find the new files.",
+            Strings.Get("Diag_HamlibNotFound_1"),
+            Strings.Get("Diag_HamlibNotFound_2"),
+            Strings.Format("Diag_HamlibNotFound_3", BrandingInfo.AppName),
         ],
         FixCommand: null,
         LearnMoreUrl: BrandingInfo.HamlibDownloadUrl);
 
     private static DiagnosticResult PortInUse(string port) => new(
-        Summary: $"{port} is already open by another program.",
+        Summary: Strings.Format("Diag_PortInUse_Summary", port),
         Checks:
         [
-            "Is WSJT-X, Fldigi, JS8Call, or Winlink currently running?",
-            "Close the other program and try again.",
-            "Some programs hold the port open even when not actively transmitting.",
-            "In WSJT-X: File → Settings → Radio — disconnect rig control before testing here.",
+            Strings.Get("Diag_PortInUse_1"),
+            Strings.Get("Diag_PortInUse_2"),
+            Strings.Get("Diag_PortInUse_3"),
+            Strings.Get("Diag_PortInUse_4"),
         ],
         FixCommand: null,
         LearnMoreUrl: null);
 
     private static DiagnosticResult PortNotFound(string port) => new(
-        Summary: $"{port} was not found on this computer.",
+        Summary: Strings.Format("Diag_PortNotFound_Summary", port),
         Checks:
         [
-            "Is the USB-to-serial cable plugged in?",
-            "Check Device Manager to see which COM port Windows assigned.",
-            $"The port may have changed — try a different COM port number.",
-            "Some radios need a driver installed (e.g., Icom IC-7300 uses Silicon Labs CP210x).",
+            Strings.Get("Diag_PortNotFound_1"),
+            Strings.Get("Diag_PortNotFound_2"),
+            Strings.Get("Diag_PortNotFound_3"),
+            Strings.Get("Diag_PortNotFound_4"),
         ],
         FixCommand: null,
         LearnMoreUrl: null);
 
     private static DiagnosticResult Timeout(ConnectionConfig cfg) => new(
-        Summary: "The radio did not respond within the time limit.",
+        Summary: Strings.Get("Diag_Timeout_Summary"),
         Checks:
         [
-            "Is the radio powered on?",
-            $"Is the baud rate correct? Your radio manual lists the CAT baud rate. Currently set to {(cfg.BaudRate > 0 ? cfg.BaudRate.ToString() : "the radio's default")}.",
-            "Is the CAT / CI-V / RS-232 cable connected to the correct port on the radio?",
-            "Does your radio need CAT control enabled in its menu? Check the manual for \"CAT\", \"CI-V\", or \"RS-232\" settings.",
-            "Some radios use a different data bits / parity / stop bits setting. Check the radio manual.",
+            Strings.Get("Diag_Timeout_1"),
+            Strings.Format("Diag_Timeout_2", cfg.BaudRate > 0 ? cfg.BaudRate.ToString() : Strings.Get("Diag_BaudDefault")),
+            Strings.Get("Diag_Timeout_3"),
+            Strings.Get("Diag_Timeout_4"),
+            Strings.Get("Diag_Timeout_5"),
         ],
         FixCommand:  null,
         LearnMoreUrl: null,
         HelpTopics:  HelpContent.TopicsForError(RigctlError.Timeout));
 
     private static DiagnosticResult NoResponse(ConnectionConfig cfg) => new(
-        Summary: "Connected to the port, but the radio returned no data.",
+        Summary: Strings.Get("Diag_NoResponse_Summary"),
         Checks:
         [
-            $"Verify the selected radio model matches your actual radio. Currently: {cfg.RadioModelName}.",
-            "Try a lower baud rate — many radios default to 9600 baud.",
-            "Check the radio's CAT/CI-V baud rate setting matches RigCheck.",
-            "Is a straight-through or null-modem cable needed? Some radios need one vs. the other.",
+            Strings.Format("Diag_NoResponse_1", cfg.RadioModelName),
+            Strings.Get("Diag_NoResponse_2"),
+            Strings.Format("Diag_NoResponse_3", BrandingInfo.AppName),
+            Strings.Get("Diag_NoResponse_4"),
         ],
         FixCommand:  null,
         LearnMoreUrl: null,
         HelpTopics:  HelpContent.TopicsForError(RigctlError.NoResponse));
 
     private static DiagnosticResult WrongModel(ConnectionConfig cfg) => new(
-        Summary: "The radio responded, but the data didn't match the expected radio model.",
+        Summary: Strings.Get("Diag_WrongModel_Summary"),
         Checks:
         [
-            $"The selected model is \"{cfg.RadioModelName}\" — does this match your actual radio?",
-            "Search for your exact model number in the radio selector.",
-            "Some radios have multiple Hamlib entries — try nearby entries in the list.",
-            "For Icom radios, verify the CI-V address in both the radio menu and RigCheck.",
+            Strings.Format("Diag_WrongModel_1", cfg.RadioModelName),
+            Strings.Get("Diag_WrongModel_2"),
+            Strings.Get("Diag_WrongModel_3"),
+            Strings.Format("Diag_WrongModel_4", BrandingInfo.AppName),
         ],
         FixCommand: null,
         LearnMoreUrl: null);
 
     private static DiagnosticResult RigctldNotRunning(ConnectionConfig cfg) => new(
-        Summary: $"Could not connect to rigctld at {cfg.RigctldHost}:{cfg.RigctldPort}.",
+        Summary: Strings.Format("Diag_Rigctld_Summary", cfg.RigctldHost, cfg.RigctldPort),
         Checks:
         [
-            "Is rigctld running? It must be started separately before RigCheck can connect.",
-            $"Verify the host is correct — currently set to \"{cfg.RigctldHost}\".",
-            $"Verify the port is correct — currently set to {cfg.RigctldPort} (default is 4532).",
-            "Check your firewall is not blocking rigctld.",
+            Strings.Format("Diag_Rigctld_1", BrandingInfo.AppName),
+            Strings.Format("Diag_Rigctld_2", cfg.RigctldHost),
+            Strings.Format("Diag_Rigctld_3", cfg.RigctldPort),
+            Strings.Get("Diag_Rigctld_4"),
         ],
         FixCommand: $"rigctld -m {cfg.ModelId} -r {cfg.ComPort} -s {cfg.BaudRate} -t {cfg.RigctldPort}",
         LearnMoreUrl: null);
 
     private static DiagnosticResult Cancelled() => new(
-        Summary: "The operation was cancelled.",
+        Summary: Strings.Get("Diag_Cancelled_Summary"),
         Checks: [],
         FixCommand: null,
         LearnMoreUrl: null);
 
     private static DiagnosticResult Unknown(string rawMessage) => new(
-        Summary: "An unexpected error occurred.",
+        Summary: Strings.Get("Diag_Unknown_Summary"),
         Checks:
         [
-            "Check the raw error message below for clues.",
-            "Try running the shown command manually in a CMD window to see the full output.",
-            "Export the log and ask for help in your club or post to a support forum.",
+            Strings.Get("Diag_Unknown_1"),
+            Strings.Get("Diag_Unknown_2"),
+            Strings.Get("Diag_Unknown_3"),
         ],
         FixCommand: null,
         LearnMoreUrl: BrandingInfo.IssueUrl,

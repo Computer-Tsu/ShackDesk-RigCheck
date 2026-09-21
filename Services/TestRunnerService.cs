@@ -1,3 +1,4 @@
+using RigCheck.Localization;
 using RigCheck.Models;
 using Serilog;
 
@@ -43,7 +44,7 @@ public class TestRunnerService
         async Task<TestResult> Run(TestId id, Func<Task<TestResult>> test)
         {
             if (ct.IsCancellationRequested)
-                return TestResult.Skipped(id, "Cancelled");
+                return TestResult.Skipped(id, Strings.Get("Test_Cancelled"));
 
             Log.Information("Running test: {TestId}", id);
             var result = await test();
@@ -60,7 +61,7 @@ public class TestRunnerService
         {
             Log.Warning("Connection failed — skipping remaining tests");
             var skipped = RemainingTests()
-                .Select(id => TestResult.Skipped(id, "Skipped — connection could not be established"))
+                .Select(id => TestResult.Skipped(id, Strings.Get("Test_SkippedNoConnection")))
                 .ToList();
             foreach (var s in skipped) progress?.Report(s);
             results.AddRange(skipped);
@@ -92,12 +93,12 @@ public class TestRunnerService
         if (result.IsSuccess)
             return TestResult.Pass(
                 TestId.OpenConnection,
-                $"Connected to {cfg.RadioModelName} on {cfg.ComPort}",
+                Strings.Format("Msg_Connected", cfg.RadioModelName, cfg.ComPort),
                 cmd.DisplayCommand);
 
         return TestResult.Fail(
             TestId.OpenConnection,
-            $"Could not connect to radio",
+            Strings.Get("Msg_ConnectFailed"),
             cmd.DisplayCommand,
             diag, result.Error);
     }
@@ -111,18 +112,18 @@ public class TestRunnerService
         if (result.IsSuccess && TryParseFrequency(result.RawOutput, out var mhz))
             return TestResult.Pass(
                 TestId.GetFrequency,
-                $"VFO A frequency: {mhz:F3} MHz",
+                Strings.Format("Msg_Frequency", mhz.ToString("F3")),
                 cmd.DisplayCommand);
 
         if (result.IsSuccess)
             return TestResult.Warning(
                 TestId.GetFrequency,
-                $"Radio responded but frequency could not be parsed: {result.RawOutput}",
+                Strings.Format("Msg_FrequencyUnparsed", result.RawOutput),
                 cmd.DisplayCommand);
 
         return TestResult.Fail(
             TestId.GetFrequency,
-            "Radio did not respond to frequency query",
+            Strings.Get("Msg_FrequencyNoResponse"),
             cmd.DisplayCommand,
             diag, result.Error);
     }
@@ -140,13 +141,13 @@ public class TestRunnerService
             var pb    = lines.ElementAtOrDefault(1)?.Trim() ?? "?";
             return TestResult.Pass(
                 TestId.GetMode,
-                $"Current mode: {mode}, passband: {pb} Hz",
+                Strings.Format("Msg_Mode", mode, pb),
                 cmd.DisplayCommand);
         }
 
         return TestResult.Fail(
             TestId.GetMode,
-            "Radio did not respond to mode query",
+            Strings.Get("Msg_ModeNoResponse"),
             cmd.DisplayCommand,
             diag, result.Error);
     }
@@ -161,14 +162,14 @@ public class TestRunnerService
         {
             var pttOn = result.RawOutput.Trim() == "1";
             var label = pttOn
-                ? "PTT is ON — transmitter is KEYED"
-                : "PTT is off (transmitter not keyed)";
+                ? Strings.Get("Msg_PttOn")
+                : Strings.Get("Msg_PttOff");
             return TestResult.Pass(TestId.GetPtt, label, cmd.DisplayCommand);
         }
 
         return TestResult.Fail(
             TestId.GetPtt,
-            "Radio did not respond to PTT query",
+            Strings.Get("Msg_PttNoResponse"),
             cmd.DisplayCommand,
             diag, result.Error);
     }
@@ -182,18 +183,18 @@ public class TestRunnerService
         if (result.IsSuccess && TryParseSmeter(result.RawOutput, out var sLabel, out var dbm))
             return TestResult.Pass(
                 TestId.GetSmeter,
-                $"Signal strength: {sLabel} ({dbm} dBm)",
+                Strings.Format("Msg_Smeter", sLabel, dbm),
                 cmd.DisplayCommand);
 
         if (result.IsSuccess)
             return TestResult.Warning(
                 TestId.GetSmeter,
-                $"S-meter responded but value could not be parsed: {result.RawOutput}",
+                Strings.Format("Msg_SmeterUnparsed", result.RawOutput),
                 cmd.DisplayCommand);
 
         return TestResult.Fail(
             TestId.GetSmeter,
-            "Radio did not respond to S-meter query (some radios don't support this)",
+            Strings.Get("Msg_SmeterNoResponse"),
             cmd.DisplayCommand,
             diag, result.Error);
     }
@@ -207,12 +208,12 @@ public class TestRunnerService
         if (result.IsSuccess)
             return TestResult.Pass(
                 TestId.GetVfo,
-                $"Active VFO: {result.RawOutput.Trim()}",
+                Strings.Format("Msg_Vfo", result.RawOutput.Trim()),
                 cmd.DisplayCommand);
 
         return TestResult.Fail(
             TestId.GetVfo,
-            "Radio did not respond to VFO query",
+            Strings.Get("Msg_VfoNoResponse"),
             cmd.DisplayCommand,
             diag, result.Error);
     }
@@ -226,7 +227,7 @@ public class TestRunnerService
         {
             return TestResult.Fail(
                 TestId.SetFrequency,
-                "Could not read current frequency before set test",
+                Strings.Get("Msg_SetFreqReadFailed"),
                 getCmd.DisplayCommand,
                 _diagnosis.Diagnose(getResult, cfg), getResult.Error);
         }
@@ -240,7 +241,7 @@ public class TestRunnerService
         {
             return TestResult.Fail(
                 TestId.SetFrequency,
-                "Failed to set frequency",
+                Strings.Get("Msg_SetFreqFailed"),
                 setCmd.DisplayCommand,
                 _diagnosis.Diagnose(setResult, cfg), setResult.Error);
         }
@@ -259,14 +260,14 @@ public class TestRunnerService
 
                 return TestResult.Pass(
                     TestId.SetFrequency,
-                    $"Set frequency verified — set {testHz / 1_000_000.0:F3} MHz, read back {verifyMhz:F3} MHz. Original frequency restored.",
+                    Strings.Format("Msg_SetFreqVerified", (testHz / 1_000_000.0).ToString("F3"), verifyMhz.ToString("F3")),
                     setCmd.DisplayCommand);
             }
         }
 
         return TestResult.Warning(
             TestId.SetFrequency,
-            "Frequency was set but readback did not match exactly",
+            Strings.Get("Msg_SetFreqMismatch"),
             setCmd.DisplayCommand);
     }
 

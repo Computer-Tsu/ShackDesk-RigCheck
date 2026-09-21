@@ -111,7 +111,7 @@ public partial class ConnectionViewModel : ObservableObject
     {
         if (value?.HasRadioHint == true)
         {
-            CableHint    = $"Detected: {value.CableHint}";
+            CableHint    = Strings.Format("Cable_Detected", value.CableHint ?? string.Empty);
             HasCableHint = true;
         }
         else
@@ -281,8 +281,8 @@ public partial class TestResultsViewModel : ObservableObject
     {
         SuiteResult = suite;
         SummaryText = suite.AllPassed
-            ? $"✓ All {suite.PassCount} tests passed"
-            : $"{suite.FailCount} failed · {suite.PassCount} passed · {suite.WarningCount} warnings";
+            ? Strings.Format("Summary_AllPassed", suite.PassCount)
+            : Strings.Format("Summary_Mixed", suite.FailCount, suite.PassCount, suite.WarningCount);
     }
 }
 

@@ -32,6 +32,15 @@ public partial class AboutDialog : Window
             ExpiryText.Text       = Strings.Format("About_Expires", BuildInfo.Channel, exp.ToString("yyyy-MM-dd"));
             ExpiryText.Visibility = Visibility.Visible;
         }
+
+        // Translator credit comes from the active language's own resource file,
+        // so contributors are credited automatically once their file is in use.
+        if (Strings.TryGet("Meta_Translator", out var translator) && !string.IsNullOrWhiteSpace(translator))
+        {
+            var language = System.Globalization.CultureInfo.CurrentUICulture.NativeName;
+            TranslationText.Text       = Strings.Format("About_Translation", language, translator);
+            TranslationText.Visibility = Visibility.Visible;
+        }
     }
 
     private void CopyId_Click(object sender, RoutedEventArgs e) =>

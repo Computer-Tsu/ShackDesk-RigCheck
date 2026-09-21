@@ -5,7 +5,22 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
-## [Unreleased]
+## [0.6.5] - 2026-09-21
+
+Every string translatable; translation contributor process in place.
+
+### Added
+- Copy Results button — the same plain-text report as Export Log, to the clipboard
+- All remaining user-visible text moved into `Strings.resx`: test names and messages, every
+  diagnosis and help topic, the exported log, status messages, and the main window
+- Translation coverage workflow: the language table in `TRANSLATING.md` and the credits in
+  `TRANSLATORS.md` are regenerated automatically whenever a string file changes
+- Translator credit shown in Help > About, read from the active language's own file
+- Translation issue template
+- Screenshots in the README
+
+### Changed
+- Exported log labels are padded to a fixed width so translated labels stay aligned
 
 ### Fixed
 - The app closed after Continue on the first-run diagnostics dialog, because that dialog was the

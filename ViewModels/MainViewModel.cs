@@ -90,8 +90,9 @@ public partial class MainViewModel : ObservableObject
     private async Task RunTestsAsync()
     {
         IsRunning = true;
-        StatusMessage = "Running tests…";
+        StatusMessage = Strings.Get("Status_Running");
         Results.Clear();
+        CopyResultsCommand.NotifyCanExecuteChanged();
 
         var cfg = Connection.BuildConfig();
 
@@ -100,9 +101,8 @@ public partial class MainViewModel : ObservableObject
         if (_settings.Current.RunSetFreqTest)
         {
             runSetFreq = MessageBox.Show(
-                "The Set Frequency test will briefly change your radio's VFO frequency " +
-                "by 1 kHz, then restore it.\n\nContinue?",
-                "Confirm frequency test",
+                Strings.Get("Confirm_SetFreq_Message"),
+                Strings.Get("Confirm_SetFreq_Title"),
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Question) == MessageBoxResult.Yes;
         }
@@ -117,8 +117,8 @@ public partial class MainViewModel : ObservableObject
 
             Results.SetSuiteResult(suite);
             StatusMessage = suite.AllPassed
-                ? $"All {suite.PassCount} tests passed."
-                : $"{suite.FailCount} test(s) failed — see results for details.";
+                ? Strings.Format("Status_AllPassed", suite.PassCount)
+                : Strings.Format("Status_SomeFailed", suite.FailCount);
 
             Log.Information("Test suite complete: {Pass} pass, {Fail} fail, {Warn} warn",
                 suite.PassCount, suite.FailCount, suite.WarningCount);
@@ -128,12 +128,13 @@ public partial class MainViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            StatusMessage = "Test run failed unexpectedly.";
+            StatusMessage = Strings.Get("Status_RunFailed");
             Log.Error(ex, "Test suite threw an exception");
         }
         finally
         {
             IsRunning = false;
+            CopyResultsCommand.NotifyCanExecuteChanged();
         }
     }
 
@@ -144,16 +145,16 @@ public partial class MainViewModel : ObservableObject
     {
         if (Results.SuiteResult is null)
         {
-            MessageBox.Show("Run the tests first before exporting.",
-                "No results", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(Strings.Get("Export_NoResults_Message"),
+                Strings.Get("Export_NoResults_Title"), MessageBoxButton.OK, MessageBoxImage.Information);
             return;
         }
 
         var dlg = new Microsoft.Win32.SaveFileDialog
         {
-            Title      = "Export RigCheck log",
-            Filter     = "Text files (*.txt)|*.txt|All files (*.*)|*.*",
-            FileName   = $"RigCheck-{DateTime.Now:yyyyMMdd-HHmmss}.txt",
+            Title      = Strings.Format("Export_DialogTitle", BrandingInfo.AppName),
+            Filter     = Strings.Get("Export_Filter"),
+            FileName   = $"{BrandingInfo.AppName}-{DateTime.Now:yyyyMMdd-HHmmss}.txt",
             DefaultExt = ".txt",
         };
 
@@ -161,11 +162,21 @@ public partial class MainViewModel : ObservableObject
 
         var path = await _logExport.ExportAsync(Results.SuiteResult, dlg.FileName);
 
-        if (path is not null)
-            StatusMessage = $"Log saved to {path}";
-        else
-            StatusMessage = "Log export failed — check the application log for details.";
+        StatusMessage = path is not null
+            ? Strings.Format("Status_LogSaved", path)
+            : Strings.Get("Status_LogFailed");
     }
+
+    // The same plain-text report as Export Log, straight to the clipboard.
+    [RelayCommand(CanExecute = nameof(HasResults))]
+    private void CopyResults()
+    {
+        if (Results.SuiteResult is null) return;
+        Clipboard.SetText(_logExport.BuildReport(Results.SuiteResult));
+        StatusMessage = Strings.Get("Status_Copied");
+    }
+
+    private bool HasResults() => Results.SuiteResult is not null;
 
     [RelayCommand]
     private Task SendRawCommandAsync() =>
@@ -236,12 +247,12 @@ public partial class MainViewModel : ObservableObject
     {
         if (_hamlib.IsAvailable)
         {
-            HamlibStatus = $"Hamlib found via {_hamlib.FoundVia}";
+            HamlibStatus = Strings.Format("Status_HamlibFound", _hamlib.FoundVia ?? string.Empty);
             Log.Information("Hamlib available at {Path}", _hamlib.RigctlPath);
         }
         else
         {
-            HamlibStatus = "Hamlib not found — install WSJT-X or download Hamlib";
+            HamlibStatus = Strings.Get("Status_HamlibMissing");
             Log.Warning("Hamlib not available");
         }
 
@@ -257,7 +268,7 @@ public partial class MainViewModel : ObservableObject
 
         StatusMessage = ExpiryMessage()
             ?? (!_hamlib.IsAvailable
-                ? "Hamlib not found. Run Tests will be unavailable until Hamlib is installed."
+                ? Strings.Get("Status_HamlibMissingLong")
                 : Connection.ReadinessHint);
     }
 

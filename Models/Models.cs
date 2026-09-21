@@ -76,17 +76,9 @@ public record TestResult(
     public static TestResult Pending(TestId id) =>
         new(id, TestStatus.Pending, string.Empty, string.Empty);
 
-    public string FriendlyName => Id switch
-    {
-        TestId.OpenConnection => "Open connection",
-        TestId.GetFrequency   => "Get frequency",
-        TestId.GetMode        => "Get mode",
-        TestId.GetPtt         => "Get PTT state",
-        TestId.GetSmeter      => "Get signal meter",
-        TestId.GetVfo         => "Get VFO",
-        TestId.SetFrequency   => "Set and verify frequency",
-        _                     => Id.ToString(),
-    };
+    // Test names are resource keys "Test_{TestId}" so the list is translatable.
+    public string FriendlyName =>
+        Localization.Strings.TryGet($"Test_{Id}", out var name) ? name : Id.ToString();
 
     public bool HasDiagnosis => Diagnosis is not null && !Diagnosis.IsOk;
 }
