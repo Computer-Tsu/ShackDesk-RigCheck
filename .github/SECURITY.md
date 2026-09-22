@@ -2,15 +2,14 @@
 
 ## Supported Versions
 
-RigCheck is pre-release. Only the most recent alpha or beta build is supported.
+RigCheck is pre-release.
+Only the most recent alpha or beta build is supported.
 
 ## Reporting a Vulnerability
 
 **Please do not open a public GitHub issue for security vulnerabilities.**
 
-Report security issues privately via GitHub's
-[Security Advisories](https://github.com/Computer-Tsu/ShackDesk-RigCheck/security/advisories/new)
-feature, or email the maintainer directly (see profile).
+Report security issues privately via GitHub's [Security Advisories](https://github.com/Computer-Tsu/ShackDesk-RigCheck/security/advisories/new) feature, or email the maintainer directly (see profile).
 
 Include:
 

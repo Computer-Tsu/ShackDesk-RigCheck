@@ -2,7 +2,7 @@
 
 ## Plain English Summary
 
-*This summary is not legal text — the full agreement is below.*
+*This summary is not legal text - the full agreement is below.*
 
 - **You keep ownership** of everything you contribute. You are not giving up your copyright.
 - **You give permission** for your contribution to be used in the GPL-licensed source

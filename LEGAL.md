@@ -8,20 +8,18 @@ RigCheck™ and ShackDesk™ are trademarks of My Computer Guru LLC.
 
 ## License
 
-Source code in this repository is licensed under the GNU General Public License,
-version 3 ([LICENSE](LICENSE)).
+Source code in this repository is licensed under the GNU General Public License, version 3 ([LICENSE](LICENSE)).
 
-Use of the RigCheck or ShackDesk names, logos, branding, or identity in derived
-products is not permitted without written permission. This trademark restriction
-is separate from, and in addition to, the terms of the GPL.
+Use of the RigCheck or ShackDesk names, logos, branding, or identity in derived products is not permitted without written permission.
+This trademark restriction is separate from, and in addition to, the terms of the GPL.
 
 ---
 
 ## Trademark Notices
 
 The following are trademarks or registered trademarks of their respective owners.
-RigCheck is not affiliated with, endorsed by, or sponsored by any of these companies
-or projects. References are for interoperability and identification purposes only.
+RigCheck is not affiliated with, endorsed by, or sponsored by any of these companies or projects.
+References are for interoperability and identification purposes only.
 
 | Trademark | Owner |
 | ----------- | ------- |
@@ -39,8 +37,7 @@ or projects. References are for interoperability and identification purposes onl
 | Winlink | Winlink Development Team |
 | OmniRig | Alex Shovkoplyas (VE3NEA) |
 
-All other product names, company names, and trademarks mentioned in RigCheck or its
-documentation are the property of their respective owners.
+All other product names, company names, and trademarks mentioned in RigCheck or its documentation are the property of their respective owners.
 
 ---
 
@@ -48,10 +45,9 @@ documentation are the property of their respective owners.
 
 ### Hamlib
 
-RigCheck invokes the Hamlib `rigctl` utility as a separate process. It does not link
-against or bundle the Hamlib library. Hamlib is licensed under the LGPL (library) and
-GPL (utilities) and is available from
-[github.com/Hamlib/Hamlib](https://github.com/Hamlib/Hamlib).
+RigCheck invokes the Hamlib `rigctl` utility as a separate process.
+It does not link against or bundle the Hamlib library.
+Hamlib is licensed under the LGPL (library) and GPL (utilities) and is available from [github.com/Hamlib/Hamlib](https://github.com/Hamlib/Hamlib).
 
 ### Libraries
 
@@ -67,5 +63,4 @@ GPL (utilities) and is available from
 | CommunityToolkit.Mvvm | MIT | © .NET Foundation and contributors | [CommunityToolkit/dotnet](https://github.com/CommunityToolkit/dotnet) |
 | Newtonsoft.Json | MIT | © James Newton-King | [JamesNK/Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json) |
 
-USB device identification data sourced in part from the
-[USB ID Repository](https://usb-ids.gowdy.us/) and community contributions.
+USB device identification data sourced in part from the [USB ID Repository](https://usb-ids.gowdy.us/) and community contributions.

@@ -88,10 +88,10 @@ jobs:
 
             $statusText = switch ($status) {
               'reviewed'           { 'Reviewed' }
-              'machine-translated' { 'Machine translated — review wanted' }
+              'machine-translated' { 'Machine translated - review wanted' }
               default              { 'In progress' }
             }
-            if ($pct -lt 100 -and $status -eq 'reviewed') { $statusText = 'Reviewed — new strings need translating' }
+            if ($pct -lt 100 -and $status -eq 'reviewed') { $statusText = 'Reviewed - new strings need translating' }
 
             $rows += "| $name (``$tag``) | ``$($file.Name)`` | $pct% ($translated of $total) | $statusText |"
             if ($translator) { $translators += "| $name | $translator |" }
@@ -106,7 +106,7 @@ jobs:
           $credits = if ($translators.Count -gt 0) {
             @('| Language | Translator |', '| --- | --- |') + $translators
           } else {
-            @('_No community translations yet — yours could be the first. See [TRANSLATING.md](TRANSLATING.md)._')
+            @('_No community translations yet - yours could be the first. See [TRANSLATING.md](TRANSLATING.md)._')
           }
 
           function Replace-Between([string]$path, [string]$startMarker, [string]$endMarker, [string[]]$lines) {
