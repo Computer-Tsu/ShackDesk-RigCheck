@@ -22,9 +22,8 @@ public record DiscoveryRequest(
 /// families and baud rates per port, and probe each with query-only
 /// exchanges until a rig answers. Emits every step as it happens so the
 /// results panel can show the sweep live and the log can replay it.
-///
-/// See docs/discovery-flow.md for the design. Verification (stage 3) is
-/// the ordinary test suite run by the caller against each DiscoveredRig.
+/// Verification (stage 3) is the ordinary test suite run by the caller
+/// against each DiscoveredRig.
 /// </summary>
 public class DiscoveryEngine
 {

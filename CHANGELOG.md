@@ -208,7 +208,6 @@ Find my radio — the second half of the 0.7.0 milestone, first cut.
   which baud rates per protocol family), `rig_ids.json` (how each radio names itself → Hamlib
   model), `port_skip_patterns.json` (ports classed as rotator, amplifier, GPS, or Bluetooth start
   unticked). Data files choose a query by name; they can never contain command bytes
-- Design document: `docs/discovery-flow.md` (with the diagram) and `docs/discovery-flow.drawio`
 - Telemetry event `discovery` (ports swept, families/models/bauds that answered, verified count)
 
 ### Safety
