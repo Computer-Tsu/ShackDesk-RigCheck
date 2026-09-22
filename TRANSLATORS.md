@@ -7,6 +7,5 @@ The table below is generated automatically from the `Meta_Translator` entry in e
 To be listed, fill in that entry in your translation - see [TRANSLATING.md](TRANSLATING.md).
 
 <!-- translators:start -->
-_No community translations yet - yours could be the first.
-See [TRANSLATING.md](TRANSLATING.md)._
+_No community translations yet - yours could be the first. See [TRANSLATING.md](TRANSLATING.md)._
 <!-- translators:end -->
