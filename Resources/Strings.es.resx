@@ -408,4 +408,12 @@ Los detalles se han guardado en el registro. Si esto sigue ocurriendo, infórmel
   <data name="Diag_NotSupported_Summary" xml:space="preserve"><value>El controlador de Hamlib para {0} no implementa esta consulta.</value></data>
   <data name="Diag_NotSupported_1" xml:space="preserve"><value>La radio responde; simplemente este comando no existe para ella. WSJT-X y los demás programas no lo necesitan.</value></data>
   <data name="Main_ConsolePlaceholder" xml:space="preserve"><value>solo el subcomando, p. ej.  f   m   t   l STRENGTH   — una línea de comando completa pegada se recorta automáticamente</value></data>
+  <data name="Menu_HelpCheckUpdates" xml:space="preserve"><value>Buscar _actualizaciones</value></data>
+  <data name="Menu_HelpUpdateAvailable" xml:space="preserve"><value>Actualización disponible: {0}</value></data>
+  <data name="Status_UpdateChecking" xml:space="preserve"><value>Buscando en GitHub una versión más reciente…</value></data>
+  <data name="Status_UpdateNone" xml:space="preserve"><value>Tiene la versión más reciente de su canal ({0})</value></data>
+  <data name="Status_UpdateAvailable" xml:space="preserve"><value>Hay una versión más reciente: {0} — vea Ayuda</value></data>
+  <data name="Settings_UpdatesHeading" xml:space="preserve"><value>Actualizaciones</value></data>
+  <data name="Settings_UpdateCheck" xml:space="preserve"><value>Buscar una versión más reciente una vez al día (una petición a GitHub; no se descarga nada)</value></data>
+  <data name="Settings_UpdateCheckHint" xml:space="preserve"><value>Los usuarios de stable solo ven versiones stable; los de beta, betas y stables; los de alpha, todo. Activado por defecto en compilaciones alpha y beta.</value></data>
 </root>

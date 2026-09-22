@@ -12,7 +12,7 @@ public static class BrandingInfo
     public const string AppName    = "RigCheck";
     public const string SuiteName  = "ShackDesk";
     public const string FullName   = "RigCheck by ShackDesk";
-    public const string Version    = "0.8.0";
+    public const string Version    = "0.8.1";
     public const string Tagline    = "Know your rig is ready";
 
     // ── Developer / publisher ────────────────────────────────────
@@ -29,6 +29,8 @@ public static class BrandingInfo
     public const string GitHubRepo  = "https://github.com/Computer-Tsu/ShackDesk-RigCheck";
     public const string ReleasesUrl = "https://github.com/Computer-Tsu/ShackDesk-RigCheck/releases";
     public const string IssueUrl    = "https://github.com/Computer-Tsu/ShackDesk-RigCheck/issues";
+    /// <summary>GitHub Releases API for the update check — public, unauthenticated, read-only.</summary>
+    public const string ReleasesApiUrl = "https://api.github.com/repos/Computer-Tsu/ShackDesk-RigCheck/releases?per_page=30";
     public const string PrivacyUrl  = "https://shackdesk.com/privacy/";
 
     // ── Telemetry ─────────────────────────────────────────────────

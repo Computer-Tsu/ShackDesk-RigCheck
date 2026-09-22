@@ -85,6 +85,9 @@ public partial class App : Application
 
         mainWindow.Show();
 
+        // Update check after the window is up; result appears in Help and the status strip.
+        _ = mainWindow.ViewModel.CheckForUpdatesQuietlyAsync();
+
         // Fire-and-forget: neither call may delay the window or fail loudly.
         _ = telemetry.FlushPendingAsync();
         _ = telemetry.ReportStartupAsync(_host.Services.GetRequiredService<HamlibLocatorService>());
@@ -166,6 +169,7 @@ public partial class App : Application
         services.AddTransient<DiscoveryEngine>();
         services.AddTransient<ConfigClueService>();
         services.AddTransient<HandoffBuilder>();
+        services.AddSingleton<UpdateCheckService>();
         services.AddTransient<LogExportService>();
 
         // ViewModels

@@ -38,6 +38,8 @@ public partial class SettingsDialog : Window
         TelemetryCheckBox.IsChecked = _settings.Current.TelemetryEnabled;
         NotifyFlashCheckBox.IsChecked = _settings.Current.NotifyFlash;
         NotifySoundCheckBox.IsChecked = _settings.Current.NotifySound;
+        // Null = never chosen: show the channel default (on for alpha/beta, off for stable)
+        UpdateCheckBox.IsChecked = _settings.Current.UpdateCheckEnabled ?? !BuildInfo.IsStable;
         LogLevelCombo.SelectedValue = AppLogger.ResolveLevel(_settings.Current.LogLevel);
     }
 
@@ -52,6 +54,7 @@ public partial class SettingsDialog : Window
             s.TelemetryEnabled = TelemetryCheckBox.IsChecked == true;
             s.NotifyFlash      = NotifyFlashCheckBox.IsChecked == true;
             s.NotifySound      = NotifySoundCheckBox.IsChecked == true;
+            s.UpdateCheckEnabled = UpdateCheckBox.IsChecked == true;
             s.LogLevel         = level;
         });
 

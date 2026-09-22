@@ -61,6 +61,15 @@ public class RigCheckSettings
 
     // Logging level; empty means the channel default (see AppLogger).
     public string LogLevel          { get; set; } = string.Empty;
+
+    // Update check: one request to the GitHub Releases API, at most once a
+    // day, at startup. On by default for alpha and beta (their users want the
+    // next build); stable users switch it on in Settings. Nothing is ever
+    // downloaded — a newer release is named and its page can be opened.
+    // Null means "not chosen yet": the channel default applies.
+    public bool?    UpdateCheckEnabled { get; set; } = null;
+    public DateTime UpdateLastChecked  { get; set; } = DateTime.MinValue;
+    public string   UpdateLastSeenTag  { get; set; } = string.Empty;
 }
 
 // ── Settings service ──────────────────────────────────────────────────────

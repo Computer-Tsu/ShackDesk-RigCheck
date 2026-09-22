@@ -1307,4 +1307,28 @@ Continue?</value>
   <data name="Main_ConsolePlaceholder" xml:space="preserve">
     <value>subcommand only, e.g.  f   m   t   l STRENGTH   — a pasted full command line is trimmed for you</value>
   </data>
+  <data name="Menu_HelpCheckUpdates" xml:space="preserve">
+    <value>Check for _updates</value>
+  </data>
+  <data name="Menu_HelpUpdateAvailable" xml:space="preserve">
+    <value>Update available: {0}</value>
+  </data>
+  <data name="Status_UpdateChecking" xml:space="preserve">
+    <value>Checking GitHub for a newer release…</value>
+  </data>
+  <data name="Status_UpdateNone" xml:space="preserve">
+    <value>You have the newest release for your channel ({0})</value>
+  </data>
+  <data name="Status_UpdateAvailable" xml:space="preserve">
+    <value>A newer release is available: {0} — see Help</value>
+  </data>
+  <data name="Settings_UpdatesHeading" xml:space="preserve">
+    <value>Updates</value>
+  </data>
+  <data name="Settings_UpdateCheck" xml:space="preserve">
+    <value>Check for a newer release once a day (one request to GitHub; nothing is downloaded)</value>
+  </data>
+  <data name="Settings_UpdateCheckHint" xml:space="preserve">
+    <value>Stable users are told about stable releases only; beta users about betas and stables; alpha users about everything. On by default on alpha and beta builds.</value>
+  </data>
 </root>

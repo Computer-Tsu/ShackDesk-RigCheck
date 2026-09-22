@@ -48,6 +48,24 @@
                         </StackPanel>
                     </MenuItem.Header>
                 </MenuItem>
+                <!-- Update line: "Check for updates" normally; "Update available: 0.7.4-beta" once one is known -->
+                <MenuItem Style="{StaticResource SubMenuItemStyle}"
+                          Command="{Binding CheckForUpdatesCommand}"
+                          Visibility="{Binding HasUpdate, Converter={StaticResource InverseBoolToVisibility}}">
+                    <MenuItem.Header>
+                        <AccessText Text="{loc:Str Menu_HelpCheckUpdates}" />
+                    </MenuItem.Header>
+                </MenuItem>
+                <MenuItem Style="{StaticResource SubMenuItemStyle}"
+                          Command="{Binding OpenUpdateCommand}"
+                          Visibility="{Binding HasUpdate, Converter={StaticResource BoolToVisibility}}">
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <AccessText Text="{Binding UpdateMenuText}" />
+                            <TextBlock Style="{StaticResource ExternalLinkIconStyle}" />
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
                 <MenuItem Header="{loc:Str Menu_HelpViewData}"
                           Style="{StaticResource SubMenuItemStyle}"
                           Click="ViewData_Click" />

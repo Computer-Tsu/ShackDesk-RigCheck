@@ -21,6 +21,9 @@ public partial class MainWindow : Window
     private readonly DiscoveryDataService   _discoveryData;
     private readonly ResultsDocumentBuilder _resultsDoc = new();
 
+    /// <summary>The window's ViewModel, for App to start the update check once the window is shown.</summary>
+    public MainViewModel ViewModel => _vm;
+
     public MainWindow(MainViewModel vm, SettingsService settings, TelemetryService telemetry,
                       DiscoveryDataService discoveryData)
     {

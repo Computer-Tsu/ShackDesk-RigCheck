@@ -21,6 +21,7 @@ public partial class MainViewModel : ObservableObject
     private readonly DiscoveryEngine     _discovery;
     private readonly ConfigClueService   _clues;
     private readonly HandoffBuilder      _handoff;
+    private readonly UpdateCheckService  _updates;
     private readonly LogExportService    _logExport;
     private readonly HamlibLocatorService _hamlib;
     private readonly SettingsService     _settings;
@@ -70,6 +71,7 @@ public partial class MainViewModel : ObservableObject
         DiscoveryEngine      discovery,
         ConfigClueService    clues,
         HandoffBuilder       handoff,
+        UpdateCheckService   updates,
         LogExportService     logExport,
         HamlibLocatorService hamlib,
         SettingsService      settings,
@@ -83,6 +85,7 @@ public partial class MainViewModel : ObservableObject
         _discovery  = discovery;
         _clues      = clues;
         _handoff    = handoff;
+        _updates    = updates;
         _logExport  = logExport;
         _hamlib     = hamlib;
         _settings   = settings;
@@ -406,6 +409,44 @@ public partial class MainViewModel : ObservableObject
 
     [RelayCommand]
     private void OpenReleases() => OpenUrl(BrandingInfo.ReleasesUrl);
+
+    // ── Update check ──────────────────────────────────────────────────────
+    // One request to GitHub at startup (at most daily, channel-aware — see
+    // UpdateCheckService). The result is a menu line and a status message;
+    // opening the release page is the only action. Nothing is downloaded.
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasUpdate), nameof(UpdateMenuText))]
+    private AvailableUpdate? _availableUpdate;
+
+    public bool   HasUpdate      => AvailableUpdate is not null;
+    public string UpdateMenuText => AvailableUpdate is { } u
+        ? Strings.Format("Menu_HelpUpdateAvailable", u.Label)
+        : string.Empty;
+
+    /// <summary>Startup check: silent unless something newer exists.</summary>
+    public async Task CheckForUpdatesQuietlyAsync()
+    {
+        var update = await _updates.CheckAsync();
+        if (update is null) return;
+        AvailableUpdate = update;
+        StatusMessage   = Strings.Format("Status_UpdateAvailable", update.Label);
+    }
+
+    /// <summary>Help › Check for updates: always asks, and says so either way.</summary>
+    [RelayCommand]
+    private async Task CheckForUpdatesAsync()
+    {
+        StatusMessage = Strings.Get("Status_UpdateChecking");
+        var update = await _updates.CheckAsync(force: true);
+        AvailableUpdate = update;
+        StatusMessage = update is null
+            ? Strings.Format("Status_UpdateNone", BuildInfo.VersionLabel)
+            : Strings.Format("Status_UpdateAvailable", update.Label);
+    }
+
+    [RelayCommand]
+    private void OpenUpdate() => OpenUrl(AvailableUpdate?.PageUrl ?? BrandingInfo.ReleasesUrl);
 
     private static void OpenUrl(string url) =>
         System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo

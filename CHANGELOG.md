@@ -5,10 +5,18 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
-## [0.8.0] - unreleased
+## [0.8.1] - 2026-09-21
 
-Next milestone line. 0.7.2 was promoted to the first beta on 2026-09-21; fixes for that beta
+0.8.x is the line after the first beta (0.7.2-beta, promoted 2026-09-21). Fixes for that beta
 land on `main` as 0.7.3-beta onward and are cherry-picked here.
+
+### Added
+- Update check: once a day at startup, one request to the GitHub Releases API, nothing
+  downloaded. Channel-aware — stable users hear about stable releases only, beta users about
+  betas and stables, alpha users about everything; the same number in a more trusted channel
+  counts as newer (0.7.2-alpha → 0.7.2-beta). Result shows as "Update available: …" under Help
+  (opens the release page) and in the status strip. Help › Check for updates asks on demand.
+  Settings › Updates toggle; on by default for alpha and beta builds, off for stable
 
 ## [0.7.2] - 2026-09-21
 
