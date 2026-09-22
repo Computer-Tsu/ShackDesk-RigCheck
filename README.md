@@ -215,7 +215,7 @@ goes into the exported log so the exchange can be replayed with a terminal progr
 Safety rules that do not have a setting: RTS and DTR are never asserted (on many interfaces they
 are PTT); only read commands are ever sent; the sweep runs only from the button and only on
 ticked ports. The data files (`rig_families.json`, `rig_ids.json`, `port_skip_patterns.json`)
-choose a built-in query by name and cannot contain command bytes. Design: `docs/discovery-flow.md`.
+choose a built-in query by name and cannot contain command bytes.
 
 ### Diagnostic Test Suite
 
