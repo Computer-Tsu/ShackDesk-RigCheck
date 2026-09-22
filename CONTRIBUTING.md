@@ -1,10 +1,8 @@
 # Contributing to RigCheck
 
-**You do not need to be a programmer to contribute.** Some of the most valuable
-contributions are radio and cable database entries — a Hamlib model number, the baud
-rate that worked, and the USB VID/PID from Device Manager. If you got your rig talking
-and RigCheck did not already know the right settings, that is exactly what the project
-needs.
+**You do not need to be a programmer to contribute.**
+Some of the most valuable contributions are radio and cable database entries - a Hamlib model number, the baud rate that worked, and the USB VID/PID from Device Manager.
+If you got your rig talking and RigCheck did not already know the right settings, that is exactly what the project needs.
 
 ---
 
@@ -16,15 +14,14 @@ Thank you for your interest in contributing to RigCheck by ShackDesk.
 | ------ | ----- |
 | Bug report | Open an issue with your exported RigCheck log attached |
 | Feature request | Open an issue describing the problem you are trying to solve |
-| Radio, cable, or protocol data | Edit a JSON file under `Assets/` and submit a PR — see [Data files](#data-files); no compiler needed |
-| Translation | See [TRANSLATING.md](TRANSLATING.md) — no programming needed |
+| Radio, cable, or protocol data | Edit a JSON file under `Assets/` and submit a PR - see [Data files](#data-files); no compiler needed |
+| Translation | See [TRANSLATING.md](TRANSLATING.md) - no programming needed |
 | Code | Fork, branch, and submit a pull request (see below) |
 
 ## Data files
 
-Most of what RigCheck knows about radios lives in JSON, not code, so anyone can
-add a rig by pull request. Validate at jsonlint.com before submitting; each file
-starts with a `_comment` entry that explains its fields.
+Most of what RigCheck knows about radios lives in JSON, not code, so anyone can add a rig by pull request.
+Validate at jsonlint.com before submitting; each file starts with a `_comment` entry that explains its fields.
 
 | File | What it holds |
 | ------ | ----- |
@@ -32,22 +29,20 @@ starts with a `_comment` entry that explains its fields.
 | `Assets/usb_devices.json` | USB VID/PID → serial chip, cable hint, radio family, suggested presets |
 | `Assets/rig_families.json` | Protocol families for Find my radio: which built-in query to send, baud rates to sweep (most likely first), default model |
 | `Assets/rig_ids.json` | How a radio names itself (`ID023;`, CI-V address `94`) → Hamlib model number |
-| `Assets/port_skip_patterns.json` | Port-name patterns classed as rotator, amplifier, antenna, GPS, or Bluetooth — never opened by Find my radio |
+| `Assets/port_skip_patterns.json` | Port-name patterns classed as rotator, amplifier, antenna, GPS, or Bluetooth - never opened by Find my radio |
 
-Hamlib model numbers follow `riglist.h` in the Hamlib source: the thousands
-digit is the backend (1 Yaesu, 2 Kenwood and Elecraft, 3 Icom). Please say
-where a value came from (the radio's manual, `rigctl -l`, a real exchange) in
-the PR.
+Hamlib model numbers follow `riglist.h` in the Hamlib source: the thousands digit is the backend (1 Yaesu, 2 Kenwood and Elecraft, 3 Icom).
+Please say where a value came from (the radio's manual, `rigctl -l`, a real exchange) in the PR.
 
-**One rule that will not bend:** data files select a probe operation by name
-from the fixed set compiled into RigCheck. A PR that adds command bytes, a new
-field carrying bytes, or a "custom command" mechanism to any data file will be
-declined. A data file that could make RigCheck send arbitrary bytes at a
-transmitter is a safety problem, not a feature.
+**One rule that will not bend:**
+data files select a probe operation by name from the fixed set compiled into RigCheck.
+A PR that adds command bytes, a new field carrying bytes, or a "custom command" mechanism to any data file will be declined.
+A data file that could make RigCheck send arbitrary bytes at a transmitter is a safety problem, not a feature.
 
 ## CLA
 
-All contributors must agree to the [Contributor License Agreement](CLA.md) before a pull request can be merged. By submitting a PR, you agree to its terms.
+All contributors must agree to the [Contributor License Agreement](CLA.md) before a pull request can be merged.
+By submitting a PR, you agree to its terms.
 
 ## Code Standards
 
@@ -64,7 +59,7 @@ All contributors must agree to the [Contributor License Agreement](CLA.md) befor
 1. Fork the repository
 2. Create a branch from `develop`: `feature/my-feature` or `fix/my-bug`
 3. Make your changes
-4. Submit a pull request against `develop` — fill out the PR template fully
+4. Submit a pull request against `develop` - fill out the PR template fully
 5. CI builds and tests every PR; a maintainer will review within 7 days
 
 ## Questions?
