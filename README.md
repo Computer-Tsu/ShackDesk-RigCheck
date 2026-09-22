@@ -4,9 +4,10 @@ RigCheck is the second ShackDesk suite application.
 
 "Know your rig is ready."<br>
 
-![RigCheck — Find my radio found an IC-7300, verified it with Hamlib, and handed over the WSJT-X settings](docs/screenshots/Screenshot_RigCheck-0.6.16-FindMyRadio.png)
+![RigCheck - Find my radio found an IC-7300, verified it with Hamlib, and handed over the WSJT-X settings](docs/screenshots/Screenshot_RigCheck-0.6.16-FindMyRadio.png)
 
-Serial CAT communication diagnostics using Hamlib. Verify your radio connection before it matters.
+Serial CAT communication diagnostics using Hamlib.
+Verify your radio connection before it matters.
 
 ## Suite Context
 
@@ -20,34 +21,25 @@ Technology: C# WPF .NET 10, MVVM architecture,
 
 ## Platform
 
-RigCheck runs on Windows 10 (version 21H2 or later)
-and Windows 11, 64-bit. Nothing else needs to be
-installed: the .NET runtime is bundled inside the
-single RigCheck.exe.
+RigCheck runs on Windows 10 (version 21H2 or later) and Windows 11, 64-bit.
+Nothing else needs to be installed: the .NET runtime is bundled inside the single RigCheck.exe.
 
-Windows 11 on ARM runs it through the built-in x64
-emulation. Windows 7 and 8.1 are not supported.
+Windows 11 on ARM runs it through the built-in x64 emulation.
+Windows 7 and 8.1 are not supported.
 
 ### Why .NET 10
 
 RigCheck moved from .NET 8 to .NET 10 in September
 2026. This changed nothing about which versions of
-Windows it runs on — .NET 8 and .NET 10 support the
-identical list of Windows client versions, and
-neither supports Windows 7 or 8.1.
+Windows it runs on - .NET 8 and .NET 10 support the identical list of Windows client versions, and neither supports Windows 7 or 8.1.
 
-The reason is support lifetime. .NET 8 reaches end
-of support on November 10, 2026, after which the
-runtime bundled inside every RigCheck build would
-stop receiving security fixes. .NET 10 is the
-current long-term-support release, supported through
-November 14, 2028.
+The reason is support lifetime. .NET 8 reaches end of support on November 10, 2026, after which the runtime bundled inside every RigCheck build would stop receiving security fixes. .NET 10 is the current long-term-support release, supported through November 14, 2028.
 
 ### Build channels and expiry
 
 RigCheck is published in three channels:
 
-- **Alpha** — built from every change on the
+- **Alpha** - built from every change on the
   `develop` branch. **Alpha builds stop running
   30 days after they were built.** This keeps
   testers on current code and steers everyday
@@ -55,7 +47,7 @@ RigCheck is published in three channels:
   is shown in the window title and in Help >
   About. When an alpha expires, starting it shows
   a notice with a link to the latest build.
-- **Beta** — an alpha that is working and
+- **Beta** - an alpha that is working and
   feature-complete, promoted with the same
   number: tag `v0.7.4-beta`, file
   `RigCheck-0.7.4-beta.exe` (no date or hash).
@@ -63,25 +55,19 @@ RigCheck is published in three channels:
   after they were built but keep running. A fix
   during the beta is the next patch number
   (`0.7.5-beta`).
-- **Stable** — the last beta promoted again: tag
+- **Stable** - the last beta promoted again: tag
   `v0.7.5`, file `RigCheck-0.7.5.exe`. Never
   expires.
 
-The version names the code; the channel names
-how far it has been trusted. Every build in every
-channel is a new patch number, and the next alpha
-after a promotion starts the next minor
-(`0.8.0-alpha`).
+The version names the code; the channel names how far it has been trusted.
+Every build in every channel is a new patch number, and the next alpha after a promotion starts the next minor (`0.8.0-alpha`).
 
-The window title shows the version, channel, and
-expiry date, for example
-`RigCheck by ShackDesk 0.6.2-alpha — expires 2026-10-21`.
+The window title shows the version, channel, and expiry date, for example `RigCheck by ShackDesk 0.6.2-alpha - expires 2026-10-21`.
 
 ### Where RigCheck keeps its files
 
-RigCheck is a single portable exe and writes only
-to your local application data folder. Nothing goes
-in the registry.
+RigCheck is a single portable exe and writes only to your local application data folder.
+Nothing goes in the registry.
 
 ```
 %LOCALAPPDATA%\ShackDesk\RigCheck\
@@ -90,59 +76,43 @@ in the registry.
     Telemetry\               local copies of diagnostic reports
 ```
 
-Delete `rigcheck-settings.json` to reset every
-setting to its default.
+Delete `rigcheck-settings.json` to reset every setting to its default.
 
-RigCheck runs as a single instance: starting it
-again brings the open window to the front. Settings › Logging shows
-the log folder and can open or empty it.
+RigCheck runs as a single instance: starting it again brings the open window to the front.
+Settings › Logging shows the log folder and can open or empty it.
 
 ### Anonymous diagnostics
 
-On first launch RigCheck asks whether it may send
-anonymous diagnostic reports. Nothing is sent
-unless you say yes, and you can change the choice
-in Settings at any time. Every report is also
-stored locally and can be inspected under
-Help > View collected data.
+On first launch RigCheck asks whether it may send anonymous diagnostic reports.
+Nothing is sent unless you say yes, and you can change the choice in Settings at any time.
+Every report is also stored locally and can be inspected under Help > View collected data.
 
-What is sent: the RigCheck and Windows versions,
-whether Hamlib was found, and after each test run
-the radio model, serial settings, USB cable
-identifiers, and which tests passed or failed.
-This is what improves the radio and cable
-database for everyone.
+What is sent: the RigCheck and Windows versions, whether Hamlib was found, and after each test run the radio model, serial settings, USB cable identifiers, and which tests passed or failed.
+This is what improves the radio and cable database for everyone.
 
-Never sent: callsign, computer name, file paths,
-serial numbers, or IP address. The only identifier
-is a random ID created on first run, shown in
-Help > About as a Support ID. Reports go to the
-shared ShackDesk endpoint; see
-shackdesk.com/privacy for the full policy.
+Never sent: callsign, computer name, file paths, serial numbers, or IP address.
+The only identifier is a random ID created on first run, shown in Help > About as a Support ID.
+Reports go to the shared ShackDesk endpoint; see shackdesk.com/privacy for the full policy.
 
 ### Hamlib
 
-RigCheck does not include Hamlib. It finds the
-rigctl.exe already on the computer from any of:
+RigCheck does not include Hamlib.
+It finds the rigctl.exe already on the computer from any of:
 
-- WSJT-X (includes Hamlib) — wsjt.sourceforge.io
-- Fldigi (includes Hamlib) — w1hkj.com
-- Standalone Hamlib for Windows —
+- WSJT-X (includes Hamlib) - wsjt.sourceforge.io
+- Fldigi (includes Hamlib) - w1hkj.com
+- Standalone Hamlib for Windows -
   github.com/Hamlib/Hamlib/releases
 
 Most operators already have WSJT-X installed.
 
 ## RigCheck Purpose
 
-Hamlib is the open source radio control library used
-by virtually every digital mode program — WSJT-X, 
-Fldigi, JS8Call, Winlink, and dozens more. When rig 
-control does not work, diagnosing why is genuinely 
-difficult for non-technical operators. Currently 
-they must use cryptic command line tools.
+Hamlib is the open source radio control library used by virtually every digital mode program - WSJT-X, Fldigi, JS8Call, Winlink, and dozens more.
+When rig control does not work, diagnosing why is genuinely difficult for non-technical operators.
+Currently they must use cryptic command line tools.
 
-RigCheck provides a friendly GUI front-end for 
-testing and diagnosing Hamlib rig control connections.
+RigCheck provides a friendly GUI front-end for testing and diagnosing Hamlib rig control connections.
 
 Target users:
 - Primary: Ham radio operators troubleshooting 
@@ -170,36 +140,34 @@ Target users:
 
 ![Scan PC results](docs/screenshots/Screenshot_RigCheck-0.6.16-ScanPC.png)
 
-The **Scan PC** button checks the computer side before any radio is
-involved, so "Run Tests is greyed out — why?" has an answer:
+The **Scan PC** button checks the computer side before any radio is involved, so "Run Tests is greyed out - why?" has an answer:
 
 - Windows version and architecture
 - Every copy of Hamlib found (WSJT-X, Fldigi, standalone, PATH) and which one RigCheck uses
 - `rigctl --version` actually runs
-- Whether `rigctl` is on PATH — if not, the commands RigCheck shows will not work in a plain
+- Whether `rigctl` is on PATH - if not, the commands RigCheck shows will not work in a plain
   command window, and the exact `setx` line to fix it is shown
 - The selected radio model, called out unmistakably when it is Hamlib's dummy rig (model 1)
 - Serial port drivers: ports present, plus any Plug and Play device with a problem code
   (28 = no driver, 10 = cannot start, 22 = disabled)
 - Whether anything is listening on the rigctld port (and Flrig's), and whether that matches
   the selected connection mode
-- rigctld startup entries and Windows Firewall rules for it — a Block rule from a dismissed
+- rigctld startup entries and Windows Firewall rules for it - a Block rule from a dismissed
   prompt is a classic
 - Installed radio software (WSJT-X, Fldigi, JS8Call, Flrig, Winlink Express)
 
-Everything is read-only. RigCheck never changes PATH, firewall rules, drivers, or startup
-entries — it shows the command or the setting and leaves the change to you. The scan runs only
-when you click it; nothing enumerates processes or ports at startup.
+Everything is read-only.
+RigCheck never changes PATH, firewall rules, drivers, or startup entries - it shows the command or the setting and leaves the change to you.
+The scan runs only when you click it; nothing enumerates processes or ports at startup.
 
 ### Find my radio
-When the operator does not know the port, the speed, or even which Hamlib
-model to pick, **Find my radio** works it out:
+When the operator does not know the port, the speed, or even which Hamlib model to pick, **Find my radio** works it out:
 
 1. The operator ticks the COM ports RigCheck may open (ports that look like a rotator,
    amplifier, GPS, or Bluetooth link start unticked).
-2. Each port is swept with read-only queries — `ID;` for Kenwood, Elecraft, and Yaesu CAT
+2. Each port is swept with read-only queries - `ID;` for Kenwood, Elecraft, and Yaesu CAT
    rigs, CI-V read-ID and read-frequency for Icom, the five-byte read-frequency for the
-   FT-817 family — at the baud rates that family is likely to use, most likely first. The
+   FT-817 family - at the baud rates that family is likely to use, most likely first. The
    radio already chosen in the Connection panel and the cable's USB chip move their family
    to the front of the queue.
 3. A rig that names itself is looked up in `Assets/rig_ids.json`. One that only reports a
@@ -209,20 +177,16 @@ model to pick, **Find my radio** works it out:
 6. A rigctld already listening on 4532 is reported as a working connection; Flrig on 12345
    is noted.
 
-Everything sent and received is shown in the results panel, with a Copy button per line, and
-goes into the exported log so the exchange can be replayed with a terminal program.
+Everything sent and received is shown in the results panel, with a Copy button per line, and goes into the exported log so the exchange can be replayed with a terminal program.
 
-Safety rules that do not have a setting: RTS and DTR are never asserted (on many interfaces they
-are PTT); only read commands are ever sent; the sweep runs only from the button and only on
-ticked ports. The data files (`rig_families.json`, `rig_ids.json`, `port_skip_patterns.json`)
-choose a built-in query by name and cannot contain command bytes.
+Safety rules that do not have a setting: RTS and DTR are never asserted (on many interfaces they are PTT); only read commands are ever sent; the sweep runs only from the button and only on ticked ports.
+The data files (`rig_families.json`, `rig_ids.json`, `port_skip_patterns.json`) choose a built-in query by name and cannot contain command bytes.
 
 ### Diagnostic Test Suite
 
 ![Run Tests against an IC-7300](docs/screenshots/Screenshot_RigCheck-0.6.16-RunTests.png)
 
-Run a sequence of standard Hamlib queries and 
-display pass/fail results in plain English:
+Run a sequence of standard Hamlib queries and display pass/fail results in plain English:
 
 Test 1: Open connection
   Pass: "Connected to [radio model] on [port]"
@@ -258,7 +222,8 @@ Test 7: Set and verify frequency (optional)
 Map common failure patterns to plain English causes:
 
 No response at all:
-→ "No response from radio. Check: 
+→ "No response from radio.
+Check:
    Is the radio powered on?
    Is the correct COM port selected?
    Is the baud rate correct for your radio?
@@ -276,7 +241,8 @@ Wrong radio model:
    model number."
 
 Timeout:
-→ "Connection timed out. Check your cable 
+→ "Connection timed out.
+Check your cable
    connection and verify the radio is set to 
    accept CAT commands. Consult your radio 
    manual for CAT/CI-V setup instructions."
@@ -291,7 +257,7 @@ Collapsible advanced panel for technical users:
 - Text input to send raw Hamlib commands
 - Response display
 - Command history (up arrow recalls previous)
-- Labeled: "Advanced — raw Hamlib commands"
+- Labeled: "Advanced - raw Hamlib commands"
 
 ### Common Radio Quick-Start Presets
 Dropdown of popular radios with known-good settings:
@@ -305,27 +271,21 @@ Selecting a preset fills all connection fields.
 User can override any field after preset applied.
 
 ### Log Export
-Save test results to a text file the user can 
-email to a club Elmer or post to a support forum.
+Save test results to a text file the user can email to a club Elmer or post to a support forum.
 Format: plain text, human readable, not JSON.
-Include: timestamp, radio model, port settings,
-each test result, any error messages.
+Include: timestamp, radio model, port settings, each test result, any error messages.
 
 ## Contributing
 
-Radio and cable database entries, translations,
-bug reports with an exported log, and code are all
-welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) and
-[TRANSLATING.md](TRANSLATING.md). Translators are
-credited in Help > About and in
-[TRANSLATORS.md](TRANSLATORS.md).
+Radio and cable database entries, translations, bug reports with an exported log, and code are all welcome.
+See [CONTRIBUTING.md](CONTRIBUTING.md) and [TRANSLATING.md](TRANSLATING.md).
+Translators are credited in Help > About and in [TRANSLATORS.md](TRANSLATORS.md).
 
 ## License
 
-RigCheck is licensed under the GNU General Public
-License, version 3. See [LICENSE](LICENSE).
+RigCheck is licensed under the GNU General Public License, version 3.
+See [LICENSE](LICENSE).
 
-RigCheck and ShackDesk are trademarks of My Computer
-Guru LLC. See [LEGAL.md](LEGAL.md) for trademark and
-third-party notices.
+RigCheck and ShackDesk are trademarks of My Computer Guru LLC.
+See [LEGAL.md](LEGAL.md) for trademark and third-party notices.
 

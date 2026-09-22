@@ -26,7 +26,7 @@
 - [ ] No admin rights required
 - [ ] Nothing blocks on network access (offline-first)
 - [ ] Discovery code sends query commands only
-- [ ] Log output uses `Serilog` — no `Console.WriteLine` or `Debug.WriteLine`
+- [ ] Log output uses `Serilog` - no `Console.WriteLine` or `Debug.WriteLine`
 - [ ] I have read CONTRIBUTING.md and agree to the CLA
 
 ## Related Issues

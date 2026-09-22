@@ -12,7 +12,7 @@ Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for 
   Takes effect on the next start. Until now the language could only follow Windows
 
 ### Changed
-- The exported log's transcript section is headed "Commands and replies" — it holds Run Tests
+- The exported log's transcript section is headed "Commands and replies" - it holds Run Tests
   exchanges as well as Find my radio's
 - The hex dump shows its ASCII column only when most bytes are printable, so CI-V frames no
   longer carry a column of dots
@@ -23,7 +23,7 @@ Run Tests works without Hamlib, and says whose fault a failure is.
 
 ### Added
 - **Radio check (direct):** Run Tests now starts by speaking the radio's own protocol over the
-  port — identity, frequency, mode, PTT state, S-meter — for Icom CI-V and the
+  port - identity, frequency, mode, PTT state, S-meter - for Icom CI-V and the
   Kenwood/Elecraft/Yaesu CAT families, with no Hamlib involved. On a PC without Hamlib this is
   the whole test and it proves the radio, cable, port, and speed. Every byte is in the transcript
 - **Verdict line** after the run: radio answers directly but Hamlib fails → the hardware is
@@ -44,12 +44,12 @@ Run Tests works without Hamlib, and says whose fault a failure is.
 
 ## [0.8.1] - 2026-09-21
 
-0.8.x is the line after the first beta (0.7.2-beta, promoted 2026-09-21). Fixes for that beta
-land on `main` as 0.7.3-beta onward and are cherry-picked here.
+0.8.x is the line after the first beta (0.7.2-beta, promoted 2026-09-21).
+Fixes for that beta land on `main` as 0.7.3-beta onward and are cherry-picked here.
 
 ### Added
 - Update check: once a day at startup, one request to the GitHub Releases API, nothing
-  downloaded. Channel-aware — stable users hear about stable releases only, beta users about
+  downloaded. Channel-aware - stable users hear about stable releases only, beta users about
   betas and stables, alpha users about everything; the same number in a more trusted channel
   counts as newer (0.7.2-alpha → 0.7.2-beta). Result shows as "Update available: …" under Help
   (opens the release page) and in the status strip. Help › Check for updates asks on demand.
@@ -83,11 +83,9 @@ land on `main` as 0.7.3-beta onward and are cherry-picked here.
 
 **Milestone: environment checks and Find my radio, proven on a real Icom IC-7300.**
 
-Scan PC, Find my radio, and Run Tests all did their job on real hardware today. Everything the
-bench found — CI-V broadcast never answers, WSJT-X names its Hamlib `rigctl-wsjtx.exe`, the
-connection test hung in rigctl's interactive mode, Hamlib says nothing on failure without `-vv`,
-`get_vfo` is not a fault on Icoms — is fixed in 0.6.10 through 0.6.17 below. This is the version
-the first beta will be cut from.
+Scan PC, Find my radio, and Run Tests all did their job on real hardware today.
+Everything the bench found - CI-V broadcast never answers, WSJT-X names its Hamlib `rigctl-wsjtx.exe`, the connection test hung in rigctl's interactive mode, Hamlib says nothing on failure without `-vv`, `get_vfo` is not a fault on Icoms - is fixed in 0.6.10 through 0.6.17 below.
+This is the version the first beta will be cut from.
 
 ## [0.6.17] - 2026-09-21
 
@@ -107,7 +105,7 @@ First all-green run on an IC-7300; one false pass corrected.
 - "Get VFO" reported a pass with a page of Hamlib trace as the VFO name. The IC-7300 (like most
   Icoms) has no get_vfo in Hamlib; rigctl printed "Feature not available" but still exited 0.
   Hamlib's own error line is now recognised whatever the exit code, and an unsupported query is a
-  warning that says so — the radio is fine, the command just does not exist for it
+  warning that says so - the radio is fine, the command just does not exist for it
 - Result messages show only the first line of rigctl's output, never a trace
 
 ## [0.6.15] - 2026-09-21
@@ -121,7 +119,7 @@ Failures now say why.
   messages ("serial port COM3 is already open", "does not exist", "failed to connect") drive the
   diagnosis
 - The "port in use" diagnosis names the program that is running right now (WSJT-X, Fldigi,
-  JS8Call, Flrig, rigctld, Winlink Express, VARA) — checked only when that failure occurs
+  JS8Call, Flrig, rigctld, Winlink Express, VARA) - checked only when that failure occurs
 - The suggested rigctld command uses the name that exists on the PC (`rigctld-wsjtx`) and omits
   `-s` when the baud is Radio default
 - The Quick preset picker shows the saved radio on startup instead of "Choose your radio…"
@@ -131,7 +129,7 @@ Failures now say why.
 Run Tests works against a real radio.
 
 ### Fixed
-- The "Open connection" test ran rigctl with no command, which does not connect-and-exit — it
+- The "Open connection" test ran rigctl with no command, which does not connect-and-exit - it
   enters rigctl's interactive mode and waits for keyboard input until RigCheck's timeout, so
   every run reported "the radio did not respond" and skipped the other six tests, even though
   Hamlib could talk to the radio in 7 ms. The test now reads the frequency, which proves the
@@ -155,7 +153,7 @@ WSJT-X's Hamlib is found.
 
 ### Added
 - When Scan PC finds no Hamlib, the diagnosis shows the one-line winget command that installs
-  WSJT-X (`winget install JoeTaylor.WSJT-x`) as a copyable fix — RigCheck never runs it
+  WSJT-X (`winget install JoeTaylor.WSJT-x`) as a copyable fix - RigCheck never runs it
 
 ### Fixed
 - Summary line reads "115200 baud, 8N1 (8 data bits, no parity, 1 stop)" instead of "1 stop bit(s)"
@@ -164,8 +162,8 @@ WSJT-X's Hamlib is found.
 ## [0.6.11] - 2026-09-21
 
 ### Added
-- Find my radio ends with the sentence the operator came for — "Your radio: Icom IC-7300 on COM3
-  — 115200 baud, 8 data bits, no parity, 1 stop bit" — in the results and in the status bar
+- Find my radio ends with the sentence the operator came for - "Your radio: Icom IC-7300 on COM3
+  - 115200 baud, 8 data bits, no parity, 1 stop bit" - in the results and in the status bar
 
 ## [0.6.10] - 2026-09-21
 
@@ -176,8 +174,8 @@ First lessons from a real IC-7300.
   (broadcast), which rigs act on but by design never answer. When only our own echo comes
   back (Echo Back is on by default on the IC-7300) or nothing at all, RigCheck now addresses
   each CI-V address in `rig_ids.json` in turn, the selected radio's first
-- Our own frame echoed back is now reported as what it is — a CI-V radio listening at that
-  speed — instead of "nothing recognisable"
+- Our own frame echoed back is now reported as what it is - a CI-V radio listening at that
+  speed - instead of "nothing recognisable"
 - Without Hamlib installed, Find my radio reported a found radio as unverified because the
   rigctl tests could not run. A radio that named itself over the serial port now counts as
   verified, the Connection panel is filled in, and the handoff is shown; the note says to
@@ -200,12 +198,12 @@ Find my radio hands you the settings; Hamlib's dummy rig can no longer pass unno
   Radio), Fldigi (Rig Control › Hamlib), and Winlink Express, each as one copyable line
 - RigCheck reads what WSJT-X and JS8Call are configured to use (`WSJT-X.ini`, `JS8Call.ini`):
   their port is probed first, their radio stands in when none is chosen, and after the sweep
-  each program gets a one-line verdict — already matches, or exactly which fields to change
+  each program gets a one-line verdict - already matches, or exactly which fields to change
 - The raw console warns beside every command sent to Hamlib model 1, the dummy rig
 
 ## [0.6.8] - 2026-09-21
 
-Find my radio — the second half of the 0.7.0 milestone, first cut.
+Find my radio - the second half of the 0.7.0 milestone, first cut.
 
 ### Added
 - **Find my radio** button: tick the COM ports it may open, and it sweeps each with read-only
@@ -223,7 +221,7 @@ Find my radio — the second half of the 0.7.0 milestone, first cut.
 - Telemetry event `discovery` (ports swept, families/models/bauds that answered, verified count)
 
 ### Safety
-- RTS and DTR are never asserted during discovery — on many interfaces they are the PTT line
+- RTS and DTR are never asserted during discovery - on many interfaces they are the PTT line
 - The sweep only runs from the button, only on ticked ports, and sends read commands only
 
 ## [0.6.7] - 2026-09-21
@@ -231,7 +229,7 @@ Find my radio — the second half of the 0.7.0 milestone, first cut.
 First half of the 0.7.0 milestone: the PC-side checks.
 
 ### Added
-- **Scan PC** button: ten read-only checks that need no radio — Windows version, every Hamlib
+- **Scan PC** button: ten read-only checks that need no radio - Windows version, every Hamlib
   copy found and which one is used, `rigctl --version`, rigctl on PATH (with the `setx` fix
   shown), the selected radio model with a clear warning if it is Hamlib's dummy rig, serial
   driver problem codes, whether anything listens on the rigctld and Flrig ports, rigctld startup
@@ -263,7 +261,7 @@ Results you can select and copy; a heads-up when a run finishes.
 Every string translatable; translation contributor process in place.
 
 ### Added
-- Copy Results button — the same plain-text report as Export Log, to the clipboard
+- Copy Results button - the same plain-text report as Export Log, to the clipboard
 - All remaining user-visible text moved into `Strings.resx`: test names and messages, every
   diagnosis and help topic, the exported log, status messages, and the main window
 - Translation coverage workflow: the language table in `TRANSLATING.md` and the credits in
@@ -296,7 +294,7 @@ Radio and cable databases as data files.
 - Alpha release tags use the same `yyyyMMdd` stamp as the filename
 
 ### Removed
-- The "Flex 6300" preset, which pointed at Hamlib model 1 — the dummy rig — and would have
+- The "Flex 6300" preset, which pointed at Hamlib model 1 - the dummy rig - and would have
   reported every test as passing without touching a radio
 
 ### Fixed
@@ -322,7 +320,7 @@ Expiry, diagnostics, settings, and automated alpha releases.
   telemetry endpoint: a startup report and a per-test-run report with radio model, serial settings,
   USB cable identifiers, and test outcomes. Every report is stored locally and viewable under
   Help > View collected data. Support ID shown in Help > About.
-- Settings window: diagnostics toggle, log level (Off / Errors only / Normal / Detailed —
+- Settings window: diagnostics toggle, log level (Off / Errors only / Normal / Detailed -
   Detailed by default on test builds), log folder path with Open and Delete buttons, Support ID
   with Copy and Reset. Changes apply on OK; Cancel discards them.
 - Unhandled exceptions are logged, reported if diagnostics are on, and shown to the operator
@@ -364,12 +362,12 @@ First launch feedback and the move to .NET 10.
 
 ## [0.6.1] - 2026-09-21
 
-First successful build. The application compiles in CI and produces a
-self-contained executable.
+First successful build.
+The application compiles in CI and produces a self-contained executable.
 
 ### Added
 - CI build workflow producing the self-contained exe and its SHA-256 as an artifact
-- `app.manifest` — runs as standard user, per-monitor DPI aware
+- `app.manifest` - runs as standard user, per-monitor DPI aware
 - Placeholder application icon (to be replaced with final artwork)
 - Help topics shown alongside timeout and no-response failures
 - Main window code-behind: window position persistence, console Enter/Up/Down key handling
@@ -385,12 +383,13 @@ self-contained executable.
 - Dependency-injection registrations for services and ViewModels not yet implemented
 
 ### Fixed
-- rigctl timeout was never detected — `Task.WaitAsync` throws on timeout rather than returning false
+- rigctl timeout was never detected - `Task.WaitAsync` throws on timeout rather than returning false
 - Missing `System.IO.Ports` and `Serilog.Extensions.Hosting` package references
 
 ## [0.6.0] - 2026-09-20
 
-Project structure and licensing milestone. No functional changes to the application.
+Project structure and licensing milestone.
+No functional changes to the application.
 
 ### Added
 - GPLv3 license
@@ -406,13 +405,12 @@ Project structure and licensing milestone. No functional changes to the applicat
 - README gains license badge, Contributing, and License sections
 
 ### Removed
-- `CommercialTier` branding constant and `LicenseService` registration — monetization is deferred until closer to a stable release
+- `CommercialTier` branding constant and `LicenseService` registration - monetization is deferred until closer to a stable release
 
 ### Fixed
 - Missing `System.Management` package reference required by COM port enumeration
 
 ## [0.5.0] - 2026-04-07
 
-Initial scaffold: WPF/MVVM project structure, service layer for Hamlib location and
-invocation, COM port enumeration, diagnosis engine, settings, and log export. Feature
-specification in README.
+Initial scaffold: WPF/MVVM project structure, service layer for Hamlib location and invocation, COM port enumeration, diagnosis engine, settings, and log export.
+Feature specification in README.

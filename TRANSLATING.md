@@ -1,7 +1,8 @@
 # Translating RigCheck
 
-Translations are community-contributed and always welcome. **Any language is
-accepted** — there is no predefined list. You do not need to be a programmer:
+Translations are community-contributed and always welcome.
+**Any language is accepted** - there is no predefined list.
+You do not need to be a programmer:
 the work is copying one file and translating the text in it.
 
 ---
@@ -9,32 +10,28 @@ the work is copying one file and translating the text in it.
 ## Current languages
 
 This table is updated automatically whenever a string file changes.
-"Machine translated" files were produced by translation software and need a
-native-speaking ham to read them through — correcting one is faster than
-starting from nothing, and it is the most useful thing you can do.
+"Machine translated" files were produced by translation software and need a native-speaking ham to read them through - correcting one is faster than starting from nothing, and it is the most useful thing you can do.
 
 <!-- coverage:start -->
 | Language | File | Coverage | Status |
 | --- | --- | --- | --- |
 | English (source) | `Strings.resx` | 100% (418 of 418) | Source |
-| German (`de`) | `Strings.de.resx` | 100% (418 of 418) | Machine translated — review wanted |
-| Spanish (`es`) | `Strings.es.resx` | 100% (418 of 418) | Machine translated — review wanted |
-| French (`fr`) | `Strings.fr.resx` | 100% (418 of 418) | Machine translated — review wanted |
-| Japanese (`ja`) | `Strings.ja.resx` | 100% (418 of 418) | Machine translated — review wanted |
+| German (`de`) | `Strings.de.resx` | 100% (418 of 418) | Machine translated - review wanted |
+| Spanish (`es`) | `Strings.es.resx` | 100% (418 of 418) | Machine translated - review wanted |
+| French (`fr`) | `Strings.fr.resx` | 100% (418 of 418) | Machine translated - review wanted |
+| Japanese (`ja`) | `Strings.ja.resx` | 100% (418 of 418) | Machine translated - review wanted |
 <!-- coverage:end -->
+
 
 ---
 
 ## How it works
 
-All user-visible text lives in `Resources/Strings.resx` (English). A
-translation is a copy of that file named for its language, for example
-`Resources/Strings.de.resx` for German or `Resources/Strings.pt-BR.resx` for
-Brazilian Portuguese.
+All user-visible text lives in `Resources/Strings.resx` (English).
+A translation is a copy of that file named for its language, for example `Resources/Strings.de.resx` for German or `Resources/Strings.pt-BR.resx` for Brazilian Portuguese.
 
-RigCheck picks the file matching the Windows display language. Any key missing
-from a translation falls back to English, so a partial translation is still
-useful, and a translation made today stays valid as new strings are added.
+RigCheck picks the file matching the Windows display language.
+Any key missing from a translation falls back to English, so a partial translation is still useful, and a translation made today stays valid as new strings are added.
 
 Two special entries at the top of every translation file:
 
@@ -56,7 +53,7 @@ Two special entries at the top of every translation file:
    `Meta_Status` to `machine-translated` or `reviewed`. This is how you are
    credited, automatically, in the app and in this repository.
 5. **Translate only the text inside `<value>` tags.** Do not change the
-   `name="…"` keys — the app uses them to find each string. The `<comment>`
+   `name="…"` keys - the app uses them to find each string. The `<comment>`
    on each entry explains where the text appears and what any placeholders mean.
 6. **Keep placeholders exactly:** `{0}`, `{1}` are replaced at runtime with values
    such as the app name or a date.
@@ -68,18 +65,16 @@ Two special entries at the top of every translation file:
 9. **Submit** a pull request, or attach the file to your issue if you prefer not
    to use git. By submitting you agree to the [CLA](CLA.md).
 
-Machine translation is a fine starting point. What makes a translation good is
-a native-speaking ham reading it through and fixing the radio terms.
+Machine translation is a fine starting point.
+What makes a translation good is a native-speaking ham reading it through and fixing the radio terms.
 
 ## Glossary
 
-**Never translate** — these are names:
+**Never translate** - these are names:
 
-ShackDesk · RigCheck · PortPane · Hamlib · rigctl · rigctld · WSJT-X · Fldigi ·
-Flrig · JS8Call · Winlink · OmniRig · radio model names (IC-7300, FT-991A, …) ·
-callsigns
+ShackDesk · RigCheck · PortPane · Hamlib · rigctl · rigctld · WSJT-X · Fldigi · Flrig · JS8Call · Winlink · OmniRig · radio model names (IC-7300, FT-991A, …) · callsigns
 
-**Usually left in English by hams** — use whatever your local club says:
+**Usually left in English by hams** - use whatever your local club says:
 
 CAT · CI-V · PTT · VFO · COM port · baud · RTS · DTR · VOX · S-meter
 
@@ -87,17 +82,15 @@ The tagline "Know your rig is ready" is part of the brand and stays in English.
 
 ## Credit
 
-Translators are listed by name and callsign in **Help › About** inside RigCheck
-and in `TRANSLATORS.md` in this repository. Your GitHub contribution also
-appears on the repository's contributors page.
+Translators are listed by name and callsign in **Help › About** inside RigCheck and in `TRANSLATORS.md` in this repository.
+Your GitHub contribution also appears on the repository's contributors page.
 
 ## Seeing the app in another language
 
-RigCheck follows the Windows display language automatically. To view a
-different one — to check your own translation, or because Windows is set
-to a language you do not want here — use **Settings › Language**. The
-change takes effect the next time RigCheck starts. Language names in that
-list are written in their own language on purpose.
+RigCheck follows the Windows display language automatically.
+To view a different one - to check your own translation, or because Windows is set to a language you do not want here - use **Settings › Language**.
+The change takes effect the next time RigCheck starts.
+Language names in that list are written in their own language on purpose.
 
 ## Questions
 
