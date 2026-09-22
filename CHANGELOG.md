@@ -5,6 +5,31 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
+## [0.8.2] - 2026-09-22
+
+Run Tests works without Hamlib, and says whose fault a failure is.
+
+### Added
+- **Radio check (direct):** Run Tests now starts by speaking the radio's own protocol over the
+  port — identity, frequency, mode, PTT state, S-meter — for Icom CI-V and the
+  Kenwood/Elecraft/Yaesu CAT families, with no Hamlib involved. On a PC without Hamlib this is
+  the whole test and it proves the radio, cable, port, and speed. Every byte is in the transcript
+- **Verdict line** after the run: radio answers directly but Hamlib fails → the hardware is
+  fine and the problem is on the Hamlib side (model, stop bits, handshake, port held); nothing
+  answers → power, cable, speed, or a held port
+- Run Tests is enabled without Hamlib whenever the selected radio's family is one the direct
+  check speaks; the status bar says so
+- A radio that identifies itself as a different model than the one selected is called out
+
+### Safety
+- The direct check has no transmit command at all. PTT state on Kenwood/Elecraft comes from the
+  `IF;` status query (Kenwood `TX;` would key the rig); Yaesu CAT gets no PTT read because its
+  read form is Kenwood's set form and a wrong model choice must never key a transmitter
+
+### Fixed
+- Beta builds said "expires on …" in the title bar and About; they now say "reminder from …",
+  which is what actually happens
+
 ## [0.8.1] - 2026-09-21
 
 0.8.x is the line after the first beta (0.7.2-beta, promoted 2026-09-21). Fixes for that beta

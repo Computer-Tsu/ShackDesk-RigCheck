@@ -416,4 +416,37 @@ Fortfahren?</value></data>
   <data name="Settings_UpdatesHeading" xml:space="preserve"><value>Updates</value></data>
   <data name="Settings_UpdateCheck" xml:space="preserve"><value>Einmal täglich nach einer neueren Version suchen (eine Anfrage an GitHub; nichts wird heruntergeladen)</value></data>
   <data name="Settings_UpdateCheckHint" xml:space="preserve"><value>Stable-Nutzer erfahren nur von Stable-Versionen; Beta-Nutzer von Betas und Stables; Alpha-Nutzer von allem. Bei Alpha- und Beta-Builds standardmäßig eingeschaltet.</value></data>
+  <data name="About_Reminds" xml:space="preserve"><value>Dieser {0}-Build zeigt ab dem {1} eine Erinnerung — er läuft weiter.</value></data>
+  <data name="Expiry_TitleBarReminder" xml:space="preserve"><value>Erinnerung ab {0}</value></data>
+  <data name="Test_NativeIdentify" xml:space="preserve"><value>Funkgerät identifiziert sich (direkt)</value></data>
+  <data name="Test_NativeFrequency" xml:space="preserve"><value>Funkgerät meldet Frequenz (direkt)</value></data>
+  <data name="Test_NativeMode" xml:space="preserve"><value>Funkgerät meldet Betriebsart (direkt)</value></data>
+  <data name="Test_NativePtt" xml:space="preserve"><value>Funkgerät meldet PTT-Zustand (direkt)</value></data>
+  <data name="Test_NativeSmeter" xml:space="preserve"><value>Funkgerät meldet S-Meter (direkt)</value></data>
+  <data name="Native_Start" xml:space="preserve"><value>Funkgeräte-Prüfung — spricht {0} direkt mit {1} bei {2} Baud, ohne Hamlib</value></data>
+  <data name="Native_HamlibNext" xml:space="preserve"><value>Hamlib-Prüfung — dasselbe Funkgerät über rigctl</value></data>
+  <data name="Native_NoHamlib" xml:space="preserve"><value>Hamlib ist nicht installiert, daher ist das der gesamte Test. Er reicht, um Funkgerät, Kabel, Schnittstelle und Geschwindigkeit zu bestätigen. Installieren Sie WSJT-X oder Hamlib, um den Weg zu testen, den die Digimode-Programme nutzen.</value></data>
+  <data name="Native_NoReply" xml:space="preserve"><value>Keine Antwort</value></data>
+  <data name="Native_Unparsed" xml:space="preserve"><value>Antwort nicht verstanden: {0}</value></data>
+  <data name="Native_SkippedSilent" xml:space="preserve"><value>Übersprungen — das Funkgerät hat auf die erste Abfrage nicht geantwortet</value></data>
+  <data name="Native_IdentityMatch" xml:space="preserve"><value>{0} (Kennung {1}) — passt zum gewählten Funkgerät</value></data>
+  <data name="Native_IdentityMismatch" xml:space="preserve"><value>Antwortete als {0} (Kennung {1}), gewählt ist aber {2} — bitte das richtige Modell wählen</value></data>
+  <data name="Native_IdentityUnknown" xml:space="preserve"><value>Antwortete mit der Kennung {0}, die noch nicht in der Liste von RigCheck steht — bitte melden</value></data>
+  <data name="Native_Frequency" xml:space="preserve"><value>{0}</value></data>
+  <data name="Native_Mode" xml:space="preserve"><value>{0}</value></data>
+  <data name="Native_PttOn" xml:space="preserve"><value>Sendet — PTT ist gerade getastet</value></data>
+  <data name="Native_PttOff" xml:space="preserve"><value>Empfängt — PTT nicht getastet</value></data>
+  <data name="Native_Smeter" xml:space="preserve"><value>{0}</value></data>
+  <data name="Native_NoReply_Summary" xml:space="preserve"><value>Von {0} kam bei {1} Baud nichts zurück.</value></data>
+  <data name="Native_NoReply_1" xml:space="preserve"><value>Ist das Funkgerät eingeschaltet, und ist dies das Kabel zu seinem CAT-/CI-V-/USB-Anschluss?</value></data>
+  <data name="Native_NoReply_2" xml:space="preserve"><value>Ist {0} die im Menü des Funkgeräts eingestellte Geschwindigkeit? „Mein Funkgerät finden“ probiert jede wahrscheinliche Geschwindigkeit</value></data>
+  <data name="Native_NoReply_3" xml:space="preserve"><value>Belegt ein anderes Programm (WSJT-X, Fldigi, rigctld) die Schnittstelle? Schließen Sie es und versuchen Sie es erneut</value></data>
+  <data name="Native_NoReply_4" xml:space="preserve"><value>Muss CAT im Menü des Funkgeräts eingeschaltet werden?</value></data>
+  <data name="Native_NoReply_Icom" xml:space="preserve"><value>Icom: ist die CI-V-Adresse des Funkgeräts die Vorgabe für dieses Modell? „Mein Funkgerät finden“ fragt jede bekannte Adresse ab</value></data>
+  <data name="Status_NativeOnly" xml:space="preserve"><value>Hamlib nicht gefunden — „Tests starten“ prüft das Funkgerät direkt; installieren Sie WSJT-X oder Hamlib für die vollständigen Tests</value></data>
+  <data name="Verdict_BothOk" xml:space="preserve"><value>Ergebnis: {0} antwortet direkt und über Hamlib — die Gerätesteuerung ist bereit</value></data>
+  <data name="Verdict_RadioOkHamlibNot" xml:space="preserve"><value>Ergebnis: {0} antwortet direkt an {1}, Funkgerät, Kabel, Schnittstelle und Geschwindigkeit sind also in Ordnung — das Problem liegt auf der Hamlib-Seite: Modellnummer, Stoppbits, Handshake oder ein anderes Programm an der Schnittstelle</value></data>
+  <data name="Verdict_HamlibOkRadioNot" xml:space="preserve"><value>Ergebnis: Hamlib erreicht {0}, die direkte Prüfung aber nicht — meist passt das Protokoll des gewählten Modells nicht zum Funkgerät; Hamlib spricht womöglich mit einem anderen Gerät als gedacht</value></data>
+  <data name="Verdict_RadioOnlyOk" xml:space="preserve"><value>Ergebnis: {0} antwortet direkt an {1} — Funkgerät, Kabel, Schnittstelle und Geschwindigkeit sind in Ordnung</value></data>
+  <data name="Verdict_RadioSilent" xml:space="preserve"><value>Ergebnis: an {0} antwortet nichts — prüfen Sie Stromversorgung, Kabel, Geschwindigkeit und ob ein anderes Programm die Schnittstelle belegt</value></data>
 </root>

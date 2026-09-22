@@ -170,6 +170,7 @@ public partial class App : Application
         services.AddTransient<ConfigClueService>();
         services.AddTransient<HandoffBuilder>();
         services.AddSingleton<UpdateCheckService>();
+        services.AddSingleton<NativeCheckService>();
         services.AddTransient<LogExportService>();
 
         // ViewModels

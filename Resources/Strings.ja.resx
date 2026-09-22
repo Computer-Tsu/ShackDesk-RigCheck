@@ -416,4 +416,37 @@
   <data name="Settings_UpdatesHeading" xml:space="preserve"><value>更新</value></data>
   <data name="Settings_UpdateCheck" xml:space="preserve"><value>1 日 1 回、新しいリリースを確認する（GitHub への問い合わせ 1 回のみ。何もダウンロードしません）</value></data>
   <data name="Settings_UpdateCheckHint" xml:space="preserve"><value>stable の利用者には stable のみ、beta の利用者には beta と stable、alpha の利用者にはすべてを通知します。alpha と beta のビルドでは既定で有効です。</value></data>
+  <data name="About_Reminds" xml:space="preserve"><value>この {0} ビルドは {1} 以降にお知らせを表示します — 動作は続きます。</value></data>
+  <data name="Expiry_TitleBarReminder" xml:space="preserve"><value>{0} からお知らせ</value></data>
+  <data name="Test_NativeIdentify" xml:space="preserve"><value>無線機が自身を識別（直接）</value></data>
+  <data name="Test_NativeFrequency" xml:space="preserve"><value>無線機が周波数を報告（直接）</value></data>
+  <data name="Test_NativeMode" xml:space="preserve"><value>無線機がモードを報告（直接）</value></data>
+  <data name="Test_NativePtt" xml:space="preserve"><value>無線機が PTT 状態を報告（直接）</value></data>
+  <data name="Test_NativeSmeter" xml:space="preserve"><value>無線機が S メーターを報告（直接）</value></data>
+  <data name="Native_Start" xml:space="preserve"><value>無線機チェック — {1} に {2} ボーで {0} を直接話しかけます（Hamlib 不使用）</value></data>
+  <data name="Native_HamlibNext" xml:space="preserve"><value>Hamlib チェック — 同じ無線機を rigctl 経由で</value></data>
+  <data name="Native_NoHamlib" xml:space="preserve"><value>Hamlib がインストールされていないため、これがテストのすべてです。無線機、ケーブル、ポート、速度の確認には十分です。デジタルモードのプログラムが使う経路をテストするには WSJT-X または Hamlib をインストールしてください。</value></data>
+  <data name="Native_NoReply" xml:space="preserve"><value>応答なし</value></data>
+  <data name="Native_Unparsed" xml:space="preserve"><value>応答を解釈できません: {0}</value></data>
+  <data name="Native_SkippedSilent" xml:space="preserve"><value>スキップ — 無線機が最初の問い合わせに応答しませんでした</value></data>
+  <data name="Native_IdentityMatch" xml:space="preserve"><value>{0}（識別 {1}）— 選択した無線機と一致</value></data>
+  <data name="Native_IdentityMismatch" xml:space="preserve"><value>{0}（識別 {1}）として応答しましたが、選択されているのは {2} です — 正しい機種を選んでください</value></data>
+  <data name="Native_IdentityUnknown" xml:space="preserve"><value>識別 {0} で応答しましたが、RigCheck の一覧にまだありません — 報告をお願いします</value></data>
+  <data name="Native_Frequency" xml:space="preserve"><value>{0}</value></data>
+  <data name="Native_Mode" xml:space="preserve"><value>{0}</value></data>
+  <data name="Native_PttOn" xml:space="preserve"><value>送信中 — PTT が現在オンです</value></data>
+  <data name="Native_PttOff" xml:space="preserve"><value>受信中 — PTT はオフ</value></data>
+  <data name="Native_Smeter" xml:space="preserve"><value>{0}</value></data>
+  <data name="Native_NoReply_Summary" xml:space="preserve"><value>{0} から {1} ボーで何も返ってきませんでした。</value></data>
+  <data name="Native_NoReply_1" xml:space="preserve"><value>無線機の電源は入っていますか？このケーブルは CAT / CI-V / USB ポートにつながっていますか？</value></data>
+  <data name="Native_NoReply_2" xml:space="preserve"><value>{0} は無線機のメニューで設定した速度ですか？「無線機を探す」は可能性のある速度をすべて試します</value></data>
+  <data name="Native_NoReply_3" xml:space="preserve"><value>他のプログラム（WSJT-X、Fldigi、rigctld）がポートを使用していませんか？終了してからもう一度お試しください</value></data>
+  <data name="Native_NoReply_4" xml:space="preserve"><value>無線機のメニューで CAT を有効にする必要はありませんか？</value></data>
+  <data name="Native_NoReply_Icom" xml:space="preserve"><value>Icom: 無線機の CI-V アドレスはこの機種の既定値ですか？「無線機を探す」は既知のアドレスをすべて問い合わせます</value></data>
+  <data name="Status_NativeOnly" xml:space="preserve"><value>Hamlib が見つかりません — 「テストを実行」は無線機を直接確認します。完全なテストには WSJT-X または Hamlib をインストールしてください</value></data>
+  <data name="Verdict_BothOk" xml:space="preserve"><value>判定: {0} は直接にも Hamlib 経由にも応答します — リグ制御の準備完了</value></data>
+  <data name="Verdict_RadioOkHamlibNot" xml:space="preserve"><value>判定: {0} は {1} で直接応答するので、無線機、ケーブル、ポート、速度は正常です — 問題は Hamlib 側にあります: モデル番号、ストップビット、ハンドシェイク、またはポートを使う他のプログラム</value></data>
+  <data name="Verdict_HamlibOkRadioNot" xml:space="preserve"><value>判定: Hamlib は {0} に到達しますが直接確認は失敗しました — 多くの場合、選択した機種のプロトコルが無線機と一致していません。Hamlib は想定と別の機器と話している可能性があります</value></data>
+  <data name="Verdict_RadioOnlyOk" xml:space="preserve"><value>判定: {0} は {1} で直接応答します — 無線機、ケーブル、ポート、速度は正常です</value></data>
+  <data name="Verdict_RadioSilent" xml:space="preserve"><value>判定: {0} では何も応答しません — 電源、ケーブル、速度、他のプログラムがポートを使っていないかを確認してください</value></data>
 </root>

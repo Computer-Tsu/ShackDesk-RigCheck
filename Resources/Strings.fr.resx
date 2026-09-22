@@ -416,4 +416,37 @@ Continuer ?</value></data>
   <data name="Settings_UpdatesHeading" xml:space="preserve"><value>Mises à jour</value></data>
   <data name="Settings_UpdateCheck" xml:space="preserve"><value>Rechercher une version plus récente une fois par jour (une requête à GitHub ; rien n'est téléchargé)</value></data>
   <data name="Settings_UpdateCheckHint" xml:space="preserve"><value>Les utilisateurs stable ne voient que les versions stables ; les utilisateurs bêta, les bêtas et stables ; les utilisateurs alpha, tout. Activé par défaut sur les builds alpha et bêta.</value></data>
+  <data name="About_Reminds" xml:space="preserve"><value>Cette version {0} affiche un rappel à partir du {1} — elle continue de fonctionner.</value></data>
+  <data name="Expiry_TitleBarReminder" xml:space="preserve"><value>rappel à partir du {0}</value></data>
+  <data name="Test_NativeIdentify" xml:space="preserve"><value>La radio s'identifie (direct)</value></data>
+  <data name="Test_NativeFrequency" xml:space="preserve"><value>La radio indique la fréquence (direct)</value></data>
+  <data name="Test_NativeMode" xml:space="preserve"><value>La radio indique le mode (direct)</value></data>
+  <data name="Test_NativePtt" xml:space="preserve"><value>La radio indique l'état PTT (direct)</value></data>
+  <data name="Test_NativeSmeter" xml:space="preserve"><value>La radio indique le S-mètre (direct)</value></data>
+  <data name="Native_Start" xml:space="preserve"><value>Vérification de la radio — dialogue {0} direct avec {1} à {2} bauds, sans Hamlib</value></data>
+  <data name="Native_HamlibNext" xml:space="preserve"><value>Vérification Hamlib — la même radio via rigctl</value></data>
+  <data name="Native_NoHamlib" xml:space="preserve"><value>Hamlib n'est pas installé, c'est donc tout le test. Il suffit à prouver la radio, le câble, le port et la vitesse. Installez WSJT-X ou Hamlib pour tester le chemin qu'utilisent les programmes de modes numériques.</value></data>
+  <data name="Native_NoReply" xml:space="preserve"><value>Pas de réponse</value></data>
+  <data name="Native_Unparsed" xml:space="preserve"><value>Réponse non comprise : {0}</value></data>
+  <data name="Native_SkippedSilent" xml:space="preserve"><value>Ignoré — la radio n'a pas répondu à la première requête</value></data>
+  <data name="Native_IdentityMatch" xml:space="preserve"><value>{0} (identité {1}) — correspond à la radio sélectionnée</value></data>
+  <data name="Native_IdentityMismatch" xml:space="preserve"><value>A répondu en tant que {0} (identité {1}) mais {2} est sélectionnée — choisissez le bon modèle</value></data>
+  <data name="Native_IdentityUnknown" xml:space="preserve"><value>A répondu avec l'identité {0}, qui n'est pas encore dans la liste de RigCheck — merci de le signaler</value></data>
+  <data name="Native_Frequency" xml:space="preserve"><value>{0}</value></data>
+  <data name="Native_Mode" xml:space="preserve"><value>{0}</value></data>
+  <data name="Native_PttOn" xml:space="preserve"><value>Émission — le PTT est enclenché en ce moment</value></data>
+  <data name="Native_PttOff" xml:space="preserve"><value>Réception — PTT non enclenché</value></data>
+  <data name="Native_Smeter" xml:space="preserve"><value>{0}</value></data>
+  <data name="Native_NoReply_Summary" xml:space="preserve"><value>Rien n'est revenu de {0} à {1} bauds.</value></data>
+  <data name="Native_NoReply_1" xml:space="preserve"><value>La radio est-elle allumée, et est-ce bien le câble qui va à son port CAT / CI-V / USB ?</value></data>
+  <data name="Native_NoReply_2" xml:space="preserve"><value>{0} est-elle la vitesse réglée dans le menu de la radio ? Trouver ma radio essaie toutes les vitesses probables</value></data>
+  <data name="Native_NoReply_3" xml:space="preserve"><value>Un autre programme (WSJT-X, Fldigi, rigctld) occupe-t-il le port ? Fermez-le et réessayez</value></data>
+  <data name="Native_NoReply_4" xml:space="preserve"><value>La radio a-t-elle besoin que le CAT soit activé dans son menu ?</value></data>
+  <data name="Native_NoReply_Icom" xml:space="preserve"><value>Icom : l'adresse CI-V de la radio est-elle celle par défaut de ce modèle ? Trouver ma radio interroge chaque adresse connue</value></data>
+  <data name="Status_NativeOnly" xml:space="preserve"><value>Hamlib introuvable — Lancer les tests vérifiera la radio directement ; installez WSJT-X ou Hamlib pour les tests complets</value></data>
+  <data name="Verdict_BothOk" xml:space="preserve"><value>Verdict : {0} répond directement et via Hamlib — le contrôle de la radio est prêt</value></data>
+  <data name="Verdict_RadioOkHamlibNot" xml:space="preserve"><value>Verdict : {0} répond directement sur {1}, donc radio, câble, port et vitesse sont bons — le problème est côté Hamlib : numéro de modèle, bits de stop, handshake ou un autre programme sur le port</value></data>
+  <data name="Verdict_HamlibOkRadioNot" xml:space="preserve"><value>Verdict : Hamlib atteint {0} mais la vérification directe non — en général le protocole du modèle sélectionné ne correspond pas à la radio ; Hamlib parle peut-être à un autre appareil que vous ne le pensez</value></data>
+  <data name="Verdict_RadioOnlyOk" xml:space="preserve"><value>Verdict : {0} répond directement sur {1} — radio, câble, port et vitesse sont bons</value></data>
+  <data name="Verdict_RadioSilent" xml:space="preserve"><value>Verdict : rien ne répond sur {0} — vérifiez l'alimentation, le câble, la vitesse et qu'aucun autre programme n'occupe le port</value></data>
 </root>

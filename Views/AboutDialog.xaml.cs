@@ -29,7 +29,10 @@ public partial class AboutDialog : Window
 
         if (BuildInfo.ExpiryDate is { } exp)
         {
-            ExpiryText.Text       = Strings.Format("About_Expires", BuildInfo.Channel, exp.ToString("yyyy-MM-dd"));
+            // Alphas stop; betas only remind. Say which.
+            ExpiryText.Text       = BuildInfo.BlocksWhenExpired
+                ? Strings.Format("About_Expires",  BuildInfo.Channel, exp.ToString("yyyy-MM-dd"))
+                : Strings.Format("About_Reminds",  BuildInfo.Channel, exp.ToString("yyyy-MM-dd"));
             ExpiryText.Visibility = Visibility.Visible;
         }
 

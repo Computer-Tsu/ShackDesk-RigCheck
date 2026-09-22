@@ -38,6 +38,13 @@ public enum TestId
     GetVfo,
     SetFrequency,
 
+    // Radio check — direct serial reads, no Hamlib needed
+    NativeIdentify,
+    NativeFrequency,
+    NativeMode,
+    NativePtt,
+    NativeSmeter,
+
     // Environment checks — user-initiated Scan, no radio needed
     EnvWindows,
     EnvHamlib,

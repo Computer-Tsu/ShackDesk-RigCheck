@@ -22,6 +22,7 @@ public partial class MainViewModel : ObservableObject
     private readonly ConfigClueService   _clues;
     private readonly HandoffBuilder      _handoff;
     private readonly UpdateCheckService  _updates;
+    private readonly NativeCheckService  _native;
     private readonly LogExportService    _logExport;
     private readonly HamlibLocatorService _hamlib;
     private readonly SettingsService     _settings;
@@ -57,7 +58,7 @@ public partial class MainViewModel : ObservableObject
     // expiry date here so it is visible without opening any dialog.
     public string WindowTitle =>
         BuildInfo.ExpiryDate is { } exp
-            ? $"{BrandingInfo.FullName}  {BuildInfo.VersionLabel}  —  {Strings.Format("Expiry_TitleBar", exp.ToString("yyyy-MM-dd"))}"
+            ? $"{BrandingInfo.FullName}  {BuildInfo.VersionLabel}  —  {Strings.Format(BuildInfo.BlocksWhenExpired ? "Expiry_TitleBar" : "Expiry_TitleBarReminder", exp.ToString("yyyy-MM-dd"))}"
             : $"{BrandingInfo.FullName}  {BuildInfo.VersionLabel}";
 
     // ── Constructor ───────────────────────────────────────────────────────
@@ -72,6 +73,7 @@ public partial class MainViewModel : ObservableObject
         ConfigClueService    clues,
         HandoffBuilder       handoff,
         UpdateCheckService   updates,
+        NativeCheckService   native,
         LogExportService     logExport,
         HamlibLocatorService hamlib,
         SettingsService      settings,
@@ -86,6 +88,7 @@ public partial class MainViewModel : ObservableObject
         _clues      = clues;
         _handoff    = handoff;
         _updates    = updates;
+        _native     = native;
         _logExport  = logExport;
         _hamlib     = hamlib;
         _settings   = settings;
@@ -110,19 +113,29 @@ public partial class MainViewModel : ObservableObject
 
     // ── Commands ──────────────────────────────────────────────────────────
 
+    // Run Tests has two tiers. The radio check talks the radio's own
+    // protocol over the port (no Hamlib) for the families it knows; the
+    // Hamlib tests follow when Hamlib is installed. Either alone is a
+    // useful run; both together give the verdict at the end.
     [RelayCommand(CanExecute = nameof(CanRunTests))]
     private async Task RunTestsAsync()
     {
         IsRunning = true;
         StatusMessage = Strings.Get("Status_Running");
-        Results.Clear(TestRunnerService.SuiteTests);
-        CopyResultsCommand.NotifyCanExecuteChanged();
 
-        var cfg = Connection.BuildConfig();
+        var cfg    = Connection.BuildConfig();
+        var family = _native.FamilyFor(cfg);
+        var hamlib = _hamlib.IsAvailable;
+
+        var planned = new List<TestId>();
+        if (family is not null) planned.AddRange(NativeCheckService.Checks(family));
+        if (hamlib)             planned.AddRange(TestRunnerService.SuiteTests);
+        Results.Clear(planned);
+        CopyResultsCommand.NotifyCanExecuteChanged();
 
         // Confirm before set-frequency test (transmitter-adjacent)
         bool runSetFreq = false;
-        if (_settings.Current.RunSetFreqTest)
+        if (hamlib && _settings.Current.RunSetFreqTest)
         {
             runSetFreq = MessageBox.Show(
                 Strings.Get("Confirm_SetFreq_Message"),
@@ -136,10 +149,38 @@ public partial class MainViewModel : ObservableObject
             var progress = new Progress<TestResult>(result =>
                 Application.Current.Dispatcher.Invoke(() => Results.AddResult(result)));
 
-            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
-            var suite = await _testRunner.RunAllAsync(cfg, runSetFreq, progress, cts.Token);
+            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(90));
+            var all = new List<TestResult>();
 
+            // ── Tier 1: radio check, direct ───────────────────────────────
+            List<TestResult>? native = null;
+            if (family is not null)
+            {
+                native = await _native.RunAsync(cfg, family, progress, Results.AddTranscript, cts.Token);
+                all.AddRange(native);
+            }
+
+            // ── Tier 2: Hamlib ────────────────────────────────────────────
+            TestSuiteResult? hamlibSuite = null;
+            if (hamlib)
+            {
+                if (family is not null)
+                    Results.AddTranscript(TranscriptKind.Command, Strings.Get("Native_HamlibNext"));
+                hamlibSuite = await _testRunner.RunAllAsync(cfg, runSetFreq, progress, cts.Token);
+                all.AddRange(hamlibSuite.Results);
+            }
+            else if (family is not null)
+            {
+                Results.AddTranscript(TranscriptKind.Note, Strings.Get("Native_NoHamlib"));
+            }
+
+            var suite = new TestSuiteResult(all, cfg);
             Results.SetSuiteResult(suite);
+
+            // ── Verdict: what the two tiers say together ──────────────────
+            if (native is not null)
+                Results.AddTranscript(TranscriptKind.Found, Verdict(native, hamlibSuite, cfg));
+
             TaskCompleted?.Invoke(suite.AllPassed);
             StatusMessage = suite.AllPassed
                 ? Strings.Format("Status_AllPassed", suite.PassCount)
@@ -163,7 +204,34 @@ public partial class MainViewModel : ObservableObject
         }
     }
 
-    private bool CanRunTests() => !IsRunning && _hamlib.IsAvailable && Connection.IsReady;
+    // Run Tests needs a radio and port chosen, and at least one tier able to
+    // run: Hamlib installed, or a model whose protocol the radio check speaks.
+    private bool CanRunTests() =>
+        !IsRunning && Connection.IsReady
+        && (_hamlib.IsAvailable || _native.FamilyFor(Connection.BuildConfig()) is not null);
+
+    // The sentence the two tiers add up to. The radio answering directly
+    // while Hamlib fails is the case nothing else diagnoses: the hardware
+    // is fine, the problem is the model number, stop bits, handshake, or
+    // another program on the port.
+    private static string Verdict(List<TestResult> native, TestSuiteResult? hamlibSuite, ConnectionConfig cfg)
+    {
+        var radioAnswered = native.Any(r => r.Status == TestStatus.Pass
+                                         && r.Id is TestId.NativeIdentify or TestId.NativeFrequency);
+        if (hamlibSuite is null)
+            return radioAnswered
+                ? Strings.Format("Verdict_RadioOnlyOk", cfg.RadioModelName, cfg.ComPort)
+                : Strings.Format("Verdict_RadioSilent", cfg.ComPort);
+
+        var hamlibOk = hamlibSuite.Results.Any(r => r.Id == TestId.OpenConnection && r.Status == TestStatus.Pass);
+        return (radioAnswered, hamlibOk) switch
+        {
+            (true,  true)  => Strings.Format("Verdict_BothOk", cfg.RadioModelName),
+            (true,  false) => Strings.Format("Verdict_RadioOkHamlibNot", cfg.RadioModelName, cfg.ComPort),
+            (false, true)  => Strings.Format("Verdict_HamlibOkRadioNot", cfg.RadioModelName),
+            (false, false) => Strings.Format("Verdict_RadioSilent", cfg.ComPort),
+        };
+    }
 
     // Environment scan: PC-side checks only, no radio needed, so it is not
     // gated on readiness — it is the thing to run when Run Tests is greyed
@@ -523,10 +591,14 @@ public partial class MainViewModel : ObservableObject
     {
         if (IsRunning) return;
 
+        // Without Hamlib, Run Tests still works for a radio whose protocol
+        // the radio check speaks — say that instead of "unavailable".
+        var nativeOnly = !_hamlib.IsAvailable && _native.FamilyFor(Connection.BuildConfig()) is not null;
+
         StatusMessage = ExpiryMessage()
-            ?? (!_hamlib.IsAvailable
-                ? Strings.Get("Status_HamlibMissingLong")
-                : Connection.ReadinessHint);
+            ?? (!_hamlib.IsAvailable && !nativeOnly ? Strings.Get("Status_HamlibMissingLong")
+              : nativeOnly                          ? Strings.Get("Status_NativeOnly")
+              :                                       Connection.ReadinessHint);
     }
 
     private static string? ExpiryMessage()
