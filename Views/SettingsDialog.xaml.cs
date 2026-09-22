@@ -34,10 +34,23 @@ public partial class SettingsDialog : Window
             new Choice(AppLogger.LevelDetailed, Strings.Get("LogLevel_Debug")),
         };
 
+        // Language names are written in their own language on purpose: someone
+        // who ends up in the wrong one must still be able to find theirs.
+        LanguageCombo.ItemsSource = new[]
+        {
+            new Choice(string.Empty, Strings.Get("Settings_LanguageAuto")),
+            new Choice("en", "English"),
+            new Choice("de", "Deutsch"),
+            new Choice("es", "Español"),
+            new Choice("fr", "Français"),
+            new Choice("ja", "日本語"),
+        };
+
         // Load current values into the pending controls
         TelemetryCheckBox.IsChecked = _settings.Current.TelemetryEnabled;
         NotifyFlashCheckBox.IsChecked = _settings.Current.NotifyFlash;
         NotifySoundCheckBox.IsChecked = _settings.Current.NotifySound;
+        LanguageCombo.SelectedValue   = _settings.Current.Language ?? string.Empty;
         // Null = never chosen: show the channel default (on for alpha/beta, off for stable)
         UpdateCheckBox.IsChecked = _settings.Current.UpdateCheckEnabled ?? !BuildInfo.IsStable;
         LogLevelCombo.SelectedValue = AppLogger.ResolveLevel(_settings.Current.LogLevel);
@@ -54,6 +67,7 @@ public partial class SettingsDialog : Window
             s.TelemetryEnabled = TelemetryCheckBox.IsChecked == true;
             s.NotifyFlash      = NotifyFlashCheckBox.IsChecked == true;
             s.NotifySound      = NotifySoundCheckBox.IsChecked == true;
+            s.Language         = LanguageCombo.SelectedValue as string ?? string.Empty;
             s.UpdateCheckEnabled = UpdateCheckBox.IsChecked == true;
             s.LogLevel         = level;
         });

@@ -5,6 +5,18 @@ All notable changes to RigCheck are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Version numbers: patch (x.x.1) for landed features and fixes, minor (x.1.0) for milestones.
 
+## [0.8.3] - 2026-09-22
+
+### Added
+- Settings › Language: Same as Windows (default), English, Deutsch, Español, Français, 日本語.
+  Takes effect on the next start. Until now the language could only follow Windows
+
+### Changed
+- The exported log's transcript section is headed "Commands and replies" — it holds Run Tests
+  exchanges as well as Find my radio's
+- The hex dump shows its ASCII column only when most bytes are printable, so CI-V frames no
+  longer carry a column of dots
+
 ## [0.8.2] - 2026-09-22
 
 Run Tests works without Hamlib, and says whose fault a failure is.
