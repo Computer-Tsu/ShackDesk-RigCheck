@@ -46,6 +46,9 @@ public partial class App : Application
         // Settings are read before the host exists because the log level lives there.
         var earlySettings = new SettingsService();
         AppLogger.Configure(AppLogger.ResolveLevel(earlySettings.Current.LogLevel));
+        // Language: the saved choice, else the Windows display language. Set
+        // before any window exists — WPF binds strings once at load.
+        Strings.SetUiCulture(earlySettings.Current.Language);
 
         _host = Host.CreateDefaultBuilder()
             .UseSerilog()

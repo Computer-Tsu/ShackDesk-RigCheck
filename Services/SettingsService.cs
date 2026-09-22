@@ -62,6 +62,10 @@ public class RigCheckSettings
     // Logging level; empty means the channel default (see AppLogger).
     public string LogLevel          { get; set; } = string.Empty;
 
+    // UI language as a culture name ("de", "ja"); empty = follow Windows.
+    // Takes effect on the next start.
+    public string Language          { get; set; } = string.Empty;
+
     // Update check: one request to the GitHub Releases API, at most once a
     // day, at startup. On by default for alpha and beta (their users want the
     // next build); stable users switch it on in Settings. Nothing is ever

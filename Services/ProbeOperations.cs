@@ -203,8 +203,14 @@ public static class ProbeOperations
     public static string Dump(byte[] bytes)
     {
         if (bytes.Length == 0) return string.Empty;
-        var hex   = string.Join(" ", bytes.Select(b => b.ToString("X2")));
+        var hex = string.Join(" ", bytes.Select(b => b.ToString("X2")));
+
+        // The ASCII column only helps for text protocols ("ID0670;"); a CI-V
+        // frame that happens to contain one printable byte just gets noise.
+        var printable = bytes.Count(b => b is >= 0x20 and < 0x7F);
+        if (printable * 4 < bytes.Length * 3) return hex;
+
         var ascii = new string(bytes.Select(b => b is >= 0x20 and < 0x7F ? (char)b : '.').ToArray());
-        return ascii.Any(c => c != '.') ? $"{hex}   \"{ascii}\"" : hex;
+        return $"{hex}   \"{ascii}\"";
     }
 }

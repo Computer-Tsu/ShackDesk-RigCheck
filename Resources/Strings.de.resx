@@ -377,7 +377,7 @@ Fortfahren?</value></data>
   <data name="Disc_Verified" xml:space="preserve"><value>{0} an {1} hat die Hamlib-Tests bestanden</value></data>
   <data name="Disc_VerifyFailed" xml:space="preserve"><value>{0} an {1}: {2} Test(s) fehlgeschlagen</value></data>
   <data name="Disc_Applied" xml:space="preserve"><value>Verbindungseinstellungen auf {0} (Modell {1}), {2}, {3} Baud gesetzt — Tests ausführen verwendet diese jetzt</value></data>
-  <data name="Export_Transcript" xml:space="preserve"><value>PROTOKOLL „MEIN FUNKGERÄT FINDEN“</value></data>
+  <data name="Export_Transcript" xml:space="preserve"><value>BEFEHLE UND ANTWORTEN</value></data>
   <data name="Console_DummyRig" xml:space="preserve"><value>Modell 1 ist das Dummy-Gerät von Hamlib — jede Antwort unten ist simuliert, nicht von einem Funkgerät</value></data>
   <data name="Handoff_Heading" xml:space="preserve"><value>Einzugebende Einstellungen — Zeile für Ihr Programm kopieren</value></data>
   <data name="Handoff_WsjtxPath" xml:space="preserve"><value>WSJT-X und JS8Call: File › Settings › Radio</value></data>
@@ -449,4 +449,8 @@ Fortfahren?</value></data>
   <data name="Verdict_HamlibOkRadioNot" xml:space="preserve"><value>Ergebnis: Hamlib erreicht {0}, die direkte Prüfung aber nicht — meist passt das Protokoll des gewählten Modells nicht zum Funkgerät; Hamlib spricht womöglich mit einem anderen Gerät als gedacht</value></data>
   <data name="Verdict_RadioOnlyOk" xml:space="preserve"><value>Ergebnis: {0} antwortet direkt an {1} — Funkgerät, Kabel, Schnittstelle und Geschwindigkeit sind in Ordnung</value></data>
   <data name="Verdict_RadioSilent" xml:space="preserve"><value>Ergebnis: an {0} antwortet nichts — prüfen Sie Stromversorgung, Kabel, Geschwindigkeit und ob ein anderes Programm die Schnittstelle belegt</value></data>
+  <data name="Settings_LanguageHeading" xml:space="preserve"><value>Sprache</value></data>
+  <data name="Settings_Language" xml:space="preserve"><value>Sprache:</value></data>
+  <data name="Settings_LanguageAuto" xml:space="preserve"><value>Wie Windows</value></data>
+  <data name="Settings_LanguageHint" xml:space="preserve"><value>Wird beim nächsten Start von RigCheck wirksam. Gerätenamen, Befehle und die Datendateien bleiben unverändert; siehe TRANSLATING.md, um eine Übersetzung zu verbessern.</value></data>
 </root>

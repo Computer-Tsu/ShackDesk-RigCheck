@@ -91,6 +91,14 @@ Translators are listed by name and callsign in **Help › About** inside RigChec
 and in `TRANSLATORS.md` in this repository. Your GitHub contribution also
 appears on the repository's contributors page.
 
+## Seeing the app in another language
+
+RigCheck follows the Windows display language automatically. To view a
+different one — to check your own translation, or because Windows is set
+to a language you do not want here — use **Settings › Language**. The
+change takes effect the next time RigCheck starts. Language names in that
+list are written in their own language on purpose.
+
 ## Questions
 
 Ask in the [Translations](https://github.com/Computer-Tsu/ShackDesk-RigCheck/discussions/categories/translations) category of Discussions.
