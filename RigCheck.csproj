@@ -90,7 +90,7 @@
     <PackageReference Include="Serilog.Extensions.Hosting" Version="10.*" />
 
     <!-- Microsoft DI container — mirrors PortPane -->
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.*" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="11.*" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.*" />
 
     <!-- COM port enumeration: WMI for friendly names, SerialPort as fallback -->
