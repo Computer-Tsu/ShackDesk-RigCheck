@@ -94,7 +94,7 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.*" />
 
     <!-- COM port enumeration: WMI for friendly names, SerialPort as fallback -->
-    <PackageReference Include="System.Management" Version="10.*" />
+    <PackageReference Include="System.Management" Version="11.*" />
     <PackageReference Include="System.IO.Ports" Version="10.*" />
 
     <!-- CommunityToolkit.Mvvm for RelayCommand, ObservableObject, etc. -->
