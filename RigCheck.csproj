@@ -95,7 +95,7 @@
 
     <!-- COM port enumeration: WMI for friendly names, SerialPort as fallback -->
     <PackageReference Include="System.Management" Version="10.*" />
-    <PackageReference Include="System.IO.Ports" Version="10.*" />
+    <PackageReference Include="System.IO.Ports" Version="11.*" />
 
     <!-- CommunityToolkit.Mvvm for RelayCommand, ObservableObject, etc. -->
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.*" />
